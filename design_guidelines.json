@@ -1,0 +1,100 @@
+{
+  "theme": "light",
+  "archetype": "6 (Vibrant Play) combined with Neo-Brutalist Professionalism",
+  "brand_name": "La Neuron – STEAM Academy",
+  "motto": "Real Science for Real Kids",
+  "colors": {
+    "background": "#FDFBF7",
+    "surface_white": "#FFFFFF",
+    "text_main": "#0F172A",
+    "text_muted": "#475569",
+    "border_dark": "#0F172A",
+    "primary_science": "#4338CA",
+    "primary_science_light": "#E0E7FF",
+    "secondary_action": "#FF6B6B",
+    "accent_tech": "#10B981",
+    "accent_math": "#FBBF24",
+    "accent_art": "#A855F7",
+    "accent_engineering": "#F97316"
+  },
+  "typography": {
+    "heading_font": "Outfit, sans-serif",
+    "body_font": "DM Sans, sans-serif",
+    "weights": {
+      "heading": "700, 800",
+      "body": "400, 500, 700"
+    },
+    "hierarchy": {
+      "h1": "text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-[#0F172A]",
+      "h2": "text-4xl sm:text-5xl font-bold tracking-tight text-[#0F172A]",
+      "h3": "text-2xl sm:text-3xl font-bold text-[#0F172A]",
+      "h4": "text-xl font-bold text-[#0F172A]",
+      "body": "text-lg md:text-xl leading-relaxed text-[#475569]",
+      "overline": "text-sm font-bold uppercase tracking-[0.2em] text-[#4338CA]"
+    }
+  },
+  "layout": {
+    "spacing_system": "Generous paddings (p-8 to p-24) to give elements breathing room.",
+    "container_width": "max-w-7xl mx-auto px-6 lg:px-8",
+    "grid_patterns": {
+      "bento_steam": "Asymmetric Bento Grid for 5 disciplines. Science spans 2 columns, others 1 column.",
+      "process_flow": "Zigzag alternating layout for the 6-step scientific method to keep scrolling engaging."
+    }
+  },
+  "component_styling": {
+    "cards_tactile": "bg-white border-2 border-[#0F172A] rounded-2xl shadow-[6px_6px_0px_#0F172A] hover:-translate-y-1 hover:shadow-[8px_8px_0px_#0F172A] transition-all duration-300 overflow-hidden",
+    "button_primary": "inline-flex items-center justify-center bg-[#FF6B6B] text-white px-8 py-4 text-lg font-bold rounded-full border-2 border-[#0F172A] shadow-[4px_4px_0px_#0F172A] hover:-translate-y-1 hover:shadow-[6px_6px_0px_#0F172A] transition-all duration-200",
+    "button_secondary": "inline-flex items-center justify-center bg-white text-[#0F172A] px-8 py-4 text-lg font-bold rounded-full border-2 border-[#0F172A] shadow-[4px_4px_0px_#0F172A] hover:-translate-y-1 hover:shadow-[6px_6px_0px_#0F172A] transition-all duration-200",
+    "tags": "px-4 py-1.5 bg-[#E0E7FF] text-[#4338CA] rounded-full text-sm font-bold border border-[#4338CA]"
+  },
+  "motion": {
+    "global_scroll": "Lenis smooth scrolling is highly recommended for premium feel.",
+    "animations": "Use framer-motion. Spring physics (stiffness: 300, damping: 20) for interactive elements. Stagger children (staggerChildren: 0.1) for lists/cards.",
+    "hover_effects": "Cards pop up and shadows deepen. Buttons scale up slightly."
+  },
+  "accessibility": {
+    "focus_states": "focus:outline-none focus:ring-4 focus:ring-[#FF6B6B]/50 rounded-lg",
+    "contrast": "All text meets APCA/WCAG AA contrast due to the strict dark text and dark borders over light backgrounds.",
+    "testing": "All interactive elements must include descriptive 'data-testid' attributes (e.g., data-testid='hero-cta-button')."
+  },
+  "media": {
+    "hero_image": {
+      "url": "https://images.pexels.com/photos/8471975/pexels-photo-8471975.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Two young girls exploring chemistry in a lab. Used in Hero to establish target demographic and action."
+    },
+    "educator_portrait": {
+      "url": "https://images.pexels.com/photos/4031686/pexels-photo-4031686.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Smiling female scientist in lab coat. Used in 'About the Educator' section."
+    },
+    "robotics_tech": {
+      "url": "https://images.pexels.com/photos/7869034/pexels-photo-7869034.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Child assembling robotics. Use in Programmes or Technology cards."
+    },
+    "krakow_location": {
+      "url": "https://images.pexels.com/photos/6023585/pexels-photo-6023585.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Bustling street scene in Krakow. Use as a background or side image in the Summer Camp Events section."
+    }
+  },
+  "sections_requirements": {
+    "header": "Sticky nav with solid white background, 2px bottom border. Include Logo text, links, and 'Enquire Now' CTA button.",
+    "hero": "Split layout. Left: Massive H1, lively paragraph, Primary CTA. Right: Hero image inside a stylized card with tactile shadow, floating decorative icons (atom, rocket) around it.",
+    "about_educator": "Use Educator Portrait. Highlight 'PhD Cognitive Scientist' & 'Neuroscience Coach' using tags. Layout: Image on left, narrative on right.",
+    "what_is_steam": "Bento Grid of 5 cards (S, T, E, A, M). Each gets a unique accent color background (e.g., S=Indigo, T=Mint, E=Orange, A=Purple, M=Yellow) but with dark text and borders to unify them. Clickable/movable feel.",
+    "why_steam": "Grid of 6 standard tactile cards (3 columns). Icons from @phosphor-icons/react (duotone).",
+    "investigative_approach": "6-step scientific method. Visual flow diagram. Use a vertical zigzag path with a dashed SVG line connecting numbered circles.",
+    "programmes": "3 large tactile cards detailing the programs. Rich descriptions, use the robotics image for one.",
+    "upcoming_events": "Summer Camp 2026 Krakow. Timeline/Calendar view for Mon-Fri daily themes. Use the Krakow image as a stylized map or side visual.",
+    "register_form": "Shadcn UI form wrapped in a tactile card container. Thick borders on inputs, strong focus rings.",
+    "faq": "Shadcn accordion styled with borders between items, plus (+) icon that rotates to minus (x) on open.",
+    "footer": "Dark background (#0F172A) with white text. Space for FB/IG links. Clean layout."
+  },
+  "instructions_to_main_agent": [
+    "Install required libraries: framer-motion, lucide-react, @phosphor-icons/react, clsx, tailwind-merge.",
+    "Use ONLY raw HTML/Tailwind for the layout wrappers to achieve the neo-brutalist 'tactile card' look. Do NOT use Shadcn Card component as it is too subtle/corporate.",
+    "Use Shadcn UI ONLY for complex logic elements (Accordion for FAQ, Form/Input for Registration). Even then, override their styles to match the thick borders and solid shadows.",
+    "Implement 'Outfit' for headers and 'DM Sans' for body using standard web font imports.",
+    "Ensure all buttons and form elements have 'data-testid' attributes.",
+    "Do not use generic placeholders. Use the provided image URLs.",
+    "Create .js or .jsx files instead of .tsx files as per environment constraints."
+  ]
+}
