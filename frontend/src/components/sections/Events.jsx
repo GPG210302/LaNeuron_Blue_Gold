@@ -24,7 +24,7 @@ export const Events = () => {
             A one-week intensive STEAM summer camp for children aged 6–13. Each day is a different themed lab. Children
             spend 3 hours per day in guided scientific investigations, both indoors and outdoors.
           </p>
-         </Reveal>
+        </Reveal>
 
         {/* Weekly flip-card timeline */}
         <Reveal delay={0.05}>
