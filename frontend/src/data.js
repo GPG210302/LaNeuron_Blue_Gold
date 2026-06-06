@@ -160,7 +160,7 @@ export const CAMP_DAYS = [
     text: "Morning: the science in the food we eat — health, lifestyle, and how food affects our body systems, through fun activities. Finale: in the last 30 minutes each child presents a favourite discovery from the week, shares results, and celebrates. Parents are warmly invited to this closing session.",
   },
   highlight:
-    "One of the most rewarding parts of my journey is training young children to conduct real research — guiding them to present their work at Jagiellonian University and publish their findings in reputed journals.",
+    "One of the most rewarding parts of my journey is training young children to conduct real research — guiding them to present their work at Jagiellonian University and publish their findings in reputed journals."
 ]
 ;
 
