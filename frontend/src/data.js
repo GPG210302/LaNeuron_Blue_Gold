@@ -88,7 +88,7 @@ export const WHY = [
   { icon: Brain, color: "#3B82F6", title: "Critical Thinking", text: "STEAM teaches children to question, hypothesise, test, and draw conclusions based on evidence. These thinking skills transfer to every subject and every life decision." },
   { icon: Sprout, color: "#10B981", title: "Growth Mindset", text: "A wrong hypothesis is not failure — it is data. Children learn that effort, iteration, and curiosity matter more than being right the first time." },
   { icon: Rocket, color: "#FB7185", title: "Future Readiness", text: "Most of the fastest-growing careers require STEAM literacy. Early exposure dramatically increases a child's confidence, interest, and aspiration." },
-  { icon: Shapes, color: "#A855F7", title: "Creativity & Logic", text: "STEAM bridges the arts and sciences — proving that being creative and being analytical are not opposites. The best thinkers use both." },
+  { icon: Shapes, color: "#e1f136", title: "Creativity & Logic", text: "STEAM bridges the arts and sciences — proving that being creative and being analytical are not opposites. The best thinkers use both." },
   { icon: Lightbulb, color: "#8B5CF6", title: "Brain-Compatible Learning", text: "Learning through investigation, movement, and hands-on discovery is how children's brains are wired to absorb and retain knowledge." },
   { icon: Trees, color: "#F97316", title: "Real-World Connection", text: "STEAM is not confined to a classroom. Children discover that science happens everywhere — in parks, gardens, kitchens, and the sky above them." },
 ];
@@ -97,7 +97,7 @@ export const METHOD = [
   { n: 1, icon: Lightbulb, title: "Hypothesis", text: "Children form their own prediction before the experiment begins.", color: "#3B82F6" },
   { n: 2, icon: ClipboardList, title: "Materials & Methods", text: "Children identify and prepare what they need.", color: "#10B981" },
   { n: 3, icon: FlaskConical, title: "Investigation", text: "Hands-on experiment, including outdoor activities where relevant.", color: "#F97316" },
-  { n: 4, icon: Eye, title: "Observation", text: "Children record what they see, measure, and notice.", color: "#A855F7" },
+  { n: 4, icon: Eye, title: "Observation", text: "Children record what they see, measure, and notice.", color: "#b0f833" },
   { n: 5, icon: BarChart3, title: "Results", text: "Data is collected, counted, and compared.", color: "#8B5CF6" },
   { n: 6, icon: CheckCircle2, title: "Conclusion", text: "Children evaluate whether their hypothesis was supported and explain why.", color: "#FB7185" },
 ];
@@ -159,8 +159,6 @@ export const CAMP_DAYS = [
     day: "Friday", lab: "Food Lab + Showcase", tagline: "Food Science & Celebration", icon: Apple, color: "#FB7185",
     text: "Morning: the science in the food we eat — health, lifestyle, and how food affects our body systems, through fun activities. Finale: in the last 30 minutes each child presents a favourite discovery from the week, shares results, and celebrates. Parents are warmly invited to this closing session.",
   },
-    highlight:
-    "One of the most rewarding parts of my journey is training young children",
 ];
 
 export const CAMP_FACTS = [
