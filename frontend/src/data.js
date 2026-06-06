@@ -159,9 +159,9 @@ export const CAMP_DAYS = [
     day: "Friday", lab: "Food Lab + Showcase", tagline: "Food Science & Celebration", icon: Apple, color: "#FB7185",
     text: "Morning: the science in the food we eat — health, lifestyle, and how food affects our body systems, through fun activities. Finale: in the last 30 minutes each child presents a favourite discovery from the week, shares results, and celebrates. Parents are warmly invited to this closing session.",
   },
-]
-highlight:
+  highlight:
     "One of the most rewarding parts of my journey is training young children to conduct real research — guiding them to present their work at Jagiellonian University and publish their findings in reputed journals.",
+]
 ;
 
 export const CAMP_FACTS = [
