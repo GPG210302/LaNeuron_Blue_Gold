@@ -53,7 +53,7 @@ export const EDUCATOR = {
     "Former Anatomist at a reputed Medical University",
     "Academic Advisor for a digital educational platform",
     "Secondary Science Educator at an International School in Poland",
-    "Neuroscience Coaching Certificate holder",
+    "Certified Neuroscience Coach",
     "Cognitive Specialist supporting children with learning differences, memory challenges, ADHD, dyslexia, and SEN",
     "Experience in exam preparation, revision strategies, handwriting, and cognitive development",
   ],
