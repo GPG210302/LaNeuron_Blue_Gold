@@ -10,9 +10,9 @@ export const SITE = {
   brand: "La Neuron – STEAM Academy",
   tagline: "Inspiring the next generation of thinkers, makers, and explorers",
   phone: "+48 729 655 422",
-  email: "Priya2goutham@gmail.com",
-  location: "Stakkato, Kraków",
-  venue: "Stakkato · Berka Joselewicza 23, Kraków",
+  email: "admin@la-neuron.org",
+  location: "Kraków",
+  venue: "Berka Joselewicza 23, Kraków",
   social: { facebook: "#", instagram: "#" }, // placeholders – to be added later
 };
 
