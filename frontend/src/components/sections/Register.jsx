@@ -10,13 +10,6 @@ import { WEEKS, PROGRAMME_OPTIONS } from "../../data";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
-const WORKER_URL = "https://form-handler.la-neuron.workers.dev/enquiry";
-
-const res = await fetch(WORKER_URL, {
-  method: "POST",
-  body: payload,
-});
-
 const empty = {
   parent_name: "", email: "", phone: "", child_name: "",
   child_age: "", preferred_week: "", programme_interest: "", message: "",
@@ -32,24 +25,46 @@ export const Register = ({ formRef }) => {
 
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
-  const submit = async (e) => {
-    e.preventDefault();
-    if (!form.parent_name || !form.email || !form.child_name || !form.child_age || !form.preferred_week || !form.programme_interest) {
-      toast.error("Please fill in all required fields.");
-      return;
-    }
-    setLoading(true);
-    try {
-      await axios.post(`${API}/enquiries`, { ...form, child_age: parseInt(form.child_age, 10) });
-      setDone(true);
-      toast.success("Enquiry received! We'll respond within 24 hours.");
-    } catch (err) {
-      const msg = err?.response?.data?.detail;
-      toast.error(typeof msg === "string" ? msg : "Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
+const WORKER_URL = "https://form-handler.gpg210302-account.workers.dev/enquiry";
+
+const submit = async (e) => {
+  e.preventDefault();
+
+  if (!form.parent_name || !form.email || !form.child_name || !form.child_age || !form.preferred_week || !form.programme_interest) {
+    toast.error("Please fill in all required fields.");
+    return;
+  }
+
+  setLoading(true);
+
+  try {
+    const payload = new FormData();
+    payload.append("parent_name",       form.parent_name);
+    payload.append("email",             form.email);
+    payload.append("phone",             form.phone || "Not provided");
+    payload.append("child_name",        form.child_name);
+    payload.append("child_age",         form.child_age);
+    payload.append("preferred_week",    form.preferred_week);
+    payload.append("programme",         form.programme_interest);
+    payload.append("notes",             form.message || "None");
+
+    const res = await fetch(WORKER_URL, {
+      method: "POST",
+      body: payload,
+    });
+
+    if (!res.ok) throw new Error(`Server error ${res.status}`);
+
+    setDone(true);
+    toast.success("Enquiry received! We'll respond within 24 hours.");
+
+  } catch (err) {
+    console.error("Enquiry submit failed:", err);
+    toast.error("Something went wrong. Please try again or email admin@la-neuron.org directly.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <section id="register" ref={formRef} className="py-20 lg:py-28 pt-28 sm:pt-32">
