@@ -87,10 +87,10 @@ export const STEAM = [
 export const WHY = [
   { icon: Brain, color: "#3B82F6", title: "Critical Thinking", text: "STEAM teaches children to question, hypothesise, test, and draw conclusions based on evidence. These thinking skills transfer to every subject and every life decision." },
   { icon: Sprout, color: "#10B981", title: "Growth Mindset", text: "A wrong hypothesis is not failure — it is data. Children learn that effort, iteration, and curiosity matter more than being right the first time." },
-  { icon: Rocket, color: "#FB7185", title: "Future Readiness", text: "Most of the fastest-growing careers require STEAM literacy. Early exposure dramatically increases a child's confidence, interest, and aspiration." },
-  { icon: Shapes, color: "#e1f136", title: "Creativity & Logic", text: "STEAM bridges the arts and sciences — proving that being creative and being analytical are not opposites. The best thinkers use both." },
+  { icon: Rocket, color: "#f16400", title: "Future Readiness", text: "Most of the fastest-growing careers require STEAM literacy. Early exposure dramatically increases a child's confidence, interest, and aspiration." },
+  { icon: Shapes, color: "#7cc300", title: "Creativity & Logic", text: "STEAM bridges the arts and sciences — proving that being creative and being analytical are not opposites. The best thinkers use both." },
   { icon: Lightbulb, color: "#8B5CF6", title: "Brain-Compatible Learning", text: "Learning through investigation, movement, and hands-on discovery is how children's brains are wired to absorb and retain knowledge." },
-  { icon: Trees, color: "#F97316", title: "Real-World Connection", text: "STEAM is not confined to a classroom. Children discover that science happens everywhere — in parks, gardens, kitchens, and the sky above them." },
+  { icon: Trees, color: "#c700ea", title: "Real-World Connection", text: "STEAM is not confined to a classroom. Children discover that science happens everywhere — in parks, gardens, kitchens, and the sky above them." },
 ];
 
 export const METHOD = [
