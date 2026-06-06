@@ -24,6 +24,8 @@ export const Events = () => {
             A one-week intensive STEAM summer camp for children aged 6–13. Each day is a different themed lab. Children
             spend 3 hours per day in guided scientific investigations, both indoors and outdoors.
           </p>
+          highlight:
+            "One of the most rewarding parts of my journey is training young children to conduct real research — guiding them to present their work at Jagiellonian University and publish their findings in reputed journals.",
         </Reveal>
 
         {/* Weekly flip-card timeline */}
