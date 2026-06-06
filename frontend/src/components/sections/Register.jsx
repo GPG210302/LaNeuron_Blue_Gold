@@ -10,6 +10,13 @@ import { WEEKS, PROGRAMME_OPTIONS } from "../../data";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
+const WORKER_URL = "https://form-handler.la-neuron.workers.dev/enquiry";
+
+const res = await fetch(WORKER_URL, {
+  method: "POST",
+  body: payload,
+});
+
 const empty = {
   parent_name: "", email: "", phone: "", child_name: "",
   child_age: "", preferred_week: "", programme_interest: "", message: "",
