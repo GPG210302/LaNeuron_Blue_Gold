@@ -41,28 +41,17 @@ export const Register = ({ formRef }) => {
 
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
+  const resetForm = () => { setForm(empty); setDone(false); setCountryCode("+48"); };
+
   const submit = async (e) => {
     e.preventDefault();
-
-    if (
-      !form.parent_name ||
-      !form.email ||
-      !form.child_name ||
-      !form.child_age ||
-      !form.preferred_week ||
-      !form.programme_interest
-    ) {
+    if (!form.parent_name || !form.email || !form.child_name || !form.child_age || !form.preferred_week || !form.programme_interest) {
       toast.error("Please fill in all required fields.");
       return;
     }
-
     setLoading(true);
-
     try {
-      const fullPhone = form.phone.trim()
-        ? countryCode + " " + form.phone.trim()
-        : "Not provided";
-
+      const fullPhone = form.phone.trim() ? countryCode + " " + form.phone.trim() : "Not provided";
       const payload = new FormData();
       payload.append("parent_name",    form.parent_name);
       payload.append("email",          form.email);
@@ -72,17 +61,10 @@ export const Register = ({ formRef }) => {
       payload.append("preferred_week", form.preferred_week);
       payload.append("programme",      form.programme_interest);
       payload.append("notes",          form.message || "None");
-
-      const res = await fetch(WORKER_URL, {
-        method: "POST",
-        body: payload,
-      });
-
+      const res = await fetch(WORKER_URL, { method: "POST", body: payload });
       if (!res.ok) throw new Error("Server error " + res.status);
-
       setDone(true);
       toast.success("Enquiry received! We will respond within 24 hours.");
-
     } catch (err) {
       console.error("Enquiry submit failed:", err);
       toast.error("Something went wrong. Please try again or email admin@la-neuron.org directly.");
@@ -91,17 +73,10 @@ export const Register = ({ formRef }) => {
     }
   };
 
-  const resetForm = () => {
-    setForm(empty);
-    setDone(false);
-    setCountryCode("+48");
-  };
-
   return (
     <section id="register" ref={formRef} className="py-20 lg:py-28 pt-28 sm:pt-32">
       <div className="max-w-5xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-5 gap-0 ln-card overflow-hidden">
-
           <div className="lg:col-span-2 bg-[#1B2A63] text-white p-8 lg:p-10 flex flex-col">
             <span className="ln-overline !text-[#C7D2FE]">Register / Enquiry</span>
             <h2 className="mt-3 font-display font-extrabold text-3xl md:text-4xl leading-tight">
@@ -112,11 +87,7 @@ export const Register = ({ formRef }) => {
               Submit the form and you will receive a response within 24 hours.
             </p>
             <div className="mt-auto pt-8 space-y-3">
-              {[
-                "Personal response within 24 hours",
-                "Mention allergies or learning needs",
-                "Sibling discount available"
-              ].map((t) => (
+              {["Personal response within 24 hours", "Mention allergies or learning needs", "Sibling discount available"].map((t) => (
                 <div key={t} className="flex items-center gap-2 text-white/90">
                   <CheckCircle2 size={18} className="text-[#FBBF24]" />
                   <span className="text-sm font-medium">{t}</span>
@@ -124,7 +95,6 @@ export const Register = ({ formRef }) => {
               ))}
             </div>
           </div>
-
           <div className="lg:col-span-3 p-8 lg:p-10 bg-white">
             {done ? (
               <motion.div
@@ -140,89 +110,37 @@ export const Register = ({ formRef }) => {
                 <p className="mt-3 text-[#475569] max-w-sm">
                   Thank you. A personal response from Dr. Priyadarshini will follow within 24 hours.
                 </p>
-                <button
-                  onClick={resetForm}
-                  className="ln-btn ln-btn-white mt-7"
-                  data-testid="register-another-btn"
-                >
+                <button onClick={resetForm} className="ln-btn ln-btn-white mt-7" data-testid="register-another-btn">
                   Submit another enquiry
                 </button>
               </motion.div>
             ) : (
               <form onSubmit={submit} className="space-y-4" data-testid="register-form">
                 <div className="grid sm:grid-cols-2 gap-4">
-
                   <Field label="Parent / guardian full name *">
-                    <input
-                      className={inputCls}
-                      value={form.parent_name}
-                      onChange={set("parent_name")}
-                      placeholder="Your full name"
-                      data-testid="input-parent-name"
-                    />
+                    <input className={inputCls} value={form.parent_name} onChange={set("parent_name")} placeholder="Your full name" data-testid="input-parent-name" />
                   </Field>
-
                   <Field label="Email address *">
-                    <input
-                      type="email"
-                      className={inputCls}
-                      value={form.email}
-                      onChange={set("email")}
-                      placeholder="you@email.com"
-                      data-testid="input-email"
-                    />
+                    <input type="email" className={inputCls} value={form.email} onChange={set("email")} placeholder="you@email.com" data-testid="input-email" />
                   </Field>
-
                   <Field label="Phone / WhatsApp (optional)">
                     <div className="flex gap-2">
-                      <select
-                        value={countryCode}
-                        onChange={(e) => setCountryCode(e.target.value)}
-                        className={selectCls}
-                        data-testid="select-country-code"
-                      >
+                      <select value={countryCode} onChange={(e) => setCountryCode(e.target.value)} className={selectCls} data-testid="select-country-code">
                         {COUNTRY_CODES.map(({ code, label }) => (
                           <option key={code} value={code}>{label}</option>
                         ))}
                       </select>
-                      <input
-                        className={inputCls + " flex-1"}
-                        value={form.phone}
-                        onChange={set("phone")}
-                        placeholder="729 655 422"
-                        data-testid="input-phone"
-                      />
+                      <input className={inputCls + " flex-1"} value={form.phone} onChange={set("phone")} placeholder="729 655 422" data-testid="input-phone" />
                     </div>
                   </Field>
-
                   <Field label="Child first name *">
-                    <input
-                      className={inputCls}
-                      value={form.child_name}
-                      onChange={set("child_name")}
-                      placeholder="Child name"
-                      data-testid="input-child-name"
-                    />
+                    <input className={inputCls} value={form.child_name} onChange={set("child_name")} placeholder="Child name" data-testid="input-child-name" />
                   </Field>
-
                   <Field label="Child age (6-13) *">
-                    <input
-                      type="number"
-                      min="6"
-                      max="13"
-                      className={inputCls}
-                      value={form.child_age}
-                      onChange={set("child_age")}
-                      placeholder="e.g. 9"
-                      data-testid="input-child-age"
-                    />
+                    <input type="number" min="6" max="13" className={inputCls} value={form.child_age} onChange={set("child_age")} placeholder="e.g. 9" data-testid="input-child-age" />
                   </Field>
-
                   <Field label="Preferred week *">
-                    <Select
-                      value={form.preferred_week}
-                      onValueChange={(v) => setForm((f) => ({ ...f, preferred_week: v }))}
-                    >
+                    <Select value={form.preferred_week} onValueChange={(v) => setForm((f) => ({ ...f, preferred_week: v }))}>
                       <SelectTrigger className={inputCls + " h-auto"} data-testid="select-week">
                         <SelectValue placeholder="Choose a week" />
                       </SelectTrigger>
@@ -233,14 +151,9 @@ export const Register = ({ formRef }) => {
                       </SelectContent>
                     </Select>
                   </Field>
-
                 </div>
-
                 <Field label="Programme interest *">
-                  <Select
-                    value={form.programme_interest}
-                    onValueChange={(v) => setForm((f) => ({ ...f, programme_interest: v }))}
-                  >
+                  <Select value={form.programme_interest} onValueChange={(v) => setForm((f) => ({ ...f, programme_interest: v }))}>
                     <SelectTrigger className={inputCls + " h-auto"} data-testid="select-programme">
                       <SelectValue placeholder="Select an option" />
                     </SelectTrigger>
@@ -251,7 +164,27 @@ export const Register = ({ formRef }) => {
                     </SelectContent>
                   </Select>
                 </Field>
-
                 <Field label="Questions, allergies, or learning needs (optional)">
-                  <textarea
- 
+                  <textarea rows={3} className={inputCls + " resize-none"} value={form.message} onChange={set("message")} placeholder="Anything the educator should know" data-testid="input-message" />
+                </Field>
+                <button type="submit" disabled={loading} className="ln-btn ln-btn-primary w-full" data-testid="register-submit-btn">
+                  {loading ? <><Loader2 size={18} className="animate-spin" /> Sending...</> : <>Submit Enquiry <Send size={18} /></>}
+                </button>
+                <p className="flex items-center justify-center gap-1.5 text-xs text-[#475569] font-medium">
+                  <ShieldCheck size={14} /> Your details are kept private and used only to respond to your enquiry.
+                </p>
+              </form>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Field = ({ label, children }) => (
+  <label className="block">
+    <span className="block text-sm font-bold mb-1.5">{label}</span>
+    {children}
+  </label>
+);
