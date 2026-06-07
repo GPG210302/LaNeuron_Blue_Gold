@@ -162,7 +162,7 @@ export const Register = ({ formRef }) => {
                           <option key={code} value={code}>{label}</option>
                         ))}
                       </select>
-                      <input className={inputCls + " flex-1"} value={form.phone} onChange={set("phone")} placeholder="729 655 422" data-testid="input-phone" />
+                      <input className={inputCls + " flex-1"} value={form.phone} onChange={set("phone")} placeholder=" " data-testid="input-phone" />
                     </div>
                   </Field>
                   <Field label="Child first name *">
