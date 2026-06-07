@@ -10,18 +10,18 @@ import { WEEKS, PROGRAMME_OPTIONS } from "../../data";
 const WORKER_URL = "https://form-handler.gpg210302-account.workers.dev/enquiry";
 
 const COUNTRY_CODES = [
-  { code: "+48", flag: "PL" },
-  { code: "+91", flag: "IN" },
-  { code: "+44", flag: "GB" },
-  { code: "+1",  flag: "US" },
-  { code: "+49", flag: "DE" },
-  { code: "+31", flag: "NL" },
-  { code: "+33", flag: "FR" },
-  { code: "+39", flag: "IT" },
-  { code: "+34", flag: "ES" },
-  { code: "+61", flag: "AU" },
-  { code: "+971", flag: "AE" },
-  { code: "+65", flag: "SG" },
+  { code: "+48", label: "PL +48" },
+  { code: "+91", label: "IN +91" },
+  { code: "+44", label: "GB +44" },
+  { code: "+1",  label: "US +1"  },
+  { code: "+49", label: "DE +49" },
+  { code: "+31", label: "NL +31" },
+  { code: "+33", label: "FR +33" },
+  { code: "+39", label: "IT +39" },
+  { code: "+34", label: "ES +34" },
+  { code: "+61", label: "AU +61" },
+  { code: "+971", label: "AE +971" },
+  { code: "+65", label: "SG +65" },
 ];
 
 const empty = {
@@ -29,8 +29,9 @@ const empty = {
   child_age: "", preferred_week: "", programme_interest: "", message: "",
 };
 
-const inputCls =
-  "w-full px-4 py-3 rounded-xl border-2 border-[#0F172A] bg-white text-[#0F172A] font-medium placeholder:text-[#94A3B8] focus:outline-none focus:ring-4 focus:ring-[#E0B33C]/40 transition";
+const inputCls = "w-full px-4 py-3 rounded-xl border-2 border-[#0F172A] bg-white text-[#0F172A] font-medium placeholder:text-[#94A3B8] focus:outline-none focus:ring-4 focus:ring-[#E0B33C]/40 transition";
+
+const selectCls = "px-2 py-3 rounded-xl border-2 border-[#0F172A] bg-white text-[#0F172A] font-medium focus:outline-none focus:ring-4 focus:ring-[#E0B33C]/40 transition w-24 text-sm";
 
 export const Register = ({ formRef }) => {
   const [form, setForm]               = useState(empty);
@@ -43,7 +44,14 @@ export const Register = ({ formRef }) => {
   const submit = async (e) => {
     e.preventDefault();
 
-    if (!form.parent_name || !form.email || !form.child_name || !form.child_age || !form.preferred_week || !form.programme_interest) {
+    if (
+      !form.parent_name ||
+      !form.email ||
+      !form.child_name ||
+      !form.child_age ||
+      !form.preferred_week ||
+      !form.programme_interest
+    ) {
       toast.error("Please fill in all required fields.");
       return;
     }
@@ -73,7 +81,7 @@ export const Register = ({ formRef }) => {
       if (!res.ok) throw new Error("Server error " + res.status);
 
       setDone(true);
-      toast.success("Enquiry received! We'll respond within 24 hours.");
+      toast.success("Enquiry received! We will respond within 24 hours.");
 
     } catch (err) {
       console.error("Enquiry submit failed:", err);
@@ -83,23 +91,32 @@ export const Register = ({ formRef }) => {
     }
   };
 
+  const resetForm = () => {
+    setForm(empty);
+    setDone(false);
+    setCountryCode("+48");
+  };
+
   return (
     <section id="register" ref={formRef} className="py-20 lg:py-28 pt-28 sm:pt-32">
       <div className="max-w-5xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-5 gap-0 ln-card overflow-hidden">
 
-          {/* Left intro */}
           <div className="lg:col-span-2 bg-[#1B2A63] text-white p-8 lg:p-10 flex flex-col">
             <span className="ln-overline !text-[#C7D2FE]">Register / Enquiry</span>
             <h2 className="mt-3 font-display font-extrabold text-3xl md:text-4xl leading-tight">
-              Reserve Your Child's Spot
+              Reserve Your Child Spot
             </h2>
             <p className="mt-5 text-white/80 leading-relaxed">
               Spots are limited to a maximum of 10 children per week to ensure every child receives personal attention.
               Submit the form and you will receive a response within 24 hours.
             </p>
             <div className="mt-auto pt-8 space-y-3">
-              {["Personal response within 24 hours", "Mention allergies or learning needs", "Sibling discount available"].map((t) => (
+              {[
+                "Personal response within 24 hours",
+                "Mention allergies or learning needs",
+                "Sibling discount available"
+              ].map((t) => (
                 <div key={t} className="flex items-center gap-2 text-white/90">
                   <CheckCircle2 size={18} className="text-[#FBBF24]" />
                   <span className="text-sm font-medium">{t}</span>
@@ -108,7 +125,6 @@ export const Register = ({ formRef }) => {
             </div>
           </div>
 
-          {/* Right form */}
           <div className="lg:col-span-3 p-8 lg:p-10 bg-white">
             {done ? (
               <motion.div
@@ -125,7 +141,7 @@ export const Register = ({ formRef }) => {
                   Thank you. A personal response from Dr. Priyadarshini will follow within 24 hours.
                 </p>
                 <button
-                  onClick={() => { setForm(empty); setDone(false); setCountryCode("+48"); }}
+                  onClick={resetForm}
                   className="ln-btn ln-btn-white mt-7"
                   data-testid="register-another-btn"
                 >
@@ -162,11 +178,11 @@ export const Register = ({ formRef }) => {
                       <select
                         value={countryCode}
                         onChange={(e) => setCountryCode(e.target.value)}
-                        className="px-2 py-3 rounded-xl border-2 border-[#0F172A] bg-white text-[#0F172A] font-medium focus:outline-none focus:ring-4 focus:ring-[#E0B33C]/40 transition w-24 text-sm"
+                        className={selectCls}
                         data-testid="select-country-code"
                       >
-                        {COUNTRY_CODES.map(({ code, flag }) => (
-                          <option key={code} value={code}>{flag} {code}</option>
+                        {COUNTRY_CODES.map(({ code, label }) => (
+                          <option key={code} value={code}>{label}</option>
                         ))}
                       </select>
                       <input
@@ -179,17 +195,17 @@ export const Register = ({ formRef }) => {
                     </div>
                   </Field>
 
-                  <Field label="Child's first name *">
+                  <Field label="Child first name *">
                     <input
                       className={inputCls}
                       value={form.child_name}
                       onChange={set("child_name")}
-                      placeholder="Child's name"
+                      placeholder="Child name"
                       data-testid="input-child-name"
                     />
                   </Field>
 
-                  <Field label="Child's age (6-13) *">
+                  <Field label="Child age (6-13) *">
                     <input
                       type="number"
                       min="6"
@@ -203,7 +219,10 @@ export const Register = ({ formRef }) => {
                   </Field>
 
                   <Field label="Preferred week *">
-                    <Select value={form.preferred_week} onValueChange={(v) => setForm((f) => ({ ...f, preferred_week: v }))}>
+                    <Select
+                      value={form.preferred_week}
+                      onValueChange={(v) => setForm((f) => ({ ...f, preferred_week: v }))}
+                    >
                       <SelectTrigger className={inputCls + " h-auto"} data-testid="select-week">
                         <SelectValue placeholder="Choose a week" />
                       </SelectTrigger>
@@ -218,7 +237,10 @@ export const Register = ({ formRef }) => {
                 </div>
 
                 <Field label="Programme interest *">
-                  <Select value={form.programme_interest} onValueChange={(v) => setForm((f) => ({ ...f, programme_interest: v }))}>
+                  <Select
+                    value={form.programme_interest}
+                    onValueChange={(v) => setForm((f) => ({ ...f, programme_interest: v }))}
+                  >
                     <SelectTrigger className={inputCls + " h-auto"} data-testid="select-programme">
                       <SelectValue placeholder="Select an option" />
                     </SelectTrigger>
@@ -232,9 +254,4 @@ export const Register = ({ formRef }) => {
 
                 <Field label="Questions, allergies, or learning needs (optional)">
                   <textarea
-                    rows={3}
-                    className={inputCls + " resize-none"}
-                    value={form.message}
-                    onChange={set("message")}
-                    placeholder="Anything the educator should know..."
-                    data-testid="input-message"
+ 
