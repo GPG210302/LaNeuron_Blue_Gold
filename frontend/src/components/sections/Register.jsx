@@ -1,5 +1,4 @@
 import { useState } from "react";
-import axios from "axios";
 import { motion } from "framer-motion";
 import { CheckCircle2, Loader2, Send, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
@@ -8,7 +7,22 @@ import {
 } from "../ui/select";
 import { WEEKS, PROGRAMME_OPTIONS } from "../../data";
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const WORKER_URL = "https://form-handler.gpg210302-account.workers.dev/enquiry";
+
+const COUNTRY_CODES = [
+  { code: "+48", flag: "🇵🇱", label: "PL" },
+  { code: "+91", flag: "🇮🇳", label: "IN" },
+  { code: "+44", flag: "🇬🇧", label: "GB" },
+  { code: "+1",  flag: "🇺🇸", label: "US" },
+  { code: "+49", flag: "🇩🇪", label: "DE" },
+  { code: "+31", flag: "🇳🇱", label: "NL" },
+  { code: "+33", flag: "🇫🇷", label: "FR" },
+  { code: "+39", flag: "🇮🇹", label: "IT" },
+  { code: "+34", flag: "🇪🇸", label: "ES" },
+  { code: "+61", flag: "🇦🇺", label: "AU" },
+  { code: "+971", flag: "🇦🇪", label: "AE" },
+  { code: "+65", flag: "🇸🇬", label: "SG" },
+];
 
 const empty = {
   parent_name: "", email: "", phone: "", child_name: "",
@@ -19,57 +33,62 @@ const inputCls =
   "w-full px-4 py-3 rounded-xl border-2 border-[#0F172A] bg-white text-[#0F172A] font-medium placeholder:text-[#94A3B8] focus:outline-none focus:ring-4 focus:ring-[#E0B33C]/40 transition";
 
 export const Register = ({ formRef }) => {
-  const [form, setForm] = useState(empty);
-  const [loading, setLoading] = useState(false);
-  const [done, setDone] = useState(false);
+  const [form, setForm]           = useState(empty);
+  const [loading, setLoading]     = useState(false);
+  const [done, setDone]           = useState(false);
+  const [countryCode, setCountryCode] = useState("+48"); // Default: Poland
 
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
-const WORKER_URL = "https://form-handler.gpg210302-account.workers.dev/enquiry";
+  const submit = async (e) => {
+    e.preventDefault();
 
-const submit = async (e) => {
-  e.preventDefault();
+    if (!form.parent_name || !form.email || !form.child_name || !form.child_age || !form.preferred_week || !form.programme_interest) {
+      toast.error("Please fill in all required fields.");
+      return;
+    }
 
-  if (!form.parent_name || !form.email || !form.child_name || !form.child_age || !form.preferred_week || !form.programme_interest) {
-    toast.error("Please fill in all required fields.");
-    return;
-  }
+    setLoading(true);
 
-  setLoading(true);
+    try {
+      // Combine country code + number only if a number was entered
+      const fullPhone = form.phone.trim()
+        ? `${countryCode} ${form.phone.trim()}`
+        : "Not provided";
 
-  try {
-    const payload = new FormData();
-    payload.append("parent_name",       form.parent_name);
-    payload.append("email",             form.email);
-    payload.append("phone",             form.phone || "Not provided");
-    payload.append("child_name",        form.child_name);
-    payload.append("child_age",         form.child_age);
-    payload.append("preferred_week",    form.preferred_week);
-    payload.append("programme",         form.programme_interest);
-    payload.append("notes",             form.message || "None");
+      const payload = new FormData();
+      payload.append("parent_name",    form.parent_name);
+      payload.append("email",          form.email);
+      payload.append("phone",          fullPhone);
+      payload.append("child_name",     form.child_name);
+      payload.append("child_age",      form.child_age);
+      payload.append("preferred_week", form.preferred_week);
+      payload.append("programme",      form.programme_interest);
+      payload.append("notes",          form.message || "None");
 
-    const res = await fetch(WORKER_URL, {
-      method: "POST",
-      body: payload,
-    });
+      const res = await fetch(WORKER_URL, {
+        method: "POST",
+        body: payload,
+      });
 
-    if (!res.ok) throw new Error(`Server error ${res.status}`);
+      if (!res.ok) throw new Error(`Server error ${res.status}`);
 
-    setDone(true);
-    toast.success("Enquiry received! We'll respond within 24 hours.");
+      setDone(true);
+      toast.success("Enquiry received! We'll respond within 24 hours.");
 
-  } catch (err) {
-    console.error("Enquiry submit failed:", err);
-    toast.error("Something went wrong. Please try again or email admin@la-neuron.org directly.");
-  } finally {
-    setLoading(false);
-  }
-};
+    } catch (err) {
+      console.error("Enquiry submit failed:", err);
+      toast.error("Something went wrong. Please try again or email admin@la-neuron.org directly.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <section id="register" ref={formRef} className="py-20 lg:py-28 pt-28 sm:pt-32">
       <div className="max-w-5xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-5 gap-0 ln-card overflow-hidden">
+
           {/* Left intro */}
           <div className="lg:col-span-2 bg-[#1B2A63] text-white p-8 lg:p-10 flex flex-col">
             <span className="ln-overline !text-[#C7D2FE]">Register / Enquiry</span>
@@ -83,7 +102,8 @@ const submit = async (e) => {
             <div className="mt-auto pt-8 space-y-3">
               {["Personal response within 24 hours", "Mention allergies or learning needs", "Sibling discount available"].map((t) => (
                 <div key={t} className="flex items-center gap-2 text-white/90">
-                  <CheckCircle2 size={18} className="text-[#FBBF24]" /> <span className="text-sm font-medium">{t}</span>
+                  <CheckCircle2 size={18} className="text-[#FBBF24]" />
+                  <span className="text-sm font-medium">{t}</span>
                 </div>
               ))}
             </div>
@@ -106,7 +126,7 @@ const submit = async (e) => {
                   Thank you. A personal response from Dr. Priyadarshini will follow within 24 hours.
                 </p>
                 <button
-                  onClick={() => { setForm(empty); setDone(false); }}
+                  onClick={() => { setForm(empty); setDone(false); setCountryCode("+48"); }}
                   className="ln-btn ln-btn-white mt-7"
                   data-testid="register-another-btn"
                 >
@@ -116,31 +136,89 @@ const submit = async (e) => {
             ) : (
               <form onSubmit={submit} className="space-y-4" data-testid="register-form">
                 <div className="grid sm:grid-cols-2 gap-4">
+
                   <Field label="Parent / guardian full name *">
-                    <input className={inputCls} value={form.parent_name} onChange={set("parent_name")} placeholder="Your full name" data-testid="input-parent-name" />
+                    <input
+                      className={inputCls}
+                      value={form.parent_name}
+                      onChange={set("parent_name")}
+                      placeholder="Your full name"
+                      data-testid="input-parent-name"
+                    />
                   </Field>
+
                   <Field label="Email address *">
-                    <input type="email" className={inputCls} value={form.email} onChange={set("email")} placeholder="you@email.com" data-testid="input-email" />
+                    <input
+                      type="email"
+                      className={inputCls}
+                      value={form.email}
+                      onChange={set("email")}
+                      placeholder="you@email.com"
+                      data-testid="input-email"
+                    />
                   </Field>
+
+                  {/* ── Phone with country code picker ── */}
                   <Field label="Phone / WhatsApp (optional)">
-                    <input className={inputCls} value={form.phone} onChange={set("phone")} placeholder="+48 ..." data-testid="input-phone" />
+                    <div className="flex gap-2">
+                      <select
+                        value={countryCode}
+                        onChange={(e) => setCountryCode(e.target.value)}
+                        className="px-2 py-3 rounded-xl border-2 border-[#0F172A] bg-white text-[#0F172A] font-medium focus:outline-none focus:ring-4 focus:ring-[#E0B33C]/40 transition w-24 text-sm"
+                        data-testid="select-country-code"
+                      >
+                        {COUNTRY_CODES.map(({ code, flag, label }) => (
+                          <option key={code} value={code}>
+                            {flag} {code}
+                          </option>
+                        ))}
+                      </select>
+                      <input
+                        className={inputCls + " flex-1"}
+                        value={form.phone}
+                        onChange={set("phone")}
+                        placeholder="729 655 422"
+                        data-testid="input-phone"
+                      />
+                    </div>
                   </Field>
+
                   <Field label="Child's first name *">
-                    <input className={inputCls} value={form.child_name} onChange={set("child_name")} placeholder="Child's name" data-testid="input-child-name" />
+                    <input
+                      className={inputCls}
+                      value={form.child_name}
+                      onChange={set("child_name")}
+                      placeholder="Child's name"
+                      data-testid="input-child-name"
+                    />
                   </Field>
+
                   <Field label="Child's age (6–13) *">
-                    <input type="number" min="6" max="13" className={inputCls} value={form.child_age} onChange={set("child_age")} placeholder="e.g. 9" data-testid="input-child-age" />
+                    <input
+                      type="number"
+                      min="6"
+                      max="13"
+                      className={inputCls}
+                      value={form.child_age}
+                      onChange={set("child_age")}
+                      placeholder="e.g. 9"
+                      data-testid="input-child-age"
+                    />
                   </Field>
+
                   <Field label="Preferred week *">
                     <Select value={form.preferred_week} onValueChange={(v) => setForm((f) => ({ ...f, preferred_week: v }))}>
                       <SelectTrigger className={inputCls + " h-auto"} data-testid="select-week">
                         <SelectValue placeholder="Choose a week" />
                       </SelectTrigger>
                       <SelectContent>
-                        {WEEKS.map((w) => <SelectItem key={w} value={w} data-testid={`week-${w}`}>{w}</SelectItem>)}
+                        {WEEKS.map((w) => (
+                          <SelectItem key={w} value={w} data-testid={`week-${w}`}>{w}</SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </Field>
+
                 </div>
 
                 <Field label="Programme interest *">
@@ -149,33 +227,11 @@ const submit = async (e) => {
                       <SelectValue placeholder="Select an option" />
                     </SelectTrigger>
                     <SelectContent>
-                      {PROGRAMME_OPTIONS.map((p) => <SelectItem key={p} value={p} data-testid={`prog-${p}`}>{p}</SelectItem>)}
+                      {PROGRAMME_OPTIONS.map((p) => (
+                        <SelectItem key={p} value={p} data-testid={`prog-${p}`}>{p}</SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </Field>
 
-                <Field label="Questions, allergies, or learning needs (optional)">
-                  <textarea rows={3} className={inputCls + " resize-none"} value={form.message} onChange={set("message")} placeholder="Anything the educator should know..." data-testid="input-message" />
-                </Field>
-
-                <button type="submit" disabled={loading} className="ln-btn ln-btn-primary w-full" data-testid="register-submit-btn">
-                  {loading ? <><Loader2 size={18} className="animate-spin" /> Sending...</> : <>Submit Enquiry <Send size={18} /></>}
-                </button>
-                <p className="flex items-center justify-center gap-1.5 text-xs text-[#475569] font-medium">
-                  <ShieldCheck size={14} /> Your details are kept private and used only to respond to your enquiry.
-                </p>
-              </form>
-            )}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const Field = ({ label, children }) => (
-  <label className="block">
-    <span className="block text-sm font-bold mb-1.5">{label}</span>
-    {children}
-  </label>
-);
+              
