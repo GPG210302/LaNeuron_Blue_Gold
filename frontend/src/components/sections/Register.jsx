@@ -10,18 +10,18 @@ import { WEEKS, PROGRAMME_OPTIONS } from "../../data";
 const WORKER_URL = "https://form-handler.gpg210302-account.workers.dev/enquiry";
 
 const COUNTRY_CODES = [
-  { code: "+48", flag: "🇵🇱", label: "PL" },
-  { code: "+91", flag: "🇮🇳", label: "IN" },
-  { code: "+44", flag: "🇬🇧", label: "GB" },
-  { code: "+1",  flag: "🇺🇸", label: "US" },
-  { code: "+49", flag: "🇩🇪", label: "DE" },
-  { code: "+31", flag: "🇳🇱", label: "NL" },
-  { code: "+33", flag: "🇫🇷", label: "FR" },
-  { code: "+39", flag: "🇮🇹", label: "IT" },
-  { code: "+34", flag: "🇪🇸", label: "ES" },
-  { code: "+61", flag: "🇦🇺", label: "AU" },
-  { code: "+971", flag: "🇦🇪", label: "AE" },
-  { code: "+65", flag: "🇸🇬", label: "SG" },
+  { code: "+48", flag: "PL" },
+  { code: "+91", flag: "IN" },
+  { code: "+44", flag: "GB" },
+  { code: "+1",  flag: "US" },
+  { code: "+49", flag: "DE" },
+  { code: "+31", flag: "NL" },
+  { code: "+33", flag: "FR" },
+  { code: "+39", flag: "IT" },
+  { code: "+34", flag: "ES" },
+  { code: "+61", flag: "AU" },
+  { code: "+971", flag: "AE" },
+  { code: "+65", flag: "SG" },
 ];
 
 const empty = {
@@ -33,10 +33,10 @@ const inputCls =
   "w-full px-4 py-3 rounded-xl border-2 border-[#0F172A] bg-white text-[#0F172A] font-medium placeholder:text-[#94A3B8] focus:outline-none focus:ring-4 focus:ring-[#E0B33C]/40 transition";
 
 export const Register = ({ formRef }) => {
-  const [form, setForm]           = useState(empty);
-  const [loading, setLoading]     = useState(false);
-  const [done, setDone]           = useState(false);
-  const [countryCode, setCountryCode] = useState("+48"); // Default: Poland
+  const [form, setForm]               = useState(empty);
+  const [loading, setLoading]         = useState(false);
+  const [done, setDone]               = useState(false);
+  const [countryCode, setCountryCode] = useState("+48");
 
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
@@ -51,9 +51,8 @@ export const Register = ({ formRef }) => {
     setLoading(true);
 
     try {
-      // Combine country code + number only if a number was entered
       const fullPhone = form.phone.trim()
-        ? `${countryCode} ${form.phone.trim()}`
+        ? countryCode + " " + form.phone.trim()
         : "Not provided";
 
       const payload = new FormData();
@@ -71,7 +70,7 @@ export const Register = ({ formRef }) => {
         body: payload,
       });
 
-      if (!res.ok) throw new Error(`Server error ${res.status}`);
+      if (!res.ok) throw new Error("Server error " + res.status);
 
       setDone(true);
       toast.success("Enquiry received! We'll respond within 24 hours.");
@@ -97,7 +96,7 @@ export const Register = ({ formRef }) => {
             </h2>
             <p className="mt-5 text-white/80 leading-relaxed">
               Spots are limited to a maximum of 10 children per week to ensure every child receives personal attention.
-              Submit the form and you'll receive a response within 24 hours.
+              Submit the form and you will receive a response within 24 hours.
             </p>
             <div className="mt-auto pt-8 space-y-3">
               {["Personal response within 24 hours", "Mention allergies or learning needs", "Sibling discount available"].map((t) => (
@@ -158,7 +157,6 @@ export const Register = ({ formRef }) => {
                     />
                   </Field>
 
-                  {/* ── Phone with country code picker ── */}
                   <Field label="Phone / WhatsApp (optional)">
                     <div className="flex gap-2">
                       <select
@@ -167,10 +165,8 @@ export const Register = ({ formRef }) => {
                         className="px-2 py-3 rounded-xl border-2 border-[#0F172A] bg-white text-[#0F172A] font-medium focus:outline-none focus:ring-4 focus:ring-[#E0B33C]/40 transition w-24 text-sm"
                         data-testid="select-country-code"
                       >
-                        {COUNTRY_CODES.map(({ code, flag, label }) => (
-                          <option key={code} value={code}>
-                            {flag} {code}
-                          </option>
+                        {COUNTRY_CODES.map(({ code, flag }) => (
+                          <option key={code} value={code}>{flag} {code}</option>
                         ))}
                       </select>
                       <input
@@ -193,7 +189,7 @@ export const Register = ({ formRef }) => {
                     />
                   </Field>
 
-                  <Field label="Child's age (6–13) *">
+                  <Field label="Child's age (6-13) *">
                     <input
                       type="number"
                       min="6"
@@ -213,7 +209,7 @@ export const Register = ({ formRef }) => {
                       </SelectTrigger>
                       <SelectContent>
                         {WEEKS.map((w) => (
-                          <SelectItem key={w} value={w} data-testid={`week-${w}`}>{w}</SelectItem>
+                          <SelectItem key={w} value={w} data-testid={"week-" + w}>{w}</SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
@@ -228,10 +224,17 @@ export const Register = ({ formRef }) => {
                     </SelectTrigger>
                     <SelectContent>
                       {PROGRAMME_OPTIONS.map((p) => (
-                        <SelectItem key={p} value={p} data-testid={`prog-${p}`}>{p}</SelectItem>
+                        <SelectItem key={p} value={p} data-testid={"prog-" + p}>{p}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </Field>
-                  <Field label="Q
-              
+
+                <Field label="Questions, allergies, or learning needs (optional)">
+                  <textarea
+                    rows={3}
+                    className={inputCls + " resize-none"}
+                    value={form.message}
+                    onChange={set("message")}
+                    placeholder="Anything the educator should know..."
+                    data-testid="input-message"
