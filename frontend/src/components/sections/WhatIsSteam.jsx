@@ -194,7 +194,7 @@ const WHO_FOLLOWS = [
   { flag: "🇸🇬", country: "Singapore",      color: "#F97316", detail: "Singapore's Applied Learning Programme integrates STEAM into every primary school — widely cited as a global model for 21st-century education." },
   { flag: "🇫🇮", country: "Finland",        color: "#A855F7", detail: "Finland's phenomenon-based learning model is one of the world's closest real-world implementations of STEAM — inquiry-driven and child-led." },
   { flag: "🇯🇵", country: "Japan",          color: "#FB7185", detail: "Japan introduced STEAM into National Curriculum Standards in 2022, focusing on creativity and cross-disciplinary problem solving from primary school." },
-  { flag: "🇵🇱", country: "Poland",         color: "#E0B33C", detail: "Poland's Ministry of Education is actively expanding STEAM through dedicated school labs and private programmes like La Neuron in Kraków." },
+  { flag: "🇵🇱", country: "Poland",         color: "#E0B33C", detail: "Poland's Ministry of Education is actively expanding STEAM through dedicated school labs and private programmes in Kraków." },
 ];
 
 const MISCONCEPTIONS = [
