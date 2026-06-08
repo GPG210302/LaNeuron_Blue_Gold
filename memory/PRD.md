@@ -1,7 +1,7 @@
 # PRD — La Neuron – STEAM Academy (Landing Page)
 
 ## Original Problem Statement
-Build a highly-animated, professional yet kids-attractive landing page for a STEAM education academy named **"La Neuron – STEAM Academy"** (motto "Real Science for Real Kids"), focused broadly on STEAM education for children aged 6–13 in Kraków, Poland, led by Dr. Priyadarshini Gouthaman (PhD Cognitive Scientist & certified Neuroscience Coach). The Summer Camp 2026 is featured as an upcoming event. Interactive graphics, process-flow diagrams, calendar, and a map are required.
+Build a highly-animated, professional yet kids-attractive landing page for a STEAM education academy named **"La Neuron – STEAM Academy"** (motto "Real-World Science for Young Minds"), focused broadly on STEAM education for children aged 6–13 in Kraków, Poland, led by Dr. Priyadarshini Gouthaman (PhD Cognitive Scientist & certified Neuroscience Coach). The Summer Camp 2026 is featured as an upcoming event. Interactive graphics, process-flow diagrams, calendar, and a map are required.
 
 ## User Choices (confirmed)
 - Site name: **La Neuron – STEAM Academy**
