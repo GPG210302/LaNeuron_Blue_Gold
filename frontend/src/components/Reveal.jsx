@@ -1,229 +1,142 @@
-import { motion, useReducedMotion } from "framer-motion";
-import { useRef, Children } from "react";
+import { useState, useRef } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
-// ─── SHARED EASING ────────────────────────────────────────
-const EASE_OUT_EXPO = [0.22, 1, 0.36, 1];
-const EASE_OUT_BACK = [0.34, 1.56, 0.64, 1]; // slight overshoot
-const VIEWPORT = { once: true, margin: "-60px" };
-
-// ─── ANIMATION VARIANTS ───────────────────────────────────
-const variants = {
-  // Original: fade up (default)
-  fadeUp: (delay, y) => ({
-    hidden: { opacity: 0, y },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.65, delay, ease: EASE_OUT_EXPO } },
-  }),
-
-  // Fade in from left
-  fadeLeft: (delay) => ({
-    hidden: { opacity: 0, x: -40 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.65, delay, ease: EASE_OUT_EXPO } },
-  }),
-
-  // Fade in from right
-  fadeRight: (delay) => ({
-    hidden: { opacity: 0, x: 40 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.65, delay, ease: EASE_OUT_EXPO } },
-  }),
-
-  // Scale up with slight overshoot
-  scaleUp: (delay) => ({
-    hidden: { opacity: 0, scale: 0.88 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.6, delay, ease: EASE_OUT_BACK } },
-  }),
-
-  // Clip-path wipe from bottom (no layout shift)
-  wipe: (delay) => ({
-    hidden: { clipPath: "inset(100% 0 0 0)", opacity: 0 },
-    visible: {
-      clipPath: "inset(0% 0 0 0)",
-      opacity: 1,
-      transition: { duration: 0.7, delay, ease: EASE_OUT_EXPO },
-    },
-  }),
-
-  // Clip-path wipe from left
-  wipeLeft: (delay) => ({
-    hidden: { clipPath: "inset(0 100% 0 0)", opacity: 0 },
-    visible: {
-      clipPath: "inset(0 0% 0 0)",
-      opacity: 1,
-      transition: { duration: 0.7, delay, ease: EASE_OUT_EXPO },
-    },
-  }),
-
-  // Blur + fade (glassmorphism feel)
-  blurIn: (delay) => ({
-    hidden: { opacity: 0, filter: "blur(12px)", y: 16 },
-    visible: {
-      opacity: 1,
-      filter: "blur(0px)",
-      y: 0,
-      transition: { duration: 0.75, delay, ease: EASE_OUT_EXPO },
-    },
-  }),
-};
-
-// ─── REVEAL ───────────────────────────────────────────────
-// variant: "fadeUp" | "fadeLeft" | "fadeRight" | "scaleUp" | "wipe" | "wipeLeft" | "blurIn"
-export const Reveal = ({
-  children,
-  delay = 0,
-  y = 28,
-  className = "",
-  variant = "fadeUp",
+export const FlipCard = ({
+  front,
+  back,
+  heightClass = "h-64",
+  testid,
+  enableTilt = true,
 }) => {
-  const prefersReduced = useReducedMotion();
+  const [flipped, setFlipped] = useState(false);
+  const cardRef = useRef(null);
 
-  // Respect user accessibility preference — instant show, no motion
-  if (prefersReduced) {
-    return <div className={className}>{children}</div>;
-  }
+  // Spring-based tilt
+  const rawX = useMotionValue(0);
+  const rawY = useMotionValue(0);
+  const rotateX = useSpring(rawX, { stiffness: 200, damping: 20 });
+  const rotateY = useSpring(rawY, { stiffness: 200, damping: 20 });
+  const scale = useSpring(1, { stiffness: 300, damping: 22 });
 
-  const selected = variants[variant]?.(delay, y) ?? variants.fadeUp(delay, y);
+  // Hard offset shadow springs — animate x/y offset independently
+  const shadowX = useSpring(5, { stiffness: 250, damping: 24 });
+  const shadowY = useSpring(5, { stiffness: 250, damping: 24 });
 
-  return (
-    <motion.div
-      className={className}
-      initial="hidden"
-      whileInView="visible"
-      viewport={VIEWPORT}
-      variants={selected}
-    >
-      {children}
-    </motion.div>
-  );
-};
-
-// ─── STAGGER REVEAL ───────────────────────────────────────
-// Wraps multiple children and reveals them one-by-one in sequence.
-// Usage: <StaggerReveal staggerDelay={0.1}><Card/><Card/><Card/></StaggerReveal>
-export const StaggerReveal = ({
-  children,
-  staggerDelay = 0.08,
-  initialDelay = 0,
-  className = "",
-  variant = "fadeUp",
-  y = 24,
-}) => {
-  const prefersReduced = useReducedMotion();
-
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: staggerDelay,
-        delayChildren: initialDelay,
-      },
-    },
+  const handleMouseMove = (e) => {
+    if (!enableTilt || flipped) return;
+    const rect = cardRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = ((e.clientX - cx) / (rect.width / 2)) * 12;
+    const dy = ((e.clientY - cy) / (rect.height / 2)) * -12;
+    rawY.set(dx);
+    rawX.set(dy);
+    // Shadow shifts opposite to tilt — grounds the card physically
+    shadowX.set(5 + dx * 0.35);
+    shadowY.set(5 - dy * 0.35);
   };
 
-  const itemVariants = variants[variant]?.(0, y) ?? variants.fadeUp(0, y);
+  const handleMouseEnter = () => {
+    scale.set(1.03);
+    shadowX.set(8);
+    shadowY.set(8);
+  };
 
-  if (prefersReduced) {
-    return <div className={className}>{children}</div>;
-  }
+  const handleMouseLeave = () => {
+    rawX.set(0);
+    rawY.set(0);
+    scale.set(1);
+    shadowX.set(5);
+    shadowY.set(5);
+  };
 
-  return (
-    <motion.div
-      className={className}
-      initial="hidden"
-      whileInView="visible"
-      viewport={VIEWPORT}
-      variants={containerVariants}
-    >
-      {Children.map(children, (child, i) => (
-        <motion.div key={i} variants={itemVariants}>
-          {child}
-        </motion.div>
-      ))}
-    </motion.div>
-  );
-};
-
-// ─── SECTION HEADING ──────────────────────────────────────
-// Enhanced with per-word stagger on title + animated overline bar
-export const SectionHeading = ({
-  overline,
-  title,
-  sub,
-  center = true,
-  titleVariant = "fadeUp",
-  animateWords = true, // per-word stagger on title
-}) => {
-  const prefersReduced = useReducedMotion();
-  const words = title?.split(" ") ?? [];
-
-  const wordVariants = {
-    hidden: { opacity: 0, y: 24, filter: "blur(6px)" },
-    visible: (i) => ({
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: {
-        duration: 0.6,
-        delay: i * 0.07,
-        ease: EASE_OUT_EXPO,
-      },
-    }),
+  const handleFlip = () => {
+    setFlipped((f) => !f);
+    rawX.set(0);
+    rawY.set(0);
+    // Shadow collapses on flip then restores
+    shadowX.set(2);
+    shadowY.set(2);
+    setTimeout(() => {
+      shadowX.set(5);
+      shadowY.set(5);
+    }, 420);
   };
 
   return (
-    <div className={center ? "max-w-3xl mx-auto text-center" : "max-w-3xl"}>
-      {/* Animated overline with sliding underbar */}
-      {overline && (
-        <Reveal variant="wipeLeft" delay={0}>
-          <span
-            className="ln-overline inline-flex items-center gap-2"
-            data-testid="section-overline"
-          >
-            {/* Animated leading bar */}
-            <motion.span
-              className="inline-block h-[2px] bg-current rounded-full"
-              initial={{ width: 0, opacity: 0 }}
-              whileInView={{ width: 20, opacity: 1 }}
-              viewport={VIEWPORT}
-              transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
-            />
-            {overline}
-          </span>
-        </Reveal>
-      )}
+    <div
+      ref={cardRef}
+      className={`relative [perspective:1400px] cursor-pointer ${heightClass}`}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onClick={handleFlip}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handleFlip();
+        }
+      }}
+      role="button"
+      tabIndex={0}
+      data-testid={testid}
+      aria-pressed={flipped}
+    >
+      {/* ── HARD OFFSET SHADOW ──────────────────────────────────
+          Sits OUTSIDE the perspective container so it never
+          bleeds through the card faces. Pure CSS box-shadow
+          driven by spring-animated inline style. No dark fill. */}
+      <motion.div
+        aria-hidden="true"
+        className="absolute inset-0 rounded-[inherit] pointer-events-none"
+        style={{
+          x: shadowX,
+          y: shadowY,
+          // Matches the dark navy border colour visible on your cards
+          boxShadow: "0 0 0 100vmax transparent",
+          backgroundColor: "#1a1a2e",
+          borderRadius: "inherit",
+          zIndex: -1,
+        }}
+      />
 
-      {/* Title — per-word stagger or single block fallback */}
-      <h2 className="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight">
-        {animateWords && !prefersReduced ? (
-          <motion.span
-            className="inline"
-            initial="hidden"
-            whileInView="visible"
-            viewport={VIEWPORT}
-          >
-            {words.map((word, i) => (
-              <motion.span
-                key={i}
-                className="inline-block mr-[0.25em] last:mr-0"
-                custom={i}
-                variants={wordVariants}
-              >
-                {word}
-              </motion.span>
-            ))}
-          </motion.span>
-        ) : (
-          <Reveal variant={titleVariant} delay={overline ? 0.1 : 0}>
-            {title}
-          </Reveal>
-        )}
-      </h2>
+      {/* ── CARD FLIP CONTAINER ─────────────────────────────────
+          transform-style:preserve-3d lives here only.
+          NO background or colour set here — prevents bleed. */}
+      <motion.div
+        className="relative w-full h-full [transform-style:preserve-3d]"
+        style={{
+          scale,
+          rotateX: flipped ? 0 : rotateX,
+        }}
+        animate={{ rotateY: flipped ? 180 : 0 }}
+        transition={{
+          rotateY: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+        }}
+      >
+        {/* ── FRONT FACE ── */}
+        <div
+          className="absolute inset-0 [backface-visibility:hidden] rounded-[inherit] overflow-hidden"
+        >
+          {front}
+        </div>
 
-      {/* Subtitle — blur-in after title */}
-      {sub && (
-        <Reveal variant="blurIn" delay={overline ? 0.25 : 0.15}>
-          <p className="mt-5 text-lg md:text-xl text-[#475569] leading-relaxed">
-            {sub}
-          </p>
-        </Reveal>
+        {/* ── BACK FACE ── */}
+        <div
+          className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-[inherit] overflow-hidden"
+        >
+          {back}
+        </div>
+      </motion.div>
+
+      {/* ── FLIP HINT PULSE ── */}
+      {!flipped && (
+        <motion.div
+          className="absolute bottom-2 right-2 z-20 w-2 h-2 rounded-full bg-black/20 pointer-events-none"
+          animate={{ scale: [1, 1.8, 1], opacity: [0.5, 0, 0.5] }}
+          transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+        />
       )}
     </div>
   );
