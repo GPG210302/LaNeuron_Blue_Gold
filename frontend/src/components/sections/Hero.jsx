@@ -181,13 +181,10 @@ export const Hero = () => {
             <motion.span
               className="relative inline-block text-gold-shiny pb-2"
               style={{
-                textShadow: `
-                  -1px -1px 0 #1B2A63,
-                  1px -1px 0 #1B2A63,
-                  -1px  1px 0 #1B2A63,
-                  1px  1px 0 #1B2A63
-                `,
-                lineHeight: "1.2",
+              color: "#FBBF24",
+              WebkitTextStroke: "2px #1B2A63",
+              paintOrder: "stroke fill",
+              lineHeight: "1.2",
               }}
               initial={{ opacity: 0, y: 32, filter: "blur(8px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
