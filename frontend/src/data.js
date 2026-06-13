@@ -105,14 +105,13 @@ export const METHOD = [
 export const RECEIVE = [
   { text: "Personalised science investigation worksheet for every session" },
   { text: "Step-by-step guided recording sheets" },
-  { text: "Every child takes home their project outcomes — working models, observation sheets, and experimental results from their scientific journey" },
+  { text: "Science project final outcomes to take home" },
   { text: "The science behind the experiment explained clearly" },
-  {
-    text: "Skill Badges and Certificate of Achievement for motivation and celebration",
+  { text: "Skill Badges and Certificate of Achievement",
     style: {
       animation: "glowBlink 1.8s ease-in-out infinite",
-      borderRadius: "6px",
-      padding: "4px 10px",
+      borderRadius: "5px",
+      padding: "3px 10px",
     },
   },
 ];
