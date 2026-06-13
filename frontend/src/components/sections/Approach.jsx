@@ -81,10 +81,10 @@ export const Approach = () => {
                 <h3 className="font-display font-extrabold text-2xl">What children receive</h3>
               </div>
               <ul className="mt-5 space-y-3">
-                {RECEIVE.map((r) => (
-                  <li key={r} className="flex gap-3 text-white/80">
+                {RECEIVE.map((item, index) => (
+                  <li key={index} className="flex gap-3 text-white/80" style={item.style || {}}>
                     <CheckCircle2 size={20} className="text-[#10B981] shrink-0 mt-0.5" />
-                    <span>{r}</span>
+                    <span>{item.text}</span>
                   </li>
                 ))}
               </ul>

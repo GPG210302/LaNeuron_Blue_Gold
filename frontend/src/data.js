@@ -103,14 +103,19 @@ export const METHOD = [
 ];
 
 export const RECEIVE = [
-  "Personalised science investigation worksheet for every session",
-  "Step-by-step guided recording sheets",
-  "Science project final outcomes to take home",
-  "The science behind the experiment explained clearly",
+  { text: "Personalised science investigation worksheet for every session" },
+  { text: "Step-by-step guided recording sheets" },
+  { text: "Every child takes home their project outcomes — working models, observation sheets, and experimental results from their scientific journey" },
+  { text: "The science behind the experiment explained clearly" },
+  {
+    text: "Skill Badges and Certificate of Achievement for motivation and celebration",
+    style: {
+      animation: "glowBlink 1.8s ease-in-out infinite",
+      borderRadius: "6px",
+      padding: "4px 10px",
+    },
+  },
 ];
-
-export const RECEIVE_HIGHLIGHT =
-  "Skill Badges and Certificate of Achievement for motivation and celebration";
 
 export const AGE_GROUPS = [
   {
