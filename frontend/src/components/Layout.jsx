@@ -12,7 +12,7 @@ function useNeuronCanvas(canvasRef) {
 
     // ── Cream-background palette ───────────────────────────────────────────
     const BG_COLOR    = "rgba(253,251,247,0)";   // fully transparent — let CSS bg show
-    const NODE_COLOR  = "#8a5e10";               // deep dark gold node dot
+    const NODE_COLOR  = "#fdd017";               // deep bright gold node dot
     const LINE_DIM    = "rgba(138,94,16,";       // dark gold lines (base)
     const LINE_BRIGHT = "rgba(180,120,20,";      // brighter gold on mouse hover
     const PULSE_COLOR = "rgba(201,140,30,";      // travelling pulse dot
