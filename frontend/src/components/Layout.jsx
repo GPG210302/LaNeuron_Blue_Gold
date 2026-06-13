@@ -4,20 +4,19 @@ import { Navbar } from "./Navbar";
 import { Footer } from "./sections/Footer";
 import { Toaster } from "./ui/sonner";
 
-// ─── Neuron Animation ────────────────────────────────────────────────────────
-
 function useNeuronCanvas(canvasRef) {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
 
-    const NAVY_BG    = "#0a0e1a";
-    const NODE_COLOR = "#c9a84c";
-    const LINE_COLOR = "rgba(201,168,76,";
-    const PULSE_COLOR= "rgba(232,201,109,";
-    const GLOW_NAVY  = "rgba(42,60,120,";
-    const CFG = { maxDist: 200, nodeMinR: 1.5, nodeMaxR: 4.5, speed: 0.35 };
+    // ── Cream-background palette ───────────────────────────────────────────
+    const BG_COLOR    = "rgba(253,251,247,0)";   // fully transparent — let CSS bg show
+    const NODE_COLOR  = "#8a5e10";               // deep dark gold node dot
+    const LINE_DIM    = "rgba(138,94,16,";       // dark gold lines (base)
+    const LINE_BRIGHT = "rgba(180,120,20,";      // brighter gold on mouse hover
+    const PULSE_COLOR = "rgba(201,140,30,";      // travelling pulse dot
+    const CFG = { maxDist: 200, nodeMinR: 1.5, nodeMaxR: 4.0, speed: 0.35 };
 
     let nodes = [], pulses = [], W, H, animId;
     const mouse = { x: -9999, y: -9999 };
@@ -32,7 +31,7 @@ function useNeuronCanvas(canvasRef) {
         this.vx    = (Math.random() - 0.5) * CFG.speed;
         this.vy    = (Math.random() - 0.5) * CFG.speed;
         this.r     = CFG.nodeMinR + Math.random() * (CFG.nodeMaxR - CFG.nodeMinR);
-        this.alpha = 0.5 + Math.random() * 0.5;
+        this.alpha = 0.45 + Math.random() * 0.45;
         this.phase = Math.random() * Math.PI * 2;
       }
       update() {
@@ -42,13 +41,17 @@ function useNeuronCanvas(canvasRef) {
       draw() {
         const p = 0.85 + 0.15 * Math.sin(this.phase);
         const r = this.r * p;
-        const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, r * 4);
-        g.addColorStop(0, PULSE_COLOR + (this.alpha * 0.55) + ")");
+        // soft glow around node
+        const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, r * 5);
+        g.addColorStop(0, PULSE_COLOR + (this.alpha * 0.35) + ")");
         g.addColorStop(1, "rgba(0,0,0,0)");
-        ctx.beginPath(); ctx.arc(this.x, this.y, r * 4, 0, Math.PI * 2);
+        ctx.beginPath(); ctx.arc(this.x, this.y, r * 5, 0, Math.PI * 2);
         ctx.fillStyle = g; ctx.fill();
+        // solid node dot
         ctx.beginPath(); ctx.arc(this.x, this.y, r, 0, Math.PI * 2);
-        ctx.fillStyle = NODE_COLOR; ctx.globalAlpha = this.alpha * p; ctx.fill();
+        ctx.fillStyle = NODE_COLOR;
+        ctx.globalAlpha = this.alpha * p;
+        ctx.fill();
         ctx.globalAlpha = 1;
       }
     }
@@ -60,16 +63,19 @@ function useNeuronCanvas(canvasRef) {
         const x = this.a.x + (this.b.x - this.a.x) * this.t;
         const y = this.a.y + (this.b.y - this.a.y) * this.t;
         const f = Math.sin(this.t * Math.PI);
-        const g = ctx.createRadialGradient(x, y, 0, x, y, 7);
-        g.addColorStop(0,   PULSE_COLOR + (f * 0.95) + ")");
-        g.addColorStop(0.4, PULSE_COLOR + (f * 0.40) + ")");
+        const g = ctx.createRadialGradient(x, y, 0, x, y, 6);
+        g.addColorStop(0,   PULSE_COLOR + (f * 0.9) + ")");
+        g.addColorStop(0.4, PULSE_COLOR + (f * 0.35) + ")");
         g.addColorStop(1,   "rgba(0,0,0,0)");
-        ctx.beginPath(); ctx.arc(x, y, 7, 0, Math.PI * 2);
+        ctx.beginPath(); ctx.arc(x, y, 6, 0, Math.PI * 2);
         ctx.fillStyle = g; ctx.fill();
       }
     }
 
-    const init = () => { nodes = Array.from({ length: nodeCount() }, () => new Node()); pulses = []; };
+    const init = () => {
+      nodes = Array.from({ length: nodeCount() }, () => new Node());
+      pulses = [];
+    };
 
     let lastPulse = 0;
     const spawnPulses = (t) => {
@@ -86,18 +92,22 @@ function useNeuronCanvas(canvasRef) {
     };
 
     const drawConnections = () => {
+      // base connections between nearby nodes
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
           const d  = Math.sqrt(dx * dx + dy * dy);
           if (d > CFG.maxDist) continue;
           const a = 1 - d / CFG.maxDist;
-          ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y);
-          ctx.strokeStyle = GLOW_NAVY  + (a * 0.18) + ")"; ctx.lineWidth = 2.5; ctx.stroke();
-          ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y);
-          ctx.strokeStyle = LINE_COLOR + (a * 0.38) + ")"; ctx.lineWidth = 1;   ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = LINE_DIM + (a * 0.45) + ")";
+          ctx.lineWidth = 1;
+          ctx.stroke();
         }
       }
+      // mouse-proximity burst — brighter gold
       const MR = 140;
       for (let i = 0; i < nodes.length; i++) {
         const dx = nodes[i].x - mouse.x, dy = nodes[i].y - mouse.y;
@@ -108,9 +118,13 @@ function useNeuronCanvas(canvasRef) {
             const dx2 = nodes[i].x - nodes[j].x, dy2 = nodes[i].y - nodes[j].y;
             const d2  = Math.sqrt(dx2 * dx2 + dy2 * dy2);
             if (d2 < CFG.maxDist) {
-              const a = (1 - dm / MR) * (1 - d2 / CFG.maxDist) * 0.7;
-              ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y);
-              ctx.strokeStyle = PULSE_COLOR + a + ")"; ctx.lineWidth = 1.5; ctx.stroke();
+              const a = (1 - dm / MR) * (1 - d2 / CFG.maxDist) * 0.8;
+              ctx.beginPath();
+              ctx.moveTo(nodes[i].x, nodes[i].y);
+              ctx.lineTo(nodes[j].x, nodes[j].y);
+              ctx.strokeStyle = LINE_BRIGHT + a + ")";
+              ctx.lineWidth = 1.5;
+              ctx.stroke();
             }
           }
         }
@@ -118,14 +132,13 @@ function useNeuronCanvas(canvasRef) {
     };
 
     const drawBg = () => {
-      ctx.fillStyle = NAVY_BG; ctx.fillRect(0, 0, W, H);
-      const g = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, Math.max(W, H) * 0.75);
-      g.addColorStop(0, "rgba(15,25,65,0.35)"); g.addColorStop(1, "rgba(0,0,0,0)");
-      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      // clear to fully transparent so the CSS background shows through
+      ctx.clearRect(0, 0, W, H);
     };
 
     const animate = (t) => {
-      drawBg(); drawConnections();
+      drawBg();
+      drawConnections();
       nodes.forEach(n => { n.update(); n.draw(); });
       spawnPulses(t);
       pulses = pulses.filter(p => p.alive);
@@ -139,16 +152,15 @@ function useNeuronCanvas(canvasRef) {
       cancelAnimationFrame(animId); init(); animate(0);
     };
 
-    // ── Mouse & Touch ──────────────────────────────────────────────────────
-    const onMouseMove  = (e) => { mouse.x = e.clientX;          mouse.y = e.clientY; };
-    const onMouseLeave = ()  => { mouse.x = -9999;               mouse.y = -9999; };
+    const onMouseMove  = (e) => { mouse.x = e.clientX; mouse.y = e.clientY; };
+    const onMouseLeave = ()  => { mouse.x = -9999;      mouse.y = -9999; };
     const onTouchMove  = (e) => {
       if (e.touches.length > 0) {
         mouse.x = e.touches[0].clientX;
         mouse.y = e.touches[0].clientY;
       }
     };
-    const onTouchEnd   = ()  => { mouse.x = -9999; mouse.y = -9999; };
+    const onTouchEnd = () => { mouse.x = -9999; mouse.y = -9999; };
 
     window.addEventListener("mousemove",  onMouseMove);
     window.addEventListener("mouseleave", onMouseLeave);
@@ -158,7 +170,6 @@ function useNeuronCanvas(canvasRef) {
 
     resize();
 
-    // ── Cleanup on unmount ─────────────────────────────────────────────────
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener("mousemove",  onMouseMove);
@@ -170,31 +181,29 @@ function useNeuronCanvas(canvasRef) {
   }, [canvasRef]);
 }
 
-// ─── Layout ──────────────────────────────────────────────────────────────────
-
 export const Layout = () => {
   const canvasRef = useRef(null);
   useNeuronCanvas(canvasRef);
 
   return (
-    <div className="App min-h-screen overflow-x-hidden" style={{ background: "#0a0e1a" }}>
+    <div className="App min-h-screen bg-[#FDFBF7] overflow-x-hidden">
 
-      {/* Global neuron background — fixed, behind everything */}
+      {/* Neuron canvas — fixed, transparent, behind everything */}
       <canvas
         ref={canvasRef}
         style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          zIndex: 0,
-          pointerEvents: "none",   // clicks pass through to page content
+          position:      "fixed",
+          top:           0,
+          left:          0,
+          width:         "100%",
+          height:        "100%",
+          zIndex:        0,
+          pointerEvents: "none",
         }}
         aria-hidden="true"
       />
 
-      {/* All page content sits above the canvas */}
+      {/* Page content above the canvas */}
       <div style={{ position: "relative", zIndex: 1 }}>
         <Navbar />
         <main>
