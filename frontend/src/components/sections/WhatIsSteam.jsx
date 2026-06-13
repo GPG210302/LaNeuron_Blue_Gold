@@ -169,7 +169,7 @@ const STEAM_STATS = [
 ];
 
 const ORIGIN_TIMELINE = [
-  { year: "'90s", color: "#3B82F6", event: "STEM is born in the USA",               detail: "The US National Science Foundation coined STEM to address a growing skills gap in science and engineering graduates entering the workforce." },
+  { year: "'90s", color: "#3B82F6", event: "STEM was born in the USA",               detail: "The US National Science Foundation coined STEM to address a growing skills gap in science and engineering graduates entering the workforce." },
   { year: "2001", color: "#10B981", event: "Rita Colwell formalises STEM policy",   detail: "NSF Director Rita Colwell made STEM a federal education priority, linking science literacy directly to national economic competitiveness." },
   { year: "2006", color: "#F97316", event: "Georgette Yakman adds the 'A'",         detail: "American educator Georgette Yakman introduced Arts into STEM, creating STEAM — arguing creativity is inseparable from scientific innovation." },
   { year: "2013", color: "#A855F7", event: "Rhode Island School of Design lobbies Congress", detail: "RISD led a national campaign to officially add Arts to STEM policy, arguing creativity turns scientific knowledge into world-changing products." },
@@ -365,7 +365,7 @@ export const WhatIsSteam = () => {
               <Reveal>
                 <SectionHeading
                   overline="The origin story"
-                  title="How STEAM Was Born"
+                  title="Birth of STEAM"
                   center={false}
                 />
               </Reveal>

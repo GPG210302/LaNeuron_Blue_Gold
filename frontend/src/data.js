@@ -30,7 +30,7 @@ export const HERO = {
   badge: "Ages 6–13 • Kraków, Poland",
   headline: "Real-World Science for Young Minds",
   sub: "We believe every child is a natural scientist. We give children aged 6–13 the tools, the method, and the wonder to investigate the world around them through hands-on STEAM education.",
-  english: "Every session is conducted entirely in English. Children don't just improve their English — they communicate with their peers and educator in English, and learn to think and reason critically in English itself. In today's world, that ability is one of the most valuable skills a child can build.",
+  english: "At La Neuron, every session is conducted entirely in English, with minimal Polish support available where necessary. Through hands-on STEAM experiences, children naturally develop the ability to think, question, create, and communicate in English — building confidence while staying fully immersed in an English-speaking environment.",
   key: "This is not just fun with science materials. Every session follows a proper scientific investigation — hypothesis, experiment, observation, results, and conclusion.",
   image:
     "https://images.pexels.com/photos/8471975/pexels-photo-8471975.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
@@ -45,7 +45,7 @@ export const EDUCATOR = {
   name: "Dr. Priyadarshini Gouthaman",
   role: "PhD Cognitive Scientist & Certified Neuroscience Coach",
   intro:
-    "I am a PhD graduate in Human Anatomy with a specialisation in Cognitive Science — specifically behaviour, memory, and cognition. I have spent my career understanding how young minds learn, explore, and retain knowledge.",
+    "I hold a PhD in Human Anatomy specialised in Cognitive Science — spanning behaviour, memory, and the architecture of thought — I have devoted my career to unravelling how young minds learn, explore, and make the world their own.",
   philosophyTitle: "My teaching philosophy",
   philosophy:
     "I combine deep scientific knowledge with an understanding of how children's brains actually work. Every session I design is grounded in cognitive science — so children don't just do science, they remember it, understand it, and own it.",
@@ -105,8 +105,10 @@ export const METHOD = [
 export const RECEIVE = [
   "Personalised science investigation worksheet for every session",
   "Step-by-step guided recording sheets",
-  "Science investigation notebook to take home",
+  "Science project final outcomes to take home",
   "The science behind the experiment explained clearly",
+  highlight: 
+  "Skill Badges and Certificate of Achievement for motivation and celebration",
 ];
 
 export const AGE_GROUPS = [
