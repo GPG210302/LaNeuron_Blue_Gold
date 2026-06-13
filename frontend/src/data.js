@@ -109,7 +109,7 @@ export const RECEIVE = [
   { text: "The science behind the experiment explained clearly" },
   { text: "Skill Badges and Certificate of Achievement",
     style: {
-      animation: "glowBlink 1.8s ease-in-out infinite",
+      animation: "glowBlink 2s ease-in-out infinite",
       borderRadius: "5px",
       padding: "3px 10px",
     },
