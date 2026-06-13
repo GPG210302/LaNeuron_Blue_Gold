@@ -5,7 +5,6 @@ import {
   FlaskConical, ClipboardList, Search, Eye, BarChart3, CheckCircle2,
 } from "lucide-react";
 
-
 export const SITE = {
   name: "La Neuron",
   brand: "La Neuron – STEAM Academy",
@@ -14,9 +13,8 @@ export const SITE = {
   email: "admin@la-neuron.org",
   location: "Kraków",
   venue: "Berka Joselewicza , Kraków",
-  social: { facebook: "https://www.facebook.com/share/1B87gctcBG/?mibextid=wwXIfr", instagram: "#" },
+  social: { facebook: "https://www.facebook.com/share/1B87gctcBG/?mibextid=wwXIfr", instagram: "#" }, // placeholders – to be added later
 };
-
 
 export const NAV = [
   { label: "Home", path: "/" },
@@ -27,7 +25,6 @@ export const NAV = [
   { label: "Summer Camp", path: "/summer-camp" },
   { label: "FAQ", path: "/faq" },
 ];
-
 
 export const HERO = {
   badge: "Ages 6–13 • Kraków, Poland",
@@ -43,7 +40,6 @@ export const HERO = {
     { value: "5", label: "STEAM disciplines" },
   ],
 };
-
 
 export const EDUCATOR = {
   name: "Dr. Priyadarshini Gouthaman",
@@ -64,7 +60,6 @@ export const EDUCATOR = {
   highlight:
     "One of the most rewarding parts of my journey is training young children to conduct real research — guiding them to present their work at Jagiellonian University and publish their findings in reputed journals.",
 };
-
 
 export const STEAM = [
   {
@@ -89,7 +84,6 @@ export const STEAM = [
   },
 ];
 
-
 export const WHY = [
   { icon: Brain, color: "#3B82F6", title: "Critical Thinking", text: "STEAM teaches children to question, hypothesise, test, and draw conclusions based on evidence. These thinking skills transfer to every subject and every life decision." },
   { icon: Sprout, color: "#10B981", title: "Growth Mindset", text: "A wrong hypothesis is not failure — it is data. Children learn that effort, iteration, and curiosity matter more than being right the first time." },
@@ -98,7 +92,6 @@ export const WHY = [
   { icon: Lightbulb, color: "#8B5CF6", title: "Brain-Compatible Learning", text: "Learning through investigation, movement, and hands-on discovery is how children's brains are wired to absorb and retain knowledge." },
   { icon: Trees, color: "#c700ea", title: "Real-World Connection", text: "STEAM is not confined to a classroom. Children discover that science happens everywhere — in parks, gardens, kitchens, and the sky above them." },
 ];
-
 
 export const METHOD = [
   { n: 1, icon: Lightbulb, title: "Hypothesis", text: "Children form their own prediction before the experiment begins.", color: "#3B82F6" },
@@ -109,15 +102,15 @@ export const METHOD = [
   { n: 6, icon: CheckCircle2, title: "Conclusion", text: "Children evaluate whether their hypothesis was supported and explain why.", color: "#FB7185" },
 ];
 
-
 export const RECEIVE = [
-  { text: "Personalised science investigation worksheet for every session" },
-  { text: "Step-by-step guided recording sheets" },
-  { text: "Every child takes home their project outcomes — working models, observation sheets, and experimental results from their scientific journey" },
-  { text: "The science behind the experiment explained clearly" },
-  { text: "Skill Badges and Certificate of Achievement for motivation and celebration", highlight: true },
+  "Personalised science investigation worksheet for every session",
+  "Step-by-step guided recording sheets",
+  "Science project final outcomes to take home",
+  "The science behind the experiment explained clearly",
 ];
 
+export const RECEIVE_HIGHLIGHT =
+  "Skill Badges and Certificate of Achievement for motivation and celebration";
 
 export const AGE_GROUPS = [
   {
@@ -129,7 +122,6 @@ export const AGE_GROUPS = [
     points: ["Full scientific method investigations", "Structured hypothesis, variables, and data recording", "Quantitative results and written conclusions", "Cross-disciplinary STEAM projects", "Presentation of findings to the group"],
   },
 ];
-
 
 export const PROGRAMMES = [
   {
@@ -148,7 +140,6 @@ export const PROGRAMMES = [
     image: "https://images.pexels.com/photos/8471835/pexels-photo-8471835.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   },
 ];
-
 
 export const CAMP_DAYS = [
   {
@@ -173,7 +164,6 @@ export const CAMP_DAYS = [
   },
 ];
 
-
 export const CAMP_FACTS = [
   { label: "Start date", value: "6 July 2026" },
   { label: "End date", value: "End of August 2026" },
@@ -185,12 +175,10 @@ export const CAMP_FACTS = [
   { label: "Language", value: "English" },
 ];
 
-
 export const WEEKS = [
   "Week 1", "Week 2", "Week 3", "Week 4",
   "Week 5", "Week 6", "Week 7", "Week 8", "Multiple weeks",
 ];
-
 
 export const PROGRAMME_OPTIONS = [
   "Full week camp",
@@ -199,7 +187,6 @@ export const PROGRAMME_OPTIONS = [
   "Cognitive support session",
   "Not sure yet",
 ];
-
 
 export const FAQ = [
   { q: "What ages can attend?", a: "Children aged 6 to 13 are welcome. Sessions are differentiated — younger children (6–9) follow a guided, sensory-led approach while older children (10–13) complete full scientific investigations." },
