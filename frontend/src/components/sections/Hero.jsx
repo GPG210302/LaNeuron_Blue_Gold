@@ -347,12 +347,12 @@ export const Hero = () => {
             </motion.span>
           </Floating>
 
-          {/* Decorative ring behind image */}
+          {/* Decorative ring behind image 
           <motion.div
             className="absolute -inset-4 rounded-3xl border-2 border-dashed border-[#1B2A63]/15 -z-10"
             animate={{ rotate: 360 }}
             transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-          />
+          />*/}
         </motion.div>
       </div>
 
