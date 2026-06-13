@@ -30,7 +30,7 @@ export const HERO = {
   badge: "Ages 6–13 • Kraków, Poland",
   headline: "Real-World Science for Young Minds",
   sub: "We believe every child is a natural scientist. We give children aged 6–13 the tools, the method, and the wonder to investigate the world around them through hands-on STEAM education.",
-  english: "At La Neuron, every session is conducted entirely in English, with minimal Polish support available where necessary. Through hands-on STEAM experiences, children naturally develop the ability to think, question, create, and communicate in English — building confidence while staying fully immersed in an English-speaking environment.",
+  english: "At La Neuron, every session is conducted entirely in English, with minimal Polish support available where necessary. Through hands-on STEAM experiences, children naturally develop the ability to think, question, create, and communicate in English building confidence while staying fully immersed in an English speaking environment.",
   key: "This is not just fun with science materials. Every session follows a proper scientific investigation — hypothesis, experiment, observation, results, and conclusion.",
   image:
     "https://images.pexels.com/photos/8471975/pexels-photo-8471975.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
