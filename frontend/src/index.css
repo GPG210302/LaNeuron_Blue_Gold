@@ -46,6 +46,12 @@ h1, h2, h3, h4, h5, .font-display {
     color: transparent;
 }
 
+.text-outlined {
+  color: #FBBF24;
+  -webkit-text-stroke: 2px #1B2A63;
+  paint-order: stroke fill;
+}
+
 /* ---- Custom scrollbar ---- */
 ::-webkit-scrollbar { width: 12px; }
 ::-webkit-scrollbar-track { background: var(--ln-bg); }

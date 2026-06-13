@@ -179,16 +179,11 @@ export const Hero = () => {
 
             {/* "Young Minds" — highlighted, separate reveal */}
             <motion.span
-              className="relative inline-block text-gold-shiny pb-2"
-              style={{
-              color: "#FBBF24",
-              WebkitTextStroke: "2px #1B2A63",
-              paintOrder: "stroke fill",
-              lineHeight: "1.2",
-              }}
-              initial={{ opacity: 0, y: 32, filter: "blur(8px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ delay: 0.45, duration: 0.7, ease: EXPO }}
+                className="relative inline-block pb-2 text-outlined"
+                style={{ lineHeight: "1.2" }}
+                initial={{ opacity: 0, y: 32, filter: "blur(8px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ delay: 0.45, duration: 0.7, ease: EXPO }}
             >
               {" "}Young Minds
               {/* Animated underline — draws in after word appears */}
