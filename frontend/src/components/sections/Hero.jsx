@@ -179,7 +179,12 @@ export const Hero = () => {
 
             {/* "Young Minds" — highlighted, separate reveal */}
             <motion.span
-              className="relative inline-block text-gold-shiny"
+              className="relative inline-block text-gold-shiny pb-2"
+              style={{
+                WebkitTextStroke: "1.5px #1B2A63",
+                paintOrder: "stroke fill",
+                lineHeight: "1.2",
+              }}
               initial={{ opacity: 0, y: 32, filter: "blur(8px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ delay: 0.45, duration: 0.7, ease: EXPO }}
