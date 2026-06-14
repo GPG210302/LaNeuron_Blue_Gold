@@ -13,7 +13,7 @@ export const SITE = {
   email: "admin@la-neuron.org",
   location: "Kraków",
   venue: "Berka Joselewicza , Kraków",
-  social: { facebook: "https://www.facebook.com/share/1B87gctcBG/?mibextid=wwXIfr", instagram: "#" }, // placeholders – to be added later
+  social: { facebook: "https://www.facebook.com/share/1B87gctcBG/?mibextid=wwXIfr", instagram: "https://www.instagram.com/laneuron?igsh=MWxpOXRkdjh3bzBpbw==", youtube: "#" }, // placeholders – to be added later
 };
 
 export const NAV = [
