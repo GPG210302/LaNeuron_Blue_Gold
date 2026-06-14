@@ -22,7 +22,7 @@ export const NAV = [
   { label: "What is STEAM?", path: "/what-is-steam" },
   { label: "Why STEAM?", path: "/why-steam" },
   { label: "Programmes", path: "/programmes" },
-  { label: "Summer Camp", path: "/summer-camp" },
+  { label: "Summer Program", path: "/Summer Program" },
   { label: "FAQ", path: "/faq" },
 ];
 
@@ -134,8 +134,8 @@ export const PROGRAMMES = [
     image: "https://images.pexels.com/photos/7869034/pexels-photo-7869034.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   },
   {
-    tag: "Upcoming", title: "STEAM Summer Camp 2026", color: "#FB7185", link: "/summer-camp",
-    text: "An intensive one-week themed camp running through summer 2026. Each day has a dedicated theme with 3 hours of guided scientific investigation, indoors and outdoors. See the Summer Camp section below for full details.",
+    tag: "Upcoming", title: "STEAM Summer Program 2026", color: "#FB7185", link: "/Summer Program",
+    text: "An intensive one-week themed camp running through summer 2026. Each day has a dedicated theme with 3 hours of guided scientific investigation, indoors and outdoors. See the Summer Program section below for full details.",
     image: "https://images.pexels.com/photos/8471975/pexels-photo-8471975.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   },
   {
@@ -155,7 +155,7 @@ export const CAMP_DAYS = [
     text: "A day of design challenges. Children design and build simple machines, then test and improve their own creations — learning to plan, fail, iterate, and engineer real solutions.",
   },
   {
-    day: "Wednesday", lab: "Bio Lab", tagline: "Animals & Anatomy", icon: Microscope, color: "#A855F7",
+    day: "Wednesday", lab: "Bio Lab", tagline: "Living Being", icon: Microscope, color: "#A855F7",
     text: "Exploring the living world — animals, human body systems, and anatomy. Children collect specimens themselves and examine them under the microscope to see biology up close.",
   },
   {

@@ -71,8 +71,8 @@ const LINKS = [
   { to: "/about",         title: "Meet the Educator", desc: "Dr. Priyadarshini Gouthaman — PhD in Anatomy, cognitive scientist, and the mind behind La Neuron.",                       color: "#1B2A63" },
   { to: "/what-is-steam", title: "What is STEAM?",    desc: "Explore the five disciplines — Science, Technology, Engineering, Art, and Mathematics — and how they connect.",           color: "#10B981" },
   { to: "/why-steam",     title: "Why STEAM?",         desc: "Six reasons STEAM matters for your child, plus our full investigative scientific-method approach.",                        color: "#A855F7" },
-  { to: "/programmes",    title: "Programmes",         desc: "Weekly workshops, the Summer Camp, and one-to-one cognitive support sessions.",                                            color: "#F97316" },
-  { to: "/summer-camp",   title: "Summer Camp 2026",   desc: "A themed week of Wonder, Build, Bio, Planet, and Food labs in Kraków. Registrations open!",                              color: "#E0B33C" },
+  { to: "/programmes",    title: "Programmes",         desc: "Weekly workshops, the Summer Program, and one-to-one cognitive support sessions.",                                            color: "#F97316" },
+  { to: "/Summer Program",   title: "Summer Program 2026",   desc: "A themed week of Wonder, Build, Bio, Planet, and Food labs in Kraków. Registrations open!",                              color: "#E0B33C" },
   { to: "/faq",           title: "FAQ",                desc: "Ages, language, what to bring, learning differences, siblings, and the cancellation policy.",                             color: "#D97706" },
 ];
 

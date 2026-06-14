@@ -14,14 +14,14 @@ export const Events = () => {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
               <span className="ln-overline">Upcoming events — Summer 2026</span>
-              <h2 className="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight">STEAM Summer Camp 2026</h2>
+              <h2 className="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight">STEAM Summer Program 2026</h2>
             </div>
             <span className="ln-tag !bg-[#E0B33C] !text-[#0F172A] !border-[#0F172A] !text-sm !px-4 !py-2 animate-pulse">
               Registrations open • limited spots
             </span>
           </div>
           <p className="mt-5 max-w-3xl text-lg text-[#475569] leading-relaxed">
-            A one-week intensive STEAM summer camp for children aged 6–13. Each day is a different themed lab. Children
+            A one-week intensive STEAM Summer Program for children aged 6–13. Each day is a different themed lab. Children
             spend 3 hours per day in guided scientific investigations, both indoors and outdoors.
           </p>
         </Reveal>
