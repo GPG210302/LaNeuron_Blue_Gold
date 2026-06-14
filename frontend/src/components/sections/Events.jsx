@@ -91,8 +91,8 @@ export const Events = () => {
                 <AlertCircle size={20} className="text-[#1B2A63] shrink-0 mt-0.5" />
                 <p className="text-sm text-[#0F172A]/80 font-medium">
                   Suitable for children with learning differences. Our educator is a certified Neuroscience Coach
-                  experienced with ADHD, dyslexia, memory challenges, and SEN. Children take home a science notebook,
-                  and full-week participants receive a completion certificate.
+                  experienced with ADHD, dyslexia, memory challenges, and SEN. Children take home Science project final outcomes,
+                  Skill Badges and Certificate of Achievement.
                 </p>
               </div>
 
