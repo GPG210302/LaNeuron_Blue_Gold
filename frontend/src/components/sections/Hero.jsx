@@ -4,13 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { Atom, Rocket, Sparkles, FlaskConical, ArrowRight, Languages } from "lucide-react";
 import { HERO } from "../../data";
 
-// ── ADD THIS IMPORT — put your AI image in src/assets/classroom-six-children.jpg
 import classroomBg from "../../assets/Group_of_kids.png";
-
 
 // ─── EASING ───────────────────────────────────────────────
 const EXPO = [0.22, 1, 0.36, 1];
-
 
 // ─── ANIMATED COUNTER ─────────────────────────────────────
 const AnimatedCounter = ({ value }) => {
@@ -34,7 +31,6 @@ const AnimatedCounter = ({ value }) => {
   return <span>{display}</span>;
 };
 
-
 // ─── FLOATING BADGE ───────────────────────────────────────
 const Floating = ({ children, className, delay = 0 }) => (
   <motion.div
@@ -51,57 +47,6 @@ const Floating = ({ children, className, delay = 0 }) => (
     </motion.div>
   </motion.div>
 );
-
-
-// ─── 3D TILT IMAGE CARD ───────────────────────────────────
-const TiltCard = ({ children }) => {
-  const ref = useRef(null);
-  const rawX = useMotionValue(0);
-  const rawY = useMotionValue(0);
-  const rotateX = useSpring(rawX, { stiffness: 180, damping: 22 });
-  const rotateY = useSpring(rawY, { stiffness: 180, damping: 22 });
-  const scale = useSpring(1, { stiffness: 280, damping: 22 });
-
-  const glareX = useTransform(rotateY, [-18, 18], ["120%", "-20%"]);
-  const glareY = useTransform(rotateX, [-18, 18], ["120%", "-20%"]);
-  const glareOpacity = useTransform(rotateY, [-18, 0, 18], [0.2, 0, 0.2]);
-
-  const handleMove = (e) => {
-    const rect = ref.current?.getBoundingClientRect();
-    if (!rect) return;
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    rawY.set(((e.clientX - cx) / (rect.width / 2)) * 18);
-    rawX.set(((e.clientY - cy) / (rect.height / 2)) * -18);
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      onMouseMove={handleMove}
-      onMouseEnter={() => scale.set(1.025)}
-      onMouseLeave={() => { rawX.set(0); rawY.set(0); scale.set(1); }}
-      style={{ rotateX, rotateY, scale, transformStyle: "preserve-3d", perspective: 1200 }}
-      className="relative"
-    >
-      {children}
-      <motion.div
-        className="absolute inset-0 rounded-[inherit] pointer-events-none overflow-hidden"
-        style={{ opacity: glareOpacity }}
-      >
-        <motion.div
-          className="absolute w-[180%] h-[180%] -top-1/2 -left-1/2"
-          style={{
-            background: "radial-gradient(circle, rgba(255,255,255,0.5) 0%, transparent 65%)",
-            x: glareX,
-            y: glareY,
-          }}
-        />
-      </motion.div>
-    </motion.div>
-  );
-};
-
 
 // ─── ANIMATED BACKGROUND ORBS ────────────────────────────
 const Orbs = () => (
@@ -124,7 +69,6 @@ const Orbs = () => (
   </>
 );
 
-
 // ─── HERO ─────────────────────────────────────────────────
 export const Hero = () => {
   const navigate = useNavigate();
@@ -136,17 +80,6 @@ export const Hero = () => {
       className="relative pt-36 pb-20 sm:pt-[250px] lg:pt-[260px] lg:pb-28 overflow-hidden ln-grid-bg"
     >
       {/* ── BLENDED BACKGROUND IMAGE — 6 children classroom ── */}
-      {/*
-        Sits above the ln-grid-bg CSS pattern but below everything else.
-        - mix-blend-mode: multiply  → fuses into the light grid/notebook background
-          (works great on light/white backgrounds; dark pixels in the photo
-           darken the grid, light areas stay transparent)
-        - opacity: 0.18  → subtle tint, not a full photo takeover
-        - object-position: center top  → keeps the children's faces visible,
-          not cropped by the bottom edge
-        - pointer-events-none  → never blocks clicks
-        Change opacity between 0.12–0.25 to taste.
-      */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
         aria-hidden="true"
@@ -157,10 +90,9 @@ export const Hero = () => {
           className="w-full h-full object-cover object-center"
           style={{
             mixBlendMode: "multiply",
-            opacity: 0.18,
+            opacity: 0.28,
           }}
         />
-        {/* Soft edge fade so image dissolves at borders, not hard-cuts */}
         <div
           className="absolute inset-0"
           style={{
@@ -176,7 +108,6 @@ export const Hero = () => {
 
         {/* ── LEFT COLUMN ─────────────────────────────────── */}
         <div>
-          {/* Badge */}
           <motion.span
             className="ln-tag !text-sm !px-4 !py-1.5"
             initial={{ opacity: 0, y: 10 }}
@@ -187,7 +118,6 @@ export const Hero = () => {
             <Sparkles size={14} /> {HERO.badge}
           </motion.span>
 
-          {/* Title */}
           <h1 className="mt-5 text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-[1.02] text-[#1B2A63]">
             <motion.span
               className="inline"
@@ -243,7 +173,6 @@ export const Hero = () => {
             </motion.span>
           </h1>
 
-          {/* Subtitle */}
           <motion.p
             className="mt-6 text-lg md:text-xl text-[#475569] leading-relaxed max-w-xl"
             initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
@@ -253,7 +182,6 @@ export const Hero = () => {
             {HERO.sub}
           </motion.p>
 
-          {/* English highlight card */}
           <motion.div
             className="mt-5 max-w-xl ln-card !shadow-[4px_4px_0_#0F172A] bg-[#E7EBF7] p-4 flex items-start gap-3"
             initial={{ opacity: 0, y: 20 }}
@@ -273,7 +201,6 @@ export const Hero = () => {
             </p>
           </motion.div>
 
-          {/* CTA buttons */}
           <motion.div
             className="mt-8 flex flex-wrap gap-4"
             initial={{ opacity: 0, y: 20 }}
@@ -302,7 +229,6 @@ export const Hero = () => {
             </motion.button>
           </motion.div>
 
-          {/* Animated stats */}
           <motion.div
             className="mt-10 grid grid-cols-3 gap-4 max-w-md"
             initial={{ opacity: 0 }}
@@ -332,60 +258,13 @@ export const Hero = () => {
           </motion.div>
         </div>
 
-
-        {/* ── RIGHT COLUMN — layered images ───────────────── */}
-        {/*
-          NEW LAYOUT:
-          - No large image card in the column anymore
-          - Six-children image is ONLY in the full-section background blend (already working)
-          - Two-girls card floats top-right of the column, slightly transparent, 
-            positioned so it doesn't dominate — feels like a "ghost" overlay
-          - Floating badges remain as-is
-        */}
+        {/* ── RIGHT COLUMN — floating badges only ─────────── */}
         <motion.div
           className="relative h-[480px] lg:h-[540px]"
           initial={{ opacity: 0, x: 40, filter: "blur(10px)" }}
           animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
           transition={{ delay: 0.2, duration: 0.8, ease: EXPO }}
         >
-
-          {/* ── TWO-GIRLS CARD — top-right, semi-transparent, blended in */}
-          {/*
-            - Positioned top-right of the column
-            - opacity 0.72 so it feels like part of the background composition
-            - mix-blend-mode: multiply fuses it with the grid/neural background
-            - rotate-2 keeps the playful card tilt
-            - Width ~60% so it's visible but not a dominant block
-            - object-position: center 30% to show the girls' faces clearly
-          */}
-          <motion.div
-            className="absolute top-4 right-0 w-[62%]"
-            initial={{ opacity: 0, y: -20, scale: 0.92 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ delay: 0.35, duration: 0.75, ease: EXPO }}
-            style={{ zIndex: 5 }}
-          >
-            <TiltCard>
-              <div
-                className="ln-card overflow-hidden rotate-2"
-                style={{
-                  boxShadow: "5px 5px 0 #0F172A",
-                  mixBlendMode: "multiply",
-                  opacity: 0.78,
-                }}
-              >
-                <img
-                  src={HERO.image}
-                  alt="Two children exploring science"
-                  className="w-full h-[280px] object-cover"
-                  style={{ objectPosition: "center 30%" }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent pointer-events-none" />
-              </div>
-            </TiltCard>
-          </motion.div>
-
-          {/* ── FLOATING BADGES ── */}
           <Floating className="-top-5 -left-5" delay={0.5}>
             <span className="grid place-items-center w-16 h-16 rounded-2xl bg-[#FBBF24] border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]">
               <motion.div
@@ -416,10 +295,9 @@ export const Hero = () => {
               <FlaskConical size={24} />
             </motion.span>
           </Floating>
-
         </motion.div>
-      </div>
 
+      </div>
 
       {/* ── KEY BANNER ──────────────────────────────────── */}
       <div className="max-w-7xl mx-auto px-6 lg:px-8 mt-14">
