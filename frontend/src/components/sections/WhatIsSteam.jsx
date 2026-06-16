@@ -186,20 +186,28 @@ export const WhatIsSteam = () => {
       <div
         className="pointer-events-none absolute inset-0 z-0"
         aria-hidden="true"
-        style={{ backgroundColor: "#FDFBF7" }}
       >
         <img
           src={HERO.image}
           alt=""
           style={{
             position: "absolute",
-            top: "5%",
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: "70%",
-            maxWidth: "700px",
-            opacity: 0.13,
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "60% 20%",  /* shift right so girls are in frame, top portion visible */
+            opacity: 0.60,              /* raise from 0.13 → 0.28 so image is clearly visible */
             mixBlendMode: "multiply",
+          }}
+        />
+        {/* Soft left-side fade so text remains readable */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "linear-gradient(to right, rgba(253,251,247,0.6) 0%, rgba(253,251,247,0.1) 50%, rgba(253,251,247,0.0) 100%)",
           }}
         />
       </div>
