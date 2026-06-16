@@ -335,12 +335,12 @@ export const Hero = () => {
 
         {/* ── RIGHT COLUMN — layered images ───────────────── */}
         {/*
-          Layout:
-            - Outer container: full column height, relative positioning canvas for both images
-            - Six-children image: large, fills most of the column, slightly transparent
-              so the grid-bg/neural canvas shows through it a little
-            - Two-girls TiltCard: positioned bottom-right as a floating "spotlight" card,
-              small enough that it doesn't cover the main image's faces or desk area
+          NEW LAYOUT:
+          - No large image card in the column anymore
+          - Six-children image is ONLY in the full-section background blend (already working)
+          - Two-girls card floats top-right of the column, slightly transparent, 
+            positioned so it doesn't dominate — feels like a "ghost" overlay
+          - Floating badges remain as-is
         */}
         <motion.div
           className="relative h-[480px] lg:h-[540px]"
@@ -349,62 +349,43 @@ export const Hero = () => {
           transition={{ delay: 0.2, duration: 0.8, ease: EXPO }}
         >
 
-          {/* ── LARGE SIX-CHILDREN IMAGE (background layer in column) */}
+          {/* ── TWO-GIRLS CARD — top-right, semi-transparent, blended in */}
           {/*
-            - Fills the right column area
-            - object-position: center 20%  →  keeps faces (top half) visible;
-              adjust the % if faces are cut off
-            - opacity 0.88 so a trace of the grid/neural animation bleeds through
-            - rounded corners + subtle shadow to feel "designed" not raw
+            - Positioned top-right of the column
+            - opacity 0.72 so it feels like part of the background composition
+            - mix-blend-mode: multiply fuses it with the grid/neural background
+            - rotate-2 keeps the playful card tilt
+            - Width ~60% so it's visible but not a dominant block
+            - object-position: center 30% to show the girls' faces clearly
           */}
           <motion.div
-            className="absolute inset-0 rounded-3xl overflow-hidden shadow-[6px_6px_0_#0F172A]"
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.25, duration: 0.8, ease: EXPO }}
-          >
-            <img
-              src={classroomBg}
-              alt="Six children engaged in STEAM activities"
-              className="w-full h-full object-cover"
-              style={{ objectPosition: "center 20%", opacity: 0.88 }}
-            />
-            {/* Gradient vignette — darkens bottom so floating card reads over it */}
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30 pointer-events-none" />
-            {/* Left-side fade to blend into section background (grid/neural) */}
-            <div className="absolute inset-0 bg-gradient-to-r from-white/30 via-transparent to-transparent pointer-events-none" />
-          </motion.div>
-
-          {/* ── TWO-GIRLS TILT CARD (foreground overlay, bottom-right) */}
-          {/*
-            Positioned bottom-right so it sits over the desk/equipment area of the
-            six-children image — NOT over their faces.
-            Width is capped at ~52% of column so the rest of the large image stays
-            fully visible.
-            The slight rotate + shadow creates visual separation from the background image.
-          */}
-          <motion.div
-            className="absolute bottom-4 right-2 w-[52%]"
-            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            className="absolute top-4 right-0 w-[62%]"
+            initial={{ opacity: 0, y: -20, scale: 0.92 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ delay: 0.5, duration: 0.7, ease: EXPO }}
-            style={{ zIndex: 10 }}
+            transition={{ delay: 0.35, duration: 0.75, ease: EXPO }}
+            style={{ zIndex: 5 }}
           >
             <TiltCard>
-              <div className="ln-card overflow-hidden rotate-2 shadow-[6px_6px_0_#0F172A]">
+              <div
+                className="ln-card overflow-hidden rotate-2"
+                style={{
+                  boxShadow: "5px 5px 0 #0F172A",
+                  mixBlendMode: "multiply",
+                  opacity: 0.78,
+                }}
+              >
                 <img
                   src={HERO.image}
                   alt="Two children exploring science"
-                  className="w-full h-[220px] object-cover"
+                  className="w-full h-[280px] object-cover"
                   style={{ objectPosition: "center 30%" }}
                 />
-                {/* Inner vignette */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent pointer-events-none" />
               </div>
             </TiltCard>
           </motion.div>
 
-          {/* ── FLOATING BADGES — unchanged, just z-index elevated ── */}
+          {/* ── FLOATING BADGES ── */}
           <Floating className="-top-5 -left-5" delay={0.5}>
             <span className="grid place-items-center w-16 h-16 rounded-2xl bg-[#FBBF24] border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]">
               <motion.div
