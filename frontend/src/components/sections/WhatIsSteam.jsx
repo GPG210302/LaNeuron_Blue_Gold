@@ -222,8 +222,8 @@ export const WhatIsSteam = () => {
           className="w-full h-full object-cover"
           style={{
             objectPosition: "center 25%",
-            mixBlendMode: "multiply",
-            opacity: 0.20,
+            mixBlendMode: "screen",
+            opacity: 0.35,
           }}
         />
         {/* Radial fade — dissolves image edges into page bg */}

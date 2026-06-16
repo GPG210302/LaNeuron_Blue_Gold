@@ -144,11 +144,11 @@ h1, h2, h3, h4, h5, .font-display {
 }
 .ln-dash { stroke-dasharray: 10 12; animation: ln-dash 30s linear infinite; }
 
-.ln-grid-bg {
+/*.ln-grid-bg {
     background-image:
         linear-gradient(rgba(27,42,99,0.06) 1px, transparent 1px),
         linear-gradient(90deg, rgba(27,42,99,0.06) 1px, transparent 1px);
     background-size: 28px 28px;
-}
+}*/
 
 [data-debug-wrapper="true"] { display: contents !important; }
