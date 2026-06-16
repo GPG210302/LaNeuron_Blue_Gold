@@ -187,29 +187,32 @@ export const WhatIsSteam = () => {
         className="pointer-events-none absolute inset-0 z-0"
         aria-hidden="true"
       >
-        <img
-          src={HERO.image}
-          alt=""
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            objectPosition: "60% 20%",  /* shift right so girls are in frame, top portion visible */
-            opacity: 0.60,              /* raise from 0.13 → 0.28 so image is clearly visible */
-            mixBlendMode: "multiply",
-          }}
-        />
-        {/* Soft left-side fade so text remains readable */}
-        <div
-          style={{
+        <div style={{
+          position: "sticky",
+          top: 0,
+          width: "100%",
+          height: "100vh",
+          overflow: "hidden",
+        }}>
+          <img
+            src={HERO.image}
+            alt=""
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "55% 25%",  /* adjust % to reframe girls */
+              opacity: 0.28,
+              mixBlendMode: "multiply",
+            }}
+          />
+          {/* Soft fade on left so text stays readable */}
+          <div style={{
             position: "absolute",
             inset: 0,
-            background: "linear-gradient(to right, rgba(253,251,247,0.6) 0%, rgba(253,251,247,0.1) 50%, rgba(253,251,247,0.0) 100%)",
-          }}
-        />
+            background: "linear-gradient(to right, rgba(253,251,247,0.65) 0%, rgba(253,251,247,0.2) 45%, rgba(253,251,247,0.0) 100%)",
+          }} />
+        </div>
       </div>
 
       <div className="relative z-10">
@@ -231,10 +234,10 @@ export const WhatIsSteam = () => {
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
           />
 
-          <FloatingSticker emoji="🔬" label="Science"     className="top-24 left-[3%]    hidden xl:block" delay={0.5} rotation={-8} />
-          <FloatingSticker emoji="⚙️"  label="Engineering" className="top-28 right-[4%]   hidden xl:block" delay={0.7} rotation={6}  />
-          <FloatingSticker emoji="🎨" label="Art"         className="bottom-28 left-[5%]  hidden xl:block" delay={0.9} rotation={-5} />
-          <FloatingSticker emoji="💡" label="Innovation"  className="bottom-20 right-[3%] hidden xl:block" delay={1.1} rotation={7}  />
+          <FloatingSticker emoji="🔬" label="Science"     className="top-30 left-[3%]    hidden xl:block" delay={0.5} rotation={-8} />
+          <FloatingSticker emoji="⚙️"  label="Engineering" className="top-35 right-[4%]   hidden xl:block" delay={0.7} rotation={6}  />
+          <FloatingSticker emoji="🎨" label="Art"         className="bottom-30 left-[5%]  hidden xl:block" delay={0.9} rotation={-5} />
+          <FloatingSticker emoji="💡" label="Innovation"  className="bottom-30 right-[3%] hidden xl:block" delay={1.1} rotation={7}  />
 
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <Reveal>
