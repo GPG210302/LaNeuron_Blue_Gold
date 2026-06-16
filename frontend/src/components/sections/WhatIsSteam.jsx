@@ -188,10 +188,12 @@ export const WhatIsSteam = () => {
         aria-hidden="true"
       >
         <div style={{
-          position: "sticky",
+          position: "fixed",
           top: 0,
+          left: 0,
           width: "100%",
           height: "100vh",
+          zIndex: -1,
           overflow: "hidden",
         }}>
           <img
@@ -201,8 +203,8 @@ export const WhatIsSteam = () => {
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              objectPosition: "55% 25%",  /* adjust % to reframe girls */
-              opacity: 0.28,
+              objectPosition: "55% 25%",
+              opacity: 0.75,
               mixBlendMode: "multiply",
             }}
           />
