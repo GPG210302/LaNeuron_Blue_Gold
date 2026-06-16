@@ -219,19 +219,22 @@ export const WhatIsSteam = () => {
         <img
           src={HERO.image}
           alt=""
-          className="w-full h-full object-cover"
+          className="w-full h-full"
           style={{
-            objectPosition: "center 25%",
-            mixBlendMode: "screen",
-            opacity: 0.35,
+            objectFit: "contain",        /* contain = no zoom/crop, full image visible */
+            objectPosition: "center top",
+            mixBlendMode: "normal",      /* normal = most reliable, no blend tricks */
+            opacity: 0.12,               /* increase this 0.12 → 0.20 → 0.28 to taste */
+            position: "sticky",          /* sticky keeps image in viewport as user scrolls */
+            top: 0,
           }}
         />
-        {/* Radial fade — dissolves image edges into page bg */}
+        {/* Light overlay to soften edges */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 80% 60% at 50% 30%, transparent 30%, rgba(248,250,252,0.88) 100%)",
+              "linear-gradient(to bottom, rgba(253,251,247,0.3) 0%, rgba(253,251,247,0.1) 40%, rgba(253,251,247,0.3) 100%)",
           }}
         />
       </div>
