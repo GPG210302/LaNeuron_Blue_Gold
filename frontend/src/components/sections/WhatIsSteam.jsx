@@ -4,11 +4,9 @@ import { Reveal, SectionHeading } from "../Reveal";
 import { STEAM } from "../../data";
 import { HERO } from "../../data";
 
-// ─── CONSTANTS ────────────────────────────────────────────
 const EXPO = [0.22, 1, 0.36, 1];
 const VIEWPORT = { once: true, margin: "-60px" };
 
-// ─── TILT CARD ────────────────────────────────────────────
 const TiltCard = ({ children, className = "", intensity = 10 }) => {
   const ref = useRef(null);
   const rawX = useMotionValue(0);
@@ -51,7 +49,6 @@ const TiltCard = ({ children, className = "", intensity = 10 }) => {
   );
 };
 
-// ─── FLOATING STICKER ─────────────────────────────────────
 const FloatingSticker = ({ emoji, label, className, delay = 0, rotation = 0 }) => (
   <motion.div
     className={`absolute z-20 select-none pointer-events-none ${className}`}
@@ -75,7 +72,6 @@ const FloatingSticker = ({ emoji, label, className, delay = 0, rotation = 0 }) =
   </motion.div>
 );
 
-// ─── STAT BADGE ───────────────────────────────────────────
 const StatBadge = ({ value, label, color, delay }) => (
   <motion.div
     className="ln-card px-4 py-5 text-center"
@@ -90,7 +86,6 @@ const StatBadge = ({ value, label, color, delay }) => (
   </motion.div>
 );
 
-// ─── TIMELINE ITEM ────────────────────────────────────────
 const TimelineItem = ({ year, event, detail, color, index, isLast }) => (
   <motion.div
     className="flex gap-5 items-start"
@@ -115,7 +110,6 @@ const TimelineItem = ({ year, event, detail, color, index, isLast }) => (
   </motion.div>
 );
 
-// ─── WHO FOLLOWS CARD ─────────────────────────────────────
 const FollowerCard = ({ flag, country, detail, color, index }) => (
   <TiltCard>
     <motion.div
@@ -134,7 +128,6 @@ const FollowerCard = ({ flag, country, detail, color, index }) => (
   </TiltCard>
 );
 
-// ─── MISCONCEPTION CARD ───────────────────────────────────
 const MythCard = ({ myth, truth, color, index }) => (
   <TiltCard>
     <motion.div
@@ -151,22 +144,19 @@ const MythCard = ({ myth, truth, color, index }) => (
   </TiltCard>
 );
 
-// ═══════════════════════════════════════════════════════════
-// SECTION DATA
-// ═══════════════════════════════════════════════════════════
 const STEAM_STATS = [
-  { value: "65%",  label: "of today's children will work in jobs that don't exist yet",       color: "#3B82F6" },
-  { value: "3×",   label: "more likely to study STEAM with early childhood exposure",          color: "#10B981" },
-  { value: "40+",  label: "countries now have a national STEAM education strategy",            color: "#F97316" },
-  { value: "1987", label: "year Stanford proved arts integration boosts science retention",    color: "#A855F7" },
+  { value: "65%",  label: "of today's children will work in jobs that don't exist yet",    color: "#3B82F6" },
+  { value: "3×",   label: "more likely to study STEAM with early childhood exposure",       color: "#10B981" },
+  { value: "40+",  label: "countries now have a national STEAM education strategy",         color: "#F97316" },
+  { value: "1987", label: "year Stanford proved arts integration boosts science retention", color: "#A855F7" },
 ];
 
 const ORIGIN_TIMELINE = [
-  { year: "'90s", color: "#3B82F6", event: "STEM was born in the USA",               detail: "The US National Science Foundation coined STEM to address a growing skills gap in science and engineering graduates entering the workforce." },
-  { year: "2001", color: "#10B981", event: "Rita Colwell formalises STEM policy",   detail: "NSF Director Rita Colwell made STEM a federal education priority, linking science literacy directly to national economic competitiveness." },
-  { year: "2006", color: "#F97316", event: "Georgette Yakman adds the 'A'",         detail: "American educator Georgette Yakman introduced Arts into STEM, creating STEAM — arguing creativity is inseparable from scientific innovation." },
+  { year: "'90s", color: "#3B82F6", event: "STEM was born in the USA",                      detail: "The US National Science Foundation coined STEM to address a growing skills gap in science and engineering graduates entering the workforce." },
+  { year: "2001", color: "#10B981", event: "Rita Colwell formalises STEM policy",           detail: "NSF Director Rita Colwell made STEM a federal education priority, linking science literacy directly to national economic competitiveness." },
+  { year: "2006", color: "#F97316", event: "Georgette Yakman adds the 'A'",                 detail: "American educator Georgette Yakman introduced Arts into STEM, creating STEAM — arguing creativity is inseparable from scientific innovation." },
   { year: "2013", color: "#A855F7", event: "Rhode Island School of Design lobbies Congress", detail: "RISD led a national campaign to officially add Arts to STEM policy, arguing creativity turns scientific knowledge into world-changing products." },
-  { year: "Now",  color: "#FB7185", event: "STEAM adopted globally",                detail: "Countries across Europe, Asia, and South America embed STEAM into national curricula. Poland is actively expanding STEAM in early education." },
+  { year: "Now",  color: "#FB7185", event: "STEAM adopted globally",                        detail: "Countries across Europe, Asia, and South America embed STEAM into national curricula. Poland is actively expanding STEAM in early education." },
 ];
 
 const WHO_FOLLOWS = [
@@ -179,75 +169,48 @@ const WHO_FOLLOWS = [
 ];
 
 const MISCONCEPTIONS = [
-  { myth: "\"STEAM is just fun experiments — not real learning.\"",      truth: "Every La Neuron STEAM session follows a complete scientific method: hypothesis, experiment, results, and conclusion. Children produce documented investigations — the same structure used in real research.", color: "#3B82F6" },
-  { myth: "\"My child needs to be good at maths to enjoy STEAM.\"",      truth: "STEAM starts with curiosity, not ability. The Arts component ensures that creative thinkers, visual learners, and storytellers are equally at home in every session.", color: "#10B981" },
-  { myth: "\"STEAM is only for older children.\"",                       truth: "Ages 6–9 benefit the most from early STEAM exposure. Young Explorers sessions are sensory-led and visual, designed precisely for how young brains form foundational concepts.", color: "#F97316" },
+  { myth: "\"STEAM is just fun experiments — not real learning.\"",   truth: "Every La Neuron STEAM session follows a complete scientific method: hypothesis, experiment, results, and conclusion. Children produce documented investigations — the same structure used in real research.", color: "#3B82F6" },
+  { myth: "\"My child needs to be good at maths to enjoy STEAM.\"",   truth: "STEAM starts with curiosity, not ability. The Arts component ensures that creative thinkers, visual learners, and storytellers are equally at home in every session.", color: "#10B981" },
+  { myth: "\"STEAM is only for older children.\"",                    truth: "Ages 6–9 benefit the most from early STEAM exposure. Young Explorers sessions are sensory-led and visual, designed precisely for how young brains form foundational concepts.", color: "#F97316" },
 ];
 
-// ═══════════════════════════════════════════════════════════
-// MAIN EXPORT
-// ═══════════════════════════════════════════════════════════
 export const WhatIsSteam = () => {
   const [active, setActive] = useState("S");
   const current = STEAM.find((s) => s.key === active);
 
   return (
-    /*
-      ── PAGE WRAPPER ──────────────────────────────────────
-      The two-girls image is fixed here as a full-page background blend.
-      Every section inside renders on top of it.
-      - position: relative + overflow-hidden on the wrapper
-      - The image div is absolute inset-0 z-0
-      - All sections already have bg-white/75 or bg-[#F8FAFC]/70 with
-        backdrop-blur-sm, so they partially reveal the blended image beneath
-    */
     <div className="relative overflow-hidden">
 
       {/* ── BLENDED BACKGROUND — two girls science image ── */}
-      {/*
-        mixBlendMode: "multiply" fuses the photo into the white/light
-        section backgrounds. The sections' own semi-transparent bg colours
-        (bg-white/75, bg-[#F8FAFC]/70) act as tinted filters on top,
-        so the image feels ambient — present but not overpowering.
-        Increase opacity (max ~0.32) if you want it more visible.
-        object-position: center 25% keeps the girls' faces in frame.
-      */}
+      {/* backdrop-blur REMOVED from all sections — it was blocking this image */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
         aria-hidden="true"
+        style={{ backgroundColor: "#FDFBF7" }}
       >
         <img
           src={HERO.image}
           alt=""
-          className="w-full h-full"
           style={{
-            objectFit: "contain",        /* contain = no zoom/crop, full image visible */
-            objectPosition: "center top",
-            mixBlendMode: "normal",      /* normal = most reliable, no blend tricks */
-            opacity: 0.12,               /* increase this 0.12 → 0.20 → 0.28 to taste */
-            position: "sticky",          /* sticky keeps image in viewport as user scrolls */
-            top: 0,
-          }}
-        />
-        {/* Light overlay to soften edges */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(to bottom, rgba(253,251,247,0.3) 0%, rgba(253,251,247,0.1) 40%, rgba(253,251,247,0.3) 100%)",
+            position: "absolute",
+            top: "5%",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "70%",
+            maxWidth: "700px",
+            opacity: 0.13,
+            mixBlendMode: "multiply",
           }}
         />
       </div>
 
-      {/* ── ALL SECTIONS (z-10 so they render above the bg image) ── */}
       <div className="relative z-10">
 
-        {/* ───────────────────────────────────────────────────
-            SECTION 1 — DISCIPLINES
-        ─────────────────────────────────────────────────── */}
+        {/* ── SECTION 1 — DISCIPLINES */}
+        {/* KEY CHANGE: removed backdrop-blur-sm, changed bg-white/75 → bg-white/60 */}
         <section
           id="what-is-steam"
-          className="relative py-20 lg:py-28 pt-28 sm:pt-32 bg-white/75 backdrop-blur-sm border-b-2 border-[#0F172A] overflow-hidden"
+          className="relative py-20 lg:py-28 pt-28 sm:pt-32 bg-white/60 border-b-2 border-[#0F172A] overflow-hidden"
         >
           <motion.div
             className="pointer-events-none absolute -top-20 -right-20 w-96 h-96 rounded-full bg-[#DBEAFE] blur-3xl opacity-40"
@@ -369,10 +332,9 @@ export const WhatIsSteam = () => {
           </div>
         </section>
 
-        {/* ───────────────────────────────────────────────────
-            SECTION 2 — BY THE NUMBERS
-        ─────────────────────────────────────────────────── */}
-        <section className="py-16 bg-[#F8FAFC]/70 backdrop-blur-sm border-b border-[#E2E8F0]">
+        {/* ── SECTION 2 — BY THE NUMBERS */}
+        {/* KEY CHANGE: removed backdrop-blur-sm */}
+        <section className="py-16 bg-[#F8FAFC]/60 border-b border-[#E2E8F0]">
           <div className="max-w-5xl mx-auto px-6 lg:px-8">
             <Reveal>
               <SectionHeading
@@ -389,19 +351,14 @@ export const WhatIsSteam = () => {
           </div>
         </section>
 
-        {/* ───────────────────────────────────────────────────
-            SECTION 3 — ORIGIN STORY + TIMELINE
-        ─────────────────────────────────────────────────── */}
-        <section className="py-20 lg:py-28 bg-white/75 backdrop-blur-sm border-b border-[#E2E8F0]">
+        {/* ── SECTION 3 — ORIGIN STORY + TIMELINE */}
+        {/* KEY CHANGE: removed backdrop-blur-sm */}
+        <section className="py-20 lg:py-28 bg-white/60 border-b border-[#E2E8F0]">
           <div className="max-w-6xl mx-auto px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-14 items-start">
               <div>
                 <Reveal>
-                  <SectionHeading
-                    overline="The origin story"
-                    title="Birth of STEAM"
-                    center={false}
-                  />
+                  <SectionHeading overline="The origin story" title="Birth of STEAM" center={false} />
                 </Reveal>
                 <Reveal delay={0.1} variant="blurIn">
                   <p className="mt-5 text-[#475569] leading-relaxed">
@@ -447,22 +404,16 @@ export const WhatIsSteam = () => {
                   </h3>
                 </Reveal>
                 {ORIGIN_TIMELINE.map((item, i) => (
-                  <TimelineItem
-                    key={i}
-                    {...item}
-                    index={i}
-                    isLast={i === ORIGIN_TIMELINE.length - 1}
-                  />
+                  <TimelineItem key={i} {...item} index={i} isLast={i === ORIGIN_TIMELINE.length - 1} />
                 ))}
               </div>
             </div>
           </div>
         </section>
 
-        {/* ───────────────────────────────────────────────────
-            SECTION 4 — WHO FOLLOWS STEAM
-        ─────────────────────────────────────────────────── */}
-        <section className="py-20 bg-[#F8FAFC]/70 backdrop-blur-sm border-b border-[#E2E8F0]">
+        {/* ── SECTION 4 — WHO FOLLOWS STEAM */}
+        {/* KEY CHANGE: removed backdrop-blur-sm */}
+        <section className="py-20 bg-[#F8FAFC]/60 border-b border-[#E2E8F0]">
           <div className="max-w-6xl mx-auto px-6 lg:px-8">
             <Reveal>
               <SectionHeading
@@ -479,10 +430,9 @@ export const WhatIsSteam = () => {
           </div>
         </section>
 
-        {/* ───────────────────────────────────────────────────
-            SECTION 5 — CLEARING UP MYTHS
-        ─────────────────────────────────────────────────── */}
-        <section className="py-20 bg-white/75 backdrop-blur-sm border-b-2 border-[#0F172A]">
+        {/* ── SECTION 5 — CLEARING UP MYTHS */}
+        {/* KEY CHANGE: removed backdrop-blur-sm */}
+        <section className="py-20 bg-white/60 border-b-2 border-[#0F172A]">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <Reveal>
               <SectionHeading
@@ -499,7 +449,7 @@ export const WhatIsSteam = () => {
           </div>
         </section>
 
-      </div>{/* end z-10 wrapper */}
-    </div>/* end page wrapper */
+      </div>
+    </div>
   );
 };
