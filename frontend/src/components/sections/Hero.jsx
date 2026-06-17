@@ -92,6 +92,12 @@ export const Hero = () => {
             objectPosition: "70% top",
             mixBlendMode: "multiply",
             opacity: 0.35,
+            maskImage:
+              "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%)",
+            maskComposite: "intersect",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%)",
+            WebkitMaskComposite: "source-in",
           }}
         />
         <div
