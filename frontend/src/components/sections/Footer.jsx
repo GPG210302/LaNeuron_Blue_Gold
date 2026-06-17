@@ -3,7 +3,7 @@ import { Phone, Mail, MapPin, Facebook, Instagram } from "lucide-react";
 import { SITE, NAV } from "../../data";
 import logo from "../../assets/logo.png";
 
-const FACTS = ["Ages 6–13", "Mon–Fri 9AM–12PM", "Max 10 per week", "Starts 6 July 2026", "Stakkato, Kraków"];
+const FACTS = ["Ages 6–13", "Mon–Fri 9AM–12PM", "Max 10 per week", "Starts 6 July 2026", "Kraków"];
 
 export const Footer = () => {
   const navigate = useNavigate();

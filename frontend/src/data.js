@@ -175,7 +175,7 @@ export const CAMP_FACTS = [
   { label: "Daily timing", value: "9:00 AM – 12:00 PM" },
   { label: "Days", value: "Monday to Friday" },
   { label: "Group size", value: "Max 10 children" },
-  { label: "Location", value: "Stakkato, Kraków" },
+  { label: "Location", value: "Kraków" },
   { label: "Language", value: "English" },
 ];
 

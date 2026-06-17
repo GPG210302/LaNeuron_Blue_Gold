@@ -84,7 +84,7 @@ export const Events = () => {
               <div className="mt-6 grid grid-cols-3 gap-3">
                 <Stat icon={Clock} label="3 hrs / day" />
                 <Stat icon={Users} label="Max 10 kids" />
-                <Stat icon={MapPin} label="Stakkato" />
+                <Stat icon={MapPin} label="Kraków" />
               </div>
 
               <div className="mt-6 ln-card !shadow-none bg-[#E7EBF7] p-4 flex gap-3">
@@ -109,8 +109,8 @@ export const Events = () => {
                 <span className="font-display font-bold">{SITE.venue}</span>
               </div>
               <iframe
-                title="Stakkato Kraków map"
-                src="https://www.google.com/maps?q=Stakkato%20Berka%20Joselewicza%2023%20Krak%C3%B3w&output=embed"
+                title="Kraków map"
+                src="https://www.google.com/maps?q=Krak%C3%B3w,Poland&output=embed"
                 className="w-full flex-1 border-0"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
