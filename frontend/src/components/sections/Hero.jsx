@@ -87,9 +87,9 @@ export const Hero = () => {
         <img
           src={classroomBg}
           alt=""
-          className="w-full h-full object-contain"
+          className="w-full h-full object-right"
           style={{
-            objectPosition: "right center",
+            objectPosition: "68% top",
             mixBlendMode: "multiply",
             opacity: 0.30,
           }}
