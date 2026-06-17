@@ -87,11 +87,11 @@ export const Hero = () => {
         <img
           src={classroomBg}
           alt=""
-          className="w-full h-full object-right"
+          className="w-full h-full object-right object-contain"
           style={{
-            objectPosition: "68% top",
+            objectPosition: "70% top",
             mixBlendMode: "multiply",
-            opacity: 0.30,
+            opacity: 0.35,
           }}
         />
         <div
@@ -99,6 +99,7 @@ export const Hero = () => {
           style={{
             background:
               "radial-gradient(ellipse 65% 90% at 22% 50%, rgba(247,248,252,0.95) 30%, transparent 70%)",
+              "linear-gradient(to top, rgba(247,248,252,0.97) 0%, transparent 10%)",
           }}
         />
       </div>
