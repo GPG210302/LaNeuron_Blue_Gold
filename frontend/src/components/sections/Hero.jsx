@@ -98,7 +98,7 @@ export const Hero = () => {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to top, rgba(247,248,252,0.97) 0%, transparent 10%)",  {/* ← changed: radial removed, bottom-fade only */}
+              "linear-gradient(to top, rgba(247,248,252,0.97) 0%, transparent 10%)",
           }}
         />
       </div>
