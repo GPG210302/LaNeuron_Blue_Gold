@@ -223,7 +223,7 @@ export const WhatIsSteam = () => {
         {/* KEY CHANGE: removed backdrop-blur-sm, changed bg-white/75 → bg-white/60 */}
         <section
           id="what-is-steam"
-          className="relative py-20 lg:py-28 pt-28 sm:pt-32 bg-white/60 border-b-2 border-[#0F172A] overflow-hidden"
+          className="relative py-20 lg:py-28 pt-28 sm:pt-32 bg-white/60 overflow-hidden"
         >
           <motion.div
             className="pointer-events-none absolute -top-20 -right-20 w-96 h-96 rounded-full bg-[#DBEAFE] blur-3xl opacity-40"
@@ -236,10 +236,10 @@ export const WhatIsSteam = () => {
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
           />
 
-          <FloatingSticker emoji="🔬" label="Science"     className="top-30 left-[3%]    hidden xl:block" delay={0.5} rotation={-8} />
-          <FloatingSticker emoji="⚙️"  label="Engineering" className="top-35 right-[4%]   hidden xl:block" delay={0.7} rotation={6}  />
-          <FloatingSticker emoji="🎨" label="Art"         className="bottom-30 left-[5%]  hidden xl:block" delay={0.9} rotation={-5} />
-          <FloatingSticker emoji="💡" label="Innovation"  className="bottom-30 right-[3%] hidden xl:block" delay={1.1} rotation={7}  />
+          <FloatingSticker emoji="🔬" label="Science"     className="top-16 left-[12%]   hidden xl:block" delay={0.5} rotation={-8} />
+          <FloatingSticker emoji="🎨" label="Art"         className="top-48 left-[22%]   hidden xl:block" delay={0.9} rotation={5}  />
+          <FloatingSticker emoji="⚙️"  label="Engineering" className="top-24 right-[18%]  hidden xl:block" delay={0.7} rotation={-6} />
+          <FloatingSticker emoji="💡" label="Innovation"  className="top-64 right-[12%]  hidden xl:block" delay={1.1} rotation={8}  />
 
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <Reveal>

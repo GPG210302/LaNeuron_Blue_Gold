@@ -96,7 +96,7 @@ export const Hero = () => {
               "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%)",
             maskComposite: "intersect",
             WebkitMaskImage:
-              "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%)",
+              "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 35%, transparent 100%)",
             WebkitMaskComposite: "source-in",
           }}
         />
