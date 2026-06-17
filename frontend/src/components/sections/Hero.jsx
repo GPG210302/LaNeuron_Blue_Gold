@@ -91,12 +91,12 @@ export const Hero = () => {
           style={{
             objectPosition: "70% top",
             mixBlendMode: "multiply",
-            opacity: 0.35,
+            opacity: 0.40,
             maskImage:
               "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%)",
             maskComposite: "intersect",
             WebkitMaskImage:
-              "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%)",
+              "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%)",
             WebkitMaskComposite: "source-in",
           }}
         />
@@ -104,7 +104,7 @@ export const Hero = () => {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to top, rgba(247,248,252,0.97) 0%, transparent 10%)",
+              "linear-gradient(to top, rgba(247,248,252,0.97) 0%, transparent 25%)",
           }}
         />
       </div>
