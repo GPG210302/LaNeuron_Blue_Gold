@@ -79,9 +79,9 @@ export const Hero = () => {
       id="home"
       className="relative pt-36 pb-20 sm:pt-[250px] lg:pt-[260px] lg:pb-28 overflow-hidden ln-grid-bg"
     >
-      {/* ── BLENDED BACKGROUND IMAGE — 6 children classroom ── */}
+      {/* ── BLENDED BACKGROUND IMAGE — fixed throughout scroll ── */}
       <div
-        className="pointer-events-none absolute inset-0 z-0"
+        className="pointer-events-none fixed inset-0 z-0"  {/* ← changed: absolute → fixed */}
         aria-hidden="true"
       >
         <img
@@ -98,7 +98,7 @@ export const Hero = () => {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 65% 90% at 22% 50%, rgba(247,248,252,0.95) 30%, transparent 70%),linear-gradient(to top, rgba(247,248,252,0.97) 0%, transparent 10%)",
+              "linear-gradient(to top, rgba(247,248,252,0.97) 0%, transparent 10%)",  {/* ← changed: radial removed, bottom-fade only */}
           }}
         />
       </div>
