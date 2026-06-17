@@ -81,7 +81,7 @@ export const Hero = () => {
     >
       {/* ── BLENDED BACKGROUND IMAGE — fixed throughout scroll ── */}
       <div
-        className="pointer-events-none fixed inset-0 z-0"  {/* ← changed: absolute → fixed */}
+        className="pointer-events-none fixed inset-0 z-0"
         aria-hidden="true"
       >
         <img
