@@ -98,8 +98,7 @@ export const Hero = () => {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 65% 90% at 22% 50%, rgba(247,248,252,0.95) 30%, transparent 70%)",
-              "linear-gradient(to top, rgba(247,248,252,0.97) 0%, transparent 10%)",
+              "radial-gradient(ellipse 65% 90% at 22% 50%, rgba(247,248,252,0.95) 30%, transparent 70%),linear-gradient(to top, rgba(247,248,252,0.97) 0%, transparent 10%)",
           }}
         />
       </div>
