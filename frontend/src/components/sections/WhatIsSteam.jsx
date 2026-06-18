@@ -186,33 +186,38 @@ export const WhatIsSteam = () => {
         className="pointer-events-none absolute inset-0 z-0"
         aria-hidden="true"
       >
+      <div style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        zIndex: -1,
+        overflow: "hidden",
+      }}>
+        <img
+          src={HERO.image}
+          alt=""
+          style={{
+            width: "100%",
+            height: "auto",
+            objectFit: "contain",
+            objectPosition: "top center",
+            opacity: 0.45,
+            mixBlendMode: "multiply",
+            display: "block",
+          }}
+        />
+        {/* Fade all 4 edges into white background */}
         <div style={{
           position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          zIndex: -1,
-          overflow: "hidden",
-        }}>
-          <img
-            src={HERO.image}
-            alt=""
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "55% 25%",
-              opacity: 0.45,
-              mixBlendMode: "multiply",
-            }}
-          />
-          <div style={{
-            position: "absolute",
-            inset: 0,
-            background: "linear-gradient(to right, rgba(253,251,247,0.65) 0%, rgba(253,251,247,0.2) 45%, rgba(253,251,247,0.0) 100%)",
-          }} />
-        </div>
+          inset: 0,
+          background: `
+            linear-gradient(to bottom, rgba(253,251,247,0) 50%, rgba(253,251,247,1) 100%),
+            linear-gradient(to right,  rgba(253,251,247,0.8) 0%, rgba(253,251,247,0) 20%, rgba(253,251,247,0) 80%, rgba(253,251,247,0.8) 100%),
+            linear-gradient(to bottom, rgba(253,251,247,0.5) 0%, rgba(253,251,247,0) 15%)
+          `,
+        }} />
       </div>
 
       <div className="relative z-10">
