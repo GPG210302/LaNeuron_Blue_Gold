@@ -81,7 +81,8 @@ export const Hero = () => {
     >
       {/* ── BLENDED BACKGROUND IMAGE — fixed throughout scroll ── */}
       <div
-        className="pointer-events-none fixed inset-0 z-0"
+        className="pointer-events-none fixed inset-0"
+        style={{ zIndex: -1 }}
         aria-hidden="true"
       >
         <img
@@ -93,18 +94,11 @@ export const Hero = () => {
             mixBlendMode: "multiply",
             opacity: 0.40,
             maskImage:
-              "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%)",
+              "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%)",
             maskComposite: "intersect",
             WebkitMaskImage:
-              "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 35%, transparent 100%)",
+              "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%)",
             WebkitMaskComposite: "source-in",
-          }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(to top, rgba(247,248,252,0.97) 0%, transparent 25%)",
           }}
         />
       </div>
