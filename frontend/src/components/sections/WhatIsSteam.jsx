@@ -179,9 +179,9 @@ export const WhatIsSteam = () => {
   const current = STEAM.find((s) => s.key === active);
 
   return (
-    <div className="relative">
+    // ↓ ONLY CHANGE: added overflow-hidden to clip the bg image inside this component
+    <div className="relative overflow-hidden">
 
-      {/* ↓ CHANGED: position absolute (not fixed) so it stays within this page only */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
         aria-hidden="true"
