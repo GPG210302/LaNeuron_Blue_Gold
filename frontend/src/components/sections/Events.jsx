@@ -7,7 +7,7 @@ import { CAMP_DAYS, CAMP_FACTS, SITE } from "../../data";
 export const Events = () => {
   const navigate = useNavigate();
   return (
-    <section id="events" className="py-20 lg:py-28 pt-28 sm:pt-32 bg-white border-b-2 border-[#0F172A] relative overflow-hidden">
+    <section id="events" className="py-20 lg:py-28 pt-28 sm:pt-32 bg-white/60 border-b-2 border-[#0F172A] relative">
       <div className="pointer-events-none absolute top-10 right-10 w-72 h-72 rounded-full bg-[#FFE4E4] blur-3xl opacity-50" />
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
         <Reveal>
