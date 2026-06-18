@@ -181,16 +181,17 @@ export const WhatIsSteam = () => {
   return (
     <div className="relative">
 
+      {/* ↓ CHANGED: position absolute (not fixed) so it stays within this page only */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
         aria-hidden="true"
       >
         <div style={{
-          position: "fixed",
+          position: "absolute",
           top: 0,
           left: 0,
           width: "100%",
-          height: "100vh",
+          height: "100%",
           zIndex: -1,
           overflow: "hidden",
         }}>
