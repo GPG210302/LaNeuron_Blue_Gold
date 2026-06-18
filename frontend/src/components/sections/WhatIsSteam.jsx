@@ -181,38 +181,57 @@ export const WhatIsSteam = () => {
   return (
     <div className="relative overflow-hidden">
 
+      {/* ── BACKGROUND IMAGE: fixed so it stays visible throughout scroll ── */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
         aria-hidden="true"
+        style={{ position: "sticky", top: 0 }}
       >
         <div style={{
-          position: "absolute",
+          position: "fixed",
           top: 0,
           left: 0,
           width: "100%",
-          height: "100%",
-          zIndex: -1,
+          height: "100vh",
+          zIndex: 0,
           overflow: "hidden",
         }}>
+          {/* The kids image at natural size, centered */}
           <img
             src={HERO.image}
             alt=""
             style={{
-              width: "100%",
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "auto",
               height: "auto",
-              objectFit: "contain",
-              objectPosition: "top center",
-              opacity: 0.45,
+              maxWidth: "100%",
+              maxHeight: "100%",
+              opacity: 0.60,
               mixBlendMode: "multiply",
               display: "block",
             }}
           />
-          {/* Bottom fade */}
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(253,251,247,0) 50%, rgba(253,251,247,1) 100%)" }} />
-          {/* Left and right fade */}
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(253,251,247,0.8) 0%, rgba(253,251,247,0) 20%, rgba(253,251,247,0) 80%, rgba(253,251,247,0.8) 100%)" }} />
-          {/* Top fade */}
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(253,251,247,0.5) 0%, rgba(253,251,247,0) 15%)" }} />
+          {/* Heavy radial fade to erase all 4 edges smoothly */}
+          <div style={{
+            position: "absolute",
+            inset: 0,
+            background: "radial-gradient(ellipse 70% 60% at 50% 40%, rgba(253,251,247,0) 30%, rgba(253,251,247,0.6) 60%, rgba(253,251,247,1) 85%)",
+          }} />
+          {/* Extra bottom fade */}
+          <div style={{
+            position: "absolute",
+            inset: 0,
+            background: "linear-gradient(to bottom, rgba(253,251,247,0.2) 0%, rgba(253,251,247,0) 20%, rgba(253,251,247,0) 75%, rgba(253,251,247,1) 100%)",
+          }} />
+          {/* Extra top fade */}
+          <div style={{
+            position: "absolute",
+            inset: 0,
+            background: "linear-gradient(to bottom, rgba(253,251,247,0.6) 0%, rgba(253,251,247,0) 12%)",
+          }} />
         </div>
       </div>
 
