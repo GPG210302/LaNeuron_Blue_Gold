@@ -202,7 +202,7 @@ export const WhatIsSteam = () => {
               height: "100%",
               objectFit: "cover",
               objectPosition: "55% 25%",
-              opacity: 0.75,
+              opacity: 0.30,
               mixBlendMode: "multiply",
             }}
           />
