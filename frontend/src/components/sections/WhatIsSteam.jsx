@@ -175,42 +175,57 @@ const MISCONCEPTIONS = [
 ];
 
 // Scrolling background that hides itself once the section scrolls out of view
+// Replace the entire StickyBackground component with this:
 const StickyBackground = ({ image }) => {
-  const bgRef = useRef(null);
-  const sectionRef = useRef(null);
+  const wrapperRef = useRef(null);
+  const imgWrapRef = useRef(null);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    const bg = bgRef.current;
-    if (!section || !bg) return;
+    const onScroll = () => {
+      const wrapper = wrapperRef.current;
+      const imgWrap = imgWrapRef.current;
+      if (!wrapper || !imgWrap) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        bg.style.opacity = entry.isIntersecting ? "1" : "0";
-      },
-      { threshold: 0 }
-    );
-    observer.observe(section);
-    return () => observer.disconnect();
+      const rect = wrapper.getBoundingClientRect();
+      const viewH = window.innerHeight;
+
+      // Only show while ANY part of this section is in view
+      if (rect.bottom <= 0 || rect.top >= viewH) {
+        imgWrap.style.opacity = "0";
+        return;
+      }
+
+      imgWrap.style.opacity = "1";
+      // Offset the image so it stays centered in the viewport
+      const offset = Math.max(0, -rect.top);
+      imgWrap.style.transform = `translateY(${offset}px)`;
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll(); // run once on mount
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <>
-      {/* Sentinel: full height of the page section so IntersectionObserver knows when we leave */}
-      <div ref={sectionRef} style={{ position: "absolute", inset: 0, pointerEvents: "none" }} />
-
-      {/* Fixed background — hidden via opacity:0 once section leaves viewport */}
+    <div
+      ref={wrapperRef}
+      aria-hidden="true"
+      style={{
+        position: "absolute",
+        inset: 0,
+        zIndex: 0,
+        pointerEvents: "none",
+        overflow: "hidden",
+      }}
+    >
       <div
-        ref={bgRef}
-        aria-hidden="true"
+        ref={imgWrapRef}
         style={{
-          position: "fixed",
+          position: "absolute",
           top: 0,
           left: 0,
           width: "100%",
           height: "100vh",
-          zIndex: 0,
-          pointerEvents: "none",
           transition: "opacity 0.3s ease",
         }}
       >
@@ -250,7 +265,7 @@ const StickyBackground = ({ image }) => {
           background: "linear-gradient(to bottom, rgba(253,251,247,0.6) 0%, rgba(253,251,247,0) 12%)",
         }} />
       </div>
-    </>
+    </div>
   );
 };
 
