@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Reveal, SectionHeading } from "../Reveal";
 import { STEAM } from "../../data";
@@ -174,6 +174,86 @@ const MISCONCEPTIONS = [
   { myth: "\"STEAM is only for older children.\"",                    truth: "Ages 6–9 benefit the most from early STEAM exposure. Young Explorers sessions are sensory-led and visual, designed precisely for how young brains form foundational concepts.", color: "#F97316" },
 ];
 
+// Scrolling background that hides itself once the section scrolls out of view
+const StickyBackground = ({ image }) => {
+  const bgRef = useRef(null);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const bg = bgRef.current;
+    if (!section || !bg) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        bg.style.opacity = entry.isIntersecting ? "1" : "0";
+      },
+      { threshold: 0 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <>
+      {/* Sentinel: full height of the page section so IntersectionObserver knows when we leave */}
+      <div ref={sectionRef} style={{ position: "absolute", inset: 0, pointerEvents: "none" }} />
+
+      {/* Fixed background — hidden via opacity:0 once section leaves viewport */}
+      <div
+        ref={bgRef}
+        aria-hidden="true"
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100vh",
+          zIndex: 0,
+          pointerEvents: "none",
+          transition: "opacity 0.3s ease",
+        }}
+      >
+        <img
+          src={image}
+          alt=""
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "auto",
+            height: "auto",
+            maxWidth: "100%",
+            maxHeight: "100%",
+            opacity: 0.60,
+            mixBlendMode: "multiply",
+            display: "block",
+          }}
+        />
+        {/* Radial edge fade */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          background: "radial-gradient(ellipse 70% 60% at 50% 40%, rgba(253,251,247,0) 30%, rgba(253,251,247,0.6) 60%, rgba(253,251,247,1) 85%)",
+        }} />
+        {/* Bottom fade */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(to bottom, rgba(253,251,247,0.2) 0%, rgba(253,251,247,0) 20%, rgba(253,251,247,0) 75%, rgba(253,251,247,1) 100%)",
+        }} />
+        {/* Top fade */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(to bottom, rgba(253,251,247,0.6) 0%, rgba(253,251,247,0) 12%)",
+        }} />
+      </div>
+    </>
+  );
+};
+
 export const WhatIsSteam = () => {
   const [active, setActive] = useState("S");
   const current = STEAM.find((s) => s.key === active);
@@ -181,59 +261,7 @@ export const WhatIsSteam = () => {
   return (
     <div className="relative overflow-hidden">
 
-      {/* ── BACKGROUND IMAGE: fixed so it stays visible throughout scroll ── */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0"
-        aria-hidden="true"
-        style={{ position: "sticky", top: 0 }}
-      >
-        <div style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100vh",
-          zIndex: 0,
-          overflow: "hidden",
-        }}>
-          {/* The kids image at natural size, centered */}
-          <img
-            src={HERO.image}
-            alt=""
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: "auto",
-              height: "auto",
-              maxWidth: "100%",
-              maxHeight: "100%",
-              opacity: 0.60,
-              mixBlendMode: "multiply",
-              display: "block",
-            }}
-          />
-          {/* Heavy radial fade to erase all 4 edges smoothly */}
-          <div style={{
-            position: "absolute",
-            inset: 0,
-            background: "radial-gradient(ellipse 70% 60% at 50% 40%, rgba(253,251,247,0) 30%, rgba(253,251,247,0.6) 60%, rgba(253,251,247,1) 85%)",
-          }} />
-          {/* Extra bottom fade */}
-          <div style={{
-            position: "absolute",
-            inset: 0,
-            background: "linear-gradient(to bottom, rgba(253,251,247,0.2) 0%, rgba(253,251,247,0) 20%, rgba(253,251,247,0) 75%, rgba(253,251,247,1) 100%)",
-          }} />
-          {/* Extra top fade */}
-          <div style={{
-            position: "absolute",
-            inset: 0,
-            background: "linear-gradient(to bottom, rgba(253,251,247,0.6) 0%, rgba(253,251,247,0) 12%)",
-          }} />
-        </div>
-      </div>
+      <StickyBackground image={HERO.image} />
 
       <div className="relative z-10">
 
