@@ -1,18 +1,13 @@
 {
   "name": "qr-code-generator",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "deploy": "wrangler deploy",
     "dev": "wrangler dev",
-    "start": "wrangler dev",
-    "test": "vitest"
+    "start": "wrangler dev"
   },
-  "devDependencies": {
-    "@cloudflare/vitest-pool-workers": "^0.12.4",
-    "@vitest/runner": "^4.1.9",
-    "@vitest/snapshot": "^4.1.9",
-    "vitest": "~3.2.0",
-    "wrangler": "^4.100.0"
+  "dependencies": {
+    "wrangler": "^4.0.0"
   }
 }
