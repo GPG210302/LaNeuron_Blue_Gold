@@ -179,45 +179,41 @@ export const WhatIsSteam = () => {
   const current = STEAM.find((s) => s.key === active);
 
   return (
-    // ↓ ONLY CHANGE: added overflow-hidden to clip the bg image inside this component
     <div className="relative overflow-hidden">
 
       <div
         className="pointer-events-none absolute inset-0 z-0"
         aria-hidden="true"
       >
-      <div style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        zIndex: -1,
-        overflow: "hidden",
-      }}>
-        <img
-          src={HERO.image}
-          alt=""
-          style={{
-            width: "100%",
-            height: "auto",
-            objectFit: "contain",
-            objectPosition: "top center",
-            opacity: 0.45,
-            mixBlendMode: "multiply",
-            display: "block",
-          }}
-        />
-        {/* Fade all 4 edges into white background */}
         <div style={{
           position: "absolute",
-          inset: 0,
-          background: `
-            linear-gradient(to bottom, rgba(253,251,247,0) 50%, rgba(253,251,247,1) 100%),
-            linear-gradient(to right,  rgba(253,251,247,0.8) 0%, rgba(253,251,247,0) 20%, rgba(253,251,247,0) 80%, rgba(253,251,247,0.8) 100%),
-            linear-gradient(to bottom, rgba(253,251,247,0.5) 0%, rgba(253,251,247,0) 15%)
-          `,
-        }} />
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          zIndex: -1,
+          overflow: "hidden",
+        }}>
+          <img
+            src={HERO.image}
+            alt=""
+            style={{
+              width: "100%",
+              height: "auto",
+              objectFit: "contain",
+              objectPosition: "top center",
+              opacity: 0.45,
+              mixBlendMode: "multiply",
+              display: "block",
+            }}
+          />
+          {/* Bottom fade */}
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(253,251,247,0) 50%, rgba(253,251,247,1) 100%)" }} />
+          {/* Left and right fade */}
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(253,251,247,0.8) 0%, rgba(253,251,247,0) 20%, rgba(253,251,247,0) 80%, rgba(253,251,247,0.8) 100%)" }} />
+          {/* Top fade */}
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(253,251,247,0.5) 0%, rgba(253,251,247,0) 15%)" }} />
+        </div>
       </div>
 
       <div className="relative z-10">
