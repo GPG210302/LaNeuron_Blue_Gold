@@ -152,11 +152,11 @@ const STEAM_STATS = [
 ];
 
 const ORIGIN_TIMELINE = [
-  { year: "'90s", color: "#3B82F6", event: "STEM was born in the USA",                      detail: "The US National Science Foundation coined STEM to address a growing skills gap in science and engineering graduates entering the workforce." },
-  { year: "2001", color: "#10B981", event: "Rita Colwell formalises STEM policy",           detail: "NSF Director Rita Colwell made STEM a federal education priority, linking science literacy directly to national economic competitiveness." },
-  { year: "2006", color: "#F97316", event: "Georgette Yakman adds the 'A'",                 detail: "American educator Georgette Yakman introduced Arts into STEM, creating STEAM — arguing creativity is inseparable from scientific innovation." },
-  { year: "2013", color: "#A855F7", event: "Rhode Island School of Design lobbies Congress", detail: "RISD led a national campaign to officially add Arts to STEM policy, arguing creativity turns scientific knowledge into world-changing products." },
-  { year: "Now",  color: "#FB7185", event: "STEAM adopted globally",                        detail: "Countries across Europe, Asia, and South America embed STEAM into national curricula. Poland is actively expanding STEAM in early education." },
+  { year: "'90s", color: "#3B82F6", event: "STEM was born in the USA",                       detail: "The US National Science Foundation coined STEM to address a growing skills gap in science and engineering graduates entering the workforce." },
+  { year: "2001", color: "#10B981", event: "Rita Colwell formalises STEM policy",            detail: "NSF Director Rita Colwell made STEM a federal education priority, linking science literacy directly to national economic competitiveness." },
+  { year: "2006", color: "#F97316", event: "Georgette Yakman adds the 'A'",                  detail: "American educator Georgette Yakman introduced Arts into STEM, creating STEAM — arguing creativity is inseparable from scientific innovation." },
+  { year: "2013", color: "#A855F7", event: "Rhode Island School of Design lobbies Congress",  detail: "RISD led a national campaign to officially add Arts to STEM policy, arguing creativity turns scientific knowledge into world-changing products." },
+  { year: "Now",  color: "#FB7185", event: "STEAM adopted globally",                         detail: "Countries across Europe, Asia, and South America embed STEAM into national curricula. Poland is actively expanding STEAM in early education." },
 ];
 
 const WHO_FOLLOWS = [
@@ -179,10 +179,9 @@ export const WhatIsSteam = () => {
   const current = STEAM.find((s) => s.key === active);
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative">                    {/* ← removed overflow-hidden */}
 
       {/* ── BLENDED BACKGROUND — two girls science image ── */}
-      {/* backdrop-blur REMOVED from all sections — it was blocking this image */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
         aria-hidden="true"
@@ -208,7 +207,6 @@ export const WhatIsSteam = () => {
               mixBlendMode: "multiply",
             }}
           />
-          {/* Soft fade on left so text stays readable */}
           <div style={{
             position: "absolute",
             inset: 0,
@@ -220,10 +218,9 @@ export const WhatIsSteam = () => {
       <div className="relative z-10">
 
         {/* ── SECTION 1 — DISCIPLINES */}
-        {/* KEY CHANGE: removed backdrop-blur-sm, changed bg-white/75 → bg-white/60 */}
         <section
           id="what-is-steam"
-          className="relative py-20 lg:py-28 pt-28 sm:pt-32 bg-white/60 overflow-hidden"
+          className="relative py-20 lg:py-28 pt-28 sm:pt-32 bg-white/40"  {/* ← removed overflow-hidden */}
         >
           <motion.div
             className="pointer-events-none absolute -top-20 -right-20 w-96 h-96 rounded-full bg-[#DBEAFE] blur-3xl opacity-40"
@@ -236,12 +233,12 @@ export const WhatIsSteam = () => {
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
           />
 
-          <FloatingSticker emoji="🔬" label="Science" className="top-32 left-[12%]   hidden xl:block" delay={0.5} rotation={-8} />
-          <FloatingSticker emoji="🤖" label="Robot"       className="top-64 left-[14%]   hidden xl:block" delay={1.3} rotation={-4} />
-          <FloatingSticker emoji="⚙️" label="Engineering" className="top-96 left-[22%]   hidden xl:block" delay={0.9} rotation={5}  />
-          <FloatingSticker emoji="🎨"  label="Art" className="top-40 right-[18%]  hidden xl:block" delay={0.7} rotation={-6} />
-          <FloatingSticker emoji="🧬" label="DNA"         className="top-96 right-[22%]  hidden xl:block" delay={1.5} rotation={7}  />
-          <FloatingSticker emoji="💡" label="Innovation" className="top-80 right-[12%]  hidden xl:block" delay={1.1} rotation={8}  />
+          <FloatingSticker emoji="🔬" label="Science"     className="top-32 left-[12%]  hidden xl:block" delay={0.5} rotation={-8} />
+          <FloatingSticker emoji="🤖" label="Robot"       className="top-64 left-[14%]  hidden xl:block" delay={1.3} rotation={-4} />
+          <FloatingSticker emoji="⚙️"  label="Engineering" className="top-96 left-[22%]  hidden xl:block" delay={0.9} rotation={5}  />
+          <FloatingSticker emoji="🎨" label="Art"         className="top-40 right-[18%] hidden xl:block" delay={0.7} rotation={-6} />
+          <FloatingSticker emoji="🧬" label="DNA"         className="top-96 right-[22%] hidden xl:block" delay={1.5} rotation={7}  />
+          <FloatingSticker emoji="💡" label="Innovation"  className="top-80 right-[12%] hidden xl:block" delay={1.1} rotation={8}  />
 
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <Reveal>
@@ -348,8 +345,7 @@ export const WhatIsSteam = () => {
         </section>
 
         {/* ── SECTION 2 — BY THE NUMBERS */}
-        {/* KEY CHANGE: removed backdrop-blur-sm */}
-        <section className="py-16 bg-[#F8FAFC]/60 border-b border-[#E2E8F0]">
+        <section className="py-16 bg-[#F8FAFC]/30 border-b border-[#E2E8F0]">   {/* ← /60 → /30 */}
           <div className="max-w-5xl mx-auto px-6 lg:px-8">
             <Reveal>
               <SectionHeading
@@ -367,8 +363,7 @@ export const WhatIsSteam = () => {
         </section>
 
         {/* ── SECTION 3 — ORIGIN STORY + TIMELINE */}
-        {/* KEY CHANGE: removed backdrop-blur-sm */}
-        <section className="py-20 lg:py-28 bg-white/60 border-b border-[#E2E8F0]">
+        <section className="py-20 lg:py-28 bg-white/40 border-b border-[#E2E8F0]">   {/* ← /60 → /40 */}
           <div className="max-w-6xl mx-auto px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-14 items-start">
               <div>
@@ -427,8 +422,7 @@ export const WhatIsSteam = () => {
         </section>
 
         {/* ── SECTION 4 — WHO FOLLOWS STEAM */}
-        {/* KEY CHANGE: removed backdrop-blur-sm */}
-        <section className="py-20 bg-[#F8FAFC]/60 border-b border-[#E2E8F0]">
+        <section className="py-20 bg-[#F8FAFC]/30 border-b border-[#E2E8F0]">   {/* ← /60 → /30 */}
           <div className="max-w-6xl mx-auto px-6 lg:px-8">
             <Reveal>
               <SectionHeading
@@ -446,8 +440,7 @@ export const WhatIsSteam = () => {
         </section>
 
         {/* ── SECTION 5 — CLEARING UP MYTHS */}
-        {/* KEY CHANGE: removed backdrop-blur-sm */}
-        <section className="py-20 bg-white/60 border-b-2 border-[#0F172A]">
+        <section className="py-20 bg-white/40 border-b-2 border-[#0F172A]">   {/* ← /60 → /40 */}
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <Reveal>
               <SectionHeading

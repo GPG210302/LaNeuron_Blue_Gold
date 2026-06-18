@@ -13,9 +13,9 @@ function useNeuronCanvas(canvasRef) {
     // ── Cream-background palette ───────────────────────────────────────────
     const BG_COLOR    = "rgba(253,251,247,0)";   // fully transparent — let CSS bg show
     const NODE_COLOR  = "#fdd017";               // deep bright gold node dot
-    const LINE_DIM    = "rgba(138,94,16,";       // dark gold lines (base)
-    const LINE_BRIGHT = "rgba(180,120,20,";      // brighter gold on mouse hover
-    const PULSE_COLOR = "rgba(201,140,30,";      // travelling pulse dot
+    const LINE_DIM    = "rgba(180,120,20,";      // brighter base lines
+    const LINE_BRIGHT = "rgba(230,160,20,";      // much brighter on hover
+    const PULSE_COLOR = "rgba(230,160,30,";      // stronger pulse dot
     const CFG = { maxDist: 200, nodeMinR: 1.5, nodeMaxR: 4.0, speed: 0.35 };
 
     let nodes = [], pulses = [], W, H, animId;
@@ -102,8 +102,8 @@ function useNeuronCanvas(canvasRef) {
           ctx.beginPath();
           ctx.moveTo(nodes[i].x, nodes[i].y);
           ctx.lineTo(nodes[j].x, nodes[j].y);
-          ctx.strokeStyle = LINE_DIM + (a * 0.45) + ")";
-          ctx.lineWidth = 1;
+          ctx.strokeStyle = LINE_DIM + (a * 0.75) + ")";
+          ctx.lineWidth = 1.2;
           ctx.stroke();
         }
       }
@@ -118,12 +118,12 @@ function useNeuronCanvas(canvasRef) {
             const dx2 = nodes[i].x - nodes[j].x, dy2 = nodes[i].y - nodes[j].y;
             const d2  = Math.sqrt(dx2 * dx2 + dy2 * dy2);
             if (d2 < CFG.maxDist) {
-              const a = (1 - dm / MR) * (1 - d2 / CFG.maxDist) * 0.8;
+              const a = (1 - dm / MR) * (1 - d2 / CFG.maxDist) * 1.2;
               ctx.beginPath();
               ctx.moveTo(nodes[i].x, nodes[i].y);
               ctx.lineTo(nodes[j].x, nodes[j].y);
               ctx.strokeStyle = LINE_BRIGHT + a + ")";
-              ctx.lineWidth = 1.5;
+              ctx.lineWidth = 2;
               ctx.stroke();
             }
           }
