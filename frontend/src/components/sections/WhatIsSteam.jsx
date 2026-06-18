@@ -179,9 +179,8 @@ export const WhatIsSteam = () => {
   const current = STEAM.find((s) => s.key === active);
 
   return (
-    <div className="relative">                    {/* ← removed overflow-hidden */}
+    <div className="relative">
 
-      {/* ── BLENDED BACKGROUND — two girls science image ── */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
         aria-hidden="true"
@@ -217,10 +216,9 @@ export const WhatIsSteam = () => {
 
       <div className="relative z-10">
 
-        {/* ── SECTION 1 — DISCIPLINES */}
         <section
           id="what-is-steam"
-          className="relative py-20 lg:py-28 pt-28 sm:pt-32 bg-white/40"  {/* ← removed overflow-hidden */}
+          className="relative py-20 lg:py-28 pt-28 sm:pt-32 bg-white/40"
         >
           <motion.div
             className="pointer-events-none absolute -top-20 -right-20 w-96 h-96 rounded-full bg-[#DBEAFE] blur-3xl opacity-40"
@@ -344,8 +342,7 @@ export const WhatIsSteam = () => {
           </div>
         </section>
 
-        {/* ── SECTION 2 — BY THE NUMBERS */}
-        <section className="py-16 bg-[#F8FAFC]/30 border-b border-[#E2E8F0]">   {/* ← /60 → /30 */}
+        <section className="py-16 bg-[#F8FAFC]/30 border-b border-[#E2E8F0]">
           <div className="max-w-5xl mx-auto px-6 lg:px-8">
             <Reveal>
               <SectionHeading
@@ -362,8 +359,7 @@ export const WhatIsSteam = () => {
           </div>
         </section>
 
-        {/* ── SECTION 3 — ORIGIN STORY + TIMELINE */}
-        <section className="py-20 lg:py-28 bg-white/40 border-b border-[#E2E8F0]">   {/* ← /60 → /40 */}
+        <section className="py-20 lg:py-28 bg-white/40 border-b border-[#E2E8F0]">
           <div className="max-w-6xl mx-auto px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-14 items-start">
               <div>
@@ -421,8 +417,7 @@ export const WhatIsSteam = () => {
           </div>
         </section>
 
-        {/* ── SECTION 4 — WHO FOLLOWS STEAM */}
-        <section className="py-20 bg-[#F8FAFC]/30 border-b border-[#E2E8F0]">   {/* ← /60 → /30 */}
+        <section className="py-20 bg-[#F8FAFC]/30 border-b border-[#E2E8F0]">
           <div className="max-w-6xl mx-auto px-6 lg:px-8">
             <Reveal>
               <SectionHeading
@@ -439,8 +434,7 @@ export const WhatIsSteam = () => {
           </div>
         </section>
 
-        {/* ── SECTION 5 — CLEARING UP MYTHS */}
-        <section className="py-20 bg-white/40 border-b-2 border-[#0F172A]">   {/* ← /60 → /40 */}
+        <section className="py-20 bg-white/40 border-b-2 border-[#0F172A]">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <Reveal>
               <SectionHeading
