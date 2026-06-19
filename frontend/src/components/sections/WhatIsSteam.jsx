@@ -3,10 +3,12 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Reveal, SectionHeading } from "../Reveal";
 import { STEAM } from "../../data";
 import { HERO } from "../../data";
+import "../../WhatIsSteam.css";
 
 const EXPO = [0.22, 1, 0.36, 1];
 const VIEWPORT = { once: true, margin: "-60px" };
 
+/* ─── TiltCard ─── */
 const TiltCard = ({ children, className = "", intensity = 10 }) => {
   const ref = useRef(null);
   const rawX = useMotionValue(0);
@@ -28,8 +30,18 @@ const TiltCard = ({ children, className = "", intensity = 10 }) => {
         rawX.set(((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * -intensity);
       }}
       onMouseEnter={() => scale.set(1.03)}
-      onMouseLeave={() => { rawX.set(0); rawY.set(0); scale.set(1); }}
-      style={{ rotateX, rotateY, scale, transformStyle: "preserve-3d", perspective: 1000 }}
+      onMouseLeave={() => {
+        rawX.set(0);
+        rawY.set(0);
+        scale.set(1);
+      }}
+      style={{
+        rotateX,
+        rotateY,
+        scale,
+        transformStyle: "preserve-3d",
+        perspective: 1000,
+      }}
       className={`relative ${className}`}
     >
       {children}
@@ -40,8 +52,10 @@ const TiltCard = ({ children, className = "", intensity = 10 }) => {
         <motion.div
           className="absolute w-[180%] h-[180%] -top-1/2 -left-1/2 pointer-events-none"
           style={{
-            background: "radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 65%)",
-            x: glareX, y: glareY,
+            background:
+              "radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 65%)",
+            x: glareX,
+            y: glareY,
           }}
         />
       </motion.div>
@@ -49,6 +63,7 @@ const TiltCard = ({ children, className = "", intensity = 10 }) => {
   );
 };
 
+/* ─── FloatingSticker ─── */
 const FloatingSticker = ({ emoji, label, className, delay = 0, rotation = 0 }) => (
   <motion.div
     className={`absolute z-20 select-none pointer-events-none ${className}`}
@@ -72,6 +87,7 @@ const FloatingSticker = ({ emoji, label, className, delay = 0, rotation = 0 }) =
   </motion.div>
 );
 
+/* ─── StatBadge ─── */
 const StatBadge = ({ value, label, color, delay }) => (
   <motion.div
     className="ln-card px-4 py-5 text-center"
@@ -81,11 +97,16 @@ const StatBadge = ({ value, label, color, delay }) => (
     transition={{ duration: 0.55, delay, ease: EXPO }}
     whileHover={{ y: -4, transition: { type: "spring", stiffness: 300 } }}
   >
-    <div className="font-display font-extrabold text-3xl" style={{ color }}>{value}</div>
-    <div className="text-xs font-semibold text-[#475569] mt-1 leading-tight max-w-[110px] mx-auto">{label}</div>
+    <div className="font-display font-extrabold text-3xl" style={{ color }}>
+      {value}
+    </div>
+    <div className="text-xs font-semibold text-[#475569] mt-1 leading-tight max-w-[110px] mx-auto">
+      {label}
+    </div>
   </motion.div>
 );
 
+/* ─── TimelineItem ─── */
 const TimelineItem = ({ year, event, detail, color, index, isLast }) => (
   <motion.div
     className="flex gap-5 items-start"
@@ -110,6 +131,7 @@ const TimelineItem = ({ year, event, detail, color, index, isLast }) => (
   </motion.div>
 );
 
+/* ─── FollowerCard ─── */
 const FollowerCard = ({ flag, country, detail, color, index }) => (
   <TiltCard>
     <motion.div
@@ -128,6 +150,7 @@ const FollowerCard = ({ flag, country, detail, color, index }) => (
   </TiltCard>
 );
 
+/* ─── MythCard ─── */
 const MythCard = ({ myth, truth, color, index }) => (
   <TiltCard>
     <motion.div
@@ -144,81 +167,156 @@ const MythCard = ({ myth, truth, color, index }) => (
   </TiltCard>
 );
 
+/* ─── Data ─── */
 const STEAM_STATS = [
-  { value: "65%",  label: "of today's children will work in jobs that don't exist yet",    color: "#3B82F6" },
-  { value: "3×",   label: "more likely to study STEAM with early childhood exposure",       color: "#10B981" },
-  { value: "40+",  label: "countries now have a national STEAM education strategy",         color: "#F97316" },
-  { value: "1987", label: "year Stanford proved arts integration boosts science retention", color: "#A855F7" },
+  {
+    value: "65%",
+    label: "of today's children will work in jobs that don't exist yet",
+    color: "#3B82F6",
+  },
+  {
+    value: "3×",
+    label: "more likely to study STEAM with early childhood exposure",
+    color: "#10B981",
+  },
+  {
+    value: "40+",
+    label: "countries now have a national STEAM education strategy",
+    color: "#F97316",
+  },
+  {
+    value: "1987",
+    label: "year Stanford proved arts integration boosts science retention",
+    color: "#A855F7",
+  },
 ];
 
 const ORIGIN_TIMELINE = [
-  { year: "'90s", color: "#3B82F6", event: "STEM was born in the USA",                       detail: "The US National Science Foundation coined STEM to address a growing skills gap in science and engineering graduates entering the workforce." },
-  { year: "2001", color: "#10B981", event: "Rita Colwell formalises STEM policy",            detail: "NSF Director Rita Colwell made STEM a federal education priority, linking science literacy directly to national economic competitiveness." },
-  { year: "2006", color: "#F97316", event: "Georgette Yakman adds the 'A'",                  detail: "American educator Georgette Yakman introduced Arts into STEM, creating STEAM — arguing creativity is inseparable from scientific innovation." },
-  { year: "2013", color: "#A855F7", event: "Rhode Island School of Design lobbies Congress",  detail: "RISD led a national campaign to officially add Arts to STEM policy, arguing creativity turns scientific knowledge into world-changing products." },
-  { year: "Now",  color: "#FB7185", event: "STEAM adopted globally",                         detail: "Countries across Europe, Asia, and South America embed STEAM into national curricula. Poland is actively expanding STEAM in early education." },
+  {
+    year: "'90s",
+    color: "#3B82F6",
+    event: "STEM was born in the USA",
+    detail:
+      "The US National Science Foundation coined STEM to address a growing skills gap in science and engineering graduates entering the workforce.",
+  },
+  {
+    year: "2001",
+    color: "#10B981",
+    event: "Rita Colwell formalises STEM policy",
+    detail:
+      "NSF Director Rita Colwell made STEM a federal education priority, linking science literacy directly to national economic competitiveness.",
+  },
+  {
+    year: "2006",
+    color: "#F97316",
+    event: "Georgette Yakman adds the 'A'",
+    detail:
+      "American educator Georgette Yakman introduced Arts into STEM, creating STEAM — arguing creativity is inseparable from scientific innovation.",
+  },
+  {
+    year: "2013",
+    color: "#A855F7",
+    event: "Rhode Island School of Design lobbies Congress",
+    detail:
+      "RISD led a national campaign to officially add Arts to STEM policy, arguing creativity turns scientific knowledge into world-changing products.",
+  },
+  {
+    year: "Now",
+    color: "#FB7185",
+    event: "STEAM adopted globally",
+    detail:
+      "Countries across Europe, Asia, and South America embed STEAM into national curricula. Poland is actively expanding STEAM in early education.",
+  },
 ];
 
 const WHO_FOLLOWS = [
-  { flag: "🇺🇸", country: "United States",  color: "#3B82F6", detail: "STEAM is embedded in the Every Student Succeeds Act. Thousands of schools run dedicated STEAM labs and project-based learning programmes." },
-  { flag: "🇬🇧", country: "United Kingdom", color: "#10B981", detail: "The UK's STEM Learning charity supports over 3 million young people annually. Arts integration is now part of the national curriculum." },
-  { flag: "🇸🇬", country: "Singapore",      color: "#F97316", detail: "Singapore's Applied Learning Programme integrates STEAM into every primary school — widely cited as a global model for 21st-century education." },
-  { flag: "🇫🇮", country: "Finland",        color: "#A855F7", detail: "Finland's phenomenon-based learning model is one of the world's closest real-world implementations of STEAM — inquiry-driven and child-led." },
-  { flag: "🇯🇵", country: "Japan",          color: "#FB7185", detail: "Japan introduced STEAM into National Curriculum Standards in 2022, focusing on creativity and cross-disciplinary problem solving from primary school." },
-  { flag: "🇵🇱", country: "Poland",         color: "#E0B33C", detail: "Poland's Ministry of Education is actively expanding STEAM through dedicated school labs and private programmes in Kraków." },
+  {
+    flag: "🇺🇸",
+    country: "United States",
+    color: "#3B82F6",
+    detail:
+      "STEAM is embedded in the Every Student Succeeds Act. Thousands of schools run dedicated STEAM labs and project-based learning programmes.",
+  },
+  {
+    flag: "🇬🇧",
+    country: "United Kingdom",
+    color: "#10B981",
+    detail:
+      "The UK's STEM Learning charity supports over 3 million young people annually. Arts integration is now part of the national curriculum.",
+  },
+  {
+    flag: "🇸🇬",
+    country: "Singapore",
+    color: "#F97316",
+    detail:
+      "Singapore's Applied Learning Programme integrates STEAM into every primary school — widely cited as a global model for 21st-century education.",
+  },
+  {
+    flag: "🇫🇮",
+    country: "Finland",
+    color: "#A855F7",
+    detail:
+      "Finland's phenomenon-based learning model is one of the world's closest real-world implementations of STEAM — inquiry-driven and child-led.",
+  },
+  {
+    flag: "🇯🇵",
+    country: "Japan",
+    color: "#FB7185",
+    detail:
+      "Japan introduced STEAM into National Curriculum Standards in 2022, focusing on creativity and cross-disciplinary problem solving from primary school.",
+  },
+  {
+    flag: "🇵🇱",
+    country: "Poland",
+    color: "#E0B33C",
+    detail:
+      "Poland's Ministry of Education is actively expanding STEAM through dedicated school labs and private programmes in Kraków.",
+  },
 ];
 
 const MISCONCEPTIONS = [
-  { myth: "\"STEAM is just fun experiments — not real learning.\"",  truth: "Every La Neuron STEAM session follows a complete scientific method: hypothesis, experiment, results, and conclusion. Children produce documented investigations — the same structure used in real research.", color: "#3B82F6" },
-  { myth: "\"My child needs to be good at maths to enjoy STEAM.\"",  truth: "STEAM starts with curiosity, not ability. The Arts component ensures that creative thinkers, visual learners, and storytellers are equally at home in every session.", color: "#10B981" },
-  { myth: "\"STEAM is only for older children.\"",                   truth: "Ages 6–9 benefit the most from early STEAM exposure. Young Explorers sessions are sensory-led and visual, designed precisely for how young brains form foundational concepts.", color: "#F97316" },
+  {
+    myth: '"STEAM is just fun experiments — not real learning."',
+    truth:
+      "Every La Neuron STEAM session follows a complete scientific method: hypothesis, experiment, results, and conclusion. Children produce documented investigations — the same structure used in real research.",
+    color: "#3B82F6",
+  },
+  {
+    myth: '"My child needs to be good at maths to enjoy STEAM."',
+    truth:
+      "STEAM starts with curiosity, not ability. The Arts component ensures that creative thinkers, visual learners, and storytellers are equally at home in every session.",
+    color: "#10B981",
+  },
+  {
+    myth: '"STEAM is only for older children."',
+    truth:
+      "Ages 6–9 benefit the most from early STEAM exposure. Young Explorers sessions are sensory-led and visual, designed precisely for how young brains form foundational concepts.",
+    color: "#F97316",
+  },
 ];
 
+/* ═══════════════════════════════════════════════
+   MAIN EXPORT
+═══════════════════════════════════════════════ */
 export const WhatIsSteam = () => {
   const [active, setActive] = useState("S");
   const current = STEAM.find((s) => s.key === active);
 
   return (
     <div
-      className="relative"
-      style={{
-        backgroundImage: `url(${HERO.image})`,
-        backgroundAttachment: "fixed",
-        backgroundSize: "auto 75%",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center 12%",
-      }}
+      className="what-is-steam-wrapper"
+      style={{ "--steam-bg-image": `url(${HERO.image})` }}
     >
-      {/* Single CSS-only fade overlay — no JS, no flicker */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          inset: 0,
-          zIndex: 0,
-          pointerEvents: "none",
-          background: `
-            radial-gradient(ellipse 65% 55% at 50% 38%,
-              rgba(253,251,247,0) 25%,
-              rgba(253,251,247,0.55) 58%,
-              rgba(253,251,247,1) 82%
-            ),
-            linear-gradient(to bottom,
-              rgba(253,251,247,0.5) 0%,
-              rgba(253,251,247,0) 8%,
-              rgba(253,251,247,0) 88%,
-              rgba(253,251,247,1) 100%
-            )
-          `,
-        }}
-      />
+      {/* Pure CSS fade overlay — no JS */}
+      <div className="what-is-steam-fade" aria-hidden="true" />
 
-      <div className="relative z-10">
+      <div className="what-is-steam-content">
 
+        {/* ── Section 1: What is STEAM ── */}
         <section
           id="what-is-steam"
           className="relative py-20 lg:py-28 pt-28 sm:pt-32"
-          style={{ background: "rgba(253,251,247,0.12)" }}
+          style={{ background: "rgba(253,251,247,0.10)" }}
         >
           <motion.div
             className="pointer-events-none absolute -top-20 -right-20 w-96 h-96 rounded-full bg-[#DBEAFE] blur-3xl opacity-40"
@@ -256,7 +354,9 @@ export const WhatIsSteam = () => {
                 viewport={VIEWPORT}
                 variants={{
                   hidden: {},
-                  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+                  visible: {
+                    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+                  },
                 }}
               >
                 {STEAM.map((s) => {
@@ -268,7 +368,12 @@ export const WhatIsSteam = () => {
                       data-testid={`steam-tab-${s.key}`}
                       variants={{
                         hidden: { opacity: 0, y: 24, scale: 0.8 },
-                        visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: EXPO } },
+                        visible: {
+                          opacity: 1,
+                          y: 0,
+                          scale: 1,
+                          transition: { duration: 0.5, ease: EXPO },
+                        },
                       }}
                       whileHover={{ scale: 1.12, y: -5 }}
                       whileTap={{ scale: 0.95 }}
@@ -277,7 +382,9 @@ export const WhatIsSteam = () => {
                         background: on ? s.color : s.bg,
                         color: on ? "#fff" : s.color,
                         borderColor: on ? s.color : "#0F172A",
-                        boxShadow: on ? `5px 5px 0 ${s.color}80` : "3px 3px 0 #0F172A",
+                        boxShadow: on
+                          ? `5px 5px 0 ${s.color}80`
+                          : "3px 3px 0 #0F172A",
                       }}
                     >
                       {s.key}
@@ -308,10 +415,15 @@ export const WhatIsSteam = () => {
                     <current.icon size={36} />
                   </motion.span>
                   <div>
-                    <h3 className="font-display font-extrabold text-3xl" style={{ color: current.color }}>
+                    <h3
+                      className="font-display font-extrabold text-3xl"
+                      style={{ color: current.color }}
+                    >
                       {current.word}
                     </h3>
-                    <p className="mt-3 text-lg text-[#0F172A]/80 leading-relaxed">{current.text}</p>
+                    <p className="mt-3 text-lg text-[#0F172A]/80 leading-relaxed">
+                      {current.text}
+                    </p>
                   </div>
                 </div>
               </TiltCard>
@@ -333,7 +445,9 @@ export const WhatIsSteam = () => {
                       whileHover={{ y: -3 }}
                     >
                       <s.icon size={26} style={{ color: s.color }} />
-                      <div className="mt-3 font-display font-extrabold text-lg">{s.word}</div>
+                      <div className="mt-3 font-display font-extrabold text-lg">
+                        {s.word}
+                      </div>
                     </motion.button>
                   </TiltCard>
                 ))}
@@ -342,9 +456,10 @@ export const WhatIsSteam = () => {
           </div>
         </section>
 
+        {/* ── Section 2: STEAM by the Numbers ── */}
         <section
           className="py-16 border-b border-[#E2E8F0]"
-          style={{ background: "rgba(248,250,252,0.80)" }}
+          style={{ background: "rgba(248,250,252,0.82)" }}
         >
           <div className="max-w-5xl mx-auto px-6 lg:px-8">
             <Reveal>
@@ -362,6 +477,7 @@ export const WhatIsSteam = () => {
           </div>
         </section>
 
+        {/* ── Section 3: Birth of STEAM ── */}
         <section
           className="py-20 lg:py-28 border-b border-[#E2E8F0]"
           style={{ background: "rgba(253,251,247,0.72)" }}
@@ -370,37 +486,48 @@ export const WhatIsSteam = () => {
             <div className="grid lg:grid-cols-2 gap-14 items-start">
               <div>
                 <Reveal>
-                  <SectionHeading overline="The origin story" title="Birth of STEAM" center={false} />
+                  <SectionHeading
+                    overline="The origin story"
+                    title="Birth of STEAM"
+                    center={false}
+                  />
                 </Reveal>
                 <Reveal delay={0.1} variant="blurIn">
                   <p className="mt-5 text-[#475569] leading-relaxed">
-                    STEAM did not emerge from a single idea — it evolved over three decades of research,
-                    policy-making, and classroom practice across four continents. It began as{" "}
-                    <strong>STEM</strong> in the United States in the early 1990s, driven by concerns that
-                    students were not developing the scientific and technical skills the modern economy needed.
+                    STEAM did not emerge from a single idea — it evolved over three
+                    decades of research, policy-making, and classroom practice across
+                    four continents. It began as <strong>STEM</strong> in the United
+                    States in the early 1990s, driven by concerns that students were
+                    not developing the scientific and technical skills the modern
+                    economy needed.
                   </p>
                 </Reveal>
                 <Reveal delay={0.15} variant="blurIn">
                   <p className="mt-4 text-[#475569] leading-relaxed">
-                    The pivotal shift came in <strong>2006</strong>, when American educator{" "}
-                    <strong className="text-[#1B2A63]">Georgette Yakman</strong> published her landmark
-                    framework arguing that <em>Art</em> — creative thinking, design, and expression — was
-                    the missing ingredient. Without it, STEM produced technically capable graduates who
-                    struggled to innovate, communicate, or think outside structured problems.
+                    The pivotal shift came in <strong>2006</strong>, when American
+                    educator{" "}
+                    <strong className="text-[#1B2A63]">Georgette Yakman</strong>{" "}
+                    published her landmark framework arguing that <em>Art</em> —
+                    creative thinking, design, and expression — was the missing
+                    ingredient. Without it, STEM produced technically capable
+                    graduates who struggled to innovate, communicate, or think outside
+                    structured problems.
                   </p>
                 </Reveal>
                 <Reveal delay={0.2} variant="blurIn">
                   <p className="mt-4 text-[#475569] leading-relaxed">
-                    Stanford University's research in the 1980s had already shown that children who engage
-                    in arts-integrated learning retain science concepts significantly longer. STEAM simply
-                    made that connection official — and built it into the curriculum.
+                    Stanford University's research in the 1980s had already shown
+                    that children who engage in arts-integrated learning retain
+                    science concepts significantly longer. STEAM simply made that
+                    connection official — and built it into the curriculum.
                   </p>
                 </Reveal>
                 <Reveal delay={0.25} variant="wipeLeft">
                   <blockquote className="mt-8 ln-card bg-[#EEF2FF] p-5 border-l-4 border-[#1B2A63]">
                     <p className="text-[#1B2A63] font-medium italic leading-relaxed">
-                      "STEAM is not about adding art to STEM. It is about recognising that creative
-                      thinking is the engine that makes science meaningful."
+                      "STEAM is not about adding art to STEM. It is about recognising
+                      that creative thinking is the engine that makes science
+                      meaningful."
                     </p>
                     <cite className="mt-2 block text-sm font-bold text-[#475569] not-italic">
                       — Georgette Yakman, founder of the STEAM framework (2006)
@@ -416,16 +543,22 @@ export const WhatIsSteam = () => {
                   </h3>
                 </Reveal>
                 {ORIGIN_TIMELINE.map((item, i) => (
-                  <TimelineItem key={i} {...item} index={i} isLast={i === ORIGIN_TIMELINE.length - 1} />
+                  <TimelineItem
+                    key={i}
+                    {...item}
+                    index={i}
+                    isLast={i === ORIGIN_TIMELINE.length - 1}
+                  />
                 ))}
               </div>
             </div>
           </div>
         </section>
 
+        {/* ── Section 4: Who Follows STEAM ── */}
         <section
           className="py-20 border-b border-[#E2E8F0]"
-          style={{ background: "rgba(248,250,252,0.80)" }}
+          style={{ background: "rgba(248,250,252,0.82)" }}
         >
           <div className="max-w-6xl mx-auto px-6 lg:px-8">
             <Reveal>
@@ -443,6 +576,7 @@ export const WhatIsSteam = () => {
           </div>
         </section>
 
+        {/* ── Section 5: Clearing Up the Myths ── */}
         <section
           className="py-20 border-b-2 border-[#0F172A]"
           style={{ background: "rgba(253,251,247,0.72)" }}
