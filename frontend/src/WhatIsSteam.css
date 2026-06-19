@@ -32,7 +32,7 @@
   inset: 0;
   z-index: -1;
   /* One unified overlay — replaces all individual section backgrounds */
-  background: rgba(253, 251, 247, 0.25);
+  background: rgba(253, 251, 247, 0.10);
   pointer-events: none;
 }
 
@@ -46,14 +46,14 @@
     radial-gradient(
       ellipse 65% 60% at 50% 50%,
       rgba(253, 251, 247, 0)    0%,
-      rgba(253, 251, 247, 0)   38%,
-      rgba(253, 251, 247, 0.25) 60%,
-      rgba(253, 251, 247, 0.70) 78%,
+      rgba(253, 251, 247, 0)   50%,
+      rgba(253, 251, 247, 0.15) 65%,
+      rgba(253, 251, 247, 0.55) 80%,
       rgba(253, 251, 247, 1)   100%
     ),
     linear-gradient(
       to bottom,
-      rgba(253, 251, 247, 0.50) 0%,
+      rgba(253, 251, 247, 0.40) 0%,
       rgba(253, 251, 247, 0)    5%
     );
 }
