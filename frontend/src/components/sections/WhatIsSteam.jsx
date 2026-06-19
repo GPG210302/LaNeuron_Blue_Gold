@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Reveal, SectionHeading } from "../Reveal";
 import { STEAM } from "../../data";
@@ -152,11 +152,11 @@ const STEAM_STATS = [
 ];
 
 const ORIGIN_TIMELINE = [
-  { year: "'90s", color: "#3B82F6", event: "STEM was born in the USA",                      detail: "The US National Science Foundation coined STEM to address a growing skills gap in science and engineering graduates entering the workforce." },
-  { year: "2001", color: "#10B981", event: "Rita Colwell formalises STEM policy",           detail: "NSF Director Rita Colwell made STEM a federal education priority, linking science literacy directly to national economic competitiveness." },
-  { year: "2006", color: "#F97316", event: "Georgette Yakman adds the 'A'",                 detail: "American educator Georgette Yakman introduced Arts into STEM, creating STEAM — arguing creativity is inseparable from scientific innovation." },
-  { year: "2013", color: "#A855F7", event: "Rhode Island School of Design lobbies Congress", detail: "RISD led a national campaign to officially add Arts to STEM policy, arguing creativity turns scientific knowledge into world-changing products." },
-  { year: "Now",  color: "#FB7185", event: "STEAM adopted globally",                        detail: "Countries across Europe, Asia, and South America embed STEAM into national curricula. Poland is actively expanding STEAM in early education." },
+  { year: "'90s", color: "#3B82F6", event: "STEM was born in the USA",                       detail: "The US National Science Foundation coined STEM to address a growing skills gap in science and engineering graduates entering the workforce." },
+  { year: "2001", color: "#10B981", event: "Rita Colwell formalises STEM policy",            detail: "NSF Director Rita Colwell made STEM a federal education priority, linking science literacy directly to national economic competitiveness." },
+  { year: "2006", color: "#F97316", event: "Georgette Yakman adds the 'A'",                  detail: "American educator Georgette Yakman introduced Arts into STEM, creating STEAM — arguing creativity is inseparable from scientific innovation." },
+  { year: "2013", color: "#A855F7", event: "Rhode Island School of Design lobbies Congress",  detail: "RISD led a national campaign to officially add Arts to STEM policy, arguing creativity turns scientific knowledge into world-changing products." },
+  { year: "Now",  color: "#FB7185", event: "STEAM adopted globally",                         detail: "Countries across Europe, Asia, and South America embed STEAM into national curricula. Poland is actively expanding STEAM in early education." },
 ];
 
 const WHO_FOLLOWS = [
@@ -169,124 +169,56 @@ const WHO_FOLLOWS = [
 ];
 
 const MISCONCEPTIONS = [
-  { myth: "\"STEAM is just fun experiments — not real learning.\"",   truth: "Every La Neuron STEAM session follows a complete scientific method: hypothesis, experiment, results, and conclusion. Children produce documented investigations — the same structure used in real research.", color: "#3B82F6" },
-  { myth: "\"My child needs to be good at maths to enjoy STEAM.\"",   truth: "STEAM starts with curiosity, not ability. The Arts component ensures that creative thinkers, visual learners, and storytellers are equally at home in every session.", color: "#10B981" },
-  { myth: "\"STEAM is only for older children.\"",                    truth: "Ages 6–9 benefit the most from early STEAM exposure. Young Explorers sessions are sensory-led and visual, designed precisely for how young brains form foundational concepts.", color: "#F97316" },
+  { myth: "\"STEAM is just fun experiments — not real learning.\"",  truth: "Every La Neuron STEAM session follows a complete scientific method: hypothesis, experiment, results, and conclusion. Children produce documented investigations — the same structure used in real research.", color: "#3B82F6" },
+  { myth: "\"My child needs to be good at maths to enjoy STEAM.\"",  truth: "STEAM starts with curiosity, not ability. The Arts component ensures that creative thinkers, visual learners, and storytellers are equally at home in every session.", color: "#10B981" },
+  { myth: "\"STEAM is only for older children.\"",                   truth: "Ages 6–9 benefit the most from early STEAM exposure. Young Explorers sessions are sensory-led and visual, designed precisely for how young brains form foundational concepts.", color: "#F97316" },
 ];
-
-const StickyBackground = ({ image }) => {
-  const wrapperRef = useRef(null);
-  const imgRef = useRef(null);
-  const rafRef = useRef(null);
-
-  useEffect(() => {
-    const update = () => {
-      const wrapper = wrapperRef.current;
-      const img = imgRef.current;
-      if (!wrapper || !img) return;
-
-      const rect = wrapper.getBoundingClientRect();
-      // Use transform only — never touch opacity in scroll handler
-      // The parent overflow:hidden clips it automatically when out of bounds
-      const offset = Math.max(0, -rect.top);
-      img.style.transform = `translate3d(-50%, calc(-50% + ${offset}px), 0)`;
-    };
-
-    const onScroll = () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      rafRef.current = requestAnimationFrame(update);
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    update();
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, []);
-
-  return (
-    <div
-      ref={wrapperRef}
-      aria-hidden="true"
-      style={{
-        position: "absolute",
-        inset: 0,
-        zIndex: 0,
-        pointerEvents: "none",
-        overflow: "hidden", // clips image naturally — no JS opacity toggle needed
-      }}
-    >
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100vh",
-          willChange: "transform",
-        }}
-      >
-        <img
-          ref={imgRef}
-          src={image}
-          alt=""
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate3d(-50%, -50%, 0)",
-            width: "auto",
-            height: "auto",
-            maxWidth: "100%",
-            maxHeight: "100%",
-            opacity: 0.25,          // static opacity — never changed in JS
-            display: "block",
-            willChange: "transform",
-            backfaceVisibility: "hidden",
-            WebkitBackfaceVisibility: "hidden",
-          }}
-        />
-        {/* Radial edge fade */}
-        <div style={{
-          position: "absolute",
-          inset: 0,
-          background: "radial-gradient(ellipse 70% 60% at 50% 40%, rgba(253,251,247,0) 30%, rgba(253,251,247,0.5) 60%, rgba(253,251,247,1) 85%)",
-          pointerEvents: "none",
-        }} />
-        {/* Bottom fade */}
-        <div style={{
-          position: "absolute",
-          inset: 0,
-          background: "linear-gradient(to bottom, rgba(253,251,247,0.2) 0%, rgba(253,251,247,0) 20%, rgba(253,251,247,0) 75%, rgba(253,251,247,1) 100%)",
-          pointerEvents: "none",
-        }} />
-        {/* Top fade */}
-        <div style={{
-          position: "absolute",
-          inset: 0,
-          background: "linear-gradient(to bottom, rgba(253,251,247,0.6) 0%, rgba(253,251,247,0) 12%)",
-          pointerEvents: "none",
-        }} />
-      </div>
-    </div>
-  );
-};
 
 export const WhatIsSteam = () => {
   const [active, setActive] = useState("S");
   const current = STEAM.find((s) => s.key === active);
 
   return (
-    <div className="relative overflow-hidden">
-
-      <StickyBackground image={HERO.image} />
+    <div
+      className="relative"
+      style={{
+        backgroundImage: `url(${HERO.image})`,
+        backgroundAttachment: "fixed",
+        backgroundSize: "auto 75%",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center 12%",
+      }}
+    >
+      {/* Single CSS-only fade overlay — no JS, no flicker */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 0,
+          pointerEvents: "none",
+          background: `
+            radial-gradient(ellipse 65% 55% at 50% 38%,
+              rgba(253,251,247,0) 25%,
+              rgba(253,251,247,0.55) 58%,
+              rgba(253,251,247,1) 82%
+            ),
+            linear-gradient(to bottom,
+              rgba(253,251,247,0.5) 0%,
+              rgba(253,251,247,0) 8%,
+              rgba(253,251,247,0) 88%,
+              rgba(253,251,247,1) 100%
+            )
+          `,
+        }}
+      />
 
       <div className="relative z-10">
 
         <section
           id="what-is-steam"
-          className="relative py-20 lg:py-28 pt-28 sm:pt-32 bg-white/20"
+          className="relative py-20 lg:py-28 pt-28 sm:pt-32"
+          style={{ background: "rgba(253,251,247,0.12)" }}
         >
           <motion.div
             className="pointer-events-none absolute -top-20 -right-20 w-96 h-96 rounded-full bg-[#DBEAFE] blur-3xl opacity-40"
@@ -410,7 +342,10 @@ export const WhatIsSteam = () => {
           </div>
         </section>
 
-        <section className="py-16 bg-[#F8FAFC]/20 border-b border-[#E2E8F0]">
+        <section
+          className="py-16 border-b border-[#E2E8F0]"
+          style={{ background: "rgba(248,250,252,0.80)" }}
+        >
           <div className="max-w-5xl mx-auto px-6 lg:px-8">
             <Reveal>
               <SectionHeading
@@ -427,7 +362,10 @@ export const WhatIsSteam = () => {
           </div>
         </section>
 
-        <section className="py-20 lg:py-28 bg-white/20 border-b border-[#E2E8F0]">
+        <section
+          className="py-20 lg:py-28 border-b border-[#E2E8F0]"
+          style={{ background: "rgba(253,251,247,0.72)" }}
+        >
           <div className="max-w-6xl mx-auto px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-14 items-start">
               <div>
@@ -485,7 +423,10 @@ export const WhatIsSteam = () => {
           </div>
         </section>
 
-        <section className="py-20 bg-[#F8FAFC]/20 border-b border-[#E2E8F0]">
+        <section
+          className="py-20 border-b border-[#E2E8F0]"
+          style={{ background: "rgba(248,250,252,0.80)" }}
+        >
           <div className="max-w-6xl mx-auto px-6 lg:px-8">
             <Reveal>
               <SectionHeading
@@ -502,7 +443,10 @@ export const WhatIsSteam = () => {
           </div>
         </section>
 
-        <section className="py-20 bg-transparent border-b-2 border-[#0F172A]">
+        <section
+          className="py-20 border-b-2 border-[#0F172A]"
+          style={{ background: "rgba(253,251,247,0.72)" }}
+        >
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <Reveal>
               <SectionHeading
