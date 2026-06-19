@@ -175,11 +175,11 @@ const STEAM_STATS = [
 ];
 
 const ORIGIN_TIMELINE = [
-  { year: "'90s", color: "#3B82F6", event: "STEM was born in the USA",                        detail: "The US National Science Foundation coined STEM to address a growing skills gap in science and engineering graduates entering the workforce." },
-  { year: "2001", color: "#10B981", event: "Rita Colwell formalises STEM policy",              detail: "NSF Director Rita Colwell made STEM a federal education priority, linking science literacy directly to national economic competitiveness." },
-  { year: "2006", color: "#F97316", event: "Georgette Yakman adds the 'A'",                   detail: "American educator Georgette Yakman introduced Arts into STEM, creating STEAM — arguing creativity is inseparable from scientific innovation." },
-  { year: "2013", color: "#A855F7", event: "Rhode Island School of Design lobbies Congress",  detail: "RISD led a national campaign to officially add Arts to STEM policy, arguing creativity turns scientific knowledge into world-changing products." },
-  { year: "Now",  color: "#FB7185", event: "STEAM adopted globally",                          detail: "Countries across Europe, Asia, and South America embed STEAM into national curricula. Poland is actively expanding STEAM in early education." },
+  { year: "'90s", color: "#3B82F6", event: "STEM was born in the USA",                       detail: "The US National Science Foundation coined STEM to address a growing skills gap in science and engineering graduates entering the workforce." },
+  { year: "2001", color: "#10B981", event: "Rita Colwell formalises STEM policy",             detail: "NSF Director Rita Colwell made STEM a federal education priority, linking science literacy directly to national economic competitiveness." },
+  { year: "2006", color: "#F97316", event: "Georgette Yakman adds the 'A'",                  detail: "American educator Georgette Yakman introduced Arts into STEM, creating STEAM — arguing creativity is inseparable from scientific innovation." },
+  { year: "2013", color: "#A855F7", event: "Rhode Island School of Design lobbies Congress", detail: "RISD led a national campaign to officially add Arts to STEM policy, arguing creativity turns scientific knowledge into world-changing products." },
+  { year: "Now",  color: "#FB7185", event: "STEAM adopted globally",                         detail: "Countries across Europe, Asia, and South America embed STEAM into national curricula. Poland is actively expanding STEAM in early education." },
 ];
 
 const WHO_FOLLOWS = [
@@ -192,9 +192,9 @@ const WHO_FOLLOWS = [
 ];
 
 const MISCONCEPTIONS = [
-  { myth: '"STEAM is just fun experiments — not real learning."',      truth: "Every La Neuron STEAM session follows a complete scientific method: hypothesis, experiment, results, and conclusion. Children produce documented investigations — the same structure used in real research.", color: "#3B82F6" },
-  { myth: '"My child needs to be good at maths to enjoy STEAM."',     truth: "STEAM starts with curiosity, not ability. The Arts component ensures that creative thinkers, visual learners, and storytellers are equally at home in every session.", color: "#10B981" },
-  { myth: '"STEAM is only for older children."',                       truth: "Ages 6–9 benefit the most from early STEAM exposure. Young Explorers sessions are sensory-led and visual, designed precisely for how young brains form foundational concepts.", color: "#F97316" },
+  { myth: '"STEAM is just fun experiments — not real learning."',  truth: "Every La Neuron STEAM session follows a complete scientific method: hypothesis, experiment, results, and conclusion. Children produce documented investigations — the same structure used in real research.", color: "#3B82F6" },
+  { myth: '"My child needs to be good at maths to enjoy STEAM."', truth: "STEAM starts with curiosity, not ability. The Arts component ensures that creative thinkers, visual learners, and storytellers are equally at home in every session.", color: "#10B981" },
+  { myth: '"STEAM is only for older children."',                   truth: "Ages 6–9 benefit the most from early STEAM exposure. Young Explorers sessions are sensory-led and visual, designed precisely for how young brains form foundational concepts.", color: "#F97316" },
 ];
 
 /* ═══════════════════════════════════════════════
@@ -209,18 +209,16 @@ export const WhatIsSteam = () => {
       className="what-is-steam-wrapper"
       style={{ "--steam-bg-image": `url(${HERO.image})` }}
     >
-      {/* Radial vignette fade — blends photo edges into white from all sides */}
+      {/* Radial edge vignette — blends photo borders softly to white */}
       <div className="what-is-steam-fade" aria-hidden="true" />
 
       <div className="what-is-steam-content">
 
-        {/* ── Section 1: What is STEAM ── */}
+        {/* ── Section 1: What is STEAM ── no background — neuron animation shows freely */}
         <section
           id="what-is-steam"
           className="relative py-20 lg:py-28 pt-28 sm:pt-32"
-          style={{ background: "rgba(253,251,247,0.45)" }}
         >
-          {/* Neuron animation blobs — z-0 so they sit above section bg but below content */}
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
             <motion.div
               className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-[#DBEAFE] blur-3xl opacity-40"
@@ -234,7 +232,6 @@ export const WhatIsSteam = () => {
             />
           </div>
 
-          {/* All section content sits above blobs at z-10 */}
           <div className="relative z-10">
             <FloatingSticker emoji="🔬" label="Science"     className="top-32 left-[12%]  hidden xl:block" delay={0.5} rotation={-8} />
             <FloatingSticker emoji="🤖" label="Robot"       className="top-64 left-[14%]  hidden xl:block" delay={1.3} rotation={-4} />
@@ -349,10 +346,7 @@ export const WhatIsSteam = () => {
         </section>
 
         {/* ── Section 2: STEAM by the Numbers ── */}
-        <section
-          className="py-16"
-          style={{ background: "rgba(253,251,247,0.45)" }}
-        >
+        <section className="py-16">
           <div className="max-w-5xl mx-auto px-6 lg:px-8">
             <Reveal>
               <SectionHeading
@@ -370,10 +364,7 @@ export const WhatIsSteam = () => {
         </section>
 
         {/* ── Section 3: Birth of STEAM ── */}
-        <section
-          className="py-20 lg:py-28"
-          style={{ background: "rgba(253,251,247,0.45)" }}
-        >
+        <section className="py-20 lg:py-28">
           <div className="max-w-6xl mx-auto px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-14 items-start">
               <div>
@@ -432,10 +423,7 @@ export const WhatIsSteam = () => {
         </section>
 
         {/* ── Section 4: Who Follows STEAM ── */}
-        <section
-          className="py-20"
-          style={{ background: "rgba(253,251,247,0.45)" }}
-        >
+        <section className="py-20">
           <div className="max-w-6xl mx-auto px-6 lg:px-8">
             <Reveal>
               <SectionHeading
@@ -453,10 +441,7 @@ export const WhatIsSteam = () => {
         </section>
 
         {/* ── Section 5: Clearing Up the Myths ── */}
-        <section
-          className="py-20 border-b-2 border-[#0F172A]"
-          style={{ background: "rgba(253,251,247,0.45)" }}
-        >
+        <section className="py-20 border-b-2 border-[#0F172A]">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <Reveal>
               <SectionHeading

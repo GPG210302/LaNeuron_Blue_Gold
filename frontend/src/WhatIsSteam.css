@@ -4,16 +4,15 @@
 
 .what-is-steam-wrapper {
   position: relative;
-  /* isolation: isolate; ← REMOVED — this was creating a new stacking context
-     that trapped the neuron animation behind the wrapper */
   overflow: clip;
 }
 
+/* The girls photo — pinned behind everything */
 .what-is-steam-wrapper::before {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: -2;
   background-image: var(--steam-bg-image);
   background-size: contain;
   background-repeat: no-repeat;
@@ -26,6 +25,18 @@
   pointer-events: none;
 }
 
+/* Single white wash over the photo — thin enough for neuron animation to show */
+.what-is-steam-wrapper::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  /* One unified overlay — replaces all individual section backgrounds */
+  background: rgba(253, 251, 247, 0.25);
+  pointer-events: none;
+}
+
+/* Radial edge fade — blends photo borders to white */
 .what-is-steam-fade {
   position: fixed;
   inset: 0;
@@ -33,17 +44,17 @@
   pointer-events: none;
   background:
     radial-gradient(
-      ellipse 60% 55% at 50% 50%,
+      ellipse 65% 60% at 50% 50%,
       rgba(253, 251, 247, 0)    0%,
-      rgba(253, 251, 247, 0)   40%,
-      rgba(253, 251, 247, 0.30) 65%,
-      rgba(253, 251, 247, 0.60) 80%,
+      rgba(253, 251, 247, 0)   38%,
+      rgba(253, 251, 247, 0.25) 60%,
+      rgba(253, 251, 247, 0.70) 78%,
       rgba(253, 251, 247, 1)   100%
     ),
     linear-gradient(
       to bottom,
-      rgba(253, 251, 247, 0.40) 0%,
-      rgba(253, 251, 247, 0)    6%
+      rgba(253, 251, 247, 0.50) 0%,
+      rgba(253, 251, 247, 0)    5%
     );
 }
 
