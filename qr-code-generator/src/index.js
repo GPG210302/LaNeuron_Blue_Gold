@@ -177,7 +177,7 @@ export default {
       imageOptions: {
         crossOrigin: "anonymous",
         margin: 8,
-        imageSize: 0.30,
+        imageSize: 0.45,
         hideBackgroundDots: true
       },
       dotsOptions: {
