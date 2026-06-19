@@ -3,7 +3,7 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Reveal, SectionHeading } from "../Reveal";
 import { STEAM } from "../../data";
 import { HERO } from "../../data";
-import "./WhatIsSteam.css";
+import "../../WhatIsSteam.css";
 
 const EXPO = [0.22, 1, 0.36, 1];
 const VIEWPORT = { once: true, margin: "-60px" };
