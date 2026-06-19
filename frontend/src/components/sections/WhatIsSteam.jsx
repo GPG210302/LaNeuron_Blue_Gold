@@ -3,7 +3,7 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Reveal, SectionHeading } from "../Reveal";
 import { STEAM } from "../../data";
 import { HERO } from "../../data";
-import "../../WhatIsSteam.css";
+import "./WhatIsSteam.css";
 
 const EXPO = [0.22, 1, 0.36, 1];
 const VIEWPORT = { once: true, margin: "-60px" };
@@ -52,8 +52,7 @@ const TiltCard = ({ children, className = "", intensity = 10 }) => {
         <motion.div
           className="absolute w-[180%] h-[180%] -top-1/2 -left-1/2 pointer-events-none"
           style={{
-            background:
-              "radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 65%)",
+            background: "radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 65%)",
             x: glareX,
             y: glareY,
           }}
@@ -163,6 +162,27 @@ const MythCard = ({ myth, truth, color, index }) => (
       <p className="font-bold text-lg text-[#0F172A] italic">{myth}</p>
       <div className="mt-3 h-0.5 rounded-full w-12" style={{ backgroundColor: color }} />
       <p className="mt-3 text-[#475569] leading-relaxed">{truth}</p>
+    </motion.div>
+  </TiltCard>
+);
+
+/* ─── MythCardDark (for navy last section) ─── */
+const MythCardDark = ({ myth, truth, color, index }) => (
+  <TiltCard>
+    <motion.div
+      className="p-6 md:p-8 rounded-2xl border"
+      style={{
+        background: "rgba(255,255,255,0.05)",
+        borderColor: "rgba(255,255,255,0.10)",
+      }}
+      initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      viewport={VIEWPORT}
+      transition={{ duration: 0.55, delay: index * 0.1, ease: EXPO }}
+    >
+      <p className="font-bold text-lg text-white italic">{myth}</p>
+      <div className="mt-3 h-0.5 rounded-full w-12" style={{ backgroundColor: color }} />
+      <p className="mt-3 text-slate-300 leading-relaxed">{truth}</p>
     </motion.div>
   </TiltCard>
 );
@@ -307,7 +327,7 @@ export const WhatIsSteam = () => {
       className="what-is-steam-wrapper"
       style={{ "--steam-bg-image": `url(${HERO.image})` }}
     >
-      {/* Pure CSS fade overlay — no JS */}
+      {/* Pure CSS fade overlay — subtle top/bottom only */}
       <div className="what-is-steam-fade" aria-hidden="true" />
 
       <div className="what-is-steam-content">
@@ -576,10 +596,9 @@ export const WhatIsSteam = () => {
           </div>
         </section>
 
-        {/* ── Section 5: Clearing Up the Myths ── */}
+        {/* ── Section 5: Clearing Up the Myths ── SOLID NAVY, no background image bleed */}
         <section
-          className="py-20 border-b-2 border-[#0F172A]"
-          style={{ background: "rgba(253,251,247,0.72)" }}
+          className="what-is-steam-last-section py-20 border-b-2 border-[#0F172A]"
         >
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <Reveal>
@@ -587,11 +606,15 @@ export const WhatIsSteam = () => {
                 overline="Common questions"
                 title="Clearing Up the Myths"
                 sub="Three things parents often wonder — answered honestly."
+                /* Override text colours for dark background */
+                overlineColor="rgba(255,255,255,0.55)"
+                titleColor="#ffffff"
+                subColor="rgba(255,255,255,0.75)"
               />
             </Reveal>
             <div className="mt-10 flex flex-col gap-5">
               {MISCONCEPTIONS.map((m, i) => (
-                <MythCard key={i} {...m} index={i} />
+                <MythCardDark key={i} {...m} index={i} />
               ))}
             </div>
           </div>

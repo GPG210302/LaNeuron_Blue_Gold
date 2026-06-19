@@ -7,8 +7,6 @@
 .what-is-steam-wrapper {
   position: relative;
   isolation: isolate;
-  /* overflow:clip clips the fixed ::before to component bounds
-     without creating a scroll container (unlike overflow:hidden) */
   overflow: clip;
 }
 
@@ -18,10 +16,12 @@
   inset: 0;
   z-index: -1;
   background-image: var(--steam-bg-image);
-  background-size: auto 72%;
+  /* Cover the full viewport so image is visible in every section */
+  background-size: cover;
   background-repeat: no-repeat;
-  background-position: center 10%;
-  opacity: 0.22;
+  background-position: center top;
+  /* Fix 3: raised from 0.22 → 0.38 for 25% more visibility */
+  opacity: 0.38;
   will-change: transform;
   transform: translateZ(0);
   backface-visibility: hidden;
@@ -29,24 +29,19 @@
   pointer-events: none;
 }
 
+/* Fix 1: Only a subtle top/bottom linear fade — no radial that kills mid-section visibility */
 .what-is-steam-fade {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(
-      ellipse 70% 55% at 50% 36%,
-      rgba(253, 251, 247, 0) 20%,
-      rgba(253, 251, 247, 0.5) 55%,
-      rgba(253, 251, 247, 1) 80%
-    ),
     linear-gradient(
       to bottom,
-      rgba(253, 251, 247, 0.55) 0%,
-      rgba(253, 251, 247, 0) 6%,
-      rgba(253, 251, 247, 0) 92%,
-      rgba(253, 251, 247, 1) 100%
+      rgba(253, 251, 247, 0.45) 0%,
+      rgba(253, 251, 247, 0) 5%,
+      rgba(253, 251, 247, 0) 94%,
+      rgba(253, 251, 247, 0.6) 100%
     );
 }
 
@@ -55,6 +50,27 @@
   z-index: 1;
 }
 
+/* Fix 2: Last section is always solid navy — image never bleeds through */
+.what-is-steam-last-section {
+  background: rgb(15, 23, 42) !important;
+  position: relative;
+}
+
+/* Ensure text in last section stays readable on dark background */
+.what-is-steam-last-section .ln-card {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.what-is-steam-last-section p,
+.what-is-steam-last-section h3,
+.what-is-steam-last-section cite {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.what-is-steam-last-section .font-bold.text-lg {
+  color: #fff !important;
+}
 @supports not (overflow: clip) {
   .what-is-steam-wrapper {
     overflow: hidden;
