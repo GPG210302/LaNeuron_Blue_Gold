@@ -1,23 +1,20 @@
 /* ═══════════════════════════════════════════════
    WhatIsSteam.css
-   Background: pure CSS fixed pseudo-element
-   Zero JavaScript. Zero flicker.
 ═══════════════════════════════════════════════ */
 
 .what-is-steam-wrapper {
   position: relative;
-  isolation: isolate;
+  /* isolation: isolate; ← REMOVED — this was creating a new stacking context
+     that trapped the neuron animation behind the wrapper */
   overflow: clip;
 }
 
-/* The full-page pinned background image */
 .what-is-steam-wrapper::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
   background-image: var(--steam-bg-image);
-  /* contain = whole image visible, centred, no crop */
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
@@ -29,26 +26,23 @@
   pointer-events: none;
 }
 
-/* Radial vignette — fades image edges into white, top-only linear for header */
 .what-is-steam-fade {
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  /* Radial mask: transparent centre → white edges — blends photo into page */
   background:
     radial-gradient(
       ellipse 60% 55% at 50% 50%,
       rgba(253, 251, 247, 0)    0%,
       rgba(253, 251, 247, 0)   40%,
-      rgba(253, 251, 247, 0.55) 65%,
-      rgba(253, 251, 247, 0.88) 80%,
+      rgba(253, 251, 247, 0.30) 65%,
+      rgba(253, 251, 247, 0.60) 80%,
       rgba(253, 251, 247, 1)   100%
     ),
-    /* Top fade for nav area */
     linear-gradient(
       to bottom,
-      rgba(253, 251, 247, 0.55) 0%,
+      rgba(253, 251, 247, 0.40) 0%,
       rgba(253, 251, 247, 0)    6%
     );
 }
