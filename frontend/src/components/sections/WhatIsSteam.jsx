@@ -315,7 +315,7 @@ export const WhatIsSteam = () => {
         <section
           id="what-is-steam"
           className="relative py-20 lg:py-28 pt-28 sm:pt-32"
-          style={{ background: "rgba(253,251,247,0.08)" }}
+          style={{ background: "rgba(253,251,247,0.72)" }}
         >
           <motion.div
             className="pointer-events-none absolute -top-20 -right-20 w-96 h-96 rounded-full bg-[#DBEAFE] blur-3xl opacity-40"
@@ -458,7 +458,7 @@ export const WhatIsSteam = () => {
         {/* ── Section 2: STEAM by the Numbers ── */}
         <section
           className="py-16 border-b border-[#E2E8F0]"
-          style={{ background: "rgba(248,250,252,0.72)" }}
+          style={{ background: "rgba(253,251,247,0.72)" }}
         >
           <div className="max-w-5xl mx-auto px-6 lg:px-8">
             <Reveal>
@@ -557,7 +557,7 @@ export const WhatIsSteam = () => {
         {/* ── Section 4: Who Follows STEAM ── */}
         <section
           className="py-20 border-b border-[#E2E8F0]"
-          style={{ background: "rgba(248,250,252,0.72)" }}
+          style={{ background: "rgba(253,251,247,0.72)" }}
         >
           <div className="max-w-6xl mx-auto px-6 lg:px-8">
             <Reveal>
