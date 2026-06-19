@@ -8,7 +8,7 @@ const FACTS = ["Ages 6–13", "Mon–Fri 9AM–12PM", "Max 10 per week", "Starts
 export const Footer = () => {
   const navigate = useNavigate();
   return (
-    <footer className="bg-[#0F172A] text-white pt-16 pb-8">
+    <footer className="relative z-10 bg-[#0F172A] text-white pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-10">
           <div className="md:col-span-2">

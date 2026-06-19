@@ -19,7 +19,6 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center top;
-  /* +10% more visibility */
   opacity: 0.42;
   will-change: transform;
   transform: translateZ(0);
@@ -28,7 +27,7 @@
   pointer-events: none;
 }
 
-/* Subtle top-only fade — no bottom gradient killing lower section visibility */
+/* Top-only fade — never kills lower section visibility */
 .what-is-steam-fade {
   position: absolute;
   inset: 0;

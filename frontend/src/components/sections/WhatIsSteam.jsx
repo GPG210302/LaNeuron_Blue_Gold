@@ -458,7 +458,7 @@ export const WhatIsSteam = () => {
         {/* ── Section 2: STEAM by the Numbers ── */}
         <section
           className="py-16 border-b border-[#E2E8F0]"
-          style={{ background: "rgba(248,250,252,0.50)" }}
+          style={{ background: "rgba(248,250,252,0.72)" }}
         >
           <div className="max-w-5xl mx-auto px-6 lg:px-8">
             <Reveal>
@@ -479,7 +479,7 @@ export const WhatIsSteam = () => {
         {/* ── Section 3: Birth of STEAM ── */}
         <section
           className="py-20 lg:py-28 border-b border-[#E2E8F0]"
-          style={{ background: "rgba(253,251,247,0.52)" }}
+          style={{ background: "rgba(253,251,247,0.72)" }}
         >
           <div className="max-w-6xl mx-auto px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-14 items-start">
@@ -557,7 +557,7 @@ export const WhatIsSteam = () => {
         {/* ── Section 4: Who Follows STEAM ── */}
         <section
           className="py-20 border-b border-[#E2E8F0]"
-          style={{ background: "rgba(248,250,252,0.50)" }}
+          style={{ background: "rgba(248,250,252,0.72)" }}
         >
           <div className="max-w-6xl mx-auto px-6 lg:px-8">
             <Reveal>
@@ -578,7 +578,7 @@ export const WhatIsSteam = () => {
         {/* ── Section 5: Clearing Up the Myths ── transparent like all other sections */}
         <section
           className="py-20 border-b-2 border-[#0F172A]"
-          style={{ background: "rgba(253,251,247,0.52)" }}
+          style={{ background: "rgba(253,251,247,0.72)" }}
         >
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <Reveal>
