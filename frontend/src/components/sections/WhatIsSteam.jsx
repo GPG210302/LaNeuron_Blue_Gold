@@ -176,25 +176,20 @@ const MISCONCEPTIONS = [
 
 const StickyBackground = ({ image }) => {
   const wrapperRef = useRef(null);
-  const imgWrapRef = useRef(null);
+  const imgRef = useRef(null);
   const rafRef = useRef(null);
 
   useEffect(() => {
     const update = () => {
       const wrapper = wrapperRef.current;
-      const imgWrap = imgWrapRef.current;
-      if (!wrapper || !imgWrap) return;
+      const img = imgRef.current;
+      if (!wrapper || !img) return;
 
       const rect = wrapper.getBoundingClientRect();
-      const viewH = window.innerHeight;
-
-      if (rect.bottom <= 0 || rect.top >= viewH) {
-        imgWrap.style.opacity = "0";
-      } else {
-        imgWrap.style.opacity = "1";
-        const offset = Math.max(0, -rect.top);
-        imgWrap.style.transform = `translate3d(0, ${offset}px, 0)`;
-      }
+      // Use transform only — never touch opacity in scroll handler
+      // The parent overflow:hidden clips it automatically when out of bounds
+      const offset = Math.max(0, -rect.top);
+      img.style.transform = `translate3d(-50%, calc(-50% + ${offset}px), 0)`;
     };
 
     const onScroll = () => {
@@ -219,11 +214,10 @@ const StickyBackground = ({ image }) => {
         inset: 0,
         zIndex: 0,
         pointerEvents: "none",
-        overflow: "hidden",
+        overflow: "hidden", // clips image naturally — no JS opacity toggle needed
       }}
     >
       <div
-        ref={imgWrapRef}
         style={{
           position: "absolute",
           top: 0,
@@ -231,26 +225,24 @@ const StickyBackground = ({ image }) => {
           width: "100%",
           height: "100vh",
           willChange: "transform",
-          transform: "translate3d(0, 0, 0)",
-          backfaceVisibility: "hidden",
-          WebkitBackfaceVisibility: "hidden",
         }}
       >
         <img
+          ref={imgRef}
           src={image}
           alt=""
           style={{
             position: "absolute",
             top: "50%",
             left: "50%",
-            transform: "translate(-50%, -50%) translateZ(0)",
+            transform: "translate3d(-50%, -50%, 0)",
             width: "auto",
             height: "auto",
             maxWidth: "100%",
             maxHeight: "100%",
-            /* ↓ KEY FIX: removed mixBlendMode — blend modes kill GPU compositing */
-            opacity: 0.25,
+            opacity: 0.25,          // static opacity — never changed in JS
             display: "block",
+            willChange: "transform",
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
           }}
@@ -260,18 +252,21 @@ const StickyBackground = ({ image }) => {
           position: "absolute",
           inset: 0,
           background: "radial-gradient(ellipse 70% 60% at 50% 40%, rgba(253,251,247,0) 30%, rgba(253,251,247,0.5) 60%, rgba(253,251,247,1) 85%)",
+          pointerEvents: "none",
         }} />
         {/* Bottom fade */}
         <div style={{
           position: "absolute",
           inset: 0,
           background: "linear-gradient(to bottom, rgba(253,251,247,0.2) 0%, rgba(253,251,247,0) 20%, rgba(253,251,247,0) 75%, rgba(253,251,247,1) 100%)",
+          pointerEvents: "none",
         }} />
         {/* Top fade */}
         <div style={{
           position: "absolute",
           inset: 0,
           background: "linear-gradient(to bottom, rgba(253,251,247,0.6) 0%, rgba(253,251,247,0) 12%)",
+          pointerEvents: "none",
         }} />
       </div>
     </div>
