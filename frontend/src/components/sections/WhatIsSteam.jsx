@@ -189,11 +189,9 @@ const StickyBackground = ({ image }) => {
       const viewH = window.innerHeight;
 
       if (rect.bottom <= 0 || rect.top >= viewH) {
-        // Section fully out of view — hide without transition
         imgWrap.style.opacity = "0";
       } else {
         imgWrap.style.opacity = "1";
-        // Translate so image tracks viewport position
         const offset = Math.max(0, -rect.top);
         imgWrap.style.transform = `translate3d(0, ${offset}px, 0)`;
       }
@@ -205,7 +203,7 @@ const StickyBackground = ({ image }) => {
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    update(); // sync on mount
+    update();
     return () => {
       window.removeEventListener("scroll", onScroll);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
@@ -233,7 +231,9 @@ const StickyBackground = ({ image }) => {
           width: "100%",
           height: "100vh",
           willChange: "transform",
-          // No transition here — rAF handles smoothness, transition causes flicker
+          transform: "translate3d(0, 0, 0)",
+          backfaceVisibility: "hidden",
+          WebkitBackfaceVisibility: "hidden",
         }}
       >
         <img
@@ -243,22 +243,23 @@ const StickyBackground = ({ image }) => {
             position: "absolute",
             top: "50%",
             left: "50%",
-            transform: "translate(-50%, -50%)",
+            transform: "translate(-50%, -50%) translateZ(0)",
             width: "auto",
             height: "auto",
             maxWidth: "100%",
             maxHeight: "100%",
-            opacity: 0.60,
-            mixBlendMode: "multiply",
+            /* ↓ KEY FIX: removed mixBlendMode — blend modes kill GPU compositing */
+            opacity: 0.25,
             display: "block",
-            willChange: "transform",
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
           }}
         />
         {/* Radial edge fade */}
         <div style={{
           position: "absolute",
           inset: 0,
-          background: "radial-gradient(ellipse 70% 60% at 50% 40%, rgba(253,251,247,0) 30%, rgba(253,251,247,0.6) 60%, rgba(253,251,247,1) 85%)",
+          background: "radial-gradient(ellipse 70% 60% at 50% 40%, rgba(253,251,247,0) 30%, rgba(253,251,247,0.5) 60%, rgba(253,251,247,1) 85%)",
         }} />
         {/* Bottom fade */}
         <div style={{
