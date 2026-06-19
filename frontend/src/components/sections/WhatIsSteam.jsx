@@ -174,14 +174,13 @@ const MISCONCEPTIONS = [
   { myth: "\"STEAM is only for older children.\"",                    truth: "Ages 6–9 benefit the most from early STEAM exposure. Young Explorers sessions are sensory-led and visual, designed precisely for how young brains form foundational concepts.", color: "#F97316" },
 ];
 
-// Scrolling background that hides itself once the section scrolls out of view
-// Replace the entire StickyBackground component with this:
 const StickyBackground = ({ image }) => {
   const wrapperRef = useRef(null);
   const imgWrapRef = useRef(null);
+  const rafRef = useRef(null);
 
   useEffect(() => {
-    const onScroll = () => {
+    const update = () => {
       const wrapper = wrapperRef.current;
       const imgWrap = imgWrapRef.current;
       if (!wrapper || !imgWrap) return;
@@ -189,21 +188,28 @@ const StickyBackground = ({ image }) => {
       const rect = wrapper.getBoundingClientRect();
       const viewH = window.innerHeight;
 
-      // Only show while ANY part of this section is in view
       if (rect.bottom <= 0 || rect.top >= viewH) {
+        // Section fully out of view — hide without transition
         imgWrap.style.opacity = "0";
-        return;
+      } else {
+        imgWrap.style.opacity = "1";
+        // Translate so image tracks viewport position
+        const offset = Math.max(0, -rect.top);
+        imgWrap.style.transform = `translate3d(0, ${offset}px, 0)`;
       }
+    };
 
-      imgWrap.style.opacity = "1";
-      // Offset the image so it stays centered in the viewport
-      const offset = Math.max(0, -rect.top);
-      imgWrap.style.transform = `translateY(${offset}px)`;
+    const onScroll = () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(update);
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll(); // run once on mount
-    return () => window.removeEventListener("scroll", onScroll);
+    update(); // sync on mount
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
   }, []);
 
   return (
@@ -226,7 +232,8 @@ const StickyBackground = ({ image }) => {
           left: 0,
           width: "100%",
           height: "100vh",
-          transition: "opacity 0.3s ease",
+          willChange: "transform",
+          // No transition here — rAF handles smoothness, transition causes flicker
         }}
       >
         <img
@@ -244,6 +251,7 @@ const StickyBackground = ({ image }) => {
             opacity: 0.60,
             mixBlendMode: "multiply",
             display: "block",
+            willChange: "transform",
           }}
         />
         {/* Radial edge fade */}
