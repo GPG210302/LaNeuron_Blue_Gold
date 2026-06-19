@@ -109,8 +109,8 @@ export const Events = () => {
                 <span className="font-display font-bold">{SITE.venue}</span>
               </div>
               <iframe
-                title="Kraków map"
-                src="https://www.google.com/maps?q=Krak%C3%B3w,Poland&output=embed"
+                title="La Neuron Location"
+                src="https://maps.google.com/maps?q=ul.+%C5%9Aniadeckich+3%2C+31-531+Krak%C3%B3w&output=embed"
                 className="w-full flex-1 border-0"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
