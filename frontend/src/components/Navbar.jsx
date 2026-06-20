@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -6,6 +6,45 @@ import { NAV } from "../data";
 import logo from "../assets/logo.png";
 
 const slug = (path) => (path === "/" ? "home" : path.slice(1));
+
+const SCRAMBLE_CHARS = "ABCDE01234!@#$%^&*";
+const SCRAMBLE_INTERVAL = 30;
+
+function useScramble() {
+  return useCallback((element, original) => {
+    let i = 0;
+    const iv = setInterval(() => {
+      element.textContent = original
+        .split("")
+        .map((ch, idx) =>
+          idx < i ? ch : SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]
+        )
+        .join("");
+      if (i++ >= original.length) clearInterval(iv);
+    }, SCRAMBLE_INTERVAL);
+  }, []);
+}
+
+function ScrambleButton({ label, onClick, className, "data-testid": testId }) {
+  const ref = useRef(null);
+  const scramble = useScramble();
+
+  const handleMouseEnter = () => {
+    if (ref.current) scramble(ref.current, label);
+  };
+
+  return (
+    <button
+      ref={ref}
+      data-testid={testId}
+      onClick={onClick}
+      onMouseEnter={handleMouseEnter}
+      className={className}
+    >
+      {label}
+    </button>
+  );
+}
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -52,28 +91,26 @@ export const Navbar = () => {
           {NAV.map((n) => {
             const active = n.path === pathname;
             return (
-              <button
+              <ScrambleButton
                 key={n.path}
+                label={n.label}
                 data-testid={`nav-${slug(n.path)}`}
                 onClick={() => goTo(n.path)}
-                className={`px-3 py-2 text-sm font-bold rounded-full transition-colors ${
+                className={`px-3 py-2 text-sm font-bold rounded-full transition-colors font-mono tracking-wide ${
                   active ? "bg-[#1B2A63] text-white" : "text-[#0F172A] hover:bg-[#E7EBF7]"
                 }`}
-              >
-                {n.label}
-              </button>
+              />
             );
           })}
         </nav>
 
         <div className="flex items-center gap-3">
-          <button
+          <ScrambleButton
+            label="Enquire Now"
             data-testid="nav-register-btn"
             onClick={() => goTo("/register")}
-            className="hidden sm:inline-flex ln-btn ln-btn-primary !px-5 !py-2.5 !text-sm"
-          >
-            Enquire Now
-          </button>
+            className="hidden sm:inline-flex ln-btn ln-btn-primary !px-5 !py-2.5 !text-sm font-mono tracking-wide"
+          />
           <button
             className="lg:hidden grid place-items-center w-10 h-10 rounded-xl border-2 border-[#0F172A] bg-white"
             data-testid="mobile-menu-toggle"
@@ -96,19 +133,20 @@ export const Navbar = () => {
           >
             <div className="px-6 py-4 flex flex-col gap-1">
               {NAV.map((n) => (
-                <button
+                <ScrambleButton
                   key={n.path}
+                  label={n.label}
                   onClick={() => goTo(n.path)}
-                  className={`text-left px-3 py-3 font-bold rounded-xl ${
+                  className={`text-left px-3 py-3 font-bold rounded-xl font-mono tracking-wide ${
                     n.path === pathname ? "bg-[#1B2A63] text-white" : "hover:bg-[#E7EBF7]"
                   }`}
-                >
-                  {n.label}
-                </button>
+                />
               ))}
-              <button onClick={() => goTo("/register")} className="ln-btn ln-btn-primary mt-2">
-                Enquire Now
-              </button>
+              <ScrambleButton
+                label="Enquire Now"
+                onClick={() => goTo("/register")}
+                className="ln-btn ln-btn-primary mt-2 font-mono tracking-wide"
+              />
             </div>
           </motion.div>
         )}
