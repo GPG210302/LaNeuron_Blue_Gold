@@ -1,9 +1,8 @@
-import { motion, useMotionValue, useSpring, useTransform, animate } from "framer-motion";
+import { motion, animate } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { Atom, Rocket, Sparkles, FlaskConical, ArrowRight, Languages } from "lucide-react";
 import { HERO } from "../../data";
-
 import classroomBg from "../../assets/Group_of_kids.png";
 
 // ─── EASING ───────────────────────────────────────────────
@@ -16,7 +15,10 @@ const AnimatedCounter = ({ value }) => {
 
   useEffect(() => {
     const match = String(value).match(/^(\d+)(.*)/);
-    if (!match) { setDisplay(value); return; }
+    if (!match) {
+      setDisplay(value);
+      return;
+    }
     const end = parseInt(match[1], 10);
     const suffix = match[2] ?? "";
     const controls = animate(0, end, {
@@ -28,7 +30,7 @@ const AnimatedCounter = ({ value }) => {
     return () => controls.stop();
   }, [value]);
 
-  return <span>{display}</span>;
+  return <span ref={ref}>{display}</span>;
 };
 
 // ─── FLOATING BADGE ───────────────────────────────────────
@@ -69,6 +71,12 @@ const Orbs = () => (
   </>
 );
 
+const MobileChip = ({ children }) => (
+  <div className="rounded-2xl border-2 border-[#0F172A] bg-white/90 px-3 py-2 text-center text-[11px] font-extrabold text-[#1B2A63] shadow-[3px_3px_0_#0F172A]">
+    {children}
+  </div>
+);
+
 // ─── HERO ─────────────────────────────────────────────────
 export const Hero = () => {
   const navigate = useNavigate();
@@ -79,9 +87,20 @@ export const Hero = () => {
       id="home"
       className="relative pt-36 pb-20 sm:pt-[250px] lg:pt-[260px] lg:pb-28 overflow-hidden ln-grid-bg"
     >
-      {/* ── BLENDED BACKGROUND IMAGE — fixed throughout scroll ── */}
+      {/* ── MOBILE-ONLY BACKGROUND IMAGE ─────────────────── */}
+      <div className="pointer-events-none absolute inset-0 sm:hidden" aria-hidden="true">
+        <img
+          src={classroomBg}
+          alt=""
+          className="ln-mobile-hero-bg w-full h-full object-cover"
+          style={{ objectPosition: "68% 12%", opacity: 0.24 }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/35 via-white/60 to-white/88" />
+      </div>
+
+      {/* ── DESKTOP/TABLET FIXED BACKGROUND IMAGE ───────── */}
       <div
-        className="pointer-events-none fixed inset-0"
+        className="pointer-events-none fixed inset-0 hidden sm:block"
         style={{ zIndex: -1 }}
         aria-hidden="true"
       >
@@ -92,7 +111,7 @@ export const Hero = () => {
           style={{
             objectPosition: "70% top",
             mixBlendMode: "multiply",
-            opacity: 0.40,
+            opacity: 0.4,
             maskImage:
               "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%)",
             maskComposite: "intersect",
@@ -103,10 +122,11 @@ export const Hero = () => {
         />
       </div>
 
-      <Orbs />
+      <div className="hidden sm:block">
+        <Orbs />
+      </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-14 items-center relative z-10">
-
         {/* ── LEFT COLUMN ─────────────────────────────────── */}
         <div>
           <motion.span
@@ -136,7 +156,9 @@ export const Hero = () => {
                   variants={{
                     hidden: { opacity: 0, y: 32, filter: "blur(8px)" },
                     visible: {
-                      opacity: 1, y: 0, filter: "blur(0px)",
+                      opacity: 1,
+                      y: 0,
+                      filter: "blur(0px)",
                       transition: { duration: 0.65, ease: EXPO },
                     },
                   }}
@@ -259,14 +281,35 @@ export const Hero = () => {
           </motion.div>
         </div>
 
-        {/* ── RIGHT COLUMN — floating badges only ─────────── */}
+        {/* ── RIGHT COLUMN — mobile content + floating badges ── */}
         <motion.div
-          className="relative h-[480px] lg:h-[540px]"
+          className="relative h-[280px] sm:h-[480px] lg:h-[540px]"
           initial={{ opacity: 0, x: 40, filter: "blur(10px)" }}
           animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
           transition={{ delay: 0.2, duration: 0.8, ease: EXPO }}
         >
-          <Floating className="-top-5 -left-5" delay={0.5}>
+          {/* mobile-only filler card */}
+          <div className="sm:hidden absolute inset-x-3 top-12 z-10">
+            <div className="ln-mobile-hero-panel rounded-[28px] border-2 border-[#0F172A] px-4 py-4 shadow-[6px_6px_0_#0F172A]">
+              <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#1B2A63]/70">
+                Young scientists at work
+              </p>
+              <h3 className="mt-2 text-2xl font-extrabold leading-tight text-[#1B2A63]">
+                Build, test, and create in English.
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-[#475569]">
+                Hands-on science, guided teamwork, and creative problem-solving in one inspiring space.
+              </p>
+
+              <div className="mt-4 grid grid-cols-3 gap-2">
+                <MobileChip>Hands-on</MobileChip>
+                <MobileChip>Small groups</MobileChip>
+                <MobileChip>Creative</MobileChip>
+              </div>
+            </div>
+          </div>
+
+          <Floating className="top-0 left-3 sm:-top-5 sm:-left-5" delay={0.5}>
             <span className="grid place-items-center w-16 h-16 rounded-2xl bg-[#FBBF24] border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]">
               <motion.div
                 animate={{ rotate: 360 }}
@@ -277,7 +320,7 @@ export const Hero = () => {
             </span>
           </Floating>
 
-          <Floating className="top-1/3 -right-6" delay={0.65}>
+          <Floating className="top-24 right-2 sm:top-1/3 sm:-right-6" delay={0.65}>
             <motion.span
               className="grid place-items-center w-14 h-14 rounded-2xl bg-[#10B981] text-white border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]"
               whileHover={{ rotate: -15, scale: 1.15 }}
@@ -287,7 +330,7 @@ export const Hero = () => {
             </motion.span>
           </Floating>
 
-          <Floating className="-bottom-5 left-10" delay={0.8}>
+          <Floating className="bottom-2 left-8 sm:-bottom-5 sm:left-10" delay={0.8}>
             <motion.span
               className="grid place-items-center w-14 h-14 rounded-2xl bg-[#FB7185] text-white border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]"
               whileHover={{ rotate: 15, scale: 1.15 }}
@@ -297,7 +340,6 @@ export const Hero = () => {
             </motion.span>
           </Floating>
         </motion.div>
-
       </div>
 
       {/* ── KEY BANNER ──────────────────────────────────── */}
