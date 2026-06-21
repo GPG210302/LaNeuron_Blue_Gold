@@ -10,7 +10,7 @@ export const SITE = {
   brand: "La Neuron – STEAM Academy",
   tagline: "Inspiring the next generation of thinkers, makers, and explorers",
   phone: "+48 573 033 220",
-  email: "admin@la-neuron.org",
+  email: "admin@laneuron.org",
   location: "Kraków",
   venue: "ul. Śniadeckich 3, Kraków, Poland",
   social: { facebook: "https://www.facebook.com/share/1B87gctcBG/?mibextid=wwXIfr", instagram: "https://www.instagram.com/laneuron?igsh=MWxpOXRkdjh3bzBpbw==", youtube: "#" }, // placeholders – to be added later

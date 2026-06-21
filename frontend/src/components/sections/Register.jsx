@@ -99,7 +99,7 @@ export const Register = ({ formRef }) => {
       toast.success("Enquiry received! We will respond within 24 hours.");
     } catch (err) {
       console.error("Enquiry submit failed:", err);
-      toast.error("Something went wrong. Please try again or email admin@la-neuron.org directly.");
+      toast.error("Something went wrong. Please try again or email admin@laneuron.org directly.");
     } finally {
       setLoading(false);
     }
