@@ -7,8 +7,8 @@ export default {
       return env.ASSETS.fetch(request);
     }
 
-    // Read ?text= param, default to la-neuron.org
-    const text = url.searchParams.get('text') || 'https://la-neuron.org';
+    // Read ?text= param, default to laneuron.org
+    const text = url.searchParams.get('text') || 'https://laneuron.org';
 
     // Logo lives on same worker domain
     const logoUrl = `${url.origin}/logo.PNG`;
@@ -159,7 +159,7 @@ export default {
     </button>
   </div>
 
-  <p class="footer-note">la-neuron.org · STEAM Education</p>
+  <p class="footer-note">laneuron.org · STEAM Education</p>
 
   <script>
     const logoUrl = ${JSON.stringify(logoUrl)};
