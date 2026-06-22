@@ -15,10 +15,7 @@ const AnimatedCounter = ({ value }) => {
 
   useEffect(() => {
     const match = String(value).match(/^(\d+)(.*)/);
-    if (!match) {
-      setDisplay(value);
-      return;
-    }
+    if (!match) { setDisplay(value); return; }
     const end = parseInt(match[1], 10);
     const suffix = match[2] ?? "";
     const controls = animate(0, end, {
@@ -83,285 +80,338 @@ export const Hero = () => {
   const words = "Real-World Science for".split(" ");
 
   return (
-    <section
-      id="home"
-      className="relative pt-36 pb-20 sm:pt-[250px] lg:pt-[260px] lg:pb-28 overflow-hidden ln-grid-bg"
-    >
-      {/* ── MOBILE-ONLY BACKGROUND IMAGE ─────────────────── */}
-      <div className="pointer-events-none absolute inset-0 sm:hidden" aria-hidden="true">
-        <img
-          src={classroomBg}
-          alt=""
-          className="ln-mobile-hero-bg w-full h-full object-cover"
-          style={{ objectPosition: "68% 12%", opacity: 0.24 }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/35 via-white/60 to-white/88" />
-      </div>
-
-      {/* ── DESKTOP/TABLET FIXED BACKGROUND IMAGE ───────── */}
+    <>
+      {/* ── MOBILE-ONLY BACKGROUND IMAGE — outside section so overflow-hidden can't clip it ── */}
       <div
-        className="pointer-events-none fixed inset-0 hidden sm:block"
+        className="pointer-events-none fixed inset-0 sm:hidden"
         style={{ zIndex: -1 }}
         aria-hidden="true"
       >
         <img
           src={classroomBg}
           alt=""
-          className="w-full h-full object-right object-contain"
+          className="w-full h-full object-cover"
           style={{
-            objectPosition: "70% top",
-            mixBlendMode: "multiply",
-            opacity: 0.4,
+            objectPosition: "68% 12%",
+            opacity: 0.22,
             maskImage:
-              "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%)",
-            maskComposite: "intersect",
+              "linear-gradient(to bottom, transparent 0%, black 8%, black 70%, transparent 100%)",
             WebkitMaskImage:
-              "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%)",
-            WebkitMaskComposite: "source-in",
+              "linear-gradient(to bottom, transparent 0%, black 8%, black 70%, transparent 100%)",
           }}
         />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/50 to-white/85" />
       </div>
 
-      <div className="hidden sm:block">
-        <Orbs />
-      </div>
+      <section
+        id="home"
+        className="relative pt-36 pb-20 sm:pt-[250px] lg:pt-[260px] lg:pb-28 overflow-hidden ln-grid-bg"
+      >
+        {/* ── DESKTOP/TABLET FIXED BACKGROUND IMAGE ───────── */}
+        <div
+          className="pointer-events-none fixed inset-0 hidden sm:block"
+          style={{ zIndex: -1 }}
+          aria-hidden="true"
+        >
+          <img
+            src={classroomBg}
+            alt=""
+            className="w-full h-full object-right object-contain"
+            style={{
+              objectPosition: "70% top",
+              mixBlendMode: "multiply",
+              opacity: 0.4,
+              maskImage:
+                "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%)",
+              maskComposite: "intersect",
+              WebkitMaskImage:
+                "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%)",
+              WebkitMaskComposite: "source-in",
+            }}
+          />
+        </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-14 items-center relative z-10">
-        {/* ── LEFT COLUMN ─────────────────────────────────── */}
-        <div>
+        <div className="hidden sm:block">
+          <Orbs />
+        </div>
+
+        {/* ── MOBILE FLOATING ICONS — on the section, above the card ── */}
+        {/* Atom: top-left corner, always above everything */}
+        <Floating className="sm:hidden top-36 left-4 z-20" delay={0.5}>
+          <span className="grid place-items-center w-14 h-14 rounded-2xl bg-[#FBBF24] border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]">
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            >
+              <Atom size={24} />
+            </motion.div>
+          </span>
+        </Floating>
+
+        {/* Rocket: right side, below the stat cards, above the info card */}
+        <Floating className="sm:hidden top-[420px] right-4 z-20" delay={0.65}>
           <motion.span
-            className="ln-tag !text-sm !px-4 !py-1.5"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: EXPO }}
-            data-testid="hero-badge"
+            className="grid place-items-center w-12 h-12 rounded-2xl bg-[#10B981] text-white border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]"
+            whileHover={{ rotate: -15, scale: 1.15 }}
+            transition={{ type: "spring", stiffness: 300 }}
           >
-            <Sparkles size={14} /> {HERO.badge}
+            <Rocket size={20} />
           </motion.span>
+        </Floating>
 
-          <h1 className="mt-5 text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-[1.02] text-[#1B2A63]">
+        {/* FlaskConical: bottom-left of the info card area */}
+        <Floating className="sm:hidden top-[680px] left-4 z-20" delay={0.8}>
+          <motion.span
+            className="grid place-items-center w-12 h-12 rounded-2xl bg-[#FB7185] text-white border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]"
+            whileHover={{ rotate: 15, scale: 1.15 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <FlaskConical size={20} />
+          </motion.span>
+        </Floating>
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-14 items-center relative z-10">
+          {/* ── LEFT COLUMN ─────────────────────────────────── */}
+          <div>
             <motion.span
-              className="inline"
-              initial="hidden"
-              animate="visible"
-              variants={{
-                hidden: {},
-                visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
-              }}
+              className="ln-tag !text-sm !px-4 !py-1.5"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: EXPO }}
+              data-testid="hero-badge"
             >
-              {words.map((word, i) => (
-                <motion.span
-                  key={i}
-                  className="inline-block mr-[0.22em]"
-                  variants={{
-                    hidden: { opacity: 0, y: 32, filter: "blur(8px)" },
-                    visible: {
-                      opacity: 1,
-                      y: 0,
-                      filter: "blur(0px)",
-                      transition: { duration: 0.65, ease: EXPO },
-                    },
-                  }}
-                >
-                  {word}
-                </motion.span>
-              ))}
+              <Sparkles size={14} /> {HERO.badge}
             </motion.span>
 
-            <motion.span
-              className="relative inline-block pb-2 text-outlined"
-              style={{ lineHeight: "1.2" }}
-              initial={{ opacity: 0, y: 32, filter: "blur(8px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ delay: 0.45, duration: 0.7, ease: EXPO }}
-            >
-              {" "}Young Minds
-              <motion.svg
-                className="absolute -bottom-2 left-0 w-full"
-                height="12"
-                viewBox="0 0 200 12"
-                fill="none"
-                initial={{ pathLength: 0, opacity: 0 }}
-              >
-                <motion.path
-                  d="M2 9 C50 2, 150 2, 198 9"
-                  stroke="#1B2A63"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  animate={{ pathLength: 1, opacity: 1 }}
-                  transition={{ delay: 0.85, duration: 0.7, ease: EXPO }}
-                />
-              </motion.svg>
-            </motion.span>
-          </h1>
-
-          <motion.p
-            className="mt-6 text-lg md:text-xl text-[#475569] leading-relaxed max-w-xl"
-            initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ delay: 0.3, duration: 0.7, ease: EXPO }}
-          >
-            {HERO.sub}
-          </motion.p>
-
-          <motion.div
-            className="mt-5 max-w-xl ln-card !shadow-[4px_4px_0_#0F172A] bg-[#E7EBF7] p-4 flex items-start gap-3"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.38, duration: 0.6, ease: EXPO }}
-            data-testid="hero-english-highlight"
-          >
-            <motion.span
-              className="grid place-items-center w-10 h-10 rounded-xl bg-[#1B2A63] text-white border-2 border-[#0F172A] shrink-0"
-              whileHover={{ rotate: [0, -8, 8, 0], transition: { duration: 0.4 } }}
-            >
-              <Languages size={20} />
-            </motion.span>
-            <p className="text-sm md:text-base text-[#0F172A] font-medium leading-relaxed">
-              <span className="font-extrabold text-[#1B2A63]">Taught entirely in English.</span>{" "}
-              {HERO.english}
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="mt-8 flex flex-wrap gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.44, duration: 0.6, ease: EXPO }}
-          >
-            <motion.button
-              onClick={() => navigate("/register")}
-              className="ln-btn ln-btn-primary"  
-              data-testid="hero-cta-register"
-              whileHover={{ scale: 1.04, y: -2 }}
-              whileTap={{ scale: 0.97, y: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            >
-              Reserve a Spot <ArrowRight size={18} />
-            </motion.button>
-            <motion.button
-              onClick={() => navigate("/what-is-steam")}
-              className="ln-btn ln-btn-white"
-              data-testid="hero-cta-learn"
-              whileHover={{ scale: 1.04, y: -2 }}
-              whileTap={{ scale: 0.97, y: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            >
-              What is STEAM?
-            </motion.button>
-          </motion.div>
-
-          <motion.div
-            className="mt-10 grid grid-cols-3 gap-4 max-w-md"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.55, duration: 0.6 }}
-          >
-            {HERO.stats.map((s, i) => (
-              <motion.div
-                key={s.label}
-                className="ln-card !shadow-[3px_3px_0_#0F172A] px-3 py-3 text-center"
-                data-testid="hero-stat"
-                initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ delay: 0.6 + i * 0.08, duration: 0.5, ease: EXPO }}
-                whileHover={{
-                  y: -4,
-                  boxShadow: "4px 6px 0 #0F172A",
-                  transition: { type: "spring", stiffness: 300, damping: 18 },
+            <h1 className="mt-5 text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-[1.02] text-[#1B2A63]">
+              <motion.span
+                className="inline"
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  hidden: {},
+                  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
                 }}
               >
-                <div className="font-display font-extrabold text-2xl text-[#1B2A63]">
-                  <AnimatedCounter value={s.value} />
+                {words.map((word, i) => (
+                  <motion.span
+                    key={i}
+                    className="inline-block mr-[0.22em]"
+                    variants={{
+                      hidden: { opacity: 0, y: 32, filter: "blur(8px)" },
+                      visible: {
+                        opacity: 1, y: 0, filter: "blur(0px)",
+                        transition: { duration: 0.65, ease: EXPO },
+                      },
+                    }}
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+              </motion.span>
+
+              <motion.span
+                className="relative inline-block pb-2 text-outlined"
+                style={{ lineHeight: "1.2" }}
+                initial={{ opacity: 0, y: 32, filter: "blur(8px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ delay: 0.45, duration: 0.7, ease: EXPO }}
+              >
+                {" "}Young Minds
+                <motion.svg
+                  className="absolute -bottom-2 left-0 w-full"
+                  height="12"
+                  viewBox="0 0 200 12"
+                  fill="none"
+                  initial={{ pathLength: 0, opacity: 0 }}
+                >
+                  <motion.path
+                    d="M2 9 C50 2, 150 2, 198 9"
+                    stroke="#1B2A63"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{ pathLength: 1, opacity: 1 }}
+                    transition={{ delay: 0.85, duration: 0.7, ease: EXPO }}
+                  />
+                </motion.svg>
+              </motion.span>
+            </h1>
+
+            <motion.p
+              className="mt-6 text-lg md:text-xl text-[#475569] leading-relaxed max-w-xl"
+              initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ delay: 0.3, duration: 0.7, ease: EXPO }}
+            >
+              {HERO.sub}
+            </motion.p>
+
+            <motion.div
+              className="mt-5 max-w-xl ln-card !shadow-[4px_4px_0_#0F172A] bg-[#E7EBF7] p-4 flex items-start gap-3"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.38, duration: 0.6, ease: EXPO }}
+              data-testid="hero-english-highlight"
+            >
+              <motion.span
+                className="grid place-items-center w-10 h-10 rounded-xl bg-[#1B2A63] text-white border-2 border-[#0F172A] shrink-0"
+                whileHover={{ rotate: [0, -8, 8, 0], transition: { duration: 0.4 } }}
+              >
+                <Languages size={20} />
+              </motion.span>
+              <p className="text-sm md:text-base text-[#0F172A] font-medium leading-relaxed">
+                <span className="font-extrabold text-[#1B2A63]">Taught entirely in English.</span>{" "}
+                {HERO.english}
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="mt-8 flex flex-wrap gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.44, duration: 0.6, ease: EXPO }}
+            >
+              <motion.button
+                onClick={() => navigate("/register")}
+                className="ln-btn ln-btn-primary"
+                data-testid="hero-cta-register"
+                whileHover={{ scale: 1.04, y: -2 }}
+                whileTap={{ scale: 0.97, y: 0 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
+                Reserve a Spot <ArrowRight size={18} />
+              </motion.button>
+              <motion.button
+                onClick={() => navigate("/what-is-steam")}
+                className="ln-btn ln-btn-white"
+                data-testid="hero-cta-learn"
+                whileHover={{ scale: 1.04, y: -2 }}
+                whileTap={{ scale: 0.97, y: 0 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
+                What is STEAM?
+              </motion.button>
+            </motion.div>
+
+            <motion.div
+              className="mt-10 grid grid-cols-3 gap-4 max-w-md"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.55, duration: 0.6 }}
+            >
+              {HERO.stats.map((s, i) => (
+                <motion.div
+                  key={s.label}
+                  className="ln-card !shadow-[3px_3px_0_#0F172A] px-3 py-3 text-center"
+                  data-testid="hero-stat"
+                  initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ delay: 0.6 + i * 0.08, duration: 0.5, ease: EXPO }}
+                  whileHover={{
+                    y: -4,
+                    boxShadow: "4px 6px 0 #0F172A",
+                    transition: { type: "spring", stiffness: 300, damping: 18 },
+                  }}
+                >
+                  <div className="font-display font-extrabold text-2xl text-[#1B2A63]">
+                    <AnimatedCounter value={s.value} />
+                  </div>
+                  <div className="text-xs font-semibold text-[#475569] mt-0.5">{s.label}</div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* ── RIGHT COLUMN — desktop floating badges + mobile info card ── */}
+          <motion.div
+            className="relative h-[320px] sm:h-[480px] lg:h-[540px]"
+            initial={{ opacity: 0, x: 40, filter: "blur(10px)" }}
+            animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+            transition={{ delay: 0.2, duration: 0.8, ease: EXPO }}
+          >
+            {/* mobile-only info card — z-10 so icons (z-20 on section) sit above it */}
+            <div className="sm:hidden absolute inset-x-3 top-4 z-10">
+              <div
+                className="rounded-[28px] border-2 border-[#0F172A] px-4 py-4 shadow-[6px_6px_0_#0F172A]"
+                style={{
+                  background: "rgba(255,255,255,0.76)",
+                  backdropFilter: "blur(10px)",
+                  WebkitBackdropFilter: "blur(10px)",
+                }}
+              >
+                <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#1B2A63]/70">
+                  Young scientists at work
+                </p>
+                <h3 className="mt-2 text-2xl font-extrabold leading-tight text-[#1B2A63]">
+                  Build, test, and create in English.
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-[#475569]">
+                  Hands-on science, guided teamwork, and creative problem-solving in one inspiring space.
+                </p>
+                <div className="mt-4 grid grid-cols-3 gap-2">
+                  <MobileChip>Hands-on</MobileChip>
+                  <MobileChip>Small groups</MobileChip>
+                  <MobileChip>Creative</MobileChip>
                 </div>
-                <div className="text-xs font-semibold text-[#475569] mt-0.5">{s.label}</div>
-              </motion.div>
-            ))}
+              </div>
+            </div>
+
+            {/* DESKTOP-ONLY floating badges */}
+            <Floating className="hidden sm:block -top-5 -left-5" delay={0.5}>
+              <span className="grid place-items-center w-16 h-16 rounded-2xl bg-[#FBBF24] border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]">
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                >
+                  <Atom size={28} />
+                </motion.div>
+              </span>
+            </Floating>
+
+            <Floating className="hidden sm:block top-1/3 -right-6" delay={0.65}>
+              <motion.span
+                className="grid place-items-center w-14 h-14 rounded-2xl bg-[#10B981] text-white border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]"
+                whileHover={{ rotate: -15, scale: 1.15 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Rocket size={24} />
+              </motion.span>
+            </Floating>
+
+            <Floating className="hidden sm:block -bottom-5 left-10" delay={0.8}>
+              <motion.span
+                className="grid place-items-center w-14 h-14 rounded-2xl bg-[#FB7185] text-white border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]"
+                whileHover={{ rotate: 15, scale: 1.15 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <FlaskConical size={24} />
+              </motion.span>
+            </Floating>
           </motion.div>
         </div>
 
-        {/* ── RIGHT COLUMN — mobile content + floating badges ── */}
-        <motion.div
-          className="relative h-[280px] sm:h-[480px] lg:h-[540px]"
-          initial={{ opacity: 0, x: 40, filter: "blur(10px)" }}
-          animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-          transition={{ delay: 0.2, duration: 0.8, ease: EXPO }}
-        >
-          {/* mobile-only filler card */}
-          <div className="sm:hidden absolute inset-x-3 top-12 z-10">
-            <div className="ln-mobile-hero-panel rounded-[28px] border-2 border-[#0F172A] px-4 py-4 shadow-[6px_6px_0_#0F172A]">
-              <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#1B2A63]/70">
-                Young scientists at work
-              </p>
-              <h3 className="mt-2 text-2xl font-extrabold leading-tight text-[#1B2A63]">
-                Build, test, and create in English.
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-[#475569]">
-                Hands-on science, guided teamwork, and creative problem-solving in one inspiring space.
-              </p>
-
-              <div className="mt-4 grid grid-cols-3 gap-2">
-                <MobileChip>Hands-on</MobileChip>
-                <MobileChip>Small groups</MobileChip>
-                <MobileChip>Creative</MobileChip>
-              </div>
-            </div>
-          </div>
-
-          <Floating className="top-0 left-3 sm:-top-5 sm:-left-5" delay={0.5}>
-            <span className="grid place-items-center w-16 h-16 rounded-2xl bg-[#FBBF24] border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              >
-                <Atom size={28} />
-              </motion.div>
-            </span>
-          </Floating>
-
-          <Floating className="top-24 right-2 sm:top-1/3 sm:-right-6" delay={0.65}>
-            <motion.span
-              className="grid place-items-center w-14 h-14 rounded-2xl bg-[#10B981] text-white border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]"
-              whileHover={{ rotate: -15, scale: 1.15 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <Rocket size={24} />
-            </motion.span>
-          </Floating>
-
-          <Floating className="bottom-2 left-8 sm:-bottom-5 sm:left-10" delay={0.8}>
-            <motion.span
-              className="grid place-items-center w-14 h-14 rounded-2xl bg-[#FB7185] text-white border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]"
-              whileHover={{ rotate: 15, scale: 1.15 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <FlaskConical size={24} />
-            </motion.span>
-          </Floating>
-        </motion.div>
-      </div>
-
-      {/* ── KEY BANNER ──────────────────────────────────── */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 mt-14">
-        <motion.div
-          className="ln-card bg-[#0F172A] text-white px-6 py-5 md:px-8 md:py-6 flex items-start gap-4"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.6, ease: EXPO }}
-          whileHover={{ scale: 1.01, transition: { type: "spring", stiffness: 300 } }}
-        >
-          <motion.span
-            className="grid place-items-center w-10 h-10 rounded-xl bg-[#FBBF24] text-[#0F172A] shrink-0"
-            animate={{ rotate: [0, 10, -10, 0] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        {/* ── KEY BANNER ──────────────────────────────────── */}
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 mt-14">
+          <motion.div
+            className="ln-card bg-[#0F172A] text-white px-6 py-5 md:px-8 md:py-6 flex items-start gap-4"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6, ease: EXPO }}
+            whileHover={{ scale: 1.01, transition: { type: "spring", stiffness: 300 } }}
           >
-            <Sparkles size={20} />
-          </motion.span>
-          <p className="text-base md:text-lg font-medium leading-relaxed">{HERO.key}</p>
-        </motion.div>
-      </div>
-    </section>
+            <motion.span
+              className="grid place-items-center w-10 h-10 rounded-xl bg-[#FBBF24] text-[#0F172A] shrink-0"
+              animate={{ rotate: [0, 10, -10, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            >
+              <Sparkles size={20} />
+            </motion.span>
+            <p className="text-base md:text-lg font-medium leading-relaxed">{HERO.key}</p>
+          </motion.div>
+        </div>
+      </section>
+    </>
   );
 };
