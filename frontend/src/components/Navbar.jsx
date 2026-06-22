@@ -1,14 +1,20 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { NAV } from "../data";
+import { useLanguage } from "../i18n/LanguageContext";
+import { useData } from "../i18n/useData";
 import logo from "../assets/logo.png";
 
-const slug = (path) => (path === "/" ? "home" : path.slice(1));
+const slug = (path) => (path === "/" ? "home" : path.replace(/\s+/g, "-").slice(1).toLowerCase());
 
 const SCRAMBLE_CHARS = "ABCDE01234!@#$%^&*";
 const SCRAMBLE_INTERVAL = 30;
+
+const FLAG = {
+  en: "🇬🇧",
+  pl: "🇵🇱",
+};
 
 function useScramble() {
   return useCallback((element, original) => {
@@ -46,11 +52,84 @@ function ScrambleButton({ label, onClick, className, "data-testid": testId }) {
   );
 }
 
+function LanguageSwitcher({ compact = false }) {
+  const { language, setLanguage } = useLanguage();
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+
+  // Close on outside click
+  useEffect(() => {
+    const handler = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const options = [
+    { code: "en", label: "English", flag: FLAG.en },
+    { code: "pl", label: "Polski", flag: FLAG.pl },
+  ];
+
+  const current = options.find((o) => o.code === language) || options[0];
+
+  return (
+    <div ref={ref} className="relative" data-testid="language-switcher">
+      <button
+        onClick={() => setOpen((v) => !v)}
+        data-testid="language-switcher-btn"
+        className={`flex items-center gap-1.5 font-mono font-bold text-sm rounded-full border-2 border-[#0F172A] bg-white hover:bg-[#E7EBF7] transition-colors ${
+          compact ? "px-2.5 py-1.5" : "px-3 py-2"
+        }`}
+        aria-label="Switch language"
+        aria-expanded={open}
+      >
+        <span role="img" aria-label={current.label}>{current.flag}</span>
+        <span>{current.code.toUpperCase()}</span>
+        <ChevronDown
+          size={14}
+          className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+        />
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -6, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -6, scale: 0.97 }}
+            transition={{ duration: 0.15 }}
+            className="absolute right-0 mt-2 w-36 bg-white border-2 border-[#0F172A] rounded-2xl shadow-[4px_4px_0_#0F172A] overflow-hidden z-50"
+            data-testid="language-dropdown"
+          >
+            {options.map((opt) => (
+              <button
+                key={opt.code}
+                data-testid={`lang-option-${opt.code}`}
+                onClick={() => { setLanguage(opt.code); setOpen(false); }}
+                className={`w-full flex items-center gap-2.5 px-4 py-3 text-sm font-bold font-mono transition-colors ${
+                  language === opt.code
+                    ? "bg-[#1B2A63] text-white"
+                    : "hover:bg-[#E7EBF7] text-[#0F172A]"
+                }`}
+              >
+                <span role="img" aria-label={opt.label}>{opt.flag}</span>
+                {opt.label}
+              </button>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const { nav, ui } = useData();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -79,6 +158,7 @@ export const Navbar = () => {
           big ? "h-28 sm:h-[220px]" : "h-20"
         }`}
       >
+        {/* Logo */}
         <button onClick={() => goTo("/")} data-testid="logo" className="flex items-center">
           <img
             src={logo}
@@ -87,8 +167,9 @@ export const Navbar = () => {
           />
         </button>
 
+        {/* Desktop nav links */}
         <nav className="hidden lg:flex items-center gap-1">
-          {NAV.map((n) => {
+          {nav.map((n) => {
             const active = n.path === pathname;
             return (
               <ScrambleButton
@@ -104,16 +185,22 @@ export const Navbar = () => {
           })}
         </nav>
 
-        <div className="flex items-center gap-3">
-          {/* ── CHANGED: ln-btn-primary → ln-btn-enquire (glow, no shadow, navy border) ── */}
+        {/* Desktop right side: language switcher + enquire button */}
+        <div className="hidden lg:flex items-center gap-3">
+          <LanguageSwitcher />
           <ScrambleButton
-            label="Enquire Now"
+            label={ui.enquireNow}
             data-testid="nav-register-btn"
             onClick={() => goTo("/register")}
-            className="hidden sm:inline-flex ln-btn ln-btn-enquire !px-5 !py-2.5 !text-sm font-mono tracking-wide"
+            className="ln-btn ln-btn-enquire !px-5 !py-2.5 !text-sm font-mono tracking-wide"
           />
+        </div>
+
+        {/* Mobile: language switcher + hamburger */}
+        <div className="flex lg:hidden items-center gap-2">
+          <LanguageSwitcher compact />
           <button
-            className="lg:hidden grid place-items-center w-10 h-10 rounded-xl border-2 border-[#0F172A] bg-white"
+            className="grid place-items-center w-10 h-10 rounded-xl border-2 border-[#0F172A] bg-white"
             data-testid="mobile-menu-toggle"
             onClick={() => setOpen((v) => !v)}
             aria-label="Menu"
@@ -123,6 +210,7 @@ export const Navbar = () => {
         </div>
       </div>
 
+      {/* Mobile menu */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -133,7 +221,7 @@ export const Navbar = () => {
             data-testid="mobile-menu"
           >
             <div className="px-6 py-4 flex flex-col gap-1">
-              {NAV.map((n) => (
+              {nav.map((n) => (
                 <ScrambleButton
                   key={n.path}
                   label={n.label}
@@ -143,9 +231,8 @@ export const Navbar = () => {
                   }`}
                 />
               ))}
-              {/* ── CHANGED: ln-btn-primary → ln-btn-enquire in mobile menu too ── */}
               <ScrambleButton
-                label="Enquire Now"
+                label={ui.enquireNow}
                 onClick={() => goTo("/register")}
                 className="ln-btn ln-btn-enquire mt-2 font-mono tracking-wide"
               />

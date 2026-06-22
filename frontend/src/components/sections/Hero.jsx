@@ -2,7 +2,7 @@ import { motion, animate } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { Atom, Rocket, Sparkles, FlaskConical, ArrowRight, Languages } from "lucide-react";
-import { HERO } from "../../data";
+import { useData } from "../../i18n/useData";
 import classroomBg from "../../assets/Group_of_kids.png";
 
 const EXPO = [0.22, 1, 0.36, 1];
@@ -42,21 +42,9 @@ const Floating = ({ children, className, delay = 0 }) => (
 
 const Orbs = () => (
   <>
-    <motion.div
-      className="pointer-events-none absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#E7EBF7] blur-3xl"
-      animate={{ scale: [1, 1.15, 1], opacity: [0.6, 0.8, 0.6] }}
-      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-    />
-    <motion.div
-      className="pointer-events-none absolute bottom-0 -left-24 w-80 h-80 rounded-full bg-[#FFE4E4] blur-3xl"
-      animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.75, 0.6] }}
-      transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-    />
-    <motion.div
-      className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#EEF2FF] blur-[100px]"
-      animate={{ scale: [0.9, 1.05, 0.9], opacity: [0.3, 0.45, 0.3] }}
-      transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-    />
+    <motion.div className="pointer-events-none absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#E7EBF7] blur-3xl" animate={{ scale: [1, 1.15, 1], opacity: [0.6, 0.8, 0.6] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
+    <motion.div className="pointer-events-none absolute bottom-0 -left-24 w-80 h-80 rounded-full bg-[#FFE4E4] blur-3xl" animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.75, 0.6] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }} />
+    <motion.div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#EEF2FF] blur-[100px]" animate={{ scale: [0.9, 1.05, 0.9], opacity: [0.3, 0.45, 0.3] }} transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 2 }} />
   </>
 );
 
@@ -68,98 +56,41 @@ const MobileChip = ({ children }) => (
 
 export const Hero = () => {
   const navigate = useNavigate();
-  const words = "Real-World Science for".split(" ");
+  const { hero, ui } = useData();
+
+  // Split headline on the last word so animation still works
+  // headline e.g. "Real-World Science for Young Minds"
+  const headlineParts = hero.headline.split(" ");
+  const lastWord = headlineParts[headlineParts.length - 1];
+  const leadWords = headlineParts.slice(0, -1);
 
   return (
     <>
-      {/* ── MOBILE-ONLY BACKGROUND IMAGE — 25% brighter: opacity 0.22 → 0.28 ── */}
-      <div
-        className="pointer-events-none fixed inset-0 sm:hidden"
-        style={{ zIndex: -1 }}
-        aria-hidden="true"
-      >
-        <img
-          src={classroomBg}
-          alt=""
-          className="w-full h-full object-cover"
-          style={{
-            objectPosition: "68% 12%",
-            opacity: 0.55,
-            maskImage:
-              "linear-gradient(to bottom, transparent 0%, black 8%, black 70%, transparent 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to bottom, transparent 0%, black 8%, black 70%, transparent 100%)",
-          }}
-        />
+      {/* ── MOBILE-ONLY BACKGROUND IMAGE ── */}
+      <div className="pointer-events-none fixed inset-0 sm:hidden" style={{ zIndex: -1 }} aria-hidden="true">
+        <img src={classroomBg} alt="" className="w-full h-full object-cover" style={{ objectPosition: "68% 12%", opacity: 0.55, maskImage: "linear-gradient(to bottom, transparent 0%, black 8%, black 70%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 8%, black 70%, transparent 100%)" }} />
         <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/50 to-white/85" />
       </div>
 
-      {/* ── DESKTOP/TABLET FIXED BACKGROUND IMAGE — unchanged ── */}
-      <div
-        className="pointer-events-none fixed inset-0 hidden sm:block"
-        style={{ zIndex: -1 }}
-        aria-hidden="true"
-      >
-        <img
-          src={classroomBg}
-          alt=""
-          className="w-full h-full object-right object-contain"
-          style={{
-            objectPosition: "70% top",
-            mixBlendMode: "multiply",
-            opacity: 0.4,
-            maskImage:
-              "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%)",
-            maskComposite: "intersect",
-            WebkitMaskImage:
-              "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%)",
-            WebkitMaskComposite: "source-in",
-          }}
-        />
+      {/* ── DESKTOP/TABLET FIXED BACKGROUND IMAGE ── */}
+      <div className="pointer-events-none fixed inset-0 hidden sm:block" style={{ zIndex: -1 }} aria-hidden="true">
+        <img src={classroomBg} alt="" className="w-full h-full object-right object-contain" style={{ objectPosition: "70% top", mixBlendMode: "multiply", opacity: 0.4, maskImage: "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%)", maskComposite: "intersect", WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%)", WebkitMaskComposite: "source-in" }} />
       </div>
 
-      <section
-        id="home"
-        className="relative pt-36 pb-20 sm:pt-[250px] lg:pt-[260px] lg:pb-28 overflow-hidden ln-grid-bg"
-      >
-        <div className="hidden sm:block">
-          <Orbs />
-        </div>
+      <section id="home" className="relative pt-36 pb-20 sm:pt-[250px] lg:pt-[260px] lg:pb-28 overflow-hidden ln-grid-bg">
+        <div className="hidden sm:block"><Orbs /></div>
 
-        {/* ── MOBILE FLOATING ICONS — repositioned to clear text areas ── */}
-
-        {/* Atom (yellow): moved to RIGHT side, level with the badge tag — empty space on that side */}
+        {/* Mobile floating icons */}
         <Floating className="sm:hidden top-36 right-4 z-20" delay={0.5}>
           <span className="grid place-items-center w-14 h-14 rounded-2xl bg-[#FBBF24] border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-            >
-              <Atom size={22} />
-            </motion.div>
+            <motion.div animate={{ rotate: 360 }} transition={{ duration: 8, repeat: Infinity, ease: "linear" }}><Atom size={22} /></motion.div>
           </span>
         </Floating>
-
-        {/* Rocket (green): moved down to sit beside the CTA button row — ~top-[560px] clears all text */}
         <Floating className="sm:hidden top-[560px] right-4 z-20" delay={0.65}>
-          <motion.span
-            className="grid place-items-center w-12 h-12 rounded-2xl bg-[#10B981] text-white border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]"
-            whileHover={{ rotate: -15, scale: 1.15 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <Rocket size={20} />
-          </motion.span>
+          <motion.span className="grid place-items-center w-12 h-12 rounded-2xl bg-[#10B981] text-white border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]" whileHover={{ rotate: -15, scale: 1.15 }} transition={{ type: "spring", stiffness: 300 }}><Rocket size={20} /></motion.span>
         </Floating>
-
-        {/* FlaskConical (pink): bottom-left, below the English card — clear of card overlap */}
         <Floating className="sm:hidden top-[740px] left-4 z-20" delay={0.8}>
-          <motion.span
-            className="grid place-items-center w-12 h-12 rounded-2xl bg-[#FB7185] text-white border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]"
-            whileHover={{ rotate: 15, scale: 1.15 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <FlaskConical size={20} />
-          </motion.span>
+          <motion.span className="grid place-items-center w-12 h-12 rounded-2xl bg-[#FB7185] text-white border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]" whileHover={{ rotate: 15, scale: 1.15 }} transition={{ type: "spring", stiffness: 300 }}><FlaskConical size={20} /></motion.span>
         </Floating>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-14 items-center relative z-10">
@@ -172,7 +103,7 @@ export const Hero = () => {
               transition={{ duration: 0.5, ease: EXPO }}
               data-testid="hero-badge"
             >
-              <Sparkles size={14} /> {HERO.badge}
+              <Sparkles size={14} /> {hero.badge}
             </motion.span>
 
             <h1 className="mt-5 text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-[1.02] text-[#1B2A63]">
@@ -180,22 +111,13 @@ export const Hero = () => {
                 className="inline"
                 initial="hidden"
                 animate="visible"
-                variants={{
-                  hidden: {},
-                  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
-                }}
+                variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } } }}
               >
-                {words.map((word, i) => (
+                {leadWords.map((word, i) => (
                   <motion.span
                     key={i}
                     className="inline-block mr-[0.22em]"
-                    variants={{
-                      hidden: { opacity: 0, y: 32, filter: "blur(8px)" },
-                      visible: {
-                        opacity: 1, y: 0, filter: "blur(0px)",
-                        transition: { duration: 0.65, ease: EXPO },
-                      },
-                    }}
+                    variants={{ hidden: { opacity: 0, y: 32, filter: "blur(8px)" }, visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.65, ease: EXPO } } }}
                   >
                     {word}
                   </motion.span>
@@ -209,23 +131,9 @@ export const Hero = () => {
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 transition={{ delay: 0.45, duration: 0.7, ease: EXPO }}
               >
-                {" "}Young Minds
-                <motion.svg
-                  className="absolute -bottom-2 left-0 w-full"
-                  height="12"
-                  viewBox="0 0 200 12"
-                  fill="none"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                >
-                  <motion.path
-                    d="M2 9 C50 2, 150 2, 198 9"
-                    stroke="#1B2A63"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    animate={{ pathLength: 1, opacity: 1 }}
-                    transition={{ delay: 0.85, duration: 0.7, ease: EXPO }}
-                  />
+                {" "}{lastWord}
+                <motion.svg className="absolute -bottom-2 left-0 w-full" height="12" viewBox="0 0 200 12" fill="none" initial={{ pathLength: 0, opacity: 0 }}>
+                  <motion.path d="M2 9 C50 2, 150 2, 198 9" stroke="#1B2A63" strokeWidth="4" strokeLinecap="round" initial={{ pathLength: 0, opacity: 0 }} animate={{ pathLength: 1, opacity: 1 }} transition={{ delay: 0.85, duration: 0.7, ease: EXPO }} />
                 </motion.svg>
               </motion.span>
             </h1>
@@ -236,7 +144,7 @@ export const Hero = () => {
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ delay: 0.3, duration: 0.7, ease: EXPO }}
             >
-              {HERO.sub}
+              {hero.sub}
             </motion.p>
 
             <motion.div
@@ -254,7 +162,7 @@ export const Hero = () => {
               </motion.span>
               <p className="text-sm md:text-base text-[#0F172A] font-medium leading-relaxed">
                 <span className="font-extrabold text-[#1B2A63]">Taught entirely in English.</span>{" "}
-                {HERO.english}
+                {hero.english}
               </p>
             </motion.div>
 
@@ -272,7 +180,7 @@ export const Hero = () => {
                 whileTap={{ scale: 0.97, y: 0 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
-                Reserve a Spot <ArrowRight size={18} />
+                {ui.enquireNow} <ArrowRight size={18} />
               </motion.button>
               <motion.button
                 onClick={() => navigate("/what-is-steam")}
@@ -292,7 +200,7 @@ export const Hero = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.55, duration: 0.6 }}
             >
-              {HERO.stats.map((s, i) => (
+              {hero.stats.map((s, i) => (
                 <motion.div
                   key={s.label}
                   className="ln-card !shadow-[3px_3px_0_#0F172A] px-3 py-3 text-center"
@@ -300,11 +208,7 @@ export const Hero = () => {
                   initial={{ opacity: 0, y: 20, scale: 0.9 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   transition={{ delay: 0.6 + i * 0.08, duration: 0.5, ease: EXPO }}
-                  whileHover={{
-                    y: -4,
-                    boxShadow: "4px 6px 0 #0F172A",
-                    transition: { type: "spring", stiffness: 300, damping: 18 },
-                  }}
+                  whileHover={{ y: -4, boxShadow: "4px 6px 0 #0F172A", transition: { type: "spring", stiffness: 300, damping: 18 } }}
                 >
                   <div className="font-display font-extrabold text-2xl text-[#1B2A63]">
                     <AnimatedCounter value={s.value} />
@@ -315,7 +219,7 @@ export const Hero = () => {
             </motion.div>
           </div>
 
-          {/* ── RIGHT COLUMN — desktop badges only, mobile info card ── */}
+          {/* ── RIGHT COLUMN ── */}
           <motion.div
             className="relative h-[320px] sm:h-[480px] lg:h-[540px]"
             initial={{ opacity: 0, x: 40, filter: "blur(10px)" }}
@@ -324,23 +228,10 @@ export const Hero = () => {
           >
             {/* mobile info card */}
             <div className="sm:hidden absolute inset-x-3 top-4 z-10">
-              <div
-                className="rounded-[28px] border-2 border-[#0F172A] px-4 py-4 shadow-[6px_6px_0_#0F172A]"
-                style={{
-                  background: "rgba(255,255,255,0.76)",
-                  backdropFilter: "blur(10px)",
-                  WebkitBackdropFilter: "blur(10px)",
-                }}
-              >
-                <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#1B2A63]/70">
-                  Young scientists at work
-                </p>
-                <h3 className="mt-2 text-2xl font-extrabold leading-tight text-[#1B2A63]">
-                  Build, test, and create in English.
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#475569]">
-                  Hands-on science, guided teamwork, and creative problem-solving in one inspiring space.
-                </p>
+              <div className="rounded-[28px] border-2 border-[#0F172A] px-4 py-4 shadow-[6px_6px_0_#0F172A]" style={{ background: "rgba(255,255,255,0.76)", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)" }}>
+                <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#1B2A63]/70">Young scientists at work</p>
+                <h3 className="mt-2 text-2xl font-extrabold leading-tight text-[#1B2A63]">Build, test, and create in English.</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[#475569]">Hands-on science, guided teamwork, and creative problem-solving in one inspiring space.</p>
                 <div className="mt-4 grid grid-cols-3 gap-2">
                   <MobileChip>Hands-on</MobileChip>
                   <MobileChip>Small groups</MobileChip>
@@ -349,36 +240,17 @@ export const Hero = () => {
               </div>
             </div>
 
-            {/* Desktop-only floating badges — completely unchanged */}
+            {/* Desktop-only floating badges */}
             <Floating className="hidden sm:block -top-5 -left-5" delay={0.5}>
               <span className="grid place-items-center w-16 h-16 rounded-2xl bg-[#FBBF24] border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]">
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                >
-                  <Atom size={28} />
-                </motion.div>
+                <motion.div animate={{ rotate: 360 }} transition={{ duration: 8, repeat: Infinity, ease: "linear" }}><Atom size={28} /></motion.div>
               </span>
             </Floating>
-
             <Floating className="hidden sm:block top-1/3 -right-6" delay={0.65}>
-              <motion.span
-                className="grid place-items-center w-14 h-14 rounded-2xl bg-[#10B981] text-white border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]"
-                whileHover={{ rotate: -15, scale: 1.15 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <Rocket size={24} />
-              </motion.span>
+              <motion.span className="grid place-items-center w-14 h-14 rounded-2xl bg-[#10B981] text-white border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]" whileHover={{ rotate: -15, scale: 1.15 }} transition={{ type: "spring", stiffness: 300 }}><Rocket size={24} /></motion.span>
             </Floating>
-
             <Floating className="hidden sm:block -bottom-5 left-10" delay={0.8}>
-              <motion.span
-                className="grid place-items-center w-14 h-14 rounded-2xl bg-[#FB7185] text-white border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]"
-                whileHover={{ rotate: 15, scale: 1.15 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <FlaskConical size={24} />
-              </motion.span>
+              <motion.span className="grid place-items-center w-14 h-14 rounded-2xl bg-[#FB7185] text-white border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]" whileHover={{ rotate: 15, scale: 1.15 }} transition={{ type: "spring", stiffness: 300 }}><FlaskConical size={24} /></motion.span>
             </Floating>
           </motion.div>
         </div>
@@ -400,7 +272,7 @@ export const Hero = () => {
             >
               <Sparkles size={20} />
             </motion.span>
-            <p className="text-base md:text-lg font-medium leading-relaxed">{HERO.key}</p>
+            <p className="text-base md:text-lg font-medium leading-relaxed">{hero.key}</p>
           </motion.div>
         </div>
       </section>

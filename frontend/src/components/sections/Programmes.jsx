@@ -2,10 +2,16 @@ import { motion } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { Reveal, SectionHeading } from "../Reveal";
-import { PROGRAMMES } from "../../data";
+import { useData } from "../../i18n/useData";
 
 export const Programmes = () => {
   const navigate = useNavigate();
+  const { programmes, ui } = useData();
+
+  // Keep original programme data for images and links (non-translatable)
+  // programmes from useData() already has translated title/tag/text
+  // but preserves image and color from data.js via spread
+
   return (
     <section id="programmes" className="py-20 lg:py-28 pt-28 sm:pt-32">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -18,7 +24,7 @@ export const Programmes = () => {
         </Reveal>
 
         <div className="mt-14 grid lg:grid-cols-3 gap-7">
-          {PROGRAMMES.map((p, i) => (
+          {programmes.map((p, i) => (
             <motion.div
               key={p.title}
               initial={{ opacity: 0, y: 26 }}
@@ -57,7 +63,7 @@ export const Programmes = () => {
                   style={{ color: p.color }}
                   data-testid={`programme-enquire-${i}`}
                 >
-                  Enquire about this <ArrowUpRight size={18} />
+                  {ui.enquireNow} <ArrowUpRight size={18} />
                 </button>
               </div>
             </motion.div>

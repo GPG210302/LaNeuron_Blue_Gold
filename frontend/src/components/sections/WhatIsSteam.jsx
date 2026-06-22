@@ -1,12 +1,18 @@
 import { useState, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Reveal, SectionHeading } from "../Reveal";
-import { STEAM } from "../../data";
-import { HERO } from "../../data";
+import { STEAM, HERO } from "../../data";
+import { useData } from "../../i18n/useData";
 import "../../WhatIsSteam.css";
 
 const EXPO = [0.22, 1, 0.36, 1];
 const VIEWPORT = { once: true, margin: "-60px" };
+
+// Colors for stats, timeline, whoFollows, misconceptions — NOT translated, purely visual
+const STAT_COLORS    = ["#3B82F6", "#10B981", "#F97316", "#A855F7"];
+const TIMELINE_COLORS = ["#3B82F6", "#10B981", "#F97316", "#A855F7", "#FB7185"];
+const FOLLOWER_COLORS = ["#3B82F6", "#10B981", "#F97316", "#A855F7", "#FB7185", "#E0B33C"];
+const MYTH_COLORS    = ["#3B82F6", "#10B981", "#F97316"];
 
 /* ─── TiltCard ─── */
 const TiltCard = ({ children, className = "", intensity = 10 }) => {
@@ -30,18 +36,8 @@ const TiltCard = ({ children, className = "", intensity = 10 }) => {
         rawX.set(((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * -intensity);
       }}
       onMouseEnter={() => scale.set(1.03)}
-      onMouseLeave={() => {
-        rawX.set(0);
-        rawY.set(0);
-        scale.set(1);
-      }}
-      style={{
-        rotateX,
-        rotateY,
-        scale,
-        transformStyle: "preserve-3d",
-        perspective: 1000,
-      }}
+      onMouseLeave={() => { rawX.set(0); rawY.set(0); scale.set(1); }}
+      style={{ rotateX, rotateY, scale, transformStyle: "preserve-3d", perspective: 1000 }}
       className={`relative ${className}`}
     >
       {children}
@@ -166,59 +162,43 @@ const MythCard = ({ myth, truth, color, index }) => (
   </TiltCard>
 );
 
-/* ─── Data ─── */
-const STEAM_STATS = [
-  { value: "65%",  label: "of today's children will work in jobs that don't exist yet", color: "#3B82F6" },
-  { value: "3×",   label: "more likely to study STEAM with early childhood exposure",   color: "#10B981" },
-  { value: "40+",  label: "countries now have a national STEAM education strategy",     color: "#F97316" },
-  { value: "1987", label: "year Stanford proved arts integration boosts science retention", color: "#A855F7" },
-];
-
-const ORIGIN_TIMELINE = [
-  { year: "'90s", color: "#3B82F6", event: "STEM was born in the USA",                       detail: "The US National Science Foundation coined STEM to address a growing skills gap in science and engineering graduates entering the workforce." },
-  { year: "2001", color: "#10B981", event: "Rita Colwell formalises STEM policy",             detail: "NSF Director Rita Colwell made STEM a federal education priority, linking science literacy directly to national economic competitiveness." },
-  { year: "2006", color: "#F97316", event: "Georgette Yakman adds the 'A'",                  detail: "American educator Georgette Yakman introduced Arts into STEM, creating STEAM — arguing creativity is inseparable from scientific innovation." },
-  { year: "2013", color: "#A855F7", event: "Rhode Island School of Design lobbies Congress", detail: "RISD led a national campaign to officially add Arts to STEM policy, arguing creativity turns scientific knowledge into world-changing products." },
-  { year: "Now",  color: "#FB7185", event: "STEAM adopted globally",                         detail: "Countries across Europe, Asia, and South America embed STEAM into national curricula. Poland is actively expanding STEAM in early education." },
-];
-
-const WHO_FOLLOWS = [
-  { flag: "🇺🇸", country: "United States", color: "#3B82F6", detail: "STEAM is embedded in the Every Student Succeeds Act. Thousands of schools run dedicated STEAM labs and project-based learning programmes." },
-  { flag: "🇬🇧", country: "United Kingdom", color: "#10B981", detail: "The UK's STEM Learning charity supports over 3 million young people annually. Arts integration is now part of the national curriculum." },
-  { flag: "🇸🇬", country: "Singapore",      color: "#F97316", detail: "Singapore's Applied Learning Programme integrates STEAM into every primary school — widely cited as a global model for 21st-century education." },
-  { flag: "🇫🇮", country: "Finland",        color: "#A855F7", detail: "Finland's phenomenon-based learning model is one of the world's closest real-world implementations of STEAM — inquiry-driven and child-led." },
-  { flag: "🇯🇵", country: "Japan",          color: "#FB7185", detail: "Japan introduced STEAM into National Curriculum Standards in 2022, focusing on creativity and cross-disciplinary problem solving from primary school." },
-  { flag: "🇵🇱", country: "Poland",         color: "#E0B33C", detail: "Poland's Ministry of Education is actively expanding STEAM through dedicated school labs and private programmes in Kraków." },
-];
-
-const MISCONCEPTIONS = [
-  { myth: '"STEAM is just fun experiments — not real learning."',  truth: "Every La Neuron STEAM session follows a complete scientific method: hypothesis, experiment, results, and conclusion. Children produce documented investigations — the same structure used in real research.", color: "#3B82F6" },
-  { myth: '"My child needs to be good at maths to enjoy STEAM."', truth: "STEAM starts with curiosity, not ability. The Arts component ensures that creative thinkers, visual learners, and storytellers are equally at home in every session.", color: "#10B981" },
-  { myth: '"STEAM is only for older children."',                   truth: "Ages 6–9 benefit the most from early STEAM exposure. Young Explorers sessions are sensory-led and visual, designed precisely for how young brains form foundational concepts.", color: "#F97316" },
-];
-
 /* ═══════════════════════════════════════════════
    MAIN EXPORT
 ═══════════════════════════════════════════════ */
 export const WhatIsSteam = () => {
   const [active, setActive] = useState("S");
-  const current = STEAM.find((s) => s.key === active);
+  const { steam, whatIsSteamI18n } = useData();
+  const current = steam.find((s) => s.key === active);
+
+  // Merge i18n text with static colors
+  const steamStats = (whatIsSteamI18n.stats || []).map((s, i) => ({
+    ...s,
+    color: STAT_COLORS[i] || "#3B82F6",
+  }));
+  const originTimeline = (whatIsSteamI18n.timeline || []).map((t, i) => ({
+    ...t,
+    color: TIMELINE_COLORS[i] || "#3B82F6",
+  }));
+  const whoFollows = (whatIsSteamI18n.whoFollows || []).map((f, i) => ({
+    ...f,
+    color: FOLLOWER_COLORS[i] || "#3B82F6",
+  }));
+  const misconceptions = (whatIsSteamI18n.misconceptions || []).map((m, i) => ({
+    ...m,
+    color: MYTH_COLORS[i] || "#3B82F6",
+  }));
 
   return (
     <div
       className="what-is-steam-wrapper"
       style={{ "--steam-bg-image": `url(${HERO.image})` }}
     >
-      {/* Radial edge vignette — blends photo borders softly to white */}
       <div className="what-is-steam-fade" aria-hidden="true" />
 
       <div className="what-is-steam-content">
 
-        {/* ── Section 1: What is STEAM ── no background — neuron animation shows freely */}
-        <section
-          id="what-is-steam"
-          className="relative py-20 lg:py-28 pt-28 sm:pt-32"
-        >
+        {/* ── Section 1: What is STEAM ── */}
+        <section id="what-is-steam" className="relative py-20 lg:py-28 pt-28 sm:pt-32">
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
             <motion.div
               className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-[#DBEAFE] blur-3xl opacity-40"
@@ -243,9 +223,9 @@ export const WhatIsSteam = () => {
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
               <Reveal>
                 <SectionHeading
-                  overline="The five disciplines"
-                  title="What is STEAM Education?"
-                  sub="STEAM stands for Science, Technology, Engineering, Art, and Mathematics — an integrated way of thinking that connects five disciplines into one investigative approach. Rather than teaching subjects in isolation, STEAM shows children how everything is connected."
+                  overline={whatIsSteamI18n.s1Overline}
+                  title={whatIsSteamI18n.s1Title}
+                  sub={whatIsSteamI18n.s1Sub}
                 />
               </Reveal>
 
@@ -261,7 +241,7 @@ export const WhatIsSteam = () => {
                     visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
                   }}
                 >
-                  {STEAM.map((s) => {
+                  {steam.map((s) => {
                     const on = s.key === active;
                     return (
                       <motion.button
@@ -321,7 +301,7 @@ export const WhatIsSteam = () => {
 
               <Reveal delay={0.1}>
                 <div className="mt-12 grid grid-cols-2 md:grid-cols-5 gap-4">
-                  {STEAM.map((s, i) => (
+                  {steam.map((s, i) => (
                     <TiltCard key={s.key}>
                       <motion.button
                         onClick={() => setActive(s.key)}
@@ -350,13 +330,13 @@ export const WhatIsSteam = () => {
           <div className="max-w-5xl mx-auto px-6 lg:px-8">
             <Reveal>
               <SectionHeading
-                overline="Why it matters globally"
-                title="STEAM by the Numbers"
-                sub="The research case for integrated science and arts education."
+                overline={whatIsSteamI18n.s2Overline}
+                title={whatIsSteamI18n.s2Title}
+                sub={whatIsSteamI18n.s2Sub}
               />
             </Reveal>
             <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
-              {STEAM_STATS.map((s, i) => (
+              {steamStats.map((s, i) => (
                 <StatBadge key={i} {...s} delay={i * 0.08} />
               ))}
             </div>
@@ -369,40 +349,30 @@ export const WhatIsSteam = () => {
             <div className="grid lg:grid-cols-2 gap-14 items-start">
               <div>
                 <Reveal>
-                  <SectionHeading overline="The origin story" title="Birth of STEAM" center={false} />
+                  <SectionHeading overline={whatIsSteamI18n.s3Overline} title={whatIsSteamI18n.s3Title} center={false} />
                 </Reveal>
                 <Reveal delay={0.1} variant="blurIn">
                   <p className="mt-5 text-[#475569] leading-relaxed">
-                    STEAM did not emerge from a single idea — it evolved over three decades of research,
-                    policy-making, and classroom practice across four continents. It began as <strong>STEM</strong> in
-                    the United States in the early 1990s, driven by concerns that students were not developing the
-                    scientific and technical skills the modern economy needed.
+                    {whatIsSteamI18n.s3Body1}
                   </p>
                 </Reveal>
                 <Reveal delay={0.15} variant="blurIn">
                   <p className="mt-4 text-[#475569] leading-relaxed">
-                    The pivotal shift came in <strong>2006</strong>, when American educator{" "}
-                    <strong className="text-[#1B2A63]">Georgette Yakman</strong> published her landmark framework
-                    arguing that <em>Art</em> — creative thinking, design, and expression — was the missing
-                    ingredient. Without it, STEM produced technically capable graduates who struggled to innovate,
-                    communicate, or think outside structured problems.
+                    {whatIsSteamI18n.s3Body2}
                   </p>
                 </Reveal>
                 <Reveal delay={0.2} variant="blurIn">
                   <p className="mt-4 text-[#475569] leading-relaxed">
-                    Stanford University's research in the 1980s had already shown that children who engage in
-                    arts-integrated learning retain science concepts significantly longer. STEAM simply made that
-                    connection official — and built it into the curriculum.
+                    {whatIsSteamI18n.s3Body3}
                   </p>
                 </Reveal>
                 <Reveal delay={0.25} variant="wipeLeft">
                   <blockquote className="mt-8 ln-card bg-[#EEF2FF] p-5 border-l-4 border-[#1B2A63]">
                     <p className="text-[#1B2A63] font-medium italic leading-relaxed">
-                      "STEAM is not about adding art to STEM. It is about recognising that creative thinking is the
-                      engine that makes science meaningful."
+                      {whatIsSteamI18n.s3Quote}
                     </p>
                     <cite className="mt-2 block text-sm font-bold text-[#475569] not-italic">
-                      — Georgette Yakman, founder of the STEAM framework (2006)
+                      {whatIsSteamI18n.s3QuoteCite}
                     </cite>
                   </blockquote>
                 </Reveal>
@@ -411,11 +381,11 @@ export const WhatIsSteam = () => {
               <div>
                 <Reveal delay={0.1}>
                   <h3 className="font-display font-extrabold text-xl text-[#1B2A63] mb-6">
-                    A timeline of STEAM
+                    {whatIsSteamI18n.s3TimelineHeading}
                   </h3>
                 </Reveal>
-                {ORIGIN_TIMELINE.map((item, i) => (
-                  <TimelineItem key={i} {...item} index={i} isLast={i === ORIGIN_TIMELINE.length - 1} />
+                {originTimeline.map((item, i) => (
+                  <TimelineItem key={i} {...item} index={i} isLast={i === originTimeline.length - 1} />
                 ))}
               </div>
             </div>
@@ -427,13 +397,13 @@ export const WhatIsSteam = () => {
           <div className="max-w-6xl mx-auto px-6 lg:px-8">
             <Reveal>
               <SectionHeading
-                overline="Global adoption"
-                title="Who Follows STEAM?"
-                sub="From government policy to classroom practice — STEAM is the world's fastest-growing education movement."
+                overline={whatIsSteamI18n.s4Overline}
+                title={whatIsSteamI18n.s4Title}
+                sub={whatIsSteamI18n.s4Sub}
               />
             </Reveal>
             <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {WHO_FOLLOWS.map((f, i) => (
+              {whoFollows.map((f, i) => (
                 <FollowerCard key={f.country} {...f} index={i} />
               ))}
             </div>
@@ -445,13 +415,13 @@ export const WhatIsSteam = () => {
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <Reveal>
               <SectionHeading
-                overline="Common questions"
-                title="Clearing Up the Myths"
-                sub="Three things parents often wonder — answered honestly."
+                overline={whatIsSteamI18n.s5Overline}
+                title={whatIsSteamI18n.s5Title}
+                sub={whatIsSteamI18n.s5Sub}
               />
             </Reveal>
             <div className="mt-10 flex flex-col gap-5">
-              {MISCONCEPTIONS.map((m, i) => (
+              {misconceptions.map((m, i) => (
                 <MythCard key={i} {...m} index={i} />
               ))}
             </div>
