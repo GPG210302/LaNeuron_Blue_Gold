@@ -1,5 +1,6 @@
 import "@/App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { LanguageProvider } from "@/i18n/LanguageContext";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { Layout } from "@/components/Layout";
 import Home from "@/pages/Home";
@@ -13,22 +14,24 @@ import { Faq } from "@/components/sections/Faq";
 
 function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/what-is-steam" element={<WhatIsSteam />} />
-          <Route path="/why-steam" element={<WhySteamPage />} />
-          <Route path="/programmes" element={<Programmes />} />
-          <Route path="/Summer Program" element={<Events />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/faq" element={<Faq />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <LanguageProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/what-is-steam" element={<WhatIsSteam />} />
+            <Route path="/why-steam" element={<WhySteamPage />} />
+            <Route path="/programmes" element={<Programmes />} />
+            <Route path="/Summer Program" element={<Events />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/faq" element={<Faq />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </LanguageProvider>
   );
 }
 
