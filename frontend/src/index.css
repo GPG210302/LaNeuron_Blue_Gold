@@ -8,12 +8,11 @@
     --ln-bg: #FDFBF7;
     --ln-ink: #0F172A;
     --ln-muted: #475569;
-    /* Logo-aligned palette: Navy blue + Gold */
-    --ln-science: #1B2A63;        /* navy (primary brand) */
-    --ln-science-light: #E7EBF7;  /* light navy tint */
-    --ln-coral: #E0B33C;          /* light shiny gold accent */
+    --ln-science: #1B2A63;
+    --ln-science-light: #E7EBF7;
+    --ln-coral: #E0B33C;
     --ln-gold: #E0B33C;
-    --ln-gold-bright: #FBBF24;    /* bright gold for dark backgrounds */
+    --ln-gold-bright: #FBBF24;
     --ln-mint: #10B981;
     --ln-math: #FBBF24;
     --ln-art: #A855F7;
@@ -103,10 +102,21 @@ h1, h2, h3, h4, h5, .font-display {
     }
     .ln-btn:hover { transform: translateY(-3px); box-shadow: 6px 6px 0px #0F172A; }
     .ln-btn:active { transform: translateY(0); box-shadow: 2px 2px 0px #0F172A; }
+
+    /* ── GOLD GLOW PULSE added here — no other changes to ln-btn-primary ── */
     .ln-btn-primary {
         @apply text-[#0F172A];
         background: linear-gradient(135deg, #FBE49A 0%, #ECC656 40%, #D9A521 70%, #F6DE8B 100%);
+        animation: goldGlow 2.2s ease-in-out infinite;
     }
+
+    /* Pause pulse on hover/active so the lift effect reads cleanly */
+    .ln-btn-primary:hover,
+    .ln-btn-primary:active {
+        animation: none;
+        box-shadow: 0 0 18px 5px rgba(220, 160, 20, 0.55), 6px 6px 0px #0F172A;
+    }
+
     .ln-btn-dark { @apply bg-[#0F172A] text-white; }
     .ln-btn-white { @apply bg-white text-[#0F172A]; }
     .ln-tag {
@@ -134,6 +144,30 @@ h1, h2, h3, h4, h5, .font-display {
 }
 .ln-spin-slow { animation: ln-spin-slow 18s linear infinite; }
 
+/* ── GOLD GLOW PULSE keyframes ─────────────────────────────────────────────
+   Uses your exact brand gold: #ECC656 core → #D9A521 deep → transparent rim
+   Three-layer box-shadow: tight contact glow + mid spread + wide halo
+   The 4px 4px 0px #0F172A offset shadow is preserved throughout so the
+   neobrutalist raised-button look is never lost during the pulse.
+   ───────────────────────────────────────────────────────────────────────── */
+@keyframes goldGlow {
+    0%, 100% {
+        box-shadow:
+            0 0 6px 1px  rgba(220, 160, 20, 0.45),
+            0 0 14px 4px rgba(236, 198, 86, 0.25),
+            0 0 0px 0px  rgba(236, 198, 86, 0.00),
+            4px 4px 0px  #0F172A;
+    }
+    50% {
+        box-shadow:
+            0 0 10px 3px  rgba(220, 160, 20, 0.75),
+            0 0 22px 8px  rgba(236, 198, 86, 0.45),
+            0 0 40px 14px rgba(236, 198, 86, 0.18),
+            4px 4px 0px   #0F172A;
+    }
+}
+
+/* Keep old glowBlink in place (used nowhere currently, safe to leave) */
 @keyframes glowBlink {
   0%, 100% { box-shadow: 0 0 8px 2px rgba(255,200,50,0.5); background-color: rgba(255,200,50,0.15); }
   50%       { box-shadow: 0 0 20px 6px rgba(255,200,50,0.9); background-color: rgba(255,200,50,0.35); }
@@ -143,12 +177,5 @@ h1, h2, h3, h4, h5, .font-display {
     to { stroke-dashoffset: -1000; }
 }
 .ln-dash { stroke-dasharray: 10 12; animation: ln-dash 30s linear infinite; }
-
-/*.ln-grid-bg {
-    background-image:
-        linear-gradient(rgba(27,42,99,0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(27,42,99,0.06) 1px, transparent 1px);
-    background-size: 28px 28px;
-}*/
 
 [data-debug-wrapper="true"] { display: contents !important; }
