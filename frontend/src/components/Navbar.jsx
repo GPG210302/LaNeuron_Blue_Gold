@@ -105,11 +105,12 @@ export const Navbar = () => {
         </nav>
 
         <div className="flex items-center gap-3">
+          {/* ── CHANGED: ln-btn-primary → ln-btn-enquire (glow, no shadow, navy border) ── */}
           <ScrambleButton
             label="Enquire Now"
             data-testid="nav-register-btn"
             onClick={() => goTo("/register")}
-            className="hidden sm:inline-flex ln-btn ln-btn-primary !px-5 !py-2.5 !text-sm font-mono tracking-wide"
+            className="hidden sm:inline-flex ln-btn ln-btn-enquire !px-5 !py-2.5 !text-sm font-mono tracking-wide"
           />
           <button
             className="lg:hidden grid place-items-center w-10 h-10 rounded-xl border-2 border-[#0F172A] bg-white"
@@ -142,10 +143,11 @@ export const Navbar = () => {
                   }`}
                 />
               ))}
+              {/* ── CHANGED: ln-btn-primary → ln-btn-enquire in mobile menu too ── */}
               <ScrambleButton
                 label="Enquire Now"
                 onClick={() => goTo("/register")}
-                className="ln-btn ln-btn-primary mt-2 font-mono tracking-wide"
+                className="ln-btn ln-btn-enquire mt-2 font-mono tracking-wide"
               />
             </div>
           </motion.div>

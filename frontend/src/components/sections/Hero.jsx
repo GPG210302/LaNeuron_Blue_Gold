@@ -232,7 +232,7 @@ export const Hero = () => {
           >
             <motion.button
               onClick={() => navigate("/register")}
-              className="ln-btn ln-btn-primary"
+              className="ln-btn ln-btn-primary"   {/* ← must say ln-btn-primary, NOT ln-btn-enquire */}
               data-testid="hero-cta-register"
               whileHover={{ scale: 1.04, y: -2 }}
               whileTap={{ scale: 0.97, y: 0 }}

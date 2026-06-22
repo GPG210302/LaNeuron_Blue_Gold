@@ -49,7 +49,7 @@ export const Footer = () => {
               <li><a href={`tel:${SITE.phone}`} className="flex items-center gap-2 hover:text-white"><Phone size={16} className="text-[#10B981]" /> {SITE.phone}</a></li>
               <li><a href={`mailto:${SITE.email}`} className="flex items-center gap-2 hover:text-white break-all"><Mail size={16} className="text-[#FBBF24]" /> {SITE.email}</a></li>
             </ul>
-            <button onClick={() => navigate("/register")} className="ln-btn ln-btn-primary mt-5 !px-5 !py-2.5 !text-sm">Enquire Now</button>
+            <button onClick={() => navigate("/register")} className="ln-btn ln-btn-enquire font-mono tracking-wide">Enquire Now</button>
           </div>
         </div>
 
