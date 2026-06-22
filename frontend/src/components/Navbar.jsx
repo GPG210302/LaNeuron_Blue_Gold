@@ -40,7 +40,7 @@ function ScrambleButton({ label, onClick, className, style, "data-testid": testI
       onClick={onClick}
       onMouseEnter={handleMouseEnter}
       className={className}
-      style={style}            {/* ← pass through style prop */}
+      style={style}            
     >
       {label}
     </button>
