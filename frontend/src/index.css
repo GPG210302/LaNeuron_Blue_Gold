@@ -113,12 +113,14 @@ h1, h2, h3, h4, h5, .font-display {
        Used ONLY on the Navbar and Footer "Enquire Now" buttons.
        Extends ln-btn-primary gradient but overrides shadow and adds glow.      */
     .ln-btn-enquire {
-         @apply text-[#0F172A];
+        @apply text-[#0F172A];
         background: linear-gradient(135deg, #FBE49A 0%, #ECC656 40%, #D9A521 70%, #F6DE8B 100%);
         border: 2px solid #1B2A63 !important;
         box-shadow: none !important;
         animation: goldGlow 2.2s ease-in-out infinite;
-        transition: transform .2s ease, box-shadow .2s ease;
+        animation-fill-mode: both;        /* ← ensures glow starts on first frame */
+        animation-play-state: running;    /* ← forces running state on paint */
+        transition: transform .2s ease;   /* ← removed box-shadow from transition — it fights the animation */
     }
     .ln-btn-enquire:hover {
         transform: translateY(-3px);

@@ -16,7 +16,7 @@ export const Events = () => {
               <span className="ln-overline">Upcoming events — Summer 2026</span>
               <h2 className="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight">STEAM Summer Program 2026</h2>
             </div>
-            <span className="ln-tag !bg-[#E0B33C] !text-[#0F172A] !border-[#0F172A] !text-sm !px-4 !py-2 animate-pulse">
+            <span className="ln-tag !bg-[#E0B33C] !text-[#0F172A] !border-[#0F172A] !text-sm !px-4 !py-2 ">
               Registrations open • limited spots
             </span>
           </div>
