@@ -4,6 +4,7 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Hero } from "../components/sections/Hero";
 import { SectionHeading } from "../components/Reveal";
+import { useData } from "../i18n/useData";
 
 // ─── EASING ───────────────────────────────────────────────
 const EXPO = [0.22, 1, 0.36, 1];
@@ -66,18 +67,10 @@ const TiltCard = ({ children, className = "" }) => {
   );
 };
 
-// ─── LINKS DATA ───────────────────────────────────────────
-const LINKS = [
-  { to: "/about",         title: "Meet the Educator", desc: "Dr. Priyadarshini Gouthaman — PhD in Anatomy, cognitive scientist, and the mind behind La Neuron.",                       color: "#1B2A63" },
-  { to: "/what-is-steam", title: "What is STEAM?",    desc: "Explore the five disciplines — Science, Technology, Engineering, Art, and Mathematics — and how they connect.",           color: "#10B981" },
-  { to: "/why-steam",     title: "Why STEAM?",         desc: "Six reasons STEAM matters for your child, plus our full investigative scientific-method approach.",                        color: "#A855F7" },
-  { to: "/programmes",    title: "Programmes",         desc: "Weekly workshops, the Summer Program, and one-to-one cognitive support sessions.",                                            color: "#F97316" },
-  { to: "/Summer Program",   title: "Summer Program 2026",   desc: "A themed week of Wonder, Build, Bio, Planet, and Food labs in Kraków. Registrations open!",                              color: "#E0B33C" },
-  { to: "/faq",           title: "FAQ",                desc: "Ages, language, what to bring, learning differences, siblings, and the cancellation policy.",                             color: "#D97706" },
-];
-
 // ─── HOME PAGE ────────────────────────────────────────────
 export default function Home() {
+  const { home } = useData();
+
   return (
     <>
       <Hero />
@@ -93,15 +86,15 @@ export default function Home() {
             transition={{ duration: 0.65, ease: EXPO }}
           >
             <SectionHeading
-              overline="Explore the academy"
-              title="Where would you like to start?"
-              sub="Tap any card to dive into the details — no endless scrolling."
+              overline={home.overline}
+              title={home.sectionTitle}
+              sub={home.sectionSub}
             />
           </motion.div>
 
           {/* Cards grid */}
           <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {LINKS.map((l, i) => (
+            {home.links.map((l, i) => (
               <TiltCard key={l.to}>
                 {/* Scroll-reveal + hover lift on the inner card */}
                 <motion.div
@@ -138,7 +131,7 @@ export default function Home() {
                       style={{ color: l.color }}
                       whileHover={{ x: 4, transition: { type: "spring", stiffness: 400 } }}
                     >
-                      Explore{" "}
+                      {home.exploreBtn}{" "}
                       <motion.span
                         whileHover={{ x: 3 }}
                         transition={{ type: "spring", stiffness: 400 }}

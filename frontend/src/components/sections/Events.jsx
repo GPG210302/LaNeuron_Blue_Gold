@@ -2,10 +2,13 @@ import { useNavigate } from "react-router-dom";
 import { CalendarDays, Clock, MapPin, Users, AlertCircle, ArrowRight, RotateCw } from "lucide-react";
 import { Reveal } from "../Reveal";
 import { FlipCard } from "../FlipCard";
-import { CAMP_DAYS, CAMP_FACTS, SITE } from "../../data";
+import { SITE } from "../../data";
+import { useData } from "../../i18n/useData";
 
 export const Events = () => {
   const navigate = useNavigate();
+  const { events, campDays, campFacts } = useData();
+
   return (
     <section id="events" className="py-20 lg:py-28 pt-28 sm:pt-32 bg-white/30 border-b-2 border-[#0F172A] relative">
       <div className="pointer-events-none absolute top-10 right-10 w-72 h-72 rounded-full bg-[#FFE4E4] blur-3xl opacity-50" />
@@ -13,27 +16,26 @@ export const Events = () => {
         <Reveal>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
-              <span className="ln-overline">Upcoming events — Summer 2026</span>
-              <h2 className="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight">STEAM Summer Program 2026</h2>
+              <span className="ln-overline">{events.overline}</span>
+              <h2 className="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight">{events.heading}</h2>
             </div>
-            <span className="ln-tag !bg-[#E0B33C] !text-[#0F172A] !border-[#0F172A] !text-sm !px-4 !py-2 ">
-              Registrations open • limited spots
+            <span className="ln-tag !bg-[#E0B33C] !text-[#0F172A] !border-[#0F172A] !text-sm !px-4 !py-2">
+              {events.tag}
             </span>
           </div>
           <p className="mt-5 max-w-3xl text-lg text-[#475569] leading-relaxed">
-            A one-week intensive STEAM Summer Program for children aged 6–13. Each day is a different themed lab. Children
-            spend 3 hours per day in guided scientific investigations, both indoors and outdoors.
+            {events.intro}
           </p>
         </Reveal>
 
         {/* Weekly flip-card timeline */}
         <Reveal delay={0.05}>
           <h3 className="mt-12 font-display font-extrabold text-2xl flex items-center gap-2">
-            <CalendarDays size={24} className="text-[#1B2A63]" /> A week at camp
-            <span className="text-sm font-semibold text-[#475569] ml-2">(tap a day to explore)</span>
+            <CalendarDays size={24} className="text-[#1B2A63]" /> {events.weekHeading}
+            <span className="text-sm font-semibold text-[#475569] ml-2">{events.weekSub}</span>
           </h3>
           <div className="mt-6 grid md:grid-cols-5 gap-4" data-testid="camp-week">
-            {CAMP_DAYS.map((d) => (
+            {campDays.map((d) => (
               <FlipCard
                 key={d.day}
                 heightClass="h-64"
@@ -51,7 +53,7 @@ export const Events = () => {
                     <h4 className="mt-4 font-display font-extrabold text-xl leading-tight">{d.lab}</h4>
                     <p className="mt-1 text-sm font-semibold" style={{ color: d.color }}>{d.tagline}</p>
                     <span className="mt-auto inline-flex items-center gap-1.5 text-xs font-bold text-[#475569]">
-                      <RotateCw size={12} /> Tap to explore
+                      <RotateCw size={12} /> {events.tapExplore}
                     </span>
                   </div>
                 }
@@ -71,9 +73,9 @@ export const Events = () => {
         <div className="mt-12 grid lg:grid-cols-2 gap-7">
           <Reveal>
             <div className="ln-card p-7 h-full">
-              <h3 className="font-display font-extrabold text-2xl">Camp details</h3>
+              <h3 className="font-display font-extrabold text-2xl">{events.campDetailsHeading}</h3>
               <div className="mt-5 grid grid-cols-2 gap-x-4 gap-y-4">
-                {CAMP_FACTS.map((f) => (
+                {campFacts.map((f) => (
                   <div key={f.label} className="border-l-2 border-[#E7EBF7] pl-3">
                     <div className="text-xs font-bold uppercase tracking-wide text-[#475569]">{f.label}</div>
                     <div className="font-display font-extrabold text-[#0F172A]">{f.value}</div>
@@ -82,22 +84,20 @@ export const Events = () => {
               </div>
 
               <div className="mt-6 grid grid-cols-3 gap-3">
-                <Stat icon={Clock} label="3 hrs / day" />
-                <Stat icon={Users} label="Max 10 kids" />
-                <Stat icon={MapPin} label="Kraków" />
+                <Stat icon={Clock} label={events.stat3hrs} />
+                <Stat icon={Users} label={events.statMax10} />
+                <Stat icon={MapPin} label={events.statKrakow} />
               </div>
 
               <div className="mt-6 ln-card !shadow-none bg-[#E7EBF7] p-4 flex gap-3">
                 <AlertCircle size={20} className="text-[#1B2A63] shrink-0 mt-0.5" />
                 <p className="text-sm text-[#0F172A]/80 font-medium">
-                  Suitable for children with learning differences. Our educator is a certified Neuroscience Coach
-                  experienced with ADHD, dyslexia, memory challenges, and SEN. Children take home Science project final outcomes,
-                  Skill Badges and Certificate of Achievement.
+                  {events.suitableNote}
                 </p>
               </div>
 
               <button onClick={() => navigate("/register")} className="ln-btn ln-btn-primary mt-6 w-full" data-testid="events-register-btn">
-                Reserve Your Child's Spot <ArrowRight size={18} />
+                {events.reserveBtn} <ArrowRight size={18} />
               </button>
             </div>
           </Reveal>

@@ -1,22 +1,24 @@
 import { RotateCw } from "lucide-react";
 import { Reveal, SectionHeading } from "../Reveal";
 import { FlipCard } from "../FlipCard";
-import { WHY } from "../../data";
+import { useData } from "../../i18n/useData";
 
 export const WhySteam = () => {
+  const { why, whySteamI18n } = useData();
+
   return (
     <section id="why-steam" className="py-20 lg:py-28 pt-28 sm:pt-32">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <Reveal>
           <SectionHeading
-            overline="Why STEAM? Why now?"
-            title="Why STEAM Matters for Your Child"
-            sub="Tap any card to flip it over and discover why each reason matters."
+            overline={whySteamI18n.overline}
+            title={whySteamI18n.title}
+            sub={whySteamI18n.sub}
           />
         </Reveal>
 
         <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {WHY.map((w, i) => (
+          {why.map((w, i) => (
             <FlipCard
               key={w.title}
               heightClass="h-64"
@@ -34,7 +36,7 @@ export const WhySteam = () => {
                     <h3 className="font-display font-extrabold text-xl">{w.title}</h3>
                   </div>
                   <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-bold" style={{ color: w.color }}>
-                    <RotateCw size={14} /> Tap to explore
+                    <RotateCw size={14} /> {whySteamI18n.tapExplore}
                   </span>
                 </div>
               }

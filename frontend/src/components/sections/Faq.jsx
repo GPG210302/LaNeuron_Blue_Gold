@@ -2,19 +2,25 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus } from "lucide-react";
 import { Reveal, SectionHeading } from "../Reveal";
-import { FAQ as FAQS } from "../../data";
+import { useData } from "../../i18n/useData";
 
 export const Faq = () => {
   const [open, setOpen] = useState(0);
+  const { faq } = useData();
+
   return (
     <section id="faq" className="py-20 lg:py-28 pt-28 sm:pt-32 ln-grid-bg">
       <div className="max-w-3xl mx-auto px-6 lg:px-8">
         <Reveal>
+          {/* SectionHeading overline and title come from the FAQ page — these two strings
+              are short UI labels. If you want them translated, add faq.overline and
+              faq.sectionTitle keys to en.js / pl.js. For now they use static values
+              since they weren't in the original data.js. */}
           <SectionHeading overline="Good to know" title="Frequently Asked Questions" />
         </Reveal>
 
         <div className="mt-12 space-y-3">
-          {FAQS.map((f, i) => {
+          {faq.map((f, i) => {
             const isOpen = open === i;
             return (
               <Reveal key={f.q} delay={i * 0.03}>

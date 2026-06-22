@@ -1,27 +1,29 @@
 import { motion } from "framer-motion";
 import { CheckCircle2, Gift, ArrowDown } from "lucide-react";
 import { Reveal } from "../Reveal";
-import { METHOD, RECEIVE, AGE_GROUPS } from "../../data";
+import { useData } from "../../i18n/useData";
 
 export const Approach = () => {
+  const { method, receive, ageGroups, approachI18n } = useData();
+
   return (
     <section id="approach" className="py-20 lg:py-28 bg-[#0F172A] text-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <Reveal>
           <div className="max-w-3xl mx-auto text-center">
-            <span className="ln-overline !text-[#FBBF24]">Our investigative approach</span>
+            <span className="ln-overline !text-[#FBBF24]">{approachI18n.overline}</span>
             <h2 className="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight">
-              Every Session Follows the Scientific Method
+              {approachI18n.heading}
             </h2>
             <p className="mt-5 text-lg text-white/70 leading-relaxed">
-              Six clear steps turn curiosity into real discovery — the same method scientists use, made joyful for children.
+              {approachI18n.sub}
             </p>
           </div>
         </Reveal>
 
         {/* Process flow with connecting arrows */}
         <div className="mt-14 max-w-3xl mx-auto">
-          {METHOD.map((m, i) => (
+          {method.map((m, i) => (
             <div key={m.n}>
               <motion.div
                 initial={{ opacity: 0, y: 24 }}
@@ -53,7 +55,7 @@ export const Approach = () => {
                 </div>
               </motion.div>
 
-              {i < METHOD.length - 1 && (
+              {i < method.length - 1 && (
                 <motion.div
                   className="flex justify-center py-2"
                   initial={{ opacity: 0 }}
@@ -78,14 +80,14 @@ export const Approach = () => {
                 <span className="grid place-items-center w-11 h-11 rounded-xl bg-[#FBBF24] text-[#0F172A]">
                   <Gift size={22} />
                 </span>
-                <h3 className="font-display font-extrabold text-2xl">What children receive</h3>
+                <h3 className="font-display font-extrabold text-2xl">{approachI18n.receiveHeading}</h3>
               </div>
               <ul className="mt-5 space-y-3">
-                {RECEIVE.map((item, index) => (
+                {receive.map((item, index) => (
                   <li key={index} className="flex gap-3 text-white/80">
-                  <CheckCircle2 size={20} className="text-[#10B981] shrink-0 mt-0.5" />
-                  <span style={item.style || {}}>{item.text}</span>
-                </li>
+                    <CheckCircle2 size={20} className="text-[#10B981] shrink-0 mt-0.5" />
+                    <span style={item.style || {}}>{item.text || item}</span>
+                  </li>
                 ))}
               </ul>
             </div>
@@ -93,7 +95,7 @@ export const Approach = () => {
 
           <Reveal delay={0.1}>
             <div className="grid gap-6 h-full">
-              {AGE_GROUPS.map((g) => (
+              {ageGroups.map((g) => (
                 <div key={g.title} className="ln-card !border-white/10 bg-white/5 p-6" data-testid={`age-group-${g.title}`}>
                   <div className="flex items-center justify-between">
                     <h3 className="font-display font-extrabold text-xl">{g.title}</h3>
