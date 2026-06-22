@@ -58,4 +58,10 @@
             transparent 100%
         );
     }
+
+    /* Neuron link canvas — 15% brighter on mobile only */
+    #neuron-canvas {
+        opacity: 1.0 !important;
+        filter: brightness(1.15);
+    }
 }

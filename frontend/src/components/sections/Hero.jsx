@@ -5,32 +5,25 @@ import { Atom, Rocket, Sparkles, FlaskConical, ArrowRight, Languages } from "luc
 import { HERO } from "../../data";
 import classroomBg from "../../assets/Group_of_kids.png";
 
-// ─── EASING ───────────────────────────────────────────────
 const EXPO = [0.22, 1, 0.36, 1];
 
-// ─── ANIMATED COUNTER ─────────────────────────────────────
 const AnimatedCounter = ({ value }) => {
   const [display, setDisplay] = useState("0");
   const ref = useRef(null);
-
   useEffect(() => {
     const match = String(value).match(/^(\d+)(.*)/);
     if (!match) { setDisplay(value); return; }
     const end = parseInt(match[1], 10);
     const suffix = match[2] ?? "";
     const controls = animate(0, end, {
-      duration: 1.8,
-      ease: "easeOut",
-      delay: 0.4,
+      duration: 1.8, ease: "easeOut", delay: 0.4,
       onUpdate: (v) => setDisplay(Math.round(v) + suffix),
     });
     return () => controls.stop();
   }, [value]);
-
   return <span ref={ref}>{display}</span>;
 };
 
-// ─── FLOATING BADGE ───────────────────────────────────────
 const Floating = ({ children, className, delay = 0 }) => (
   <motion.div
     className={`absolute ${className}`}
@@ -47,7 +40,6 @@ const Floating = ({ children, className, delay = 0 }) => (
   </motion.div>
 );
 
-// ─── ANIMATED BACKGROUND ORBS ────────────────────────────
 const Orbs = () => (
   <>
     <motion.div
@@ -74,14 +66,13 @@ const MobileChip = ({ children }) => (
   </div>
 );
 
-// ─── HERO ─────────────────────────────────────────────────
 export const Hero = () => {
   const navigate = useNavigate();
   const words = "Real-World Science for".split(" ");
 
   return (
     <>
-      {/* ── MOBILE-ONLY BACKGROUND IMAGE — outside section so overflow-hidden can't clip it ── */}
+      {/* ── MOBILE-ONLY BACKGROUND IMAGE — 25% brighter: opacity 0.22 → 0.28 ── */}
       <div
         className="pointer-events-none fixed inset-0 sm:hidden"
         style={{ zIndex: -1 }}
@@ -93,7 +84,7 @@ export const Hero = () => {
           className="w-full h-full object-cover"
           style={{
             objectPosition: "68% 12%",
-            opacity: 0.22,
+            opacity: 0.28,
             maskImage:
               "linear-gradient(to bottom, transparent 0%, black 8%, black 70%, transparent 100%)",
             WebkitMaskImage:
@@ -103,53 +94,54 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/50 to-white/85" />
       </div>
 
+      {/* ── DESKTOP/TABLET FIXED BACKGROUND IMAGE — unchanged ── */}
+      <div
+        className="pointer-events-none fixed inset-0 hidden sm:block"
+        style={{ zIndex: -1 }}
+        aria-hidden="true"
+      >
+        <img
+          src={classroomBg}
+          alt=""
+          className="w-full h-full object-right object-contain"
+          style={{
+            objectPosition: "70% top",
+            mixBlendMode: "multiply",
+            opacity: 0.4,
+            maskImage:
+              "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%)",
+            maskComposite: "intersect",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%)",
+            WebkitMaskComposite: "source-in",
+          }}
+        />
+      </div>
+
       <section
         id="home"
         className="relative pt-36 pb-20 sm:pt-[250px] lg:pt-[260px] lg:pb-28 overflow-hidden ln-grid-bg"
       >
-        {/* ── DESKTOP/TABLET FIXED BACKGROUND IMAGE ───────── */}
-        <div
-          className="pointer-events-none fixed inset-0 hidden sm:block"
-          style={{ zIndex: -1 }}
-          aria-hidden="true"
-        >
-          <img
-            src={classroomBg}
-            alt=""
-            className="w-full h-full object-right object-contain"
-            style={{
-              objectPosition: "70% top",
-              mixBlendMode: "multiply",
-              opacity: 0.4,
-              maskImage:
-                "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%)",
-              maskComposite: "intersect",
-              WebkitMaskImage:
-                "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%)",
-              WebkitMaskComposite: "source-in",
-            }}
-          />
-        </div>
-
         <div className="hidden sm:block">
           <Orbs />
         </div>
 
-        {/* ── MOBILE FLOATING ICONS — on the section, above the card ── */}
-        {/* Atom: top-left corner, always above everything */}
-        <Floating className="sm:hidden top-36 left-4 z-20" delay={0.5}>
+        {/* ── MOBILE FLOATING ICONS — repositioned to clear text areas ── */}
+
+        {/* Atom (yellow): moved to RIGHT side, level with the badge tag — empty space on that side */}
+        <Floating className="sm:hidden top-36 right-4 z-20" delay={0.5}>
           <span className="grid place-items-center w-14 h-14 rounded-2xl bg-[#FBBF24] border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]">
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
             >
-              <Atom size={24} />
+              <Atom size={22} />
             </motion.div>
           </span>
         </Floating>
 
-        {/* Rocket: right side, below the stat cards, above the info card */}
-        <Floating className="sm:hidden top-[420px] right-4 z-20" delay={0.65}>
+        {/* Rocket (green): moved down to sit beside the CTA button row — ~top-[560px] clears all text */}
+        <Floating className="sm:hidden top-[560px] right-4 z-20" delay={0.65}>
           <motion.span
             className="grid place-items-center w-12 h-12 rounded-2xl bg-[#10B981] text-white border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]"
             whileHover={{ rotate: -15, scale: 1.15 }}
@@ -159,8 +151,8 @@ export const Hero = () => {
           </motion.span>
         </Floating>
 
-        {/* FlaskConical: bottom-left of the info card area */}
-        <Floating className="sm:hidden top-[680px] left-4 z-20" delay={0.8}>
+        {/* FlaskConical (pink): bottom-left, below the English card — clear of card overlap */}
+        <Floating className="sm:hidden top-[740px] left-4 z-20" delay={0.8}>
           <motion.span
             className="grid place-items-center w-12 h-12 rounded-2xl bg-[#FB7185] text-white border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]"
             whileHover={{ rotate: 15, scale: 1.15 }}
@@ -171,7 +163,7 @@ export const Hero = () => {
         </Floating>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-14 items-center relative z-10">
-          {/* ── LEFT COLUMN ─────────────────────────────────── */}
+          {/* ── LEFT COLUMN ── */}
           <div>
             <motion.span
               className="ln-tag !text-sm !px-4 !py-1.5"
@@ -323,14 +315,14 @@ export const Hero = () => {
             </motion.div>
           </div>
 
-          {/* ── RIGHT COLUMN — desktop floating badges + mobile info card ── */}
+          {/* ── RIGHT COLUMN — desktop badges only, mobile info card ── */}
           <motion.div
             className="relative h-[320px] sm:h-[480px] lg:h-[540px]"
             initial={{ opacity: 0, x: 40, filter: "blur(10px)" }}
             animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
             transition={{ delay: 0.2, duration: 0.8, ease: EXPO }}
           >
-            {/* mobile-only info card — z-10 so icons (z-20 on section) sit above it */}
+            {/* mobile info card */}
             <div className="sm:hidden absolute inset-x-3 top-4 z-10">
               <div
                 className="rounded-[28px] border-2 border-[#0F172A] px-4 py-4 shadow-[6px_6px_0_#0F172A]"
@@ -357,7 +349,7 @@ export const Hero = () => {
               </div>
             </div>
 
-            {/* DESKTOP-ONLY floating badges */}
+            {/* Desktop-only floating badges — completely unchanged */}
             <Floating className="hidden sm:block -top-5 -left-5" delay={0.5}>
               <span className="grid place-items-center w-16 h-16 rounded-2xl bg-[#FBBF24] border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]">
                 <motion.div
@@ -391,7 +383,7 @@ export const Hero = () => {
           </motion.div>
         </div>
 
-        {/* ── KEY BANNER ──────────────────────────────────── */}
+        {/* ── KEY BANNER ── */}
         <div className="max-w-7xl mx-auto px-6 lg:px-8 mt-14">
           <motion.div
             className="ln-card bg-[#0F172A] text-white px-6 py-5 md:px-8 md:py-6 flex items-start gap-4"
