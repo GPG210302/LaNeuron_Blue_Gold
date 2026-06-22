@@ -25,7 +25,7 @@ function useScramble() {
   }, []);
 }
 
-function ScrambleButton({ label, onClick, className, style, "data-testid": testId }) {
+function ScrambleButton({ label, onClick, className, "data-testid": testId }) {
   const ref = useRef(null);
   const scramble = useScramble();
 
@@ -40,7 +40,6 @@ function ScrambleButton({ label, onClick, className, style, "data-testid": testI
       onClick={onClick}
       onMouseEnter={handleMouseEnter}
       className={className}
-      style={style}            
     >
       {label}
     </button>
@@ -112,7 +111,6 @@ export const Navbar = () => {
             data-testid="nav-register-btn"
             onClick={() => goTo("/register")}
             className="hidden sm:inline-flex ln-btn ln-btn-enquire !px-5 !py-2.5 !text-sm font-mono tracking-wide"
-            style={{ animationPlayState: "running", animationName: "goldGlow" }}
           />
           <button
             className="lg:hidden grid place-items-center w-10 h-10 rounded-xl border-2 border-[#0F172A] bg-white"
@@ -150,7 +148,6 @@ export const Navbar = () => {
                 label="Enquire Now"
                 onClick={() => goTo("/register")}
                 className="ln-btn ln-btn-enquire mt-2 font-mono tracking-wide"
-                style={{ animationPlayState: "running", animationName: "goldGlow" }}
               />
             </div>
           </motion.div>
