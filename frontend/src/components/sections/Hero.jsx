@@ -84,7 +84,7 @@ export const Hero = () => {
           className="w-full h-full object-cover"
           style={{
             objectPosition: "68% 12%",
-            opacity: 0.40,
+            opacity: 0.55,
             maskImage:
               "linear-gradient(to bottom, transparent 0%, black 8%, black 70%, transparent 100%)",
             WebkitMaskImage:
