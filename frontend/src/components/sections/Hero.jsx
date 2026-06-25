@@ -74,7 +74,7 @@ export const Hero = () => {
 
       {/* ── DESKTOP/TABLET FIXED BACKGROUND IMAGE ── */}
       <div className="pointer-events-none fixed inset-0 hidden sm:block" style={{ zIndex: -1 }} aria-hidden="true">
-        <img src={classroomBg} alt="" className="w-full h-full object-right object-contain" style={{ objectPosition: "70% top", mixBlendMode: "multiply", opacity: 0.4, maskImage: "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%)", maskComposite: "intersect", WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%)", WebkitMaskComposite: "source-in" }} />
+        <img src={classroomBg} alt="" width="940" height="650" className="w-full h-full object-right object-contain" style={{ objectPosition: "70% top", mixBlendMode: "multiply", opacity: 0.4, maskImage: "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%)", maskComposite: "intersect", WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 10%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 75%, transparent 100%)", WebkitMaskComposite: "source-in" }} />
       </div>
 
       <section id="home" className="relative pt-36 pb-20 sm:pt-[250px] lg:pt-[260px] lg:pb-28 overflow-hidden ln-grid-bg">
