@@ -68,7 +68,7 @@ export const Hero = () => {
     <>
       {/* ── MOBILE-ONLY BACKGROUND IMAGE ── */}
       <div className="pointer-events-none fixed inset-0 sm:hidden" style={{ zIndex: -1 }} aria-hidden="true">
-        <img src={classroomBg} alt="" className="w-full h-full object-cover" style={{ objectPosition: "68% 12%", opacity: 0.55, maskImage: "linear-gradient(to bottom, transparent 0%, black 8%, black 70%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 8%, black 70%, transparent 100%)" }} />
+        <img src={classroomBg} alt="" width="940" height="650" className="w-full h-full object-cover" style={{ objectPosition: "68% 12%", opacity: 0.55, maskImage: "linear-gradient(to bottom, transparent 0%, black 8%, black 70%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 8%, black 70%, transparent 100%)" }} />
         <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/50 to-white/85" />
       </div>
 
