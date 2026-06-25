@@ -38,6 +38,7 @@ export const About = () => {
             <span className="ln-overline">{educator.overline}</span>
             {/* Name is always English — proper noun */}
             <h2 className="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight">{EDUCATOR.name}</h2>
+            <p className="mt-1 text-base font-semibold text-[#1B2A63]">{EDUCATOR.role}</p>
             <div className="mt-3 flex flex-wrap gap-2">
               {educator.tags.map((tag) => (
                 <span key={tag} className="ln-tag">
