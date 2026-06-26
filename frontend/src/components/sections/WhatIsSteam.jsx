@@ -217,7 +217,7 @@ export const WhatIsSteam = () => {
             <FloatingSticker emoji="🤖" label="Robot"       className="top-64 left-[14%]  hidden xl:block" delay={1.3} rotation={-4} />
             <FloatingSticker emoji="⚙️"  label="Engineering" className="top-80 left-[22%]  hidden xl:block" delay={0.9} rotation={5}  />
             <FloatingSticker emoji="🎨" label="Art"         className="top-40 right-[18%] hidden xl:block" delay={0.7} rotation={-6} />
-            <FloatingSticker emoji="🧬" label="DNA"         className="top-70 right-[22%] hidden xl:block" delay={1.5} rotation={7}  />
+            <FloatingSticker emoji="🧬" label="DNA"         className="top-60 right-[22%] hidden xl:block" delay={1.5} rotation={7}  />
             <FloatingSticker emoji="💡" label="Innovation"  className="top-86 right-[12%] hidden xl:block" delay={1.1} rotation={8}  />
 
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
