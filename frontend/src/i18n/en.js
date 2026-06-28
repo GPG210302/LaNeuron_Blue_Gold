@@ -290,6 +290,7 @@ export const en = {
     contactTitle: "Contact",
     enquireBtn: "Enquire Now",
     copyright: "All rights reserved.",
+    designerCredit: "Website crafted by G3 Creative Labs · Ghavish V G · +48 579 156 009",
     facts: ["Ages 6–13", "Mon–Fri 9AM–12PM", "Max 10 per week", "Starts 6 July 2026", "Kraków"],
   },
   events: {

@@ -65,9 +65,22 @@ export const Footer = () => {
           ))}
         </div>
 
-        <div className="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-center">
-          <p className="text-xs text-white/50">© 2026 {SITE.brand}. {footer.copyright}</p>
-          <p className="text-xs text-white/50">Dr. Priyadarshini Gouthaman • {SITE.phone}</p>
+        <div className="mt-8 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center md:items-center justify-between gap-3 text-center md:text-left">
+          <p className="text-xs text-white/50">
+            © 2026 {SITE.brand}. {footer.copyright}
+          </p>
+
+          <p className="text-xs text-white/45 md:text-right">
+            Website crafted by{" "}
+            <span className="text-white/70 font-medium">G3 Creative Labs</span>
+            {" "}· Ghavish V G ·{" "}
+            <a
+              href="tel:+48579156009"
+              className="text-white/70 hover:text-[#E0B33C] transition-colors"
+            >
+              +48 579 156 009
+            </a>
+          </p>
         </div>
       </div>
     </footer>

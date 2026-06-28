@@ -334,6 +334,7 @@ export const pl = {
     contactTitle: "Kontakt",
     enquireBtn: "Zapytaj teraz",
     copyright: "Wszelkie prawa zastrzeżone.",
+    designerCredit: "Website crafted by G3 Creative Labs · Ghavish V G · +48 579 156 009",
     facts: [
       "Wiek 6–13 lat",
       "Pon–Pt 9:00–12:00",

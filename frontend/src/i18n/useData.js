@@ -200,7 +200,12 @@ export function useData() {
     contactTitle: t("footer.contactTitle"),
     enquireBtn: t("footer.enquireBtn"),
     copyright: t("footer.copyright"),
-    facts: t("footer.facts") || ["Ages 6–13", "Mon–Fri 9AM–12PM", "Max 10 per week", "Starts 6 July 2026", "Kraków"],
+    designerCredit:
+      t("footer.designerCredit") ||
+      "Website crafted by G3 Creative Labs · Ghavish V G · +48 579 156 009",
+    facts:
+      t("footer.facts") ||
+      ["Ages 6–13", "Mon–Fri 9AM–12PM", "Max 10 per week", "Starts 6 July 2026", "Kraków"],
   };
 
   // ── REGISTER ──────────────────────────────────────────────────────────────
