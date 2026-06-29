@@ -1,11 +1,9 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { useRef, Children } from "react";
-
+import { Children } from "react";
 
 const EASE_OUT_EXPO = [0.22, 1, 0.36, 1];
 const EASE_OUT_BACK = [0.34, 1.56, 0.64, 1];
 const VIEWPORT = { once: true, margin: "-60px" };
-
 
 const variants = {
   fadeUp: (delay, y) => ({
@@ -38,7 +36,6 @@ const variants = {
   }),
 };
 
-
 // ─── REVEAL ───────────────────────────────────────────────
 export const Reveal = ({
   children,
@@ -62,7 +59,6 @@ export const Reveal = ({
     </motion.div>
   );
 };
-
 
 // ─── STAGGER REVEAL ───────────────────────────────────────
 export const StaggerReveal = ({
@@ -99,7 +95,6 @@ export const StaggerReveal = ({
   );
 };
 
-
 // ─── SECTION HEADING ──────────────────────────────────────
 export const SectionHeading = ({
   overline,
@@ -108,11 +103,11 @@ export const SectionHeading = ({
   center = true,
   titleVariant = "fadeUp",
   animateWords = true,
-  titleClassName = "",   // 👈 NEW PROP
+  titleClassName = "",
+  titleStyle = {},
 }) => {
   const prefersReduced = useReducedMotion();
   const words = title?.split(" ") ?? [];
-
 
   const wordVariants = {
     hidden: { opacity: 0, y: 24, filter: "blur(6px)" },
@@ -123,7 +118,6 @@ export const SectionHeading = ({
       transition: { duration: 0.6, delay: i * 0.07, ease: EASE_OUT_EXPO },
     }),
   };
-
 
   return (
     <div className={center ? "max-w-3xl mx-auto text-center" : "max-w-3xl"}>
@@ -142,9 +136,10 @@ export const SectionHeading = ({
         </Reveal>
       )}
 
-
-      {/* 👇 titleClassName added here */}
-      <h2 className={`mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight ${titleClassName}`}>
+      <h2
+        className={`mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight ${titleClassName}`}
+        style={titleStyle}
+      >
         {animateWords && !prefersReduced ? (
           <motion.span
             className="inline"
@@ -156,6 +151,7 @@ export const SectionHeading = ({
               <motion.span
                 key={i}
                 className={`inline-block mr-[0.25em] last:mr-0 ${titleClassName}`}
+                style={titleStyle}
                 custom={i}
                 variants={wordVariants}
               >
@@ -169,7 +165,6 @@ export const SectionHeading = ({
           </Reveal>
         )}
       </h2>
-
 
       {sub && (
         <Reveal variant="blurIn" delay={overline ? 0.25 : 0.15}>

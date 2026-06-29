@@ -3,10 +3,8 @@ import { Reveal, SectionHeading } from "../Reveal";
 import { FlipCard } from "../FlipCard";
 import { useData } from "../../i18n/useData";
 
-
 export const WhySteam = () => {
   const { why, whySteamI18n } = useData();
-
 
   return (
     <section id="why-steam" className="py-20 lg:py-28 pt-28 sm:pt-32">
@@ -16,10 +14,10 @@ export const WhySteam = () => {
             overline={whySteamI18n.overline}
             title={whySteamI18n.title}
             sub={whySteamI18n.sub}
-            titleClassName="!text-[#FBBF24]"    
+            titleClassName="!text-[#FBBF24]"
+            titleStyle={{ color: "#FBBF24" }}
           />
         </Reveal>
-
 
         <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {why.map((w, i) => (
