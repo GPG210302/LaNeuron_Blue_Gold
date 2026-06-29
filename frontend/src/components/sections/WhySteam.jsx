@@ -14,8 +14,6 @@ export const WhySteam = () => {
             overline={whySteamI18n.overline}
             title={whySteamI18n.title}
             sub={whySteamI18n.sub}
-            titleClassName="!text-[#FBBF24]"
-            titleStyle={{ color: "#FBBF24" }}
           />
         </Reveal>
 

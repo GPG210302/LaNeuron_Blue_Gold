@@ -24,8 +24,8 @@ import {
   RECEIVE,
   AGE_GROUPS,
   PROGRAMMES,
-  CAMP_DAYS,
-  CAMP_FACTS,
+  WORKSHOP_DAYS,
+  WORKSHOP_FACTS,
   WEEKS,
   PROGRAMME_OPTIONS,
   FAQ,
@@ -149,9 +149,9 @@ export function useData() {
     };
   });
 
-  // ── CAMP DAYS ─────────────────────────────────────────────────────────────
-  const campDays = CAMP_DAYS.map((day, i) => {
-    const trans = t("campDays");
+  // ── WORKSHOP DAYS ─────────────────────────────────────────────────────────────
+  const workshopDays = WORKSHOP_DAYS.map((day, i) => {
+    const trans = t("workshopDays");
     const transDay = Array.isArray(trans) ? trans[i] : null;
     return {
       ...day,
@@ -162,11 +162,11 @@ export function useData() {
     };
   });
 
-  // ── CAMP FACTS ────────────────────────────────────────────────────────────
-  const campFactsKeys = ["startDate", "endDate", "duration", "dailyTiming", "days", "groupSize", "location", "language"];
-  const campFacts = CAMP_FACTS.map((fact, i) => {
-    const key = campFactsKeys[i];
-    const trans = t(`campFacts.${key}`);
+  // ── WORKSHOP FACTS ────────────────────────────────────────────────────────────
+  const workshopFactsKeys = ["startDate", "endDate", "duration", "dailyTiming", "days", "groupSize", "location", "language"];
+  const workshopFacts = WORKSHOP_FACTS.map((fact, i) => {
+    const key = workshopFactsKeys[i];
+    const trans = t(`workshopFacts.${key}`);
     return {
       label: trans?.label || fact.label,
       value: trans?.value || fact.value,
@@ -235,7 +235,7 @@ export function useData() {
     weekHeading:         t("events.weekHeading"),
     weekSub:             t("events.weekSub"),
     tapExplore:          t("events.tapExplore"),
-    campDetailsHeading:  t("events.campDetailsHeading"),
+    workshopDetailsHeading:  t("events.workshopDetailsHeading"),
     stat3hrs:            t("events.stat3hrs"),
     statMax10:           t("events.statMax10"),
     statKrakow:          t("events.statKrakow"),
@@ -327,8 +327,8 @@ export function useData() {
     receive,
     ageGroups,
     programmes,
-    campDays,
-    campFacts,
+    workshopDays,
+    workshopFacts,
     weeks,
     programmeOptions,
     faq,

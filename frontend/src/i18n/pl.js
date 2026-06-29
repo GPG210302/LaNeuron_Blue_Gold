@@ -215,7 +215,7 @@ export const pl = {
     },
   },
 
-  campDays: [
+  workshopDays: [
     {
       day: "Poniedziałek",
       lab: "Wonder Lab",
@@ -253,7 +253,7 @@ export const pl = {
     },
   ],
 
-  campFacts: {
+  workshopFacts: {
     startDate: { label: "Data rozpoczęcia", value: "6 lipca 2026" },
     endDate: { label: "Data zakończenia", value: "Koniec sierpnia 2026" },
     duration: { label: "Czas trwania", value: "8 tygodniowych obozów" },
@@ -352,7 +352,7 @@ export const pl = {
     weekHeading: "Tydzień w obozie",
     weekSub: "(kliknij dzień, aby odkryć szczegóły)",
     tapExplore: "Kliknij, aby odkryć",
-    campDetailsHeading: "Szczegóły obozu",
+    workshopDetailsHeading: "Szczegóły obozu",
     stat3hrs: "3 godz. / dzień",
     statMax10: "Maks. 10 dzieci",
     statKrakow: "Kraków",

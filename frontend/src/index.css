@@ -172,6 +172,10 @@ h1, h2, h3, h4, h5, .font-display {
         0 0 10px 3px rgba(220, 160, 20, 0.50);
 }
 
+.heading-gold {
+    color: #FBBF24 !important;
+}
+
 /* ---- Decorative animations ---- */
 @keyframes ln-float {
     0%, 100% { transform: translateY(0) rotate(0deg); }

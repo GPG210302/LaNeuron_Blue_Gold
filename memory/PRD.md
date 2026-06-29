@@ -16,7 +16,7 @@ Build a highly-animated, professional yet kids-attractive landing page for a STE
 - **Assets**: AI-generated educator portrait at `src/assets/educator.png`.
 
 ## Implemented (2026-06-03)
-- 11 sections: Navbar, Hero, About Educator, Interactive "What is STEAM" selector, Why STEAM (6 cards), 6-step Scientific Method zigzag flow, Programmes, Summer Program 2026 (weekly calendar + Kraków Google map embed + camp facts), Register/Enquiry form, FAQ accordion, Footer.
+- 11 sections: Navbar, Hero, About Educator, Interactive "What is STEAM" selector, Why STEAM (6 cards), 6-step Scientific Method zigzag flow, Programmes, Summer Program 2026 (weekly calendar + Kraków Google map embed + workshop facts), Register/Enquiry form, FAQ accordion, Footer.
 - Enquiry API persists to Mongo; success/empty-validation flows working.
 - Email-sending code present but gated behind `RESEND_API_KEY` (disabled until configured).
 - Tested: backend 100% (8 pytest cases), frontend 100% (all flows).

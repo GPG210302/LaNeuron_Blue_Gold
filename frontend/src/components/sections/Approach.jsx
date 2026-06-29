@@ -12,7 +12,7 @@ export const Approach = () => {
         <Reveal>
           <div className="max-w-3xl mx-auto text-center">
             <span className="ln-overline !text-[#FBBF24]">{approachI18n.overline}</span>
-            <h2 className="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight">
+            <h2 className="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight heading-gold">
               {approachI18n.heading}
             </h2>
             <p className="mt-5 text-lg text-white/70 leading-relaxed">

@@ -167,7 +167,7 @@ export const en = {
       title: "STEAM Summer Program 2026",
       type: "Upcoming",
       description:
-        "An intensive one-week themed camp running through summer 2026. Each day has a dedicated theme with 3 hours of guided scientific investigation, indoors and outdoors. See the Summer Program section below for full details.",
+        "An intensive one-week themed workshop running through summer 2026. Each day has a dedicated theme with 3 hours of guided scientific investigation, indoors and outdoors. See the Summer Program section below for full details.",
     },
     "Cognitive Support Sessions": {
       title: "Cognitive Support Sessions",
@@ -176,7 +176,7 @@ export const en = {
         "Individual sessions for children who need support with memory, learning strategies, exam preparation, handwriting, or cognitive challenges such as ADHD, dyslexia, or other learning differences. Delivered by a certified Neuroscience Coach.",
     },
   },
-  campDays: [
+  workshopDays: [
     {
       day: "Monday",
       lab: "Wonder Lab",
@@ -213,10 +213,10 @@ export const en = {
         "Morning: the science in the food we eat — health, lifestyle, and how food affects our body systems, through fun activities. Finale: in the last 30 minutes each child presents a favourite discovery from the week, shares results, and celebrates. Parents are warmly invited to this closing session.",
     },
   ],
-  campFacts: {
+  workshopFacts: {
     startDate: { label: "Start date", value: "6 July 2026" },
     endDate: { label: "End date", value: "End of August 2026" },
-    duration: { label: "Duration", value: "8 weekly camps" },
+    duration: { label: "Duration", value: "8 weekly workshops" },
     dailyTiming: { label: "Daily timing", value: "9:00 AM – 12:00 PM" },
     days: { label: "Days", value: "Monday to Friday" },
     groupSize: { label: "Group size", value: "Max 10 children" },
@@ -235,7 +235,7 @@ export const en = {
     multiple: "Multiple weeks",
   },
   programmeOptions: [
-    "Full week camp",
+    "Full week workshop",
     "Multi-week bundle",
     "Single day",
     "Cognitive support session",
@@ -280,7 +280,7 @@ export const en = {
     {
       question: "What is the cancellation policy?",
       answer:
-        "Full refund with more than 7 days' notice before the camp week. Cancellations within 7 days can be transferred to another available week. Contact us directly for urgent situations.",
+        "Full refund with more than 7 days' notice before the workshop week. Cancellations within 7 days can be transferred to another available week. Contact us directly for urgent situations.",
     },
   ],
   footer: {
@@ -298,10 +298,10 @@ export const en = {
     heading: "STEAM Summer Program 2026",
     tag: "Registrations open • limited spots",
     intro: "A one-week intensive STEAM Summer Program for children aged 6–13. Each day is a different themed lab. Children spend 3 hours per day in guided scientific investigations, both indoors and outdoors.",
-    weekHeading: "A week at camp",
+    weekHeading: "A week at workshop",
     weekSub: "(tap a day to explore)",
     tapExplore: "Tap to explore",
-    campDetailsHeading: "Camp details",
+    workshopDetailsHeading: "workshop details",
     stat3hrs: "3 hrs / day",
     statMax10: "Max 10 kids",
     statKrakow: "Kraków",

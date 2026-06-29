@@ -82,7 +82,7 @@ class TestEnquiriesCreate:
     def test_create_enquiry_child_age_too_low(self, session):
         payload = {
             "parent_name": "TEST_X", "email": "x@example.com", "child_name": "TEST_C",
-            "child_age": 2, "preferred_week": "Week 1", "programme_interest": "Camp",
+            "child_age": 2, "preferred_week": "Week 1", "programme_interest": "Workshop",
         }
         r = session.post(f"{API}/enquiries", json=payload)
         assert r.status_code == 422
@@ -90,7 +90,7 @@ class TestEnquiriesCreate:
     def test_create_enquiry_child_age_too_high(self, session):
         payload = {
             "parent_name": "TEST_X", "email": "x@example.com", "child_name": "TEST_C",
-            "child_age": 20, "preferred_week": "Week 1", "programme_interest": "Camp",
+            "child_age": 20, "preferred_week": "Week 1", "programme_interest": "Workshop",
         }
         r = session.post(f"{API}/enquiries", json=payload)
         assert r.status_code == 422
@@ -98,7 +98,7 @@ class TestEnquiriesCreate:
     def test_create_enquiry_invalid_email(self, session):
         payload = {
             "parent_name": "TEST_X", "email": "not-an-email", "child_name": "TEST_C",
-            "child_age": 9, "preferred_week": "Week 1", "programme_interest": "Camp",
+            "child_age": 9, "preferred_week": "Week 1", "programme_interest": "Workshop",
         }
         r = session.post(f"{API}/enquiries", json=payload)
         assert r.status_code == 422

@@ -7,7 +7,7 @@ import { useData } from "../../i18n/useData";
 
 export const Events = () => {
   const navigate = useNavigate();
-  const { events, campDays, campFacts } = useData();
+  const { events, workshopDays, workshopFacts } = useData();
 
   return (
     <section id="events" className="py-20 lg:py-28 pt-28 sm:pt-32 bg-white/30 border-b-2 border-[#1B2A63] relative">
@@ -34,12 +34,12 @@ export const Events = () => {
             <CalendarDays size={24} className="text-[#1B2A63]" /> {events.weekHeading}
             <span className="text-sm font-semibold text-[#475569] ml-2">{events.weekSub}</span>
           </h3>
-          <div className="mt-6 grid md:grid-cols-5 gap-4" data-testid="camp-week">
-            {campDays.map((d) => (
+          <div className="mt-6 grid md:grid-cols-5 gap-4" data-testid="workshop-week">
+            {workshopDays.map((d) => (
               <FlipCard
                 key={d.day}
                 heightClass="h-64"
-                testid={`camp-day-${d.day}`}
+                testid={`workshop-day-${d.day}`}
                 front={
                   <div className="ln-card h-full p-5 flex flex-col" style={{ background: `${d.color}14` }}>
                     <div className="flex items-center justify-between">
@@ -73,9 +73,9 @@ export const Events = () => {
         <div className="mt-12 grid lg:grid-cols-2 gap-7">
           <Reveal>
             <div className="ln-card p-7 h-full">
-              <h3 className="font-display font-extrabold text-2xl">{events.campDetailsHeading}</h3>
+              <h3 className="font-display font-extrabold text-2xl">{events.workshopDetailsHeading}</h3>
               <div className="mt-5 grid grid-cols-2 gap-x-4 gap-y-4">
-                {campFacts.map((f) => (
+                {workshopFacts.map((f) => (
                   <div key={f.label} className="border-l-2 border-[#E7EBF7] pl-3">
                     <div className="text-xs font-bold uppercase tracking-wide text-[#475569]">{f.label}</div>
                     <div className="font-display font-extrabold text-[#1B2A63]">{f.value}</div>

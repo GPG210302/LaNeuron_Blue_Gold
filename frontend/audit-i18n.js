@@ -89,8 +89,8 @@ const ALLOWED_SAME = new Set([
   'nav.faq',           // "FAQ" is universal
   'site',              // brand name
   'hero.badge',        // contains "Kraków" but changes slightly — skip
-  'campFacts.location.value', // "Kraków"
-  'campFacts.language.value', // "Angielski" vs "English" — different, fine
+  'workshopFacts.location.value', // "Kraków"
+  'workshopFacts.language.value', // "Angielski" vs "English" — different, fine
 ]);
 
 const untranslated = [];

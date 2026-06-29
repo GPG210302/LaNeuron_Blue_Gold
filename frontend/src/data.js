@@ -135,7 +135,7 @@ export const PROGRAMMES = [
   },
   {
     tag: "Upcoming", title: "STEAM Summer Program 2026", color: "#FB7185", link: "/Summer Program",
-    text: "An intensive one-week themed camp running through summer 2026. Each day has a dedicated theme with 3 hours of guided scientific investigation, indoors and outdoors. See the Summer Program section below for full details.",
+    text: "An intensive one-week themed workshop running through summer 2026. Each day has a dedicated theme with 3 hours of guided scientific investigation, indoors and outdoors. See the Summer Program section below for full details.",
     image: "https://images.pexels.com/photos/8471975/pexels-photo-8471975.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   },
   {
@@ -145,7 +145,7 @@ export const PROGRAMMES = [
   },
 ];
 
-export const CAMP_DAYS = [
+export const WORKSHOP_DAYS = [
   {
     day: "Monday", lab: "Wonder Lab", tagline: "Chemical Reactions", icon: FlaskConical, color: "#3B82F6",
     text: "Hands-on chemistry! Children spark fizz, effervescence, and colour-changing reactions themselves — observing every change closely and recording their discoveries just like real scientists.",
@@ -168,10 +168,10 @@ export const CAMP_DAYS = [
   },
 ];
 
-export const CAMP_FACTS = [
+export const WORKSHOP_FACTS = [
   { label: "Start date", value: "6 July 2026" },
   { label: "End date", value: "End of August 2026" },
-  { label: "Duration", value: "8 weekly camps" },
+  { label: "Duration", value: "8 weekly workshops" },
   { label: "Daily timing", value: "9:00 AM – 12:00 PM" },
   { label: "Days", value: "Monday to Friday" },
   { label: "Group size", value: "Max 10 children" },
@@ -185,7 +185,7 @@ export const WEEKS = [
 ];
 
 export const PROGRAMME_OPTIONS = [
-  "Full week camp",
+  "Full week workshop",
   "Multi-week bundle",
   "Single day",
   "Cognitive support session",
@@ -200,5 +200,5 @@ export const FAQ = [
   { q: "Is this suitable for children with learning differences?", a: "Yes. The educator holds a Neuroscience Coaching Certificate and has extensive experience supporting children with ADHD, dyslexia, SEN, memory challenges, and other cognitive differences. Please mention any requirements at registration." },
   { q: "Can siblings attend together?", a: "Yes. Siblings within the 6–13 age range are welcome in the same week. A sibling discount is available — mention this when registering." },
   { q: "What will my child bring home?", a: "Every child takes home a personalised science investigation notebook containing all their worksheets, hypotheses, results, and conclusions. Full-week participants also receive a completion certificate." },
-  { q: "What is the cancellation policy?", a: "Full refund with more than 7 days' notice before the camp week. Cancellations within 7 days can be transferred to another available week. Contact us directly for urgent situations." },
+  { q: "What is the cancellation policy?", a: "Full refund with more than 7 days' notice before the workshop week. Cancellations within 7 days can be transferred to another available week. Contact us directly for urgent situations." },
 ];
