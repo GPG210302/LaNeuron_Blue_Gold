@@ -80,7 +80,10 @@ export const Approach = () => {
                 <span className="grid place-items-center w-11 h-11 rounded-xl bg-[#FBBF24] text-[#1B2A63]">
                   <Gift size={22} />
                 </span>
-                <h3 className="font-display font-extrabold text-2xl">{approachI18n.receiveHeading}</h3>
+                {/* ← gold */}
+                <h3 className="font-display font-extrabold text-2xl heading-gold">
+                  {approachI18n.receiveHeading}
+                </h3>
               </div>
               <ul className="mt-5 space-y-3">
                 {receive.map((item, index) => (
@@ -98,7 +101,10 @@ export const Approach = () => {
               {ageGroups.map((g) => (
                 <div key={g.title} className="ln-card !border-white/10 bg-white/5 p-6" data-testid={`age-group-${g.title}`}>
                   <div className="flex items-center justify-between">
-                    <h3 className="font-display font-extrabold text-xl">{g.title}</h3>
+                    {/* ← gold */}
+                    <h3 className="font-display font-extrabold text-xl heading-gold">
+                      {g.title}
+                    </h3>
                     <span
                       className="px-3 py-1 rounded-full text-xs font-extrabold border-2"
                       style={{ background: g.color, color: "#fff", borderColor: g.color }}
