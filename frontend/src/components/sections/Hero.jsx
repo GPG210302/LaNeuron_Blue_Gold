@@ -49,7 +49,7 @@ const Orbs = () => (
 );
 
 const MobileChip = ({ children }) => (
-  <div className="rounded-2xl border-2 border-[#0F172A] bg-white/90 px-3 py-2 text-center text-[11px] font-extrabold text-[#1B2A63] shadow-[3px_3px_0_#0F172A]">
+  <div className="rounded-2xl border-2 border-[#1B2A63] bg-white/90 px-3 py-2 text-center text-[11px] font-extrabold text-[#1B2A63] shadow-[3px_3px_0_#1B2A63]">
     {children}
   </div>
 );
@@ -82,15 +82,15 @@ export const Hero = () => {
 
         {/* Mobile floating icons */}
         <Floating className="sm:hidden top-36 right-4 z-20" delay={0.5}>
-          <span className="grid place-items-center w-14 h-14 rounded-2xl bg-[#FBBF24] border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]">
+          <span className="grid place-items-center w-14 h-14 rounded-2xl bg-[#FBBF24] border-2 border-[#1B2A63] shadow-[4px_4px_0_#1B2A63]">
             <motion.div animate={{ rotate: 360 }} transition={{ duration: 8, repeat: Infinity, ease: "linear" }}><Atom size={22} /></motion.div>
           </span>
         </Floating>
         <Floating className="sm:hidden top-[560px] right-4 z-20" delay={0.65}>
-          <motion.span className="grid place-items-center w-12 h-12 rounded-2xl bg-[#10B981] text-white border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]" whileHover={{ rotate: -15, scale: 1.15 }} transition={{ type: "spring", stiffness: 300 }}><Rocket size={20} /></motion.span>
+          <motion.span className="grid place-items-center w-12 h-12 rounded-2xl bg-[#10B981] text-white border-2 border-[#1B2A63] shadow-[4px_4px_0_#1B2A63]" whileHover={{ rotate: -15, scale: 1.15 }} transition={{ type: "spring", stiffness: 300 }}><Rocket size={20} /></motion.span>
         </Floating>
         <Floating className="sm:hidden top-[740px] left-4 z-20" delay={0.8}>
-          <motion.span className="grid place-items-center w-12 h-12 rounded-2xl bg-[#FB7185] text-white border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]" whileHover={{ rotate: 15, scale: 1.15 }} transition={{ type: "spring", stiffness: 300 }}><FlaskConical size={20} /></motion.span>
+          <motion.span className="grid place-items-center w-12 h-12 rounded-2xl bg-[#FB7185] text-white border-2 border-[#1B2A63] shadow-[4px_4px_0_#1B2A63]" whileHover={{ rotate: 15, scale: 1.15 }} transition={{ type: "spring", stiffness: 300 }}><FlaskConical size={20} /></motion.span>
         </Floating>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-14 items-center relative z-10">
@@ -148,19 +148,19 @@ export const Hero = () => {
             </motion.p>
 
             <motion.div
-              className="mt-5 max-w-xl ln-card !shadow-[4px_4px_0_#0F172A] bg-[#E7EBF7] p-4 flex items-start gap-3"
+              className="mt-5 max-w-xl ln-card !shadow-[4px_4px_0_#1B2A63] bg-[#E7EBF7] p-4 flex items-start gap-3"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.38, duration: 0.6, ease: EXPO }}
               data-testid="hero-english-highlight"
             >
               <motion.span
-                className="grid place-items-center w-10 h-10 rounded-xl bg-[#1B2A63] text-white border-2 border-[#0F172A] shrink-0"
+                className="grid place-items-center w-10 h-10 rounded-xl bg-[#1B2A63] text-white border-2 border-[#1B2A63] shrink-0"
                 whileHover={{ rotate: [0, -8, 8, 0], transition: { duration: 0.4 } }}
               >
                 <Languages size={20} />
               </motion.span>
-              <p className="text-sm md:text-base text-[#0F172A] font-medium leading-relaxed">
+              <p className="text-sm md:text-base text-[#1B2A63] font-medium leading-relaxed">
                 <span className="font-extrabold text-[#1B2A63]">Taught entirely in English.</span>{" "}
                 {hero.english}
               </p>
@@ -203,12 +203,12 @@ export const Hero = () => {
               {hero.stats.map((s, i) => (
                 <motion.div
                   key={s.label}
-                  className="ln-card !shadow-[3px_3px_0_#0F172A] px-3 py-3 text-center"
+                  className="ln-card !shadow-[3px_3px_0_#1B2A63] px-3 py-3 text-center"
                   data-testid="hero-stat"
                   initial={{ opacity: 0, y: 20, scale: 0.9 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   transition={{ delay: 0.6 + i * 0.08, duration: 0.5, ease: EXPO }}
-                  whileHover={{ y: -4, boxShadow: "4px 6px 0 #0F172A", transition: { type: "spring", stiffness: 300, damping: 18 } }}
+                  whileHover={{ y: -4, boxShadow: "4px 6px 0 #1B2A63", transition: { type: "spring", stiffness: 300, damping: 18 } }}
                 >
                   <div className="font-display font-extrabold text-2xl text-[#1B2A63]">
                     <AnimatedCounter value={s.value} />
@@ -228,7 +228,7 @@ export const Hero = () => {
           >
             {/* mobile info card */}
             <div className="sm:hidden absolute inset-x-3 top-4 z-10">
-              <div className="rounded-[28px] border-2 border-[#0F172A] px-4 py-4 shadow-[6px_6px_0_#0F172A]" style={{ background: "rgba(255,255,255,0.76)", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)" }}>
+              <div className="rounded-[28px] border-2 border-[#1B2A63] px-4 py-4 shadow-[6px_6px_0_#1B2A63]" style={{ background: "rgba(255,255,255,0.76)", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)" }}>
                 <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#1B2A63]/70">Young scientists at work</p>
                 <h3 className="mt-2 text-2xl font-extrabold leading-tight text-[#1B2A63]">Build, test, and create in English.</h3>
                 <p className="mt-2 text-sm leading-relaxed text-[#475569]">Hands-on science, guided teamwork, and creative problem-solving in one inspiring space.</p>
@@ -242,15 +242,15 @@ export const Hero = () => {
 
             {/* Desktop-only floating badges */}
             <Floating className="hidden sm:block -top-5 -left-5" delay={0.5}>
-              <span className="grid place-items-center w-16 h-16 rounded-2xl bg-[#FBBF24] border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]">
+              <span className="grid place-items-center w-16 h-16 rounded-2xl bg-[#FBBF24] border-2 border-[#1B2A63] shadow-[4px_4px_0_#1B2A63]">
                 <motion.div animate={{ rotate: 360 }} transition={{ duration: 8, repeat: Infinity, ease: "linear" }}><Atom size={28} /></motion.div>
               </span>
             </Floating>
             <Floating className="hidden sm:block top-1/3 -right-6" delay={0.65}>
-              <motion.span className="grid place-items-center w-14 h-14 rounded-2xl bg-[#10B981] text-white border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]" whileHover={{ rotate: -15, scale: 1.15 }} transition={{ type: "spring", stiffness: 300 }}><Rocket size={24} /></motion.span>
+              <motion.span className="grid place-items-center w-14 h-14 rounded-2xl bg-[#10B981] text-white border-2 border-[#1B2A63] shadow-[4px_4px_0_#1B2A63]" whileHover={{ rotate: -15, scale: 1.15 }} transition={{ type: "spring", stiffness: 300 }}><Rocket size={24} /></motion.span>
             </Floating>
             <Floating className="hidden sm:block -bottom-5 left-10" delay={0.8}>
-              <motion.span className="grid place-items-center w-14 h-14 rounded-2xl bg-[#FB7185] text-white border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]" whileHover={{ rotate: 15, scale: 1.15 }} transition={{ type: "spring", stiffness: 300 }}><FlaskConical size={24} /></motion.span>
+              <motion.span className="grid place-items-center w-14 h-14 rounded-2xl bg-[#FB7185] text-white border-2 border-[#1B2A63] shadow-[4px_4px_0_#1B2A63]" whileHover={{ rotate: 15, scale: 1.15 }} transition={{ type: "spring", stiffness: 300 }}><FlaskConical size={24} /></motion.span>
             </Floating>
           </motion.div>
         </div>
@@ -258,7 +258,7 @@ export const Hero = () => {
         {/* ── KEY BANNER ── */}
         <div className="max-w-7xl mx-auto px-6 lg:px-8 mt-14">
           <motion.div
-            className="ln-card bg-[#0F172A] text-white px-6 py-5 md:px-8 md:py-6 flex items-start gap-4"
+            className="ln-card bg-[#1B2A63] text-white px-6 py-5 md:px-8 md:py-6 flex items-start gap-4"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
@@ -266,7 +266,7 @@ export const Hero = () => {
             whileHover={{ scale: 1.01, transition: { type: "spring", stiffness: 300 } }}
           >
             <motion.span
-              className="grid place-items-center w-10 h-10 rounded-xl bg-[#FBBF24] text-[#0F172A] shrink-0"
+              className="grid place-items-center w-10 h-10 rounded-xl bg-[#FBBF24] text-[#1B2A63] shrink-0"
               animate={{ rotate: [0, 10, -10, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             >
