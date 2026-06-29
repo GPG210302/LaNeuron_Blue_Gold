@@ -155,7 +155,7 @@ export const SectionHeading = ({
             {words.map((word, i) => (
               <motion.span
                 key={i}
-                className="inline-block mr-[0.25em] last:mr-0"
+                className={`inline-block mr-[0.25em] last:mr-0 ${titleClassName}`}
                 custom={i}
                 variants={wordVariants}
               >
