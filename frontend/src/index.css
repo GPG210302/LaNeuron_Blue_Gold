@@ -30,7 +30,6 @@ body {
 
 h1, h2, h3, h4, h5, .font-display {
     font-family: 'Outfit', sans-serif;
-    color: var(--ln-science); /* = #1B2A63 */
 }
 
 ::selection {
@@ -84,6 +83,14 @@ h1, h2, h3, h4, h5, .font-display {
         --ring: 227 57% 25%;
         --radius: 0.75rem;
     }
+
+    /* ── Heading colour — inside @layer base so Tailwind utilities
+       and inline styles can override it per-component ── */
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--ln-science);
+    }
+
+    * { @apply border-border; }
 }
 
 @layer components {
@@ -119,15 +126,7 @@ h1, h2, h3, h4, h5, .font-display {
     }
 }
 
-@layer base {
-    * { @apply border-border; }
-}
-
-/* ── ENQUIRE BUTTON — defined OUTSIDE @layer so it wins the cascade ─────────
-   Must come after @tailwind utilities to ensure highest specificity.
-   The double class selector (.ln-btn.ln-btn-enquire) beats single-class
-   rules from @layer components, overriding ln-btn's box-shadow cleanly.     */
-
+/* ── ENQUIRE BUTTON ── */
 @keyframes goldGlow {
     0%, 100% {
         box-shadow:
