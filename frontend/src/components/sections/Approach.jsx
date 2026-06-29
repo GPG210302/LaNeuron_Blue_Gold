@@ -7,7 +7,7 @@ export const Approach = () => {
   const { method, receive, ageGroups, approachI18n } = useData();
 
   return (
-    <section id="approach" className="py-20 lg:py-28 bg-[#0F172A] text-white">
+    <section id="approach" className="py-20 lg:py-28 bg-[#1B2A63] text-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <Reveal>
           <div className="max-w-3xl mx-auto text-center">
@@ -40,7 +40,7 @@ export const Approach = () => {
                   >
                     <m.icon size={28} className="text-white" />
                   </span>
-                  <span className="absolute -top-2 -left-2 grid place-items-center w-7 h-7 rounded-full bg-white text-[#0F172A] font-display font-extrabold text-sm border-2 border-[#0F172A]">
+                  <span className="absolute -top-2 -left-2 grid place-items-center w-7 h-7 rounded-full bg-white text-[#1B2A63] font-display font-extrabold text-sm border-2 border-[#1B2A63]">
                     {m.n}
                   </span>
                 </div>
@@ -63,7 +63,7 @@ export const Approach = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.3 }}
                 >
-                  <span className="grid place-items-center w-8 h-8 rounded-full bg-[#FBBF24] text-[#0F172A] border-2 border-[#0F172A]">
+                  <span className="grid place-items-center w-8 h-8 rounded-full bg-[#FBBF24] text-[#1B2A63] border-2 border-[#1B2A63]">
                     <ArrowDown size={18} />
                   </span>
                 </motion.div>
@@ -77,7 +77,7 @@ export const Approach = () => {
           <Reveal>
             <div className="ln-card !border-white/10 bg-white/5 p-7 h-full">
               <div className="flex items-center gap-3">
-                <span className="grid place-items-center w-11 h-11 rounded-xl bg-[#FBBF24] text-[#0F172A]">
+                <span className="grid place-items-center w-11 h-11 rounded-xl bg-[#FBBF24] text-[#1B2A63]">
                   <Gift size={22} />
                 </span>
                 <h3 className="font-display font-extrabold text-2xl">{approachI18n.receiveHeading}</h3>

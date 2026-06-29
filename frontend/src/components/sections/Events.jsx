@@ -10,7 +10,7 @@ export const Events = () => {
   const { events, campDays, campFacts } = useData();
 
   return (
-    <section id="events" className="py-20 lg:py-28 pt-28 sm:pt-32 bg-white/30 border-b-2 border-[#0F172A] relative">
+    <section id="events" className="py-20 lg:py-28 pt-28 sm:pt-32 bg-white/30 border-b-2 border-[#1B2A63] relative">
       <div className="pointer-events-none absolute top-10 right-10 w-72 h-72 rounded-full bg-[#FFE4E4] blur-3xl opacity-50" />
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
         <Reveal>
@@ -19,7 +19,7 @@ export const Events = () => {
               <span className="ln-overline">{events.overline}</span>
               <h2 className="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight">{events.heading}</h2>
             </div>
-            <span className="ln-tag !bg-[#E0B33C] !text-[#0F172A] !border-[#0F172A] !text-sm !px-4 !py-2">
+            <span className="ln-tag !bg-[#E0B33C] !text-[#1B2A63] !border-[#1B2A63] !text-sm !px-4 !py-2">
               {events.tag}
             </span>
           </div>
@@ -46,7 +46,7 @@ export const Events = () => {
                       <span className="font-display font-extrabold text-xs uppercase tracking-wider" style={{ color: d.color }}>
                         {d.day}
                       </span>
-                      <span className="grid place-items-center w-10 h-10 rounded-xl text-white border-2 border-[#0F172A]" style={{ background: d.color }}>
+                      <span className="grid place-items-center w-10 h-10 rounded-xl text-white border-2 border-[#1B2A63]" style={{ background: d.color }}>
                         <d.icon size={20} />
                       </span>
                     </div>
@@ -78,7 +78,7 @@ export const Events = () => {
                 {campFacts.map((f) => (
                   <div key={f.label} className="border-l-2 border-[#E7EBF7] pl-3">
                     <div className="text-xs font-bold uppercase tracking-wide text-[#475569]">{f.label}</div>
-                    <div className="font-display font-extrabold text-[#0F172A]">{f.value}</div>
+                    <div className="font-display font-extrabold text-[#1B2A63]">{f.value}</div>
                   </div>
                 ))}
               </div>
@@ -91,7 +91,7 @@ export const Events = () => {
 
               <div className="mt-6 ln-card !shadow-none bg-[#E7EBF7] p-4 flex gap-3">
                 <AlertCircle size={20} className="text-[#1B2A63] shrink-0 mt-0.5" />
-                <p className="text-sm text-[#0F172A]/80 font-medium">
+                <p className="text-sm text-[#1B2A63]/80 font-medium">
                   {events.suitableNote}
                 </p>
               </div>
@@ -104,7 +104,7 @@ export const Events = () => {
 
           <Reveal delay={0.1}>
             <div className="ln-card overflow-hidden h-full min-h-[420px] flex flex-col">
-              <div className="px-5 py-3 border-b-2 border-[#0F172A] flex items-center gap-2 bg-[#0F172A] text-white">
+              <div className="px-5 py-3 border-b-2 border-[#1B2A63] flex items-center gap-2 bg-[#1B2A63] text-white">
                 <MapPin size={18} className="text-[#E0B33C]" />
                 <span className="font-display font-bold">{SITE.venue}</span>
               </div>
@@ -125,7 +125,7 @@ export const Events = () => {
 };
 
 const Stat = ({ icon: Icon, label }) => (
-  <div className="ln-card !shadow-[3px_3px_0_#0F172A] p-3 flex flex-col items-center text-center gap-1">
+  <div className="ln-card !shadow-[3px_3px_0_#1B2A63] p-3 flex flex-col items-center text-center gap-1">
     <Icon size={20} className="text-[#1B2A63]" />
     <span className="text-xs font-bold">{label}</span>
   </div>

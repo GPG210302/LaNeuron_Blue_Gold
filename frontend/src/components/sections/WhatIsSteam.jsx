@@ -155,7 +155,7 @@ const MythCard = ({ myth, truth, color, index }) => (
       viewport={VIEWPORT}
       transition={{ duration: 0.55, delay: index * 0.1, ease: EXPO }}
     >
-      <p className="font-bold text-lg text-[#0F172A] italic">{myth}</p>
+      <p className="font-bold text-lg text-[#1B2A63] italic">{myth}</p>
       <div className="mt-3 h-0.5 rounded-full w-12" style={{ backgroundColor: color }} />
       <p className="mt-3 text-[#475569] leading-relaxed">{truth}</p>
     </motion.div>
@@ -258,8 +258,8 @@ export const WhatIsSteam = () => {
                         style={{
                           background: on ? s.color : s.bg,
                           color: on ? "#fff" : s.color,
-                          borderColor: on ? s.color : "#0F172A",
-                          boxShadow: on ? `5px 5px 0 ${s.color}80` : "3px 3px 0 #0F172A",
+                          borderColor: on ? s.color : "#1B2A63",
+                          boxShadow: on ? `5px 5px 0 ${s.color}80` : "3px 3px 0 #1B2A63",
                         }}
                       >
                         {s.key}
@@ -282,7 +282,7 @@ export const WhatIsSteam = () => {
                     style={{ background: current.bg }}
                   >
                     <motion.span
-                      className="grid place-items-center w-20 h-20 rounded-2xl border-2 border-[#0F172A] text-white shrink-0 shadow-[4px_4px_0_#0F172A]"
+                      className="grid place-items-center w-20 h-20 rounded-2xl border-2 border-[#1B2A63] text-white shrink-0 shadow-[4px_4px_0_#1B2A63]"
                       style={{ background: current.color }}
                       animate={{ rotate: [0, -3, 3, 0] }}
                       transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
@@ -293,7 +293,7 @@ export const WhatIsSteam = () => {
                       <h3 className="font-display font-extrabold text-3xl" style={{ color: current.color }}>
                         {current.word}
                       </h3>
-                      <p className="mt-3 text-lg text-[#0F172A]/80 leading-relaxed">{current.text}</p>
+                      <p className="mt-3 text-lg text-[#1B2A63]/80 leading-relaxed">{current.text}</p>
                     </div>
                   </div>
                 </TiltCard>
@@ -411,7 +411,7 @@ export const WhatIsSteam = () => {
         </section>
 
         {/* ── Section 5: Clearing Up the Myths ── */}
-        <section className="py-20 border-b-2 border-[#0F172A]">
+        <section className="py-20 border-b-2 border-[#1B2A63]">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <Reveal>
               <SectionHeading

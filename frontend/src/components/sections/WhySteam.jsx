@@ -26,7 +26,7 @@ export const WhySteam = () => {
               front={
                 <div className="ln-card h-full p-7 flex flex-col">
                   <span
-                    className="grid place-items-center w-14 h-14 rounded-2xl border-2 border-[#0F172A] text-white shadow-[3px_3px_0_#0F172A]"
+                    className="grid place-items-center w-14 h-14 rounded-2xl border-2 border-[#1B2A63] text-white shadow-[3px_3px_0_#1B2A63]"
                     style={{ background: w.color }}
                   >
                     <w.icon size={26} />
