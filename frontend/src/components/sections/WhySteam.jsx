@@ -16,7 +16,7 @@ export const WhySteam = () => {
             overline={whySteamI18n.overline}
             title={whySteamI18n.title}
             sub={whySteamI18n.sub}
-            titleClassName="!text-[#FBBF24]"     {/* 👈 ONLY CHANGE HERE */}
+            titleClassName="!text-[#FBBF24]"    
           />
         </Reveal>
 
