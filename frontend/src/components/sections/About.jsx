@@ -69,7 +69,7 @@ export const About = () => {
                 <span className="grid place-items-center w-11 h-11 rounded-xl bg-[#FBBF24] text-[#0F172A] border-2 border-white/20 shrink-0">
                   <Award size={22} />
                 </span>
-                <h3 className="font-display font-extrabold text-lg text-[#FBBF24]">{educator.publishedTitle}</h3>
+                <h3 className="font-display font-extrabold text-lg !text-[#FBBF24]">{educator.publishedTitle}</h3>
               </div>
               <p className="mt-4 text-base md:text-lg text-white/85 leading-relaxed">{educator.highlight}</p>
             </div>
