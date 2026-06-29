@@ -30,6 +30,7 @@ body {
 
 h1, h2, h3, h4, h5, .font-display {
     font-family: 'Outfit', sans-serif;
+    color: var(--ln-science); /* = #1B2A63 */
 }
 
 ::selection {
