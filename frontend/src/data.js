@@ -135,7 +135,7 @@ export const PROGRAMMES = [
   },
   {
     tag: "Upcoming", title: "STEAM Thematic Workshop 2026", color: "#FB7185", link: "/Thematic Workshop",
-    text: "An intensive one-week themed workshop running through summer 2026. Each day has a dedicated theme with 3 hours of guided scientific investigation, indoors and outdoors. See the Thematic Workshop section below for full details.",
+    text: "An intensivethemed workshop running through summer 2026. Each day has a dedicated theme with 3 hours of guided scientific investigation, indoors and outdoors. See the Thematic Workshop section below for full details.",
     image: "https://images.pexels.com/photos/8471975/pexels-photo-8471975.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   },
   {

@@ -167,7 +167,7 @@ export const en = {
       title: "STEAM Thematic Workshop 2026",
       type: "Upcoming",
       description:
-        "An intensive one-week themed workshop running through summer 2026. Each day has a dedicated theme with 3 hours of guided scientific investigation, indoors and outdoors. See the Thematic Workshop section below for full details.",
+        "An intensive themed workshop running through summer 2026. Each day has a dedicated theme with 3 hours of guided scientific investigation, indoors and outdoors. See the Thematic Workshop section below for full details.",
     },
     "Cognitive Support Sessions": {
       title: "Cognitive Support Sessions",
@@ -297,7 +297,7 @@ export const en = {
     overline: "Upcoming events — Summer 2026",
     heading: "STEAM Thematic Workshop 2026",
     tag: "Registrations open • limited spots",
-    intro: "A one-week intensive STEAM Thematic Workshop for children aged 6–13. Each day is a different themed lab. Children spend 3 hours per day in guided scientific investigations, both indoors and outdoors.",
+    intro: "A intensive STEAM Thematic Workshop for children aged 6–13. Each day is a different themed lab. Children spend 3 hours per day in guided scientific investigations, both indoors and outdoors.",
     weekHeading: "A week at workshop",
     weekSub: "(tap a day to explore)",
     tapExplore: "Tap to explore",
