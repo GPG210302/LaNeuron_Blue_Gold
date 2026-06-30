@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { CalendarDays, Clock, MapPin, Users, AlertCircle, ArrowRight, RotateCw } from "lucide-react";
+import { CalendarDays, MapPin, GraduationCap, Users, Tag, AlertCircle, ArrowRight, RotateCw } from "lucide-react";
 import { Reveal } from "../Reveal";
 import { FlipCard } from "../FlipCard";
 import { SITE } from "../../data";
@@ -84,9 +84,9 @@ export const Events = () => {
               </div>
 
               <div className="mt-6 grid grid-cols-3 gap-3">
-                <Stat icon={Clock} label={events.stat3hrs} />
-                <Stat icon={Users} label={events.statMax10} />
-                <Stat icon={MapPin} label={events.statKrakow} />
+                <Stat icon={GraduationCap} label={events.statEducator} />
+                <Stat icon={Users}          label={events.statAgeGroup} />
+                <Stat icon={Tag}           label={events.statDiscount} />
               </div>
 
               <div className="mt-6 ln-card !shadow-none bg-[#E7EBF7] p-4 flex gap-3">
