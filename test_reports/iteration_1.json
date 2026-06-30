@@ -8,7 +8,7 @@
     "ui_bugs": [],
     "integration_issues": [],
     "design_issues": [
-      {"screen": "Register form vs backend constraint", "issues": ["Frontend label/input restricts child_age to 6-13 (HTML min=6/max=13) while backend Pydantic allows 4-16 (ge=4, le=16). Not user-facing but a spec inconsistency — recommend tightening backend to ge=6 le=13 (the marketed age range) or relaxing UI to match backend."]}
+      {"screen": "Register form vs backend constraint", "issues": ["Frontend label/input restricts child_age to 6-14 (HTML min=6/max=13) while backend Pydantic allows 4-16 (ge=4, le=16). Not user-facing but a spec inconsistency — recommend tightening backend to ge=6 le=13 (the marketed age range) or relaxing UI to match backend."]}
     ]
   },
   "test_report_links": [
@@ -16,7 +16,7 @@
     "/app/test_reports/pytest/pytest_results.xml"
   ],
   "action_items": [
-    "(Optional) Align child_age validation between backend (4-16) and frontend (6-13). Per business description (ages 6-13), tightening backend to ge=6 le=13 is preferred.",
+    "(Optional) Align child_age validation between backend (4-16) and frontend (6-14). Per business description (ages 6-14), tightening backend to ge=6 le=13 is preferred.",
     "(Optional) Brand text 'La Neuron' in the navbar is not exposed as a discoverable child of <nav> via simple text-locator (still visible). Not a bug — no fix required."
   ],
   "critical_code_review_comments": [

@@ -18,14 +18,14 @@ export const en = {
     tagline: "Inspiring the next generation of thinkers, makers, and explorers",
   },
   hero: {
-    badge: "Ages 6–13 • Kraków, Poland",
+    badge: "Ages 6–14 • Kraków, Poland",
     headline: "Real-World Science for Young Minds",
-    sub: "We believe every child is a natural scientist. We give children aged 6–13 the tools, the method, and the wonder to investigate the world around them through hands-on STEAM education.",
+    sub: "We believe every child is a natural scientist. We give children aged 6–14 the tools, the method, and the wonder to investigate the world around them through hands-on STEAM education.",
     english:
       "At La Neuron, every session is conducted entirely in English, with minimal Polish support available where necessary. Through hands-on STEAM experiences, children naturally develop the ability to think, question, create, and communicate in English building confidence while staying fully immersed in an English speaking environment.",
     key: "This is not just fun with science materials. Every session follows a proper scientific investigation — hypothesis, experiment, observation, results, and conclusion.",
     stats: [
-      { value: "6–13", label: "Age range" },
+      { value: "6–14", label: "Age range" },
       { value: "Max 10", label: "Per group" },
       { value: "5", label: "STEAM disciplines" },
     ],
@@ -146,7 +146,7 @@ export const en = {
     },
     "Junior Scientists": {
       title: "Junior Scientists",
-      ageRange: "Ages 10–13",
+      ageRange: "Ages 10–14",
       activities: [
         "Full scientific method investigations",
         "Structured hypothesis, variables, and data recording",
@@ -161,7 +161,7 @@ export const en = {
       title: "Cyclic STEAM Workshops",
       type: "Regular",
       description:
-        "Small group sessions for children aged 6–13. Each day focuses on a different STEAM theme. Children work through complete scientific investigations with worksheets, materials, and outdoor components — both indoor experiments and outdoor discovery.",
+        "Small group sessions for children aged 6–14. Each day focuses on a different STEAM theme. Children work through complete scientific investigations with worksheets, materials, and outdoor components — both indoor experiments and outdoor discovery.",
     },
     "STEAM Thematic Workshop 2026": {
       title: "STEAM Thematic Workshop 2026",
@@ -245,7 +245,7 @@ export const en = {
     {
       question: "What ages can attend?",
       answer:
-        "Children aged 6 to 13 are welcome. Sessions are differentiated — younger children (6–9) follow a guided, sensory-led approach while older children (10–13) complete full scientific investigations.",
+        "Children aged 6 to 14 are welcome. Sessions are differentiated — younger children (6–9) follow a guided, sensory-led approach while older children (10–14) complete full scientific investigations.",
     },
     {
       question: "What language are sessions delivered in?",
@@ -270,7 +270,7 @@ export const en = {
     {
       question: "Can siblings attend together?",
       answer:
-        "Yes. Siblings within the 6–13 age range are welcome in the same week. A sibling discount is available — mention this when registering.",
+        "Yes. Siblings within the 6–14 age range are welcome in the same week. A sibling discount is available — mention this when registering.",
     },
     {
       question: "What will my child bring home?",
@@ -285,25 +285,25 @@ export const en = {
   ],
   footer: {
     description:
-      "Hands-on STEAM education for children aged 6–13. Led by a PhD Cognitive Scientist and certified Neuroscience Coach. Every child deserves to experience the wonder of discovery.",
+      "Hands-on STEAM education for children aged 6–14. Led by a PhD Cognitive Scientist and certified Neuroscience Coach. Every child deserves to experience the wonder of discovery.",
     exploreTitle: "Explore",
     contactTitle: "Contact",
     enquireBtn: "Enquire Now",
     copyright: "All rights reserved.",
     designerCredit: "Website crafted by G3 Creative Labs · Ghavish V G · +48 579 156 009",
-    facts: ["Ages 6–13", "Mon–Fri 9AM–12PM", "Max 10 per week", "Starts 6 July 2026", "Kraków"],
+    facts: ["Ages 6–14", "Mon–Fri 9AM–12PM", "Max 10 per week", "Starts 6 July 2026", "Kraków"],
   },
   events: {
     overline: "Upcoming events — Summer 2026",
     heading: "STEAM Thematic Workshop 2026",
     tag: "Registrations open • limited spots",
-    intro: "A intensive STEAM Thematic Workshop for children aged 6–13. Each day is a different themed lab. Children spend 3 hours per day in guided scientific investigations, both indoors and outdoors.",
+    intro: "A intensive STEAM Thematic Workshop for children aged 6–14. Each day is a different themed lab. Children spend 3 hours per day in guided scientific investigations, both indoors and outdoors.",
     weekHeading: "Daily workshop",
     weekSub: "(tap a day to explore)",
     tapExplore: "Tap to explore",
     workshopDetailsHeading: "workshop details",
     statEducator: "Cognitive Scientist & Neuroscience Coach",   // 🎓
-    statAgeGroup: "Ages 6–12",            // 👦
+    statAgeGroup: "Ages 6–14,            // 👦
     statDiscount: "Contact Us",               // 🏷️
     suitableNote: "Suitable for children with learning differences. Our educator is a certified Neuroscience Coach experienced with ADHD, dyslexia, memory challenges, and SEN. Children take home Science project final outcomes, Skill Badges and Certificate of Achievement.",
     reserveBtn: "Reserve Your Child's Spot",
@@ -402,7 +402,7 @@ export const en = {
       email: "Email address *",
       phone: "Phone / WhatsApp (optional)",
       childName: "Child first name *",
-      childAge: "Child age (6-13) *",
+      childAge: "Child age (6-14) *",
       preferredWeek: "Preferred week *",
       programmeInterest: "Programme interest *",
       message: "Questions, allergies, or learning needs (optional)",

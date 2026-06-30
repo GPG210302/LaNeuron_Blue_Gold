@@ -17,7 +17,7 @@
   "critical_code_review_comments": [
     "Navbar 'big logo' branch only triggers when pathname === '/' AND not scrolled. Works correctly but the resulting 220px header height on mobile (h-28 sm:h-[220px]) is very tall and consumes the entire viewport — consider reducing on small screens.",
     "FlipCard's outer wrapper has role='button' on a div; consider rendering as a real <button> for better accessibility (Enter/Space already handled).",
-    "Register.jsx still has child_age min=6/max=13 on the input while backend permits 4-16 — flagged in iteration_1, still unresolved (low priority since marketed age range is 6-13)."
+    "Register.jsx still has child_age min=6/max=14 on the input while backend permits 4-16 — flagged in iteration_1, still unresolved (low priority since marketed age range is 6-14)."
   ],
   "updated_files": [],
   "success_rate": {"backend": "100% (not re-tested this iteration; previous pytest suite passes)", "frontend": "100% (24/24 Playwright checks)"},

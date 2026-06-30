@@ -21,14 +21,14 @@ export const pl = {
   },
 
   hero: {
-    badge: "Wiek 6–13 lat • Kraków, Polska",
+    badge: "Wiek 6–14 lat • Kraków, Polska",
     headline: "Prawdziwa nauka dla młodych umysłów",
-    sub: "Wierzymy, że każde dziecko jest z natury naukowcem. Dajemy dzieciom w wieku 6–13 lat narzędzia, metodę i ciekawość potrzebne do odkrywania otaczającego je świata — poprzez praktyczną edukację STEAM.",
+    sub: "Wierzymy, że każde dziecko jest z natury naukowcem. Dajemy dzieciom w wieku 6–14 lat narzędzia, metodę i ciekawość potrzebne do odkrywania otaczającego je świata — poprzez praktyczną edukację STEAM.",
     english:
       "W La Neuron każde zajęcia prowadzone są w całości po angielsku, z minimalnym wsparciem w języku polskim tam, gdzie jest to konieczne. Dzięki praktycznym doświadczeniom STEAM dzieci w naturalny sposób rozwijają umiejętność myślenia, zadawania pytań, tworzenia i komunikowania się po angielsku — budując pewność siebie i pozostając w pełni zanurzonym w anglojęzycznym środowisku.",
     key: "To nie jest po prostu zabawa z materiałami naukowymi. Każde zajęcia opierają się na prawdziwym badaniu naukowym — hipoteza, eksperyment, obserwacja, wyniki i wnioski.",
     stats: [
-      { value: "6–13", label: "Przedział wiekowy" },
+      { value: "6–14", label: "Przedział wiekowy" },
       { value: "Maks. 10", label: "Osób w grupie" },
       { value: "5", label: "Dyscyplin STEAM" },
     ],
@@ -183,7 +183,7 @@ export const pl = {
     },
     "Junior Scientists": {
       title: "Młodzi naukowcy",
-      ageRange: "Wiek 10–13 lat",
+      ageRange: "Wiek 10–14 lat",
       activities: [
         "Pełne badania z zastosowaniem metody naukowej",
         "Ustrukturyzowane hipotezy, zmienne i rejestrowanie danych",
@@ -199,7 +199,7 @@ export const pl = {
       title: "Cotygodniowe warsztaty STEAM",
       type: "Regularne",
       description:
-        "Zajęcia w małych grupach dla dzieci w wieku 6–13 lat. Każdy tydzień poświęcony jest innemu zagadnieniu STEAM. Dzieci przeprowadzają pełne badania naukowe z arkuszami, materiałami i elementami na świeżym powietrzu — zarówno eksperymenty wewnątrz, jak i odkrywanie na zewnątrz.",
+        "Zajęcia w małych grupach dla dzieci w wieku 6–14 lat. Każdy tydzień poświęcony jest innemu zagadnieniu STEAM. Dzieci przeprowadzają pełne badania naukowe z arkuszami, materiałami i elementami na świeżym powietrzu — zarówno eksperymenty wewnątrz, jak i odkrywanie na zewnątrz.",
     },
     "STEAM Thematic Workshop 2026": {
       title: "Program letni STEAM 2026",
@@ -288,7 +288,7 @@ export const pl = {
     {
       question: "Dla jakich dzieci są te zajęcia?",
       answer:
-        "Zapraszamy dzieci w wieku 6–13 lat. Zajęcia są zróżnicowane — młodsze dzieci (6–9 lat) pracują metodą sensoryczną z prowadzonymi ćwiczeniami, natomiast starsze (10–13 lat) przeprowadzają pełne badania naukowe.",
+        "Zapraszamy dzieci w wieku 6–14 lat. Zajęcia są zróżnicowane — młodsze dzieci (6–9 lat) pracują metodą sensoryczną z prowadzonymi ćwiczeniami, natomiast starsze (10–14 lat) przeprowadzają pełne badania naukowe.",
     },
     {
       question: "W jakim języku prowadzone są zajęcia?",
@@ -313,7 +313,7 @@ export const pl = {
     {
       question: "Czy rodzeństwo może uczęszczać razem?",
       answer:
-        "Tak. Rodzeństwo w przedziale wiekowym 6–13 lat jest mile widziane w tym samym tygodniu. Dostępna jest zniżka dla rodzeństwa — wspomnij o tym przy rejestracji.",
+        "Tak. Rodzeństwo w przedziale wiekowym 6–14 lat jest mile widziane w tym samym tygodniu. Dostępna jest zniżka dla rodzeństwa — wspomnij o tym przy rejestracji.",
     },
     {
       question: "Co dziecko zabierze do domu?",
@@ -329,14 +329,14 @@ export const pl = {
 
   footer: {
     description:
-      "Praktyczna edukacja STEAM dla dzieci w wieku 6–13 lat. Prowadzona przez doktora nauk kognitywnych i certyfikowanego coacha neurobiologicznego. Każde dziecko zasługuje na to, by doświadczyć radości odkrywania.",
+      "Praktyczna edukacja STEAM dla dzieci w wieku 6–14 lat. Prowadzona przez doktora nauk kognitywnych i certyfikowanego coacha neurobiologicznego. Każde dziecko zasługuje na to, by doświadczyć radości odkrywania.",
     exploreTitle: "Odkrywaj",
     contactTitle: "Kontakt",
     enquireBtn: "Zapytaj teraz",
     copyright: "Wszelkie prawa zastrzeżone.",
     designerCredit: "Website crafted by G3 Creative Labs · Ghavish V G · +48 579 156 009",
     facts: [
-      "Wiek 6–13 lat",
+      "Wiek 6–14 lat",
       "Pon–Pt 9:00–12:00",
       "Maks. 10 dzieci tygodniowo",
       "Start 6 lipca 2026",
@@ -348,13 +348,13 @@ export const pl = {
     overline: "Nadchodzące wydarzenia — Lato 2026",
     heading: "Program letni STEAM 2026",
     tag: "Rejestracja otwarta • ograniczona liczba miejsc",
-    intro: "Jednotygodniowy intensywny Program letni STEAM dla dzieci w wieku 6–13 lat. Każdy dzień to inne tematyczne laboratorium. Dzieci spędzają 3 godziny dziennie na prowadzonych badaniach naukowych — zarówno wewnątrz, jak i na zewnątrz.",
+    intro: "Jednotygodniowy intensywny Program letni STEAM dla dzieci w wieku 6–14 lat. Każdy dzień to inne tematyczne laboratorium. Dzieci spędzają 3 godziny dziennie na prowadzonych badaniach naukowych — zarówno wewnątrz, jak i na zewnątrz.",
     weekHeading: "Tydzień w obozie",
     weekSub: "(kliknij dzień, aby odkryć szczegóły)",
     tapExplore: "Kliknij, aby odkryć",
     workshopDetailsHeading: "Szczegóły obozu",
     statEducator: "Kognitywista i trener neuronauki",
-    statAgeGroup: "6–13 lat",
+    statAgeGroup: "6–14 lat",
     statDiscount: "zapytaj nas",
     suitableNote: "Zajęcia dostosowane dla dzieci z trudnościami w uczeniu się. Nauczycielka jest certyfikowanym coachem neurobiologicznym z doświadczeniem w pracy z dziećmi z ADHD, dysleksją, trudnościami z pamięcią i specjalnymi potrzebami edukacyjnymi. Dzieci zabierają do domu efekty projektu naukowego, odznaki umiejętności i certyfikat ukończenia.",
     reserveBtn: "Zarezerwuj miejsce dla swojego dziecka",
@@ -453,7 +453,7 @@ export const pl = {
       email: "Adres e-mail *",
       phone: "Telefon / WhatsApp (opcjonalnie)",
       childName: "Imię dziecka *",
-      childAge: "Wiek dziecka (6–13) *",
+      childAge: "Wiek dziecka (6–14) *",
       preferredWeek: "Preferowany tydzień *",
       programmeInterest: "Interesujący program *",
       message: "Pytania, alergie lub specjalne potrzeby (opcjonalnie)",
