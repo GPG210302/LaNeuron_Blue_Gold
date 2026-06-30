@@ -22,7 +22,7 @@ export const NAV = [
   { label: "What is STEAM?", path: "/what-is-steam" },
   { label: "Why STEAM?", path: "/why-steam" },
   { label: "Programmes", path: "/programmes" },
-  { label: "Summer Program", path: "/Summer Program" },
+  { label: "Thematic Workshop", path: "/Thematic Workshop" },
   { label: "FAQ", path: "/faq" },
 ];
 
@@ -134,8 +134,8 @@ export const PROGRAMMES = [
     image: "https://images.pexels.com/photos/7869034/pexels-photo-7869034.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   },
   {
-    tag: "Upcoming", title: "STEAM Summer Program 2026", color: "#FB7185", link: "/Summer Program",
-    text: "An intensive one-week themed workshop running through summer 2026. Each day has a dedicated theme with 3 hours of guided scientific investigation, indoors and outdoors. See the Summer Program section below for full details.",
+    tag: "Upcoming", title: "STEAM Thematic Workshop 2026", color: "#FB7185", link: "/Thematic Workshop",
+    text: "An intensive one-week themed workshop running through summer 2026. Each day has a dedicated theme with 3 hours of guided scientific investigation, indoors and outdoors. See the Thematic Workshop section below for full details.",
     image: "https://images.pexels.com/photos/8471975/pexels-photo-8471975.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   },
   {

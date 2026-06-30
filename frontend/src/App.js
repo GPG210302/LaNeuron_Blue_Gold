@@ -24,7 +24,7 @@ function App() {
             <Route path="/what-is-steam" element={<WhatIsSteam />} />
             <Route path="/why-steam" element={<WhySteamPage />} />
             <Route path="/programmes" element={<Programmes />} />
-            <Route path="/Summer Program" element={<Events />} />
+            <Route path="/Thematic Workshop" element={<Events />} />
             <Route path="/register" element={<Register />} />
             <Route path="/faq" element={<Faq />} />
             <Route path="*" element={<Navigate to="/" replace />} />

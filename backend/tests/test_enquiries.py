@@ -35,7 +35,7 @@ class TestEnquiriesCreate:
             "child_name": f"TEST_Child_{unique}",
             "child_age": 9,
             "preferred_week": "Week 1: 30 Jun – 4 Jul",
-            "programme_interest": "Summer Program 2026",
+            "programme_interest": "Thematic Workshop 2026",
             "message": "TEST enquiry message",
         }
         r = session.post(f"{API}/enquiries", json=payload)

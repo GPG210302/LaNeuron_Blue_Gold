@@ -42,7 +42,7 @@ export function useData() {
       "/what-is-steam": "nav.whatIsSteam",
       "/why-steam": "nav.whySteam",
       "/programmes": "nav.programmes",
-      "/Summer Program": "nav.summerProgram",
+      "/Thematic Workshop": "nav.summerProgram",
       "/faq": "nav.faq",
     };
     return { ...n, label: t(keyMap[n.path]) || n.label };
@@ -294,7 +294,7 @@ export function useData() {
     { to: "/what-is-steam",  color: "#10B981" },
     { to: "/why-steam",      color: "#A855F7" },
     { to: "/programmes",     color: "#F97316" },
-    { to: "/Summer Program", color: "#E0B33C" },
+    { to: "/Thematic Workshop", color: "#E0B33C" },
     { to: "/faq",            color: "#D97706" },
   ];
   const homeLinksI18n = t("home.links");

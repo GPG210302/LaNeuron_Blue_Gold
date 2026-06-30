@@ -5,7 +5,7 @@ export const en = {
     whatIsSteam: "What is STEAM?",
     whySteam: "Why STEAM?",
     programmes: "Programmes",
-    summerProgram: "Summer Program",
+    summerProgram: "Thematic Workshop",
     faq: "FAQ",
   },
   ui: {
@@ -163,11 +163,11 @@ export const en = {
       description:
         "Small group sessions for children aged 6–13. Each week focuses on a different STEAM theme. Children work through complete scientific investigations with worksheets, materials, and outdoor components — both indoor experiments and outdoor discovery.",
     },
-    "STEAM Summer Program 2026": {
-      title: "STEAM Summer Program 2026",
+    "STEAM Thematic Workshop 2026": {
+      title: "STEAM Thematic Workshop 2026",
       type: "Upcoming",
       description:
-        "An intensive one-week themed workshop running through summer 2026. Each day has a dedicated theme with 3 hours of guided scientific investigation, indoors and outdoors. See the Summer Program section below for full details.",
+        "An intensive one-week themed workshop running through summer 2026. Each day has a dedicated theme with 3 hours of guided scientific investigation, indoors and outdoors. See the Thematic Workshop section below for full details.",
     },
     "Cognitive Support Sessions": {
       title: "Cognitive Support Sessions",
@@ -295,9 +295,9 @@ export const en = {
   },
   events: {
     overline: "Upcoming events — Summer 2026",
-    heading: "STEAM Summer Program 2026",
+    heading: "STEAM Thematic Workshop 2026",
     tag: "Registrations open • limited spots",
-    intro: "A one-week intensive STEAM Summer Program for children aged 6–13. Each day is a different themed lab. Children spend 3 hours per day in guided scientific investigations, both indoors and outdoors.",
+    intro: "A one-week intensive STEAM Thematic Workshop for children aged 6–13. Each day is a different themed lab. Children spend 3 hours per day in guided scientific investigations, both indoors and outdoors.",
     weekHeading: "A week at workshop",
     weekSub: "(tap a day to explore)",
     tapExplore: "Tap to explore",
@@ -381,8 +381,8 @@ export const en = {
       { title: "Meet the Educator",    desc: "Dr. Priyadarshini Gouthaman — PhD in Anatomy, cognitive scientist, and the mind behind La Neuron." },
       { title: "What is STEAM?",        desc: "Explore the five disciplines — Science, Technology, Engineering, Art, and Mathematics — and how they connect." },
       { title: "Why STEAM?",            desc: "Six reasons STEAM matters for your child, plus our full investigative scientific-method approach." },
-      { title: "Programmes",            desc: "Weekly workshops, the Summer Program, and one-to-one cognitive support sessions." },
-      { title: "Summer Program 2026",   desc: "A themed week of Wonder, Build, Bio, Planet, and Food labs in Kraków. Registrations open!" },
+      { title: "Programmes",            desc: "Weekly workshops, the Thematic Workshop, and one-to-one cognitive support sessions." },
+      { title: "Thematic Workshop 2026",   desc: "A themed week of Wonder, Build, Bio, Planet, and Food labs in Kraków. Registrations open!" },
       { title: "FAQ",                   desc: "Ages, language, what to bring, learning differences, siblings, and the cancellation policy." },
     ],
   },

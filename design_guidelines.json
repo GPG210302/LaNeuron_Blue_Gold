@@ -72,7 +72,7 @@
     },
     "krakow_location": {
       "url": "https://images.pexels.com/photos/6023585/pexels-photo-6023585.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-      "description": "Bustling street scene in Krakow. Use as a background or side image in the Summer Program Events section."
+      "description": "Bustling street scene in Krakow. Use as a background or side image in the Thematic Workshop Events section."
     }
   },
   "sections_requirements": {
@@ -83,7 +83,7 @@
     "why_steam": "Grid of 6 standard tactile cards (3 columns). Icons from @phosphor-icons/react (duotone).",
     "investigative_approach": "6-step scientific method. Visual flow diagram. Use a vertical zigzag path with a dashed SVG line connecting numbered circles.",
     "programmes": "3 large tactile cards detailing the programs. Rich descriptions, use the robotics image for one.",
-    "upcoming_events": "Summer Program 2026 Krakow. Timeline/Calendar view for Mon-Fri daily themes. Use the Krakow image as a stylized map or side visual.",
+    "upcoming_events": "Thematic Workshop 2026 Krakow. Timeline/Calendar view for Mon-Fri daily themes. Use the Krakow image as a stylized map or side visual.",
     "register_form": "Shadcn UI form wrapped in a tactile card container. Thick borders on inputs, strong focus rings.",
     "faq": "Shadcn accordion styled with borders between items, plus (+) icon that rotates to minus (x) on open.",
     "footer": "Dark background (#0F172A) with white text. Space for FB/IG links. Clean layout."

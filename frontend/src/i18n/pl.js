@@ -201,7 +201,7 @@ export const pl = {
       description:
         "Zajęcia w małych grupach dla dzieci w wieku 6–13 lat. Każdy tydzień poświęcony jest innemu zagadnieniu STEAM. Dzieci przeprowadzają pełne badania naukowe z arkuszami, materiałami i elementami na świeżym powietrzu — zarówno eksperymenty wewnątrz, jak i odkrywanie na zewnątrz.",
     },
-    "STEAM Summer Program 2026": {
+    "STEAM Thematic Workshop 2026": {
       title: "Program letni STEAM 2026",
       type: "Nadchodzący",
       description:
