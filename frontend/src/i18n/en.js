@@ -157,8 +157,8 @@ export const en = {
     },
   },
   programmes: {
-    "Weekly STEAM Workshops": {
-      title: "Weekly STEAM Workshops",
+    "Cyclic STEAM Workshops": {
+      title: "Cyclic STEAM Workshops",
       type: "Regular",
       description:
         "Small group sessions for children aged 6–13. Each week focuses on a different STEAM theme. Children work through complete scientific investigations with worksheets, materials, and outdoor components — both indoor experiments and outdoor discovery.",

@@ -195,7 +195,7 @@ export const pl = {
   },
 
   programmes: {
-    "Weekly STEAM Workshops": {
+    "Cyclic STEAM Workshops": {
       title: "Cotygodniowe warsztaty STEAM",
       type: "Regularne",
       description:
