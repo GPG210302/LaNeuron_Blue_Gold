@@ -130,7 +130,7 @@ export const AGE_GROUPS = [
 export const PROGRAMMES = [
   {
     tag: "Regular", title: "Cyclic STEAM Workshops", color: "#3B82F6",
-    text: "Small group sessions for children aged 6–13. Each week focuses on a different STEAM theme. Children work through complete scientific investigations with worksheets, materials, and outdoor components — both indoor experiments and outdoor discovery.",
+    text: "Small group sessions for children aged 6–13. Each day focuses on a different STEAM theme. Children work through complete scientific investigations with worksheets, materials, and outdoor components — both indoor experiments and outdoor discovery.",
     image: "https://images.pexels.com/photos/7869034/pexels-photo-7869034.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   },
   {
@@ -171,7 +171,7 @@ export const WORKSHOP_DAYS = [
 export const WORKSHOP_FACTS = [
   { label: "Start date", value: "6 July 2026" },
   { label: "End date", value: "End of August 2026" },
-  { label: "Duration", value: "8 weekly workshops" },
+  { label: "Duration", value: "3 hours / day" },
   { label: "Daily timing", value: "9:00 AM – 12:00 PM" },
   { label: "Days", value: "Monday to Friday" },
   { label: "Group size", value: "Max 10 children" },

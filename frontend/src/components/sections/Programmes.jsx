@@ -19,7 +19,7 @@ export const Programmes = () => {
           <SectionHeading
             overline="What we offer"
             title="Our STEAM Programmes"
-            sub="Three ways for your child to learn, build, and grow — from weekly workshops to one-to-one cognitive support."
+            sub="Three ways for your child to learn, build, and grow — from daily workshops to one-to-one cognitive support."
           />
         </Reveal>
 

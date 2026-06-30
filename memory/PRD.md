@@ -8,7 +8,7 @@ Build a highly-animated, professional yet kids-attractive landing page for a STE
 - Educator photo: AI-edited into professional business attire (Gemini Nano Banana), face preserved.
 - Register form: **Save to database** (email via Resend deferred — no key yet).
 - Theme: designer's choice (bright & playful + modern & sophisticated).
-- Footer: placeholder Facebook & Instagram links (to be added later).
+- Footer: placeholder Facebook & Instagram links (to be added later)
 
 ## Architecture
 - **Frontend**: React (CRA + craco), Tailwind, framer-motion, lucide-react, shadcn/ui (Select, sonner). Single-page, sectional components under `src/components/sections/`. Content centralized in `src/data.js`. Neo-brutalist "tactile card" aesthetic (Outfit + DM Sans fonts).
@@ -16,7 +16,7 @@ Build a highly-animated, professional yet kids-attractive landing page for a STE
 - **Assets**: AI-generated educator portrait at `src/assets/educator.png`.
 
 ## Implemented (2026-06-03)
-- 11 sections: Navbar, Hero, About Educator, Interactive "What is STEAM" selector, Why STEAM (6 cards), 6-step Scientific Method zigzag flow, Programmes, Thematic Workshop 2026 (weekly calendar + Kraków Google map embed + workshop facts), Register/Enquiry form, FAQ accordion, Footer.
+- 11 sections: Navbar, Hero, About Educator, Interactive "What is STEAM" selector, Why STEAM (6 cards), 6-step Scientific Method zigzag flow, Programmes, Thematic Workshop 2026 (calendar + Kraków Google map embed + workshop facts), Register/Enquiry form, FAQ accordion, Footer.
 - Enquiry API persists to Mongo; success/empty-validation flows working.
 - Email-sending code present but gated behind `RESEND_API_KEY` (disabled until configured).
 - Tested: backend 100% (8 pytest cases), frontend 100% (all flows).

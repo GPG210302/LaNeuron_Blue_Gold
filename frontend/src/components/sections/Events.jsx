@@ -28,7 +28,7 @@ export const Events = () => {
           </p>
         </Reveal>
 
-        {/* Weekly flip-card timeline */}
+        {/* Daily flip-card timeline */}
         <Reveal delay={0.05}>
           <h3 className="mt-12 font-display font-extrabold text-2xl flex items-center gap-2">
             <CalendarDays size={24} className="text-[#1B2A63]" /> {events.weekHeading}

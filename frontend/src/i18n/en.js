@@ -161,7 +161,7 @@ export const en = {
       title: "Cyclic STEAM Workshops",
       type: "Regular",
       description:
-        "Small group sessions for children aged 6–13. Each week focuses on a different STEAM theme. Children work through complete scientific investigations with worksheets, materials, and outdoor components — both indoor experiments and outdoor discovery.",
+        "Small group sessions for children aged 6–13. Each day focuses on a different STEAM theme. Children work through complete scientific investigations with worksheets, materials, and outdoor components — both indoor experiments and outdoor discovery.",
     },
     "STEAM Thematic Workshop 2026": {
       title: "STEAM Thematic Workshop 2026",
@@ -216,7 +216,7 @@ export const en = {
   workshopFacts: {
     startDate: { label: "Start date", value: "6 July 2026" },
     endDate: { label: "End date", value: "End of August 2026" },
-    duration: { label: "Duration", value: "8 weekly workshops" },
+    duration: { label: "Duration", value: "3 hours / day" },
     dailyTiming: { label: "Daily timing", value: "9:00 AM – 12:00 PM" },
     days: { label: "Days", value: "Monday to Friday" },
     groupSize: { label: "Group size", value: "Max 10 children" },
@@ -298,7 +298,7 @@ export const en = {
     heading: "STEAM Thematic Workshop 2026",
     tag: "Registrations open • limited spots",
     intro: "A intensive STEAM Thematic Workshop for children aged 6–13. Each day is a different themed lab. Children spend 3 hours per day in guided scientific investigations, both indoors and outdoors.",
-    weekHeading: "A week at workshop",
+    weekHeading: "Dailyworkshop",
     weekSub: "(tap a day to explore)",
     tapExplore: "Tap to explore",
     workshopDetailsHeading: "workshop details",
@@ -381,7 +381,7 @@ export const en = {
       { title: "Meet the Educator",    desc: "Dr. Priyadarshini Gouthaman — PhD in Anatomy, cognitive scientist, and the mind behind La Neuron." },
       { title: "What is STEAM?",        desc: "Explore the five disciplines — Science, Technology, Engineering, Art, and Mathematics — and how they connect." },
       { title: "Why STEAM?",            desc: "Six reasons STEAM matters for your child, plus our full investigative scientific-method approach." },
-      { title: "Programmes",            desc: "Weekly workshops, the Thematic Workshop, and one-to-one cognitive support sessions." },
+      { title: "Programmes",            desc: "Cyclic workshops, the Thematic Workshop, and one-to-one cognitive support sessions." },
       { title: "Thematic Workshop 2026",   desc: "A themed week of Wonder, Build, Bio, Planet, and Food labs in Kraków. Registrations open!" },
       { title: "FAQ",                   desc: "Ages, language, what to bring, learning differences, siblings, and the cancellation policy." },
     ],
