@@ -236,9 +236,9 @@ export function useData() {
     weekSub:             t("events.weekSub"),
     tapExplore:          t("events.tapExplore"),
     workshopDetailsHeading:  t("events.workshopDetailsHeading"),
-    stat3hrs:            t("events.stat3hrs"),
-    statMax10:           t("events.statMax10"),
-    statKrakow:          t("events.statKrakow"),
+    statEducator:         t('events.statEducator'),
+    statAgeGroup:         t('events.statAgeGroup'),
+    statDiscount:         t('events.statDiscount'),
     suitableNote:        t("events.suitableNote"),
     reserveBtn:          t("events.reserveBtn"),
   };
