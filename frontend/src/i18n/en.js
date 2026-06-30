@@ -298,7 +298,7 @@ export const en = {
     heading: "STEAM Thematic Workshop 2026",
     tag: "Registrations open • limited spots",
     intro: "A intensive STEAM Thematic Workshop for children aged 6–13. Each day is a different themed lab. Children spend 3 hours per day in guided scientific investigations, both indoors and outdoors.",
-    weekHeading: "Dailyworkshop",
+    weekHeading: "Daily workshop",
     weekSub: "(tap a day to explore)",
     tapExplore: "Tap to explore",
     workshopDetailsHeading: "workshop details",
