@@ -302,9 +302,9 @@ export const en = {
     weekSub: "(tap a day to explore)",
     tapExplore: "Tap to explore",
     workshopDetailsHeading: "workshop details",
-    statEducator: "Cognitive Scientist & Neuroscience Coach",   // 🎓
-    statAgeGroup: "Ages 6–14,            // 👦
-    statDiscount: "Contact Us",               // 🏷️
+    statEducator: "Cognitive Scientist & Neuroscience Coach",
+    statAgeGroup: "Ages 6–14",
+    statDiscount: "Contact Us", 
     suitableNote: "Suitable for children with learning differences. Our educator is a certified Neuroscience Coach experienced with ADHD, dyslexia, memory challenges, and SEN. Children take home Science project final outcomes, Skill Badges and Certificate of Achievement.",
     reserveBtn: "Reserve Your Child's Spot",
   },
