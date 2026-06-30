@@ -355,7 +355,7 @@ export const pl = {
     workshopDetailsHeading: "Szczegóły obozu",
     statEducator: "Kognitywista i trener neuronauki",
     statAgeGroup: "6–14 lat",
-    statDiscount: "zapytaj nas",
+    statDiscount: "Obniżone stawki",
     suitableNote: "Zajęcia dostosowane dla dzieci z trudnościami w uczeniu się. Nauczycielka jest certyfikowanym coachem neurobiologicznym z doświadczeniem w pracy z dziećmi z ADHD, dysleksją, trudnościami z pamięcią i specjalnymi potrzebami edukacyjnymi. Dzieci zabierają do domu efekty projektu naukowego, odznaki umiejętności i certyfikat ukończenia.",
     reserveBtn: "Zarezerwuj miejsce dla swojego dziecka",
   },
