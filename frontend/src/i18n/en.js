@@ -302,9 +302,9 @@ export const en = {
     weekSub: "(tap a day to explore)",
     tapExplore: "Tap to explore",
     workshopDetailsHeading: "workshop details",
-    stat3hrs: "3 hrs / day",
-    statMax10: "Max 10 kids",
-    statKrakow: "Kraków",
+    statEducator: "Neuroscience Coach",   // 🎓
+    statAgeGroup: "Ages 6–12",            // 👦
+    statDiscount: "Ask Us",               // 🏷️
     suitableNote: "Suitable for children with learning differences. Our educator is a certified Neuroscience Coach experienced with ADHD, dyslexia, memory challenges, and SEN. Children take home Science project final outcomes, Skill Badges and Certificate of Achievement.",
     reserveBtn: "Reserve Your Child's Spot",
   },
