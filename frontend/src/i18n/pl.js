@@ -145,8 +145,7 @@ export const pl = {
     {
       step: 4,
       title: "Obserwacja",
-      description:
-        "Dzieci zapisują to, co widzą, mierzą i zauważają.",
+      description: "Dzieci zapisują to, co widzą, mierzą i zauważają.",
     },
     {
       step: 5,
@@ -264,24 +263,14 @@ export const pl = {
     language: { label: "Język", value: "Angielski" },
   },
 
-  weeks: {
-    week1: "Tydzień 1",
-    week2: "Tydzień 2",
-    week3: "Tydzień 3",
-    week4: "Tydzień 4",
-    week5: "Tydzień 5",
-    week6: "Tydzień 6",
-    week7: "Tydzień 7",
-    week8: "Tydzień 8",
-    multiple: "Kilka tygodni",
-  },
+  weeks: undefined,
 
   programmeOptions: [
-    "Pełny tydzień obozu",
-    "Pakiet wielotygodniowy",
-    "Pojedynczy dzień",
-    "Sesja wsparcia kognitywnego",
-    "Jeszcze nie wiem",
+    "Warsztat STEAM z wybranym motywem",
+    "Cykliczne warsztaty STEAM",
+    "Pojedyncze zajęcia",
+    "Indywidualna sesja wsparcia kognitywnego",
+    "Jeszcze się zastanawiam",
   ],
 
   faq: [
@@ -334,7 +323,8 @@ export const pl = {
     contactTitle: "Kontakt",
     enquireBtn: "Zapytaj teraz",
     copyright: "Wszelkie prawa zastrzeżone.",
-    designerCredit: "Website crafted by G3 Creative Labs · Ghavish V G · +48 579 156 009",
+    designerCredit:
+      "Website crafted by G3 Creative Labs · Ghavish V G · +48 579 156 009",
     facts: [
       "Wiek 6–14 lat",
       "Pon–Pt 9:00–12:00",
@@ -348,7 +338,8 @@ export const pl = {
     overline: "Nadchodzące wydarzenia — Lato 2026",
     heading: "Program letni STEAM 2026",
     tag: "Rejestracja otwarta • ograniczona liczba miejsc",
-    intro: "Jednotygodniowy intensywny Program letni STEAM dla dzieci w wieku 6–14 lat. Każdy dzień to inne tematyczne laboratorium. Dzieci spędzają 3 godziny dziennie na prowadzonych badaniach naukowych — zarówno wewnątrz, jak i na zewnątrz.",
+    intro:
+      "Jednotygodniowy intensywny Program letni STEAM dla dzieci w wieku 6–14 lat. Każdy dzień to inne tematyczne laboratorium. Dzieci spędzają 3 godziny dziennie na prowadzonych badaniach naukowych — zarówno wewnątrz, jak i na zewnątrz.",
     weekHeading: "Tydzień w obozie",
     weekSub: "(kliknij dzień, aby odkryć szczegóły)",
     tapExplore: "Kliknij, aby odkryć",
@@ -356,56 +347,149 @@ export const pl = {
     statEducator: "Kognitywista i trener neuronauki",
     statAgeGroup: "6–14 lat",
     statDiscount: "Obniżone stawki",
-    suitableNote: "Zajęcia dostosowane dla dzieci z trudnościami w uczeniu się. Nauczycielka jest certyfikowanym coachem neurobiologicznym z doświadczeniem w pracy z dziećmi z ADHD, dysleksją, trudnościami z pamięcią i specjalnymi potrzebami edukacyjnymi. Dzieci zabierają do domu efekty projektu naukowego, odznaki umiejętności i certyfikat ukończenia.",
+    suitableNote:
+      "Zajęcia dostosowane dla dzieci z trudnościami w uczeniu się. Nauczycielka jest certyfikowanym coachem neurobiologicznym z doświadczeniem w pracy z dziećmi z ADHD, dysleksją, trudnościami z pamięcią i specjalnymi potrzebami edukacyjnymi. Dzieci zabierają do domu efekty projektu naukowego, odznaki umiejętności i certyfikat ukończenia.",
     reserveBtn: "Zarezerwuj miejsce dla swojego dziecka",
   },
 
   whatIsSteam: {
     s1Overline: "Pięć dyscyplin",
     s1Title: "Czym jest edukacja STEAM?",
-    s1Sub: "STEAM to skrót od Nauki, Technologii, Inżynierii, Sztuki i Matematyki — zintegrowany sposób myślenia łączący pięć dyscyplin w jedno podejście badawcze. Zamiast uczyć przedmiotów w izolacji, STEAM pokazuje dzieciom, jak wszystko jest ze sobą połączone.",
+    s1Sub:
+      "STEAM to skrót od Nauki, Technologii, Inżynierii, Sztuki i Matematyki — zintegrowany sposób myślenia łączący pięć dyscyplin w jedno podejście badawcze. Zamiast uczyć przedmiotów w izolacji, STEAM pokazuje dzieciom, jak wszystko jest ze sobą połączone.",
     s2Overline: "Dlaczego to ważne globalnie",
     s2Title: "STEAM w liczbach",
-    s2Sub: "Naukowe uzasadnienie zintegrowanej edukacji w zakresie nauk przyrodniczych i sztuki.",
+    s2Sub:
+      "Naukowe uzasadnienie zintegrowanej edukacji w zakresie nauk przyrodniczych i sztuki.",
     s3Overline: "Historia powstania",
     s3Title: "Narodziny STEAM",
     s3TimelineHeading: "Oś czasu STEAM",
-    s3Body1: "STEAM nie powstał z jednego pomysłu — ewoluował przez trzy dekady badań, tworzenia polityki edukacyjnej i praktyki klasowej na czterech kontynentach. Zaczął się jako STEM w Stanach Zjednoczonych na początku lat 90., gdy pojawiły się obawy, że uczniowie nie rozwijają umiejętności naukowych i technicznych potrzebnych nowoczesnej gospodarce.",
-    s3Body2: "Kluczowy przełom nastąpił w 2006 roku, kiedy amerykańska pedagog Georgette Yakman opublikowała przełomowy model, argumentując, że Sztuka — twórcze myślenie, projektowanie i ekspresja — jest brakującym elementem. Bez niej STEM kształcił technicznie sprawnych absolwentów, którzy mieli trudności z innowacją, komunikacją i myśleniem nieszablonowym.",
-    s3Body3: "Badania Uniwersytetu Stanforda z lat 80. XX wieku już wcześniej wykazały, że dzieci uczące się z udziałem sztuki znacznie dłużej zachowują koncepcje naukowe w pamięci. STEAM po prostu uczyniło to połączenie oficjalnym — i wbudowało je w program nauczania.",
-    s3Quote: "„STEAM nie polega na dodaniu sztuki do STEM. Chodzi o uznanie, że twórcze myślenie jest silnikiem nadającym nauce sens.”",
+    s3Body1:
+      "STEAM nie powstał z jednego pomysłu — ewoluował przez trzy dekady badań, tworzenia polityki edukacyjnej i praktyki klasowej na czterech kontynentach. Zaczął się jako STEM w Stanach Zjednoczonych na początku lat 90., gdy pojawiły się obawy, że uczniowie nie rozwijają umiejętności naukowych i technicznych potrzebnych nowoczesnej gospodarce.",
+    s3Body2:
+      "Kluczowy przełom nastąpił w 2006 roku, kiedy amerykańska pedagog Georgette Yakman opublikowała przełomowy model, argumentując, że Sztuka — twórcze myślenie, projektowanie i ekspresja — jest brakującym elementem. Bez niej STEM kształcił technicznie sprawnych absolwentów, którzy mieli trudności z innowacją, komunikacją i myśleniem nieszablonowym.",
+    s3Body3:
+      "Badania Uniwersytetu Stanforda z lat 80. XX wieku już wcześniej wykazały, że dzieci uczące się z udziałem sztuki znacznie dłużej zachowują koncepcje naukowe w pamięci. STEAM po prostu uczyniło to połączenie oficjalnym — i wbudowało je w program nauczania.",
+    s3Quote:
+      "„STEAM nie polega na dodaniu sztuki do STEM. Chodzi o uznanie, że twórcze myślenie jest silnikiem nadającym nauce sens.”",
     s3QuoteCite: "— Georgette Yakman, twórczyni modelu STEAM (2006)",
     s4Overline: "Globalne przyjęcie",
     s4Title: "Kto stosuje STEAM?",
-    s4Sub: "Od polityki rządowej po praktykę klasową — STEAM to najszybciej rosnący ruch edukacyjny na świecie.",
+    s4Sub:
+      "Od polityki rządowej po praktykę klasową — STEAM to najszybciej rosnący ruch edukacyjny na świecie.",
     s5Overline: "Często zadawane pytania",
     s5Title: "Obalamy mity",
     s5Sub: "Trzy rzeczy, o które rodzice często pytają — odpowiedziane szczerze.",
     stats: [
-      { value: "65%",  label: "dzieci z dzisiejszych czasów będzie pracować w zawodach, które jeszcze nie istnieją" },
-      { value: "3×",   label: "większe prawdopodobieństwo wyboru ścieżki STEAM przy wczesnym kontakcie z tą edukacją" },
-      { value: "40+",  label: "krajów posiada już narodową strategię edukacji STEAM" },
-      { value: "1987", label: "rok, w którym Stanford udowodnił, że integracja sztuki zwiększa retencję wiedzy naukowej" },
+      {
+        value: "65%",
+        label:
+          "dzieci z dzisiejszych czasów będzie pracować w zawodach, które jeszcze nie istnieją",
+      },
+      {
+        value: "3×",
+        label:
+          "większe prawdopodobieństwo wyboru ścieżki STEAM przy wczesnym kontakcie z tą edukacją",
+      },
+      {
+        value: "40+",
+        label:
+          "krajów posiada już narodową strategię edukacji STEAM",
+      },
+      {
+        value: "1987",
+        label:
+          "rok, w którym Stanford udowodnił, że integracja sztuki zwiększa retencję wiedzy naukowej",
+      },
     ],
     timeline: [
-      { year: "lata 90.", event: "Narodziny STEM w USA",                                detail: "Narodowa Fundacja Nauki USA stworzyła pojęcie STEM, by zaradzić rosnącemu niedoborowi absolwentów nauk ścisłych i inżynierii na rynku pracy." },
-      { year: "2001",    event: "Rita Colwell formalizuje politykę STEM",               detail: "Dyrektorka NSF Rita Colwell uczyniła STEM federalnym priorytetem edukacyjnym, łącząc kompetencje naukowe bezpośrednio z konkurencyjnością gospodarki." },
-      { year: "2006",    event: "Georgette Yakman dodaje literę 'A'",                   detail: "Amerykańska pedagog Georgette Yakman włączyła Sztukę do STEM, tworząc STEAM — argumentując, że kreatywność jest nieodłączna od innowacji naukowej." },
-      { year: "2013",    event: "Rhode Island School of Design lobbuje w Kongresie",    detail: "RISD poprowadził ogólnokrajową kampanię, by oficjalnie dodać Sztukę do polityki STEM, argumentując, że kreatywność zamienia wiedzę naukową w przełomowe produkty." },
-      { year: "Dziś",    event: "STEAM przyjęty globalnie",                             detail: "Kraje Europy, Azji i Ameryki Południowej włączają STEAM do narodowych programów nauczania. Polska aktywnie rozwija STEAM w edukacji wczesnoszkolnej." },
+      {
+        year: "lata 90.",
+        event: "Narodziny STEM w USA",
+        detail:
+          "Narodowa Fundacja Nauki USA stworzyła pojęcie STEM, by zaradzić rosnącemu niedoborowi absolwentów nauk ścisłych i inżynierii na rynku pracy.",
+      },
+      {
+        year: "2001",
+        event: "Rita Colwell formalizuje politykę STEM",
+        detail:
+          "Dyrektorka NSF Rita Colwell uczyniła STEM federalnym priorytetem edukacyjnym, łącząc kompetencje naukowe bezpośrednio z konkurencyjnością gospodarki.",
+      },
+      {
+        year: "2006",
+        event: "Georgette Yakman dodaje literę 'A'",
+        detail:
+          "Amerykańska pedagog Georgette Yakman włączyła Sztukę do STEM, tworząc STEAM — argumentując, że kreatywność jest nieodłączna od innowacji naukowej.",
+      },
+      {
+        year: "2013",
+        event: "Rhode Island School of Design lobbuje w Kongresie",
+        detail:
+          "RISD poprowadził ogólnokrajową kampanię, by oficjalnie dodać Sztukę do polityki STEM, argumentując, że kreatywność zamienia wiedzę naukową w przełomowe produkty.",
+      },
+      {
+        year: "Dziś",
+        event: "STEAM przyjęty globalnie",
+        detail:
+          "Kraje Europy, Azji i Ameryki Południowej włączają STEAM do narodowych programów nauczania. Polska aktywnie rozwija STEAM w edukacji wczesnoszkolnej.",
+      },
     ],
     whoFollows: [
-      { flag: "🇺🇸", country: "Stany Zjednoczone", detail: "STEAM jest wbudowany w ustawę Every Student Succeeds Act. Tysiące szkół prowadzi dedykowane laboratoria STEAM i programy oparte na projektach." },
-      { flag: "🇬🇧", country: "Wielka Brytania",   detail: "Brytyjska organizacja STEM Learning wspiera ponad 3 miliony młodych ludzi rocznie. Integracja sztuki jest już częścią krajowego programu nauczania." },
-      { flag: "🇸🇬", country: "Singapur",          detail: "Singapurski Program Nauczania Stosowanego integruje STEAM w każdej szkole podstawowej — powszechnie uznawany za globalny wzorzec edukacji XXI wieku." },
-      { flag: "🇫🇮", country: "Finlandia",         detail: "Fiński model nauczania oparty na zjawiskach jest jedną z najbliższych rzeczywistych implementacji STEAM na świecie — oparty na dociekaniu i kierowany przez dziecko." },
-      { flag: "🇯🇵", country: "Japonia",           detail: "Japonia wprowadziła STEAM do Standardów Programu Nauczania w 2022 roku, skupiając się na kreatywności i interdyscyplinarnym rozwiązywaniu problemów od szkoły podstawowej." },
-      { flag: "🇵🇱", country: "Polska",            detail: "Ministerstwo Edukacji aktywnie rozszerza STEAM poprzez dedykowane laboratoria szkolne i prywatne programy w Krakowie." },
+      {
+        flag: "🇺🇸",
+        country: "Stany Zjednoczone",
+        detail:
+          "STEAM jest wbudowany w ustawę Every Student Succeeds Act. Tysiące szkół prowadzi dedykowane laboratoria STEAM i programy oparte na projektach.",
+      },
+      {
+        flag: "🇬🇧",
+        country: "Wielka Brytania",
+        detail:
+          "Brytyjska organizacja STEM Learning wspiera ponad 3 miliony młodych ludzi rocznie. Integracja sztuki jest już częścią krajowego programu nauczania.",
+      },
+      {
+        flag: "🇸🇬",
+        country: "Singapur",
+        detail:
+          "Singapurski Program Nauczania Stosowanego integruje STEAM w każdej szkole podstawowej — powszechnie uznawany za globalny wzorzec edukacji XXI wieku.",
+      },
+      {
+        flag: "🇫🇮",
+        country: "Finlandia",
+        detail:
+          "Fiński model nauczania oparty na zjawiskach jest jedną z najbliższych rzeczywistych implementacji STEAM na świecie — oparty na dociekaniu i kierowany przez dziecko.",
+      },
+      {
+        flag: "🇯🇵",
+        country: "Japonia",
+        detail:
+          "Japonia wprowadziła STEAM do Standardów Programu Nauczania w 2022 roku, skupiając się na kreatywności i interdyscyplinarnym rozwiązywaniu problemów od szkoły podstawowej.",
+      },
+      {
+        flag: "🇵🇱",
+        country: "Polska",
+        detail:
+          "Ministerstwo Edukacji aktywnie rozszerza STEAM poprzez dedykowane laboratoria szkolne i prywatne programy w Krakowie.",
+      },
     ],
     misconceptions: [
-      { myth: "„SZTEAM to tylko zabawne eksperymenty — to nie jest prawdziwa nauka.”",  truth: "Każde zajęcia La Neuron STEAM opierają się na kompletnej metodzie naukowej: hipoteza, eksperyment, wyniki i wnioski. Dzieci tworzą udokumentowane badania — tę samą strukturę co w prawdziwych badaniach naukowych." },
-      { myth: "„Moje dziecko musi być dobre z matematyki, żeby cieszyć się z STEAM.”", truth: "STEAM zaczyna się od ciekawości, nie od umiejętności. Element artystyczny sprawia, że kreatywni myśliciele, wzrokowcy i narratorzy czują się równie dobrze na każdych zajęciach." },
-      { myth: "„STEAM jest tylko dla starszych dzieci.”",                              truth: "Dzieci w wieku 6–9 lat czerpią największe korzyści z wczesnego kontaktu z STEAM. Zajęcia dla Małych Odkrywców są sensoryczne i wizualne, zaprojektowane dokładnie pod kątem tego, jak młode mózgi tworzą podstawowe pojęcia." },
+      {
+        myth:
+          "„SZTEAM to tylko zabawne eksperymenty — to nie jest prawdziwa nauka.”",
+        truth:
+          "Każde zajęcia La Neuron STEAM opierają się na kompletnej metodzie naukowej: hipoteza, eksperyment, wyniki i wnioski. Dzieci tworzą udokumentowane badania — tę samą strukturę co w prawdziwych badaniach naukowych.",
+      },
+      {
+        myth:
+          "„Moje dziecko musi być dobre z matematyki, żeby cieszyć się z STEAM.”",
+        truth:
+          "STEAM zaczyna się od ciekawości, nie od umiejętności. Element artystyczny sprawia, że kreatywni myśliciele, wzrokowcy i narratorzy czują się równie dobrze na każdych zajęciach.",
+      },
+      {
+        myth: "„STEAM jest tylko dla starszych dzieci.”",
+        truth:
+          "Dzieci w wieku 6–9 lat czerpią największe korzyści z wczesnego kontaktu z STEAM. Zajęcia dla Małych Odkrywców są sensoryczne i wizualne, zaprojektowane dokładnie pod kątem tego, jak młode mózgi tworzą podstawowe pojęcia.",
+      },
     ],
   },
 
@@ -426,15 +510,34 @@ export const pl = {
   home: {
     overline: "Odkryj akademię",
     sectionTitle: "Od czego chciałbyś zacząć?",
-    sectionSub: "Kliknij dowolną kartę, aby zobaczyć szczegóły — bez niekończącego się przewijania.",
+    sectionSub:
+      "Kliknij dowolną kartę, aby zobaczyć szczegóły — bez niekończącego się przewijania.",
     exploreBtn: "Sprawdź",
     links: [
-      { title: "Poznaj nauczyciela",       desc: "Dr Priyadarshini Gouthaman — doktor anatomii, specjalistka nauk kognitywnych i umysł stojący za La Neuron." },
-      { title: "Czym jest STEAM?",          desc: "Poznaj pięć dyscyplin — Naukę, Technologię, Inżynierię, Sztukę i Matematykę — oraz ich wzajemne powiązania." },
-      { title: "Dlaczego STEAM?",           desc: "Sześć powodów, dla których STEAM jest ważny dla Twojego dziecka, wraz z naszym pełnym podejściem opartym na metodzie naukowej." },
-      { title: "Programy",                 desc: "Cotygodniowe warsztaty, Program letni oraz indywidualne sesje wsparcia kognitywnego." },
-      { title: "Program letni 2026",        desc: "Tematyczny tydzień pełen Wonder Lab, Build Lab, Bio Lab, Planet Lab i Food Lab w Krakowie. Rejestracja otwarta!" },
-      { title: "FAQ",                       desc: "Wiek uczestników, język zajęć, co zabrać, trudności w uczeniu się, rodzeństwo i zasady anulowania." },
+      {
+        title: "Poznaj nauczyciela",
+        desc: "Dr Priyadarshini Gouthaman — doktor anatomii, specjalistka nauk kognitywnych i umysł stojący za La Neuron.",
+      },
+      {
+        title: "Czym jest STEAM?",
+        desc: "Poznaj pięć dyscyplin — Naukę, Technologię, Inżynierię, Sztukę i Matematykę — oraz ich wzajemne powiązania.",
+      },
+      {
+        title: "Dlaczego STEAM?",
+        desc: "Sześć powodów, dla których STEAM jest ważny dla Twojego dziecka, wraz z naszym pełnym podejściem opartym na metodzie naukowej.",
+      },
+      {
+        title: "Programy",
+        desc: "Cotygodniowe warsztaty, Program letni oraz indywidualne sesje wsparcia kognitywnego.",
+      },
+      {
+        title: "Program letni 2026",
+        desc: "Tematyczny tydzień pełen Wonder Lab, Build Lab, Bio Lab, Planet Lab i Food Lab w Krakowie. Rejestracja otwarta!",
+      },
+      {
+        title: "FAQ",
+        desc: "Wiek uczestników, język zajęć, co zabrać, trudności w uczeniu się, rodzeństwo i zasady anulowania.",
+      },
     ],
   },
 
@@ -442,40 +545,43 @@ export const pl = {
     overline: "Rejestracja / Zapytanie",
     heading: "Zarezerwuj miejsce dla swojego dziecka",
     subtext:
-      "Liczba miejsc jest ograniczona do maksymalnie 10 dzieci tygodniowo, aby każde dziecko otrzymało indywidualną uwagę. Wypełnij formularz, a odpowiedź otrzymasz w ciągu 24 godzin.",
+      "Liczba miejsc jest ograniczona do maksymalnie 10 dzieci w tygodniu, aby każde dziecko mogło otrzymać indywidualną uwagę. Wypełnij formularz – odpowiedź otrzymasz w ciągu 24 godzin.",
     promises: [
       "Osobista odpowiedź w ciągu 24 godzin",
-      "Podaj alergie lub specjalne potrzeby dziecka",
+      "Możliwość podania alergii i szczególnych potrzeb",
       "Zniżka dla rodzeństwa",
     ],
     labels: {
       parentName: "Imię i nazwisko rodzica / opiekuna *",
-      email: "Adres e-mail *",
+      email: "Adres e‑mail *",
       phone: "Telefon / WhatsApp (opcjonalnie)",
       childName: "Imię dziecka *",
-      childAge: "Wiek dziecka (6–14) *",
-      preferredWeek: "Preferowany tydzień *",
-      programmeInterest: "Interesujący program *",
-      message: "Pytania, alergie lub specjalne potrzeby (opcjonalnie)",
+      childAge: "Wiek dziecka (6–14 lat) *",
+      startDate: "Proszę o rozpoczęcie od dnia *",
+      endDate: "Proszę o zakończenie w dniu *",
+      programmeInterest: "Wybrany rodzaj zajęć *",
+      message:
+        "Pytania, alergie lub szczególne potrzeby (opcjonalnie)",
+      preferredContact:
+        "Preferowana forma kontaktu (można wybrać kilka opcji)",
     },
     placeholders: {
       parentName: "Twoje imię i nazwisko",
-      email: "ty@email.com",
+      email: "twoj@mail.pl",
       childAge: "np. 9",
-      week: "Wybierz tydzień",
-      programme: "Wybierz opcję",
-      message: "Coś, co nauczycielka powinna wiedzieć",
+      programme: "Wybierz rodzaj zajęć",
+      message: "Informacje, które warto przekazać nauczycielce",
     },
-    submit: "Wyślij zapytanie",
-    sending: "Wysyłanie...",
+    submit: "Wyślij formularz",
+    sending: "Wysyłanie…",
     privacy:
-      "Twoje dane są poufne i wykorzystywane wyłącznie w celu udzielenia odpowiedzi na Twoje zapytanie.",
-    successHeading: "Zapytanie otrzymane!",
+      "Twoje dane wykorzystujemy wyłącznie w celu udzielenia odpowiedzi na Twoje zapytanie.",
+    successHeading: "Formularz został wysłany!",
     successText:
-      "Dziękujemy. Osobista odpowiedź od dr Priyadarshini dotrze do Ciebie w ciągu 24 godzin.",
+      "Dziękujemy. Otrzymasz osobistą odpowiedź od dr Priyadarshini w ciągu 24 godzin.",
     successBtn: "Wyślij kolejne zapytanie",
-    errorRequired: "Proszę wypełnić wszystkie wymagane pola.",
+    errorRequired: "Proszę wypełnić wszystkie pola oznaczone gwiazdką.",
     errorGeneral:
-      "Coś poszło nie tak. Spróbuj ponownie lub napisz bezpośrednio na adres admin@laneuron.org.",
+      "Wystąpił błąd. Spróbuj ponownie lub napisz bezpośrednio na adres [admin@laneuron.org](mailto:admin@laneuron.org).",
   },
 };

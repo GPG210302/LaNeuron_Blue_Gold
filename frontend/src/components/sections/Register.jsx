@@ -3,11 +3,16 @@ import { motion } from "framer-motion";
 import { CheckCircle2, Loader2, Send, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
 import {
-  Select, SelectTrigger, SelectValue, SelectContent, SelectItem,
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
 } from "../ui/select";
 import { useData } from "../../i18n/useData";
 
-const WORKER_URL = "https://form-handler.gpg210302-account.workers.dev/enquiry";
+const WORKER_URL =
+  "https://form-handler.gpg210302-account.workers.dev/enquiry";
 
 const COUNTRY_CODES = [
   { code: "+48", label: "PL +48" },
@@ -50,51 +55,142 @@ const COUNTRY_CODES = [
   { code: "+968", label: "OM +968" },
   { code: "+962", label: "JO +962" },
   { code: "+961", label: "LB +961" },
-  { code: "+1",  label: "US +1"  },
-  { code: "+1",  label: "CA +1"  },
+  { code: "+1", label: "US +1" },
+  { code: "+1", label: "CA +1" },
   { code: "+61", label: "AU +61" },
   { code: "+65", label: "SG +65" },
 ];
 
 const empty = {
-  parent_name: "", email: "", phone: "", child_name: "",
-  child_age: "", preferred_week: "", programme_interest: "", message: "",
+  parent_name: "",
+  email: "",
+  phone: "",
+  child_name: "",
+  child_age: "",
+  start_date: "",
+  end_date: "",
+  programme_interest: "",
+  message: "",
+  preferred_contact: [],
 };
 
-const inputCls = "w-full px-4 py-3 rounded-xl border-2 border-[#0F172A] bg-white text-[#0F172A] font-medium placeholder:text-[#94A3B8] focus:outline-none focus:ring-4 focus:ring-[#E0B33C]/40 transition";
+const inputCls =
+  "w-full px-4 py-3 rounded-xl border-2 border-[#0F172A] bg-white text-[#0F172A] font-medium placeholder:text-[#94A3B8] focus:outline-none focus:ring-4 focus:ring-[#E0B33C]/40 transition";
 
-const selectCls = "px-2 py-3 rounded-xl border-2 border-[#0F172A] bg-white text-[#0F172A] font-medium focus:outline-none focus:ring-4 focus:ring-[#E0B33C]/40 transition w-24 text-sm";
+const selectCls =
+  "px-2 py-3 rounded-xl border-2 border-[#0F172A] bg-white text-[#0F172A] font-medium focus:outline-none focus:ring-4 focus:ring-[#E0B33C]/40 transition w-24 text-sm";
 
 export const Register = ({ formRef }) => {
-  const [form, setForm]               = useState(empty);
-  const [loading, setLoading]         = useState(false);
-  const [done, setDone]               = useState(false);
+  const [form, setForm] = useState(empty);
+  const [loading, setLoading] = useState(false);
+  const [done, setDone] = useState(false);
   const [countryCode, setCountryCode] = useState("+48");
 
   const { register, weeks, programmeOptions } = useData();
 
-  const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
+  const set = (k) => (e) =>
+    setForm((f) => ({
+      ...f,
+      [k]: e.target.value,
+    }));
 
-  const resetForm = () => { setForm(empty); setDone(false); setCountryCode("+48"); };
+  const resetForm = () => {
+    setForm(empty);
+    setDone(false);
+    setCountryCode("+48");
+  };
+
+  // Helper to block Sundays and keep end >= start
+  const handleDateChange = (name) => (e) => {
+    const value = e.target.value;
+    if (!value) {
+      setForm((f) => ({ ...f, [name]: "" }));
+      return;
+    }
+
+    const chosen = new Date(value);
+    const day = chosen.getDay(); // 0 = Sunday
+
+    if (day === 0) {
+      alert(
+        "Sundays are holidays and cannot be selected. Please choose another date."
+      );
+      setForm((f) => ({ ...f, [name]: "" }));
+      return;
+    }
+
+    setForm((f) => {
+      const next = { ...f, [name]: value };
+
+      // keep end_date >= start_date
+      if (name === "start_date" && f.end_date) {
+        if (new Date(f.end_date) < chosen) {
+          next.end_date = value;
+        }
+      }
+      if (name === "end_date" && f.start_date) {
+        if (chosen < new Date(f.start_date)) {
+          alert("End date cannot be before start date.");
+          next.end_date = f.start_date;
+        }
+      }
+
+      return next;
+    });
+  };
+
+  const handleContactChange = (e) => {
+    const { value, checked } = e.target;
+    setForm((prev) => {
+      const current = prev.preferred_contact || [];
+      if (checked) {
+        return {
+          ...prev,
+          preferred_contact: current.includes(value)
+            ? current
+            : [...current, value],
+        };
+      }
+      return {
+        ...prev,
+        preferred_contact: current.filter((v) => v !== value),
+      };
+    });
+  };
 
   const submit = async (e) => {
     e.preventDefault();
-    if (!form.parent_name || !form.email || !form.child_name || !form.child_age || !form.preferred_week || !form.programme_interest) {
+    if (
+      !form.parent_name ||
+      !form.email ||
+      !form.child_name ||
+      !form.child_age ||
+      !form.start_date ||
+      !form.end_date ||
+      !form.programme_interest
+    ) {
       toast.error(register.errorRequired);
       return;
     }
     setLoading(true);
     try {
-      const fullPhone = form.phone.trim() ? countryCode + " " + form.phone.trim() : "Not provided";
+      const fullPhone = form.phone.trim()
+        ? countryCode + " " + form.phone.trim()
+        : "Not provided";
       const payload = new FormData();
-      payload.append("parent_name",    form.parent_name);
-      payload.append("email",          form.email);
-      payload.append("phone",          fullPhone);
-      payload.append("child_name",     form.child_name);
-      payload.append("child_age",      form.child_age);
-      payload.append("preferred_week", form.preferred_week);
-      payload.append("programme",      form.programme_interest);
-      payload.append("notes",          form.message || "None");
+      payload.append("parent_name", form.parent_name);
+      payload.append("email", form.email);
+      payload.append("phone", fullPhone);
+      payload.append("child_name", form.child_name);
+      payload.append("child_age", form.child_age);
+      payload.append("start_date", form.start_date);
+      payload.append("end_date", form.end_date);
+      payload.append("programme", form.programme_interest);
+      payload.append(
+        "preferred_contact",
+        form.preferred_contact.join(", ") || "Not specified"
+      );
+      payload.append("notes", form.message || "None");
       const res = await fetch(WORKER_URL, { method: "POST", body: payload });
       if (!res.ok) throw new Error("Server error " + res.status);
       setDone(true);
@@ -107,13 +203,30 @@ export const Register = ({ formRef }) => {
     }
   };
 
+  const todayStr = new Date().toISOString().split("T")[0];
+
+  // Filter programme options at render-time so i18n stays generic
+  const filteredProgrammeOptions = (programmeOptions || []).filter(
+    (p) =>
+      p.toLowerCase().includes("steam") ||
+      p.toLowerCase().includes("single") ||
+      p.toLowerCase().includes("cognitive") ||
+      p.toLowerCase().includes("not sure")
+  );
+
   return (
-    <section id="register" ref={formRef} className="py-20 lg:py-28 pt-28 sm:pt-32">
+    <section
+      id="register"
+      ref={formRef}
+      className="py-20 lg:py-28 pt-28 sm:pt-32"
+    >
       <div className="max-w-5xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-5 gap-0 ln-card overflow-hidden">
           {/* Left panel */}
           <div className="lg:col-span-2 bg-[#1B2A63] text-white p-8 lg:p-10 flex flex-col">
-            <span className="ln-overline !text-[#C7D2FE]">{register.overline}</span>
+            <span className="ln-overline !text-[#C7D2FE]">
+              {register.overline}
+            </span>
             <h2 className="mt-3 font-display font-extrabold text-3xl md:text-4xl leading-tight">
               {register.heading}
             </h2>
@@ -122,7 +235,10 @@ export const Register = ({ formRef }) => {
             </p>
             <div className="mt-auto pt-8 space-y-3">
               {(register.promises || []).map((t) => (
-                <div key={t} className="flex items-center gap-2 text-white/90">
+                <div
+                  key={t}
+                  className="flex items-center gap-2 text-white/90"
+                >
                   <CheckCircle2 size={18} className="text-[#FBBF24]" />
                   <span className="text-sm font-medium">{t}</span>
                 </div>
@@ -142,69 +258,217 @@ export const Register = ({ formRef }) => {
                 <span className="grid place-items-center w-20 h-20 rounded-full bg-[#10B981] text-white border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]">
                   <CheckCircle2 size={40} />
                 </span>
-                <h3 className="mt-6 font-display font-extrabold text-2xl">{register.successHeading}</h3>
+                <h3 className="mt-6 font-display font-extrabold text-2xl">
+                  {register.successHeading}
+                </h3>
                 <p className="mt-3 text-[#475569] max-w-sm">
                   {register.successText}
                 </p>
-                <button onClick={resetForm} className="ln-btn ln-btn-white mt-7" data-testid="register-another-btn">
+                <button
+                  onClick={resetForm}
+                  className="ln-btn ln-btn-white mt-7"
+                  data-testid="register-another-btn"
+                >
                   {register.successBtn}
                 </button>
               </motion.div>
             ) : (
-              <form onSubmit={submit} className="space-y-4" data-testid="register-form">
+              <form
+                onSubmit={submit}
+                className="space-y-5"
+                data-testid="register-form"
+              >
+                {/* Top grid: 2 columns, neat alignment */}
                 <div className="grid sm:grid-cols-2 gap-4">
                   <Field label={register.labels?.parentName}>
-                    <input className={inputCls} value={form.parent_name} onChange={set("parent_name")} placeholder={register.placeholders?.parentName} data-testid="input-parent-name" />
+                    <input
+                      className={inputCls}
+                      value={form.parent_name}
+                      onChange={set("parent_name")}
+                      placeholder={register.placeholders?.parentName}
+                      data-testid="input-parent-name"
+                    />
                   </Field>
                   <Field label={register.labels?.email}>
-                    <input type="email" className={inputCls} value={form.email} onChange={set("email")} placeholder={register.placeholders?.email} data-testid="input-email" />
+                    <input
+                      type="email"
+                      className={inputCls}
+                      value={form.email}
+                      onChange={set("email")}
+                      placeholder={register.placeholders?.email}
+                      data-testid="input-email"
+                    />
                   </Field>
+
                   <Field label={register.labels?.phone}>
                     <div className="flex gap-2">
-                      <select value={countryCode} onChange={(e) => setCountryCode(e.target.value)} className={selectCls} data-testid="select-country-code">
+                      <select
+                        value={countryCode}
+                        onChange={(e) => setCountryCode(e.target.value)}
+                        className={selectCls}
+                        data-testid="select-country-code"
+                      >
                         {COUNTRY_CODES.map(({ code, label }) => (
-                          <option key={label} value={code}>{label}</option>
+                          <option key={label} value={code}>
+                            {label}
+                          </option>
                         ))}
                       </select>
-                      <input className={inputCls + " flex-1"} value={form.phone} onChange={set("phone")} placeholder=" " data-testid="input-phone" />
+                      <input
+                        className={inputCls + " flex-1"}
+                        value={form.phone}
+                        onChange={set("phone")}
+                        placeholder=" "
+                        data-testid="input-phone"
+                      />
                     </div>
                   </Field>
+
                   <Field label={register.labels?.childName}>
-                    <input className={inputCls} value={form.child_name} onChange={set("child_name")} placeholder={register.placeholders?.childName || "Child name"} data-testid="input-child-name" />
+                    <input
+                      className={inputCls}
+                      value={form.child_name}
+                      onChange={set("child_name")}
+                      placeholder={
+                        register.placeholders?.childName || "Child name"
+                      }
+                      data-testid="input-child-name"
+                    />
                   </Field>
+
                   <Field label={register.labels?.childAge}>
-                    <input type="number" min="6" max="13" className={inputCls} value={form.child_age} onChange={set("child_age")} placeholder={register.placeholders?.childAge} data-testid="input-child-age" />
+                    <input
+                      type="number"
+                      min="6"
+                      max="13"
+                      className={inputCls}
+                      value={form.child_age}
+                      onChange={set("child_age")}
+                      placeholder={register.placeholders?.childAge}
+                      data-testid="input-child-age"
+                    />
                   </Field>
-                  <Field label={register.labels?.preferredWeek}>
-                    <Select value={form.preferred_week} onValueChange={(v) => setForm((f) => ({ ...f, preferred_week: v }))}>
-                      <SelectTrigger className={inputCls + " h-auto"} data-testid="select-week">
-                        <SelectValue placeholder={register.placeholders?.week} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {weeks.map((w) => (
-                          <SelectItem key={w} value={w} data-testid={"week-" + w}>{w}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+
+                  {/* Start date */}
+                  <Field label={register.labels?.startDate || "Start date"}>
+                    <input
+                      type="date"
+                      className={inputCls}
+                      value={form.start_date}
+                      onChange={handleDateChange("start_date")}
+                      min={todayStr}
+                      data-testid="input-start-date"
+                    />
+                    <p className="mt-1 text-xs text-[#64748B]">
+                      Only current and future dates are available.
+                    </p>
+                  </Field>
+
+                  {/* End date */}
+                  <Field label={register.labels?.endDate || "End date"}>
+                    <input
+                      type="date"
+                      className={inputCls}
+                      value={form.end_date}
+                      onChange={handleDateChange("end_date")}
+                      min={form.start_date || todayStr}
+                      data-testid="input-end-date"
+                    />
+                    <p className="mt-1 text-xs text-[#64748B]">
+                      Sundays are holidays and cannot be selected.
+                    </p>
                   </Field>
                 </div>
+
+                {/* Programme interest */}
                 <Field label={register.labels?.programmeInterest}>
-                  <Select value={form.programme_interest} onValueChange={(v) => setForm((f) => ({ ...f, programme_interest: v }))}>
-                    <SelectTrigger className={inputCls + " h-auto"} data-testid="select-programme">
-                      <SelectValue placeholder={register.placeholders?.programme} />
+                  <Select
+                    value={form.programme_interest}
+                    onValueChange={(v) =>
+                      setForm((f) => ({ ...f, programme_interest: v }))
+                    }
+                  >
+                    <SelectTrigger
+                      className={inputCls + " h-auto"}
+                      data-testid="select-programme"
+                    >
+                      <SelectValue
+                        placeholder={register.placeholders?.programme}
+                      />
                     </SelectTrigger>
                     <SelectContent>
-                      {programmeOptions.map((p) => (
-                        <SelectItem key={p} value={p} data-testid={"prog-" + p}>{p}</SelectItem>
+                      {filteredProgrammeOptions.map((p) => (
+                        <SelectItem
+                          key={p}
+                          value={p}
+                          data-testid={"prog-" + p}
+                        >
+                          {p}
+                        </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </Field>
-                <Field label={register.labels?.message}>
-                  <textarea rows={3} className={inputCls + " resize-none"} value={form.message} onChange={set("message")} placeholder={register.placeholders?.message} data-testid="input-message" />
+
+                {/* Preferred contact */}
+                <Field
+                  label={
+                    register.labels?.preferredContact ||
+                    "Preferred contact method"
+                  }
+                >
+                  <div className="grid grid-cols-2 gap-2">
+                    {[
+                      { id: "call", label: "Call" },
+                      { id: "whatsapp", label: "WhatsApp" },
+                      { id: "sms", label: "SMS" },
+                      { id: "email", label: "Email" },
+                    ].map((opt) => (
+                      <label
+                        key={opt.id}
+                        className="flex items-center gap-2 text-sm font-medium text-[#0F172A]"
+                      >
+                        <input
+                          type="checkbox"
+                          value={opt.id}
+                          checked={form.preferred_contact.includes(opt.id)}
+                          onChange={handleContactChange}
+                          className="h-4 w-4 rounded border-2 border-[#0F172A] text-[#E0B33C] focus:ring-[#E0B33C]/40"
+                        />
+                        {opt.label}
+                      </label>
+                    ))}
+                  </div>
                 </Field>
-                <button type="submit" disabled={loading} className="ln-btn ln-btn-primary w-full" data-testid="register-submit-btn">
-                  {loading ? <><Loader2 size={18} className="animate-spin" /> {register.sending}</> : <>{register.submit} <Send size={18} /></>}
+
+                {/* Notes */}
+                <Field label={register.labels?.message}>
+                  <textarea
+                    rows={3}
+                    className={inputCls + " resize-none"}
+                    value={form.message}
+                    onChange={set("message")}
+                    placeholder={register.placeholders?.message}
+                    data-testid="input-message"
+                  />
+                </Field>
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="ln-btn ln-btn-primary w-full"
+                  data-testid="register-submit-btn"
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 size={18} className="animate-spin" />{" "}
+                      {register.sending}
+                    </>
+                  ) : (
+                    <>
+                      {register.submit} <Send size={18} />
+                    </>
+                  )}
                 </button>
                 <p className="flex items-center justify-center gap-1.5 text-xs text-[#475569] font-medium">
                   <ShieldCheck size={14} /> {register.privacy}
