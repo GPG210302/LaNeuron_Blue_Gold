@@ -264,11 +264,10 @@ export const en = {
     language: { label: "Language", value: "English" },
   },
 
-  // weeks removed – dates now free-form via start/end date
   programmeOptions: [
-    "STEAM-themed workshop",
+    "Thematic STEAM workshop",   // was STEAM-themed workshop
     "Cyclic STEAM workshop",
-    "Single day",
+    "Single day workshop",       // was Single day
     "Cognitive support session",
     "Not sure yet",
   ],

@@ -100,21 +100,37 @@ export const Register = ({ formRef }) => {
     setCountryCode("+48");
   };
 
-  // Helper to block Sundays and keep end >= start
+  const today = new Date();
+  const todayStr = today.toISOString().split("T")[0];
+
+  // Helper to block Sundays, past dates, and keep end >= start
   const handleDateChange = (name) => (e) => {
     const value = e.target.value;
+
     if (!value) {
       setForm((f) => ({ ...f, [name]: "" }));
       return;
     }
 
+    // Basic validity check — browser handles most invalid inputs,
+    // but guard against NaN dates.
     const chosen = new Date(value);
-    const day = chosen.getDay(); // 0 = Sunday
+    if (Number.isNaN(chosen.getTime())) {
+      alert("Please enter a valid date.");
+      setForm((f) => ({ ...f, [name]: "" }));
+      return;
+    }
 
-    if (day === 0) {
-      alert(
-        "Sundays are holidays and cannot be selected. Please choose another date."
-      );
+    // No past dates
+    if (chosen < new Date(todayStr)) {
+      alert("Please choose today or a future date.");
+      setForm((f) => ({ ...f, [name]: "" }));
+      return;
+    }
+
+    // 0 = Sunday
+    if (chosen.getDay() === 0) {
+      alert("Sundays are holidays and cannot be selected. Please choose another date.");
       setForm((f) => ({ ...f, [name]: "" }));
       return;
     }
@@ -124,12 +140,14 @@ export const Register = ({ formRef }) => {
 
       // keep end_date >= start_date
       if (name === "start_date" && f.end_date) {
-        if (new Date(f.end_date) < chosen) {
+        const end = new Date(f.end_date);
+        if (end < chosen) {
           next.end_date = value;
         }
       }
       if (name === "end_date" && f.start_date) {
-        if (chosen < new Date(f.start_date)) {
+        const start = new Date(f.start_date);
+        if (chosen < start) {
           alert("End date cannot be before start date.");
           next.end_date = f.start_date;
         }
@@ -203,9 +221,7 @@ export const Register = ({ formRef }) => {
     }
   };
 
-  const todayStr = new Date().toISOString().split("T")[0];
-
-  // Now show all programme options (EN + PL)
+  // Show all programme options (EN + PL)
   const filteredProgrammeOptions = programmeOptions || [];
 
   return (
@@ -224,7 +240,7 @@ export const Register = ({ formRef }) => {
             <h2 className="mt-3 font-display font-extrabold text-3xl md:text-4xl leading-tight">
               {register.heading}
             </h2>
-            <p className="mt-5 text-white/80 leading-relaxed">
+            <p className="mt-5 text.white/80 leading-relaxed">
               {register.subtext}
             </p>
             <div className="mt-auto pt-8 space-y-3">
@@ -241,7 +257,7 @@ export const Register = ({ formRef }) => {
           </div>
 
           {/* Right panel — form */}
-          <div className="lg:col-span-3 p-8 lg:p-10 bg.white bg-white">
+          <div className="lg:col-span-3 p-8 lg:p-10 bg-white">
             {done ? (
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
