@@ -255,7 +255,7 @@ export const pl = {
   workshopFacts: {
     startDate: { label: "Data rozpoczęcia", value: "6 lipca 2026" },
     endDate: { label: "Data zakończenia", value: "Koniec sierpnia 2026" },
-    duration: { label: "Czas trwania", value: "8 tygodniowych obozów" },
+    duration: { label: "Czas trwania", value: "8 turnusów" },
     dailyTiming: { label: "Godziny zajęć", value: "9:00–12:00" },
     days: { label: "Dni", value: "Poniedziałek – piątek" },
     groupSize: { label: "Wielkość grupy", value: "Maks. 10 dzieci" },
@@ -516,27 +516,33 @@ export const pl = {
     links: [
       {
         title: "Poznaj nauczyciela",
-        desc: "Dr Priyadarshini Gouthaman — doktor anatomii, specjalistka nauk kognitywnych i umysł stojący za La Neuron.",
+        desc:
+          "Dr Priyadarshini Gouthaman — doktor anatomii, specjalistka nauk kognitywnych i umysł stojący za La Neuron.",
       },
       {
         title: "Czym jest STEAM?",
-        desc: "Poznaj pięć dyscyplin — Naukę, Technologię, Inżynierię, Sztukę i Matematykę — oraz ich wzajemne powiązania.",
+        desc:
+          "Poznaj pięć dyscyplin — Naukę, Technologię, Inżynierię, Sztukę i Matematykę — oraz ich wzajemne powiązania.",
       },
       {
         title: "Dlaczego STEAM?",
-        desc: "Sześć powodów, dla których STEAM jest ważny dla Twojego dziecka, wraz z naszym pełnym podejściem opartym na metodzie naukowej.",
+        desc:
+          "Sześć powodów, dla których STEAM jest ważny dla Twojego dziecka, wraz z naszym pełnym podejściem opartym na metodzie naukowej.",
       },
       {
         title: "Programy",
-        desc: "Cotygodniowe warsztaty, Program letni oraz indywidualne sesje wsparcia kognitywnego.",
+        desc:
+          "Cotygodniowe warsztaty, Program letni oraz indywidualne sesje wsparcia kognitywnego.",
       },
       {
         title: "Program letni 2026",
-        desc: "Tematyczny tydzień pełen Wonder Lab, Build Lab, Bio Lab, Planet Lab i Food Lab w Krakowie. Rejestracja otwarta!",
+        desc:
+          "Tematyczny tydzień pełen Wonder Lab, Build Lab, Bio Lab, Planet Lab i Food Lab w Krakowie. Rejestracja otwarta!",
       },
       {
         title: "FAQ",
-        desc: "Wiek uczestników, język zajęć, co zabrać, trudności w uczeniu się, rodzeństwo i zasady anulowania.",
+        desc:
+          "Wiek uczestników, język zajęć, co zabrać, trudności w uczeniu się, rodzeństwo i zasady anulowania.",
       },
     ],
   },
