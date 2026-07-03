@@ -67,7 +67,7 @@ export const pl = {
     Science: {
       title: "Nauka",
       description:
-        "Badanie świata przyrody poprzez obserwację, zadawanie pytań i eksperymentowanie. Dzieci uczą się pytać 'dlaczego' i 'jak' oraz projektować badania, które przynoszą odpowiedzi.",
+        "Badanie świata przyrody poprzez obserwację, zadawanie pytań i eksperymentowanie. Dzieci uczą się pytać „dlaczego” i „jak” oraz projektować badania, które przynoszą odpowiedzi.",
     },
     Technology: {
       title: "Technologia",
@@ -82,7 +82,7 @@ export const pl = {
     Art: {
       title: "Sztuka",
       description:
-        "Kreatywność, ekspresja i design thinking. Litera 'A' przypomina nam, że nauka potrzebuje wyobraźni. Ilustracja naukowa, wizualizacja danych i projektowanie — to wszystko jest częścią tej dyscypliny.",
+        "Kreatywność, ekspresja i design thinking. Litera „A” przypomina nam, że nauka potrzebuje wyobraźni. Ilustracja naukowa, wizualizacja danych i projektowanie — to wszystko jest częścią tej dyscypliny.",
     },
     Mathematics: {
       title: "Matematyka",
@@ -195,10 +195,10 @@ export const pl = {
 
   programmes: {
     "Cyclic STEAM Workshops": {
-      title: "Cotygodniowe warsztaty STEAM",
+      title: "Cykliczne warsztaty STEAM",
       type: "Regularne",
       description:
-        "Zajęcia w małych grupach dla dzieci w wieku 6–14 lat. Każdy tydzień poświęcony jest innemu zagadnieniu STEAM. Dzieci przeprowadzają pełne badania naukowe z arkuszami, materiałami i elementami na świeżym powietrzu — zarówno eksperymenty wewnątrz, jak i odkrywanie na zewnątrz.",
+        "Zajęcia w małych grupach dla dzieci w wieku 6–14 lat. Każde spotkanie poświęcone jest innemu zagadnieniu STEAM. Dzieci przeprowadzają pełne badania naukowe z arkuszami, materiałami i elementami na świeżym powietrzu — zarówno eksperymenty wewnątrz, jak i odkrywanie na zewnątrz.",
     },
     "STEAM Thematic Workshop 2026": {
       title: "Program letni STEAM 2026",
@@ -255,7 +255,7 @@ export const pl = {
   workshopFacts: {
     startDate: { label: "Data rozpoczęcia", value: "6 lipca 2026" },
     endDate: { label: "Data zakończenia", value: "Koniec sierpnia 2026" },
-    duration: { label: "Czas trwania", value: "8 turnusów" },
+    duration: { label: "Czas trwania", value: "3 godziny dziennie" },
     dailyTiming: { label: "Godziny zajęć", value: "9:00–12:00" },
     days: { label: "Dni", value: "Poniedziałek – piątek" },
     groupSize: { label: "Wielkość grupy", value: "Maks. 10 dzieci" },
@@ -532,7 +532,7 @@ export const pl = {
       {
         title: "Programy",
         desc:
-          "Cotygodniowe warsztaty, Program letni oraz indywidualne sesje wsparcia kognitywnego.",
+          "Cykliczne warsztaty, Program letni oraz indywidualne sesje wsparcia kognitywnego.",
       },
       {
         title: "Program letni 2026",
