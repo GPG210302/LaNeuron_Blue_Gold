@@ -112,7 +112,9 @@ export const Register = ({ formRef }) => {
     const day = chosen.getDay(); // 0 = Sunday
 
     if (day === 0) {
-      alert("Sundays are holidays and cannot be selected. Please choose another date.");
+      alert(
+        "Sundays are holidays and cannot be selected. Please choose another date."
+      );
       setForm((f) => ({ ...f, [name]: "" }));
       return;
     }
@@ -203,14 +205,8 @@ export const Register = ({ formRef }) => {
 
   const todayStr = new Date().toISOString().split("T")[0];
 
-  // Filter programme options at render-time so i18n stays generic
-  const filteredProgrammeOptions = (programmeOptions || []).filter(
-    (p) =>
-      p.toLowerCase().includes("steam") ||
-      p.toLowerCase().includes("single") ||
-      p.toLowerCase().includes("cognitive") ||
-      p.toLowerCase().includes("not sure")
-  );
+  // Now show all programme options (EN + PL)
+  const filteredProgrammeOptions = programmeOptions || [];
 
   return (
     <section
@@ -245,7 +241,7 @@ export const Register = ({ formRef }) => {
           </div>
 
           {/* Right panel — form */}
-          <div className="lg:col-span-3 p-8 lg:p-10 bg-white">
+          <div className="lg:col-span-3 p-8 lg:p-10 bg.white bg-white">
             {done ? (
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -276,7 +272,7 @@ export const Register = ({ formRef }) => {
                 className="space-y-5"
                 data-testid="register-form"
               >
-                {/* Top grid: 2 columns, neat alignment */}
+                {/* Top grid */}
                 <div className="grid sm:grid-cols-2 gap-4">
                   <Field label={register.labels?.parentName}>
                     <input
@@ -287,6 +283,7 @@ export const Register = ({ formRef }) => {
                       data-testid="input-parent-name"
                     />
                   </Field>
+
                   <Field label={register.labels?.email}>
                     <input
                       type="email"
@@ -347,6 +344,36 @@ export const Register = ({ formRef }) => {
                     />
                   </Field>
 
+                  {/* Programme interest – sits before dates */}
+                  <Field label={register.labels?.programmeInterest}>
+                    <Select
+                      value={form.programme_interest}
+                      onValueChange={(v) =>
+                        setForm((f) => ({ ...f, programme_interest: v }))
+                      }
+                    >
+                      <SelectTrigger
+                        className={inputCls + " h-auto"}
+                        data-testid="select-programme"
+                      >
+                        <SelectValue
+                          placeholder={register.placeholders?.programme}
+                        />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {filteredProgrammeOptions.map((p) => (
+                          <SelectItem
+                            key={p}
+                            value={p}
+                            data-testid={"prog-" + p}
+                          >
+                            {p}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </Field>
+
                   {/* Start date */}
                   <Field label={register.labels?.startDate || "Start date"}>
                     <input
@@ -375,36 +402,6 @@ export const Register = ({ formRef }) => {
                     <p className="mt-1 text-xs text-[#64748B]">No Sundays.</p>
                   </Field>
                 </div>
-
-                {/* Programme interest */}
-                <Field label={register.labels?.programmeInterest}>
-                  <Select
-                    value={form.programme_interest}
-                    onValueChange={(v) =>
-                      setForm((f) => ({ ...f, programme_interest: v }))
-                    }
-                  >
-                    <SelectTrigger
-                      className={inputCls + " h-auto"}
-                      data-testid="select-programme"
-                    >
-                      <SelectValue
-                        placeholder={register.placeholders?.programme}
-                      />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {filteredProgrammeOptions.map((p) => (
-                        <SelectItem
-                          key={p}
-                          value={p}
-                          data-testid={"prog-" + p}
-                        >
-                          {p}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </Field>
 
                 {/* Preferred contact */}
                 <Field
