@@ -112,9 +112,7 @@ export const Register = ({ formRef }) => {
     const day = chosen.getDay(); // 0 = Sunday
 
     if (day === 0) {
-      alert(
-        "Sundays are holidays and cannot be selected. Please choose another date."
-      );
+      alert("Sundays are holidays and cannot be selected. Please choose another date.");
       setForm((f) => ({ ...f, [name]: "" }));
       return;
     }
@@ -360,7 +358,7 @@ export const Register = ({ formRef }) => {
                       data-testid="input-start-date"
                     />
                     <p className="mt-1 text-xs text-[#64748B]">
-                      Only current and future dates are available.
+                      From today onwards.
                     </p>
                   </Field>
 
@@ -374,9 +372,7 @@ export const Register = ({ formRef }) => {
                       min={form.start_date || todayStr}
                       data-testid="input-end-date"
                     />
-                    <p className="mt-1 text-xs text-[#64748B]">
-                      Sundays are holidays and cannot be selected.
-                    </p>
+                    <p className="mt-1 text-xs text-[#64748B]">No Sundays.</p>
                   </Field>
                 </div>
 

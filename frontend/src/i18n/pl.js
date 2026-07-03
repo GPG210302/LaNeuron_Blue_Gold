@@ -552,18 +552,18 @@ export const pl = {
       "Zniżka dla rodzeństwa",
     ],
     labels: {
-      parentName: "Imię i nazwisko rodzica / opiekuna *",
+      parentName: "Rodzic / opiekun *",
       email: "Adres e‑mail *",
       phone: "Telefon / WhatsApp (opcjonalnie)",
       childName: "Imię dziecka *",
       childAge: "Wiek dziecka (6–14 lat) *",
-      startDate: "Proszę o rozpoczęcie od dnia *",
-      endDate: "Proszę o zakończenie w dniu *",
-      programmeInterest: "Wybrany rodzaj zajęć *",
+      startDate: "Od dnia *",
+      endDate: "Do dnia *",
+      programmeInterest: "Rodzaj zajęć *",
       message:
         "Pytania, alergie lub szczególne potrzeby (opcjonalnie)",
       preferredContact:
-        "Preferowana forma kontaktu (można wybrać kilka opcji)",
+        "Forma kontaktu (można wybrać kilka opcji)",
     },
     placeholders: {
       parentName: "Twoje imię i nazwisko",

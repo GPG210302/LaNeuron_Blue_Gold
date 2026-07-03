@@ -8,15 +8,19 @@ export const en = {
     summerProgram: "Thematic Workshop",
     faq: "FAQ",
   },
+
   ui: {
     language: "Language",
     english: "English",
     polish: "Polish",
     enquireNow: "Enquire Now",
   },
+
   site: {
-    tagline: "Inspiring the next generation of thinkers, makers, and explorers",
+    tagline:
+      "Inspiring the next generation of thinkers, makers, and explorers",
   },
+
   hero: {
     badge: "Ages 6–14 • Kraków, Poland",
     headline: "Real-World Science for Young Minds",
@@ -30,6 +34,7 @@ export const en = {
       { value: "5", label: "STEAM disciplines" },
     ],
   },
+
   educator: {
     overline: "The mind behind La Neuron",
     intro:
@@ -58,6 +63,7 @@ export const en = {
     ],
     publishedTitle: "Published young researchers",
   },
+
   steam: {
     Science: {
       title: "Science",
@@ -85,6 +91,7 @@ export const en = {
         "The language of science. Counting, measuring, analysing data, identifying patterns, and making predictions are mathematical skills that underpin every other STEAM discipline.",
     },
   },
+
   why: {
     "Critical Thinking": {
       title: "Critical Thinking",
@@ -117,11 +124,13 @@ export const en = {
         "STEAM is not confined to a classroom. Children discover that science happens everywhere — in parks, gardens, kitchens, and the sky above them.",
     },
   },
+
   method: [
     {
       step: 1,
       title: "Hypothesis",
-      description: "Children form their own prediction before the experiment begins.",
+      description:
+        "Children form their own prediction before the experiment begins.",
     },
     {
       step: 2,
@@ -151,6 +160,7 @@ export const en = {
         "Children evaluate whether their hypothesis was supported and explain why.",
     },
   ],
+
   receive: [
     "Personalised science investigation worksheet for every session",
     "Step-by-step guided recording sheets",
@@ -158,6 +168,7 @@ export const en = {
     "The science behind the experiment explained clearly",
     "Skill Badges and Certificate of Achievement",
   ],
+
   ageGroups: {
     "Young Explorers": {
       title: "Young Explorers",
@@ -182,6 +193,7 @@ export const en = {
       ],
     },
   },
+
   programmes: {
     "Cyclic STEAM Workshops": {
       title: "Cyclic STEAM Workshops",
@@ -202,6 +214,7 @@ export const en = {
         "Individual sessions for children who need support with memory, learning strategies, exam preparation, handwriting, or cognitive challenges such as ADHD, dyslexia, or other learning differences. Delivered by a certified Neuroscience Coach.",
     },
   },
+
   workshopDays: [
     {
       day: "Monday",
@@ -239,6 +252,7 @@ export const en = {
         "Morning: the science in the food we eat — health, lifestyle, and how food affects our body systems, through fun activities. Finale: in the last 30 minutes each child presents a favourite discovery from the week, shares results, and celebrates. Parents are warmly invited to this closing session.",
     },
   ],
+
   workshopFacts: {
     startDate: { label: "Start date", value: "6 July 2026" },
     endDate: { label: "End date", value: "End of August 2026" },
@@ -301,6 +315,7 @@ export const en = {
         "Full refund with more than 7 days' notice before the workshop week. Cancellations within 7 days can be transferred to another available week. Contact us directly for urgent situations.",
     },
   ],
+
   footer: {
     description:
       "Hands-on STEAM education for children aged 6–14. Led by a PhD Cognitive Scientist and certified Neuroscience Coach. Every child deserves to experience the wonder of discovery.",
@@ -318,12 +333,13 @@ export const en = {
       "Kraków",
     ],
   },
+
   events: {
     overline: "Upcoming events — Summer 2026",
     heading: "STEAM Thematic Workshop 2026",
     tag: "Registrations open • limited spots",
     intro:
-      "A intensive STEAM Thematic Workshop for children aged 6–14. Each day is a different themed lab. Children spend 3 hours per day in guided scientific investigations, both indoors and outdoors.",
+      "An intensive STEAM Thematic Workshop for children aged 6–14. Each day is a different themed lab. Children spend 3 hours per day in guided scientific investigations, both indoors and outdoors.",
     weekHeading: "Daily workshop",
     weekSub: "(tap a day to explore)",
     tapExplore: "Tap to explore",
@@ -406,8 +422,7 @@ export const en = {
       },
       {
         year: "2013",
-        event:
-          "Rhode Island School of Design lobbies Congress",
+        event: "Rhode Island School of Design lobbies Congress",
         detail:
           "RISD led a national campaign to officially add Arts to STEM policy, arguing creativity turns scientific knowledge into world-changing products.",
       },
@@ -492,7 +507,8 @@ export const en = {
   home: {
     overline: "Explore the academy",
     sectionTitle: "Where would you like to start?",
-    sectionSub: "Tap any card to dive into the details — no endless scrolling.",
+    sectionSub:
+      "Tap any card to dive into the details — no endless scrolling.",
     exploreBtn: "Explore",
     links: [
       {
@@ -547,7 +563,8 @@ export const en = {
       startDate: "Preferred start date *",
       endDate: "Preferred end date *",
       programmeInterest: "Programme interest *",
-      preferredContact: "Preferred contact method (you can choose more than one)",
+      preferredContact:
+        "Preferred contact method (you can choose more than one)",
       message: "Questions, allergies, or learning needs (optional)",
     },
     placeholders: {
