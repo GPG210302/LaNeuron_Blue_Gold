@@ -30,7 +30,9 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-display font-extrabold mb-4">{footer.exploreTitle}</h4>
+            <h4 className="font-display font-extrabold mb-4 text-[#F5A623]">
+              {footer.exploreTitle}
+            </h4>
             <ul className="space-y-2">
               {nav.map((n) => (
                 <li key={n.path}>
@@ -43,7 +45,9 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-display font-extrabold mb-4">{footer.contactTitle}</h4>
+            <h4 className="font-display font-extrabold mb-4 text-[#F5A623]">
+              {footer.contactTitle}
+            </h4>
             <ul className="space-y-3 text-sm text-white/70">
               <li className="flex items-center gap-2"><MapPin size={16} className="text-[#E0B33C]" /> {SITE.venue}</li>
               <li><a href={`tel:${SITE.phone}`} className="flex items-center gap-2 hover:text-white"><Phone size={16} className="text-[#10B981]" /> {SITE.phone}</a></li>
