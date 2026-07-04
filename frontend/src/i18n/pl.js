@@ -5,7 +5,7 @@ export const pl = {
     whatIsSteam: "Czym jest STEAM?",
     whySteam: "Dlaczego STEAM?",
     programmes: "Programy",
-    summerProgram: "Tematyczne warsztaty STEAM",
+    summerProgram: "Tematyczne warsztaty",
     faq: "FAQ",
   },
 
