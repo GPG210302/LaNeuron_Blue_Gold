@@ -5,7 +5,7 @@ export const pl = {
     whatIsSteam: "Czym jest STEAM?",
     whySteam: "Dlaczego STEAM?",
     programmes: "Programy",
-    summerProgram: "Program letni",
+    summerProgram: "Tematyczne warsztaty STEAM",
     faq: "FAQ",
   },
 
@@ -201,10 +201,10 @@ export const pl = {
         "Zajęcia w małych grupach dla dzieci w wieku 6–14 lat. Każde spotkanie poświęcone jest innemu zagadnieniu STEAM. Dzieci przeprowadzają pełne badania naukowe z arkuszami, materiałami i elementami na świeżym powietrzu — zarówno eksperymenty wewnątrz, jak i odkrywanie na zewnątrz.",
     },
     "STEAM Thematic Workshop 2026": {
-      title: "Program letni STEAM 2026",
+      title: "Tematyczne warsztaty STEAM 2026",
       type: "Nadchodzący",
       description:
-        "Intensywny, jednotygodniowy obóz tematyczny realizowany przez całe lato 2026. Każdy dzień ma wyznaczony temat przewodni i 3 godziny prowadzonych badań naukowych — wewnątrz i na zewnątrz. Szczegółowe informacje znajdziesz w sekcji Program letni poniżej.",
+        "Intensywne tematyczne warsztaty STEAM realizowane w trakcie lata 2026. Każdy dzień ma własny motyw przewodni i 3 godziny prowadzonych badań naukowych — wewnątrz i na zewnątrz. Szczegółowe informacje znajdziesz w sekcji STEAM Thematic Workshop poniżej.",
     },
     "Cognitive Support Sessions": {
       title: "Sesje wsparcia kognitywnego",
@@ -312,7 +312,7 @@ export const pl = {
     {
       question: "Jaka jest polityka anulowania?",
       answer:
-        "Pełny zwrot środków przysługuje przy rezygnacji z wyprzedzeniem ponad 7 dni przed tygodniem obozu. Rezygnacje złożone w ciągu 7 dni można przenieść na inny dostępny termin. W pilnych sytuacjach prosimy o bezpośredni kontakt.",
+        "Pełny zwrot środków przysługuje przy rezygnacji z wyprzedzeniem ponad 7 dni przed rozpoczęciem udziału w zajęciach. Rezygnacje złożone w ciągu 7 dni można przenieść na inny dostępny termin. W pilnych sytuacjach prosimy o bezpośredni kontakt.",
     },
   ],
 
@@ -336,14 +336,14 @@ export const pl = {
 
   events: {
     overline: "Nadchodzące wydarzenia — Lato 2026",
-    heading: "Program letni STEAM 2026",
+    heading: "Tematyczne warsztaty STEAM 2026",
     tag: "Rejestracja otwarta • ograniczona liczba miejsc",
     intro:
-      "Jednotygodniowy intensywny Program letni STEAM dla dzieci w wieku 6–14 lat. Każdy dzień to inne tematyczne laboratorium. Dzieci spędzają 3 godziny dziennie na prowadzonych badaniach naukowych — zarówno wewnątrz, jak i na zewnątrz.",
-    weekHeading: "Tydzień w obozie",
+      "Intensywne tematyczne warsztaty STEAM dla dzieci w wieku 6–14 lat. Każdy dzień to inne tematyczne laboratorium. Dzieci spędzają 3 godziny dziennie na prowadzonych badaniach naukowych — zarówno wewnątrz, jak i na zewnątrz.",
+    weekHeading: "Tydzień zajęć",
     weekSub: "(kliknij dzień, aby odkryć szczegóły)",
     tapExplore: "Kliknij, aby odkryć",
-    workshopDetailsHeading: "Szczegóły obozu",
+    workshopDetailsHeading: "Szczegóły programu",
     statEducator: "Kognitywista i trener neuronauki",
     statAgeGroup: "6–14 lat",
     statDiscount: "Obniżone stawki",
@@ -532,12 +532,12 @@ export const pl = {
       {
         title: "Programy",
         desc:
-          "Cykliczne warsztaty, Program letni oraz indywidualne sesje wsparcia kognitywnego.",
+          "Cykliczne warsztaty, tematyczne warsztaty STEAM oraz indywidualne sesje wsparcia kognitywnego.",
       },
       {
-        title: "Program letni 2026",
+        title: "Tematyczne warsztaty STEAM 2026",
         desc:
-          "Tematyczny tydzień pełen Wonder Lab, Build Lab, Bio Lab, Planet Lab i Food Lab w Krakowie. Rejestracja otwarta!",
+          "Tydzień pełen Wonder Lab, Build Lab, Bio Lab, Planet Lab i Food Lab w Krakowie. Rejestracja otwarta!",
       },
       {
         title: "FAQ",
@@ -551,7 +551,7 @@ export const pl = {
     overline: "Rejestracja / Zapytanie",
     heading: "Zarezerwuj miejsce dla swojego dziecka",
     subtext:
-      "Liczba miejsc jest ograniczona do maksymalnie 10 dzieci w tygodniu, aby każde dziecko mogło otrzymać indywidualną uwagę. Wypełnij formularz – odpowiedź otrzymasz w ciągu 24 godzin.",
+      "Liczba miejsc jest ograniczona do maksymalnie 10 dzieci, aby każde dziecko mogło otrzymać indywidualną uwagę. Wypełnij formularz – odpowiedź otrzymasz w ciągu 24 godzin.",
     promises: [
       "Osobista odpowiedź w ciągu 24 godzin",
       "Możliwość podania alergii i szczególnych potrzeb",
@@ -575,6 +575,8 @@ export const pl = {
       parentName: "Twoje imię i nazwisko",
       email: "twoj@mail.pl",
       childAge: "np. 9",
+      startDate: "Wybierz datę rozpoczęcia",
+      endDate: "Wybierz datę zakończenia",
       programme: "Wybierz rodzaj zajęć",
       message: "Informacje, które warto przekazać nauczycielce",
     },
