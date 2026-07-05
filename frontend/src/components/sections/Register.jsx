@@ -211,6 +211,14 @@ export const Register = ({ formRef }) => {
       payload.append("notes", form.message || "None");
       const res = await fetch(WORKER_URL, { method: "POST", body: payload });
       if (!res.ok) throw new Error("Server error " + res.status);
+      
+      // ✅ TRIGGER GOOGLE ADS CONVERSION HERE ✅
+      if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+        window.gtag('event', 'conversion', {
+            'send_to': 'AW-18273296037/z6F0CK7tksscEKW9sYlE'
+        });
+      }
+
       setDone(true);
       toast.success(register.successHeading);
     } catch (err) {
