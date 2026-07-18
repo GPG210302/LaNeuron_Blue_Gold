@@ -193,6 +193,26 @@ const Documents = () => {
           renderFooters: true,
           renderFootnotes: true,
         });
+        const renderedPages = container.querySelectorAll(".docx .docx_page");
+
+        renderedPages.forEach((page) => {
+        const existingWatermark = page.querySelector(".page-watermark-layer");
+        if (existingWatermark) {
+            existingWatermark.remove();
+        }
+
+        const watermarkLayer = document.createElement("div");
+        watermarkLayer.className = "page-watermark-layer";
+        watermarkLayer.innerHTML = `
+            <div class="page-watermark-stripes"></div>
+            <p class="page-watermark-text top">${pageText.watermark}</p>
+            <p class="page-watermark-text middle">${pageText.watermark}</p>
+            <p class="page-watermark-text bottom">${pageText.watermark}</p>
+        `;
+
+        page.style.position = "relative";
+        page.appendChild(watermarkLayer);
+        });
       } catch (error) {
         console.error("DOCX render error:", error);
         setDocError(pageText.loadError);
@@ -321,7 +341,65 @@ const Documents = () => {
         .docx-watermark-text.bottom {
             bottom: 12%;
         }
+
+        .docx-modal-content .docx .docx_page {
+            position: relative !important;
+            overflow: hidden !important;
+        }
+
+        .page-watermark-layer {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 30;
+            overflow: hidden;
+        }
+
+        .page-watermark-stripes {
+            position: absolute;
+            inset: 0;
+            opacity: 0.12;
+            background-image: repeating-linear-gradient(
+                -32deg,
+                transparent,
+                transparent 120px,
+                rgba(27, 42, 99, 0.26) 120px,
+                rgba(27, 42, 99, 0.26) 190px
+            );
+        }
+
+        .page-watermark-text {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%) rotate(-32deg);
+            white-space: nowrap;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.35em;
+            color: rgba(27, 42, 99, 0.22);
+            font-size: 22px;
+        }
+
+        @media (min-width: 640px) {
+            .page-watermark-text {
+                font-size: 32px;
+            }
+        }
+
+        .page-watermark-text.top {
+            top: 12%;
+        }
+
+        .page-watermark-text.middle {
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%) rotate(-32deg);
+        }
+
+        .page-watermark-text.bottom {
+            bottom: 12%;
+        }
      `}</style>
+        
 
       <main className="ln-grid-bg min-h-screen pt-28 sm:pt-32 pb-20 lg:pb-28">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
