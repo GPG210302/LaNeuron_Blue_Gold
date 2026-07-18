@@ -193,7 +193,9 @@ const Documents = () => {
           renderFooters: true,
           renderFootnotes: true,
         });
-        const renderedPages = container.querySelectorAll(".docx .docx_page");
+        const renderedPages = container.querySelectorAll(
+        ".docx_page, .docx-section, section.docx, .docx-wrapper > div"
+        );
 
         renderedPages.forEach((page) => {
         const existingWatermark = page.querySelector(".page-watermark-layer");
@@ -296,38 +298,7 @@ const Documents = () => {
             background: rgba(255, 255, 255, 0.88) !important;
         }
 
-        .docx-watermark-layer {
-            position: absolute;
-            inset: 0;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 20;
-        }
 
-        .docx-watermark-stripes {
-            position: absolute;
-            inset: 0;
-            opacity: 0.12;
-            background-image: repeating-linear-gradient(
-            -32deg,
-            transparent,
-            transparent 120px,
-            rgba(27, 42, 99, 0.26) 120px,
-            rgba(27, 42, 99, 0.26) 190px
-            );
-        }
-
-        .docx-watermark-text {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%) rotate(-32deg);
-            white-space: nowrap;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.35em;
-            color: rgba(27, 42, 99, 0.22);
-            font-size: 22px;
-        }
 
         @media (min-width: 640px) {
             .docx-watermark-text {
@@ -335,18 +306,7 @@ const Documents = () => {
             }
         }
 
-        .docx-watermark-text.top {
-            top: 12%;
-        }
-
-        .docx-watermark-text.middle {
-            top: 50%;
-            transform: translateX(-50%) translateY(-50%) rotate(-32deg);
-        }
-
-        .docx-watermark-text.bottom {
-            bottom: 12%;
-        }
+ 
 
         .docx-modal-content .docx .docx_page {
             position: relative !important;
@@ -612,14 +572,6 @@ const Documents = () => {
                   </div>
                 </div>
               )}
-
-              <div className="relative flex-1 overflow-y-auto px-4 sm:px-6 py-5 sm:py-6">
-                <div aria-hidden="true" className="docx-watermark-layer">
-                    <div className="docx-watermark-stripes" />
-                    <p className="docx-watermark-text top">{pageText.watermark}</p>
-                    <p className="docx-watermark-text middle">{pageText.watermark}</p>
-                    <p className="docx-watermark-text bottom">{pageText.watermark}</p>
-                </div>
 
                 <div className="relative z-10 docx-modal-content">
                   {isDocLoading && (
