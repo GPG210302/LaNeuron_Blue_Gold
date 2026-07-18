@@ -207,27 +207,54 @@ const Documents = () => {
   return (
     <>
       <style>{`
+        .docx-modal-content {
+            position: relative;
+            z-index: 1;
+            user-select: none !important;
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+        }
+
         .docx-modal-content .docx-wrapper {
-          background: transparent !important;
-          padding: 0 !important;
+            background: transparent !important;
+            padding: 0 !important;
+            position: relative !important;
+            z-index: 1 !important;
+            user-select: none !important;
+            -webkit-user-select: none !important;
         }
 
         .docx-modal-content .docx {
-          margin: 0 auto 24px auto !important;
-          box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08) !important;
-          border-radius: 18px !important;
-          overflow: hidden !important;
-          max-width: 100% !important;
+            margin: 0 auto 24px auto !important;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08) !important;
+            border-radius: 18px !important;
+            overflow: hidden !important;
+            max-width: 100% !important;
+            position: relative !important;
+            z-index: 1 !important;
+            background: rgba(255, 255, 255, 0.90) !important;
+            user-select: none !important;
+            -webkit-user-select: none !important;
+        }
+
+        .docx-modal-content .docx * {
+            user-select: none !important;
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
         }
 
         .docx-modal-content .docx table {
-          border-collapse: collapse !important;
-          width: 100% !important;
+            border-collapse: collapse !important;
+            width: 100% !important;
         }
 
         .docx-modal-content .docx img {
-          max-width: 100% !important;
-          height: auto !important;
+            max-width: 100% !important;
+            height: auto !important;
+            pointer-events: none !important;
+            -webkit-user-drag: none !important;
         }
 
         .docx-modal-content .docx p,
@@ -235,9 +262,66 @@ const Documents = () => {
         .docx-modal-content .docx td,
         .docx-modal-content .docx th,
         .docx-modal-content .docx li {
-          word-break: break-word;
+            word-break: break-word;
         }
-      `}</style>
+
+        .docx-modal-content .docx .docx_page,
+        .docx-modal-content .docx section.docx {
+            background: rgba(255, 255, 255, 0.88) !important;
+        }
+
+        .docx-watermark-layer {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        .docx-watermark-stripes {
+            position: absolute;
+            inset: 0;
+            opacity: 0.12;
+            background-image: repeating-linear-gradient(
+            -32deg,
+            transparent,
+            transparent 120px,
+            rgba(27, 42, 99, 0.26) 120px,
+            rgba(27, 42, 99, 0.26) 190px
+            );
+        }
+
+        .docx-watermark-text {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%) rotate(-32deg);
+            white-space: nowrap;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.35em;
+            color: rgba(27, 42, 99, 0.22);
+            font-size: 22px;
+        }
+
+        @media (min-width: 640px) {
+            .docx-watermark-text {
+            font-size: 32px;
+            }
+        }
+
+        .docx-watermark-text.top {
+            top: 12%;
+        }
+
+        .docx-watermark-text.middle {
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%) rotate(-32deg);
+        }
+
+        .docx-watermark-text.bottom {
+            bottom: 12%;
+        }
+     `}</style>
 
       <main className="ln-grid-bg min-h-screen pt-28 sm:pt-32 pb-20 lg:pb-28">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
@@ -446,25 +530,11 @@ const Documents = () => {
               )}
 
               <div className="relative flex-1 overflow-y-auto px-4 sm:px-6 py-5 sm:py-6">
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 overflow-hidden"
-                >
-                  <div className="absolute inset-0 opacity-[0.08] [background-image:repeating-linear-gradient(-32deg,transparent,transparent_120px,rgba(27,42,99,0.22)_120px,rgba(27,42,99,0.22)_190px)]" />
-
-                  <div className="absolute inset-0">
-                    <p className="absolute left-1/2 top-[12%] -translate-x-1/2 rotate-[-32deg] select-none whitespace-nowrap text-[22px] sm:text-[32px] font-black uppercase tracking-[0.35em] text-[#1B2A63]/20">
-                      {pageText.watermark}
-                    </p>
-
-                    <p className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[-32deg] select-none whitespace-nowrap text-[22px] sm:text-[32px] font-black uppercase tracking-[0.35em] text-[#1B2A63]/20">
-                      {pageText.watermark}
-                    </p>
-
-                    <p className="absolute left-1/2 bottom-[12%] -translate-x-1/2 rotate-[-32deg] select-none whitespace-nowrap text-[22px] sm:text-[32px] font-black uppercase tracking-[0.35em] text-[#1B2A63]/20">
-                      {pageText.watermark}
-                    </p>
-                  </div>
+                <div aria-hidden="true" className="docx-watermark-layer">
+                    <div className="docx-watermark-stripes" />
+                    <p className="docx-watermark-text top">{pageText.watermark}</p>
+                    <p className="docx-watermark-text middle">{pageText.watermark}</p>
+                    <p className="docx-watermark-text bottom">{pageText.watermark}</p>
                 </div>
 
                 <div className="relative z-10 docx-modal-content">
