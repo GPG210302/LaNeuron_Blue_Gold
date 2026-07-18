@@ -506,103 +506,104 @@ const Documents = () => {
         </div>
       </main>
 
-      <AnimatePresence>
+        <AnimatePresence>
         {activeDocument && (
-          <motion.div
+            <motion.div
             className="fixed inset-0 z-[120] bg-[#0F172A]/60 backdrop-blur-sm px-4 sm:px-6 py-6 sm:py-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleCloseModal}
-          >
-            <motion.div
-              className="relative mx-auto flex h-full max-h-[88vh] w-full max-w-5xl flex-col overflow-hidden rounded-[28px] border-2 border-[#0F172A] bg-white shadow-[8px_8px_0_#0F172A]"
-              initial={{ opacity: 0, y: 24, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 16, scale: 0.98 }}
-              transition={{ duration: 0.22 }}
-              onClick={(event) => event.stopPropagation()}
             >
-              <div className="flex items-start justify-between gap-4 border-b-2 border-[#E2E8F0] px-5 sm:px-7 py-5">
+            <motion.div
+                className="relative mx-auto flex h-full max-h-[88vh] w-full max-w-5xl flex-col overflow-hidden rounded-[28px] border-2 border-[#0F172A] bg-white shadow-[8px_8px_0_#0F172A]"
+                initial={{ opacity: 0, y: 24, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 16, scale: 0.98 }}
+                transition={{ duration: 0.22 }}
+                onClick={(event) => event.stopPropagation()}
+            >
+                <div className="flex items-start justify-between gap-4 border-b-2 border-[#E2E8F0] px-5 sm:px-7 py-5">
                 <div>
-                  <p className="text-xs font-black uppercase tracking-[0.25em] text-[#1B2A63]">
+                    <p className="text-xs font-black uppercase tracking-[0.25em] text-[#1B2A63]">
                     {pageText.badge}
-                  </p>
-                  <h3 className="mt-2 font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A] leading-tight">
+                    </p>
+                    <h3 className="mt-2 font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A] leading-tight">
                     {activeDocumentMeta?.title}
-                  </h3>
+                    </h3>
                 </div>
 
                 <button
-                  type="button"
-                  onClick={handleCloseModal}
-                  aria-label={pageText.close}
-                  className="shrink-0 inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#1B2A63] bg-[#E7EBF7] text-[#1B2A63] transition hover:-translate-y-0.5"
+                    type="button"
+                    onClick={handleCloseModal}
+                    aria-label={pageText.close}
+                    className="shrink-0 inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#1B2A63] bg-[#E7EBF7] text-[#1B2A63] transition hover:-translate-y-0.5"
                 >
-                  <X size={20} />
+                    <X size={20} />
                 </button>
-              </div>
-
-              {activeDocument === "child-protection" && (
-                <div className="border-b-2 border-[#E2E8F0] px-5 sm:px-7 py-4">
-                  <div className="flex flex-wrap gap-3">
-                    <button
-                      type="button"
-                      onClick={() => setChildProtectionVersion("detailed")}
-                      className={`inline-flex items-center justify-center rounded-full border-2 px-4 py-2 text-sm font-mono font-bold transition ${
-                        childProtectionVersion === "detailed"
-                          ? "border-[#1B2A63] bg-[#1B2A63] text-white"
-                          : "border-[#1B2A63] bg-[#E7EBF7] text-[#1B2A63]"
-                      }`}
-                    >
-                      {pageText.versionDetailed}
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => setChildProtectionVersion("short")}
-                      className={`inline-flex items-center justify-center rounded-full border-2 px-4 py-2 text-sm font-mono font-bold transition ${
-                        childProtectionVersion === "short"
-                          ? "border-[#1B2A63] bg-[#1B2A63] text-white"
-                          : "border-[#1B2A63] bg-[#E7EBF7] text-[#1B2A63]"
-                      }`}
-                    >
-                      {pageText.versionShort}
-                    </button>
-                  </div>
                 </div>
-              )}
 
+                {activeDocument === "child-protection" && (
+                <div className="border-b-2 border-[#E2E8F0] px-5 sm:px-7 py-4">
+                    <div className="flex flex-wrap gap-3">
+                    <button
+                        type="button"
+                        onClick={() => setChildProtectionVersion("detailed")}
+                        className={`inline-flex items-center justify-center rounded-full border-2 px-4 py-2 text-sm font-mono font-bold transition ${
+                        childProtectionVersion === "detailed"
+                            ? "border-[#1B2A63] bg-[#1B2A63] text-white"
+                            : "border-[#1B2A63] bg-[#E7EBF7] text-[#1B2A63]"
+                        }`}
+                    >
+                        {pageText.versionDetailed}
+                    </button>
+
+                    <button
+                        type="button"
+                        onClick={() => setChildProtectionVersion("short")}
+                        className={`inline-flex items-center justify-center rounded-full border-2 px-4 py-2 text-sm font-mono font-bold transition ${
+                        childProtectionVersion === "short"
+                            ? "border-[#1B2A63] bg-[#1B2A63] text-white"
+                            : "border-[#1B2A63] bg-[#E7EBF7] text-[#1B2A63]"
+                        }`}
+                    >
+                        {pageText.versionShort}
+                    </button>
+                    </div>
+                </div>
+                )}
+
+                <div className="relative flex-1 overflow-y-auto px-4 sm:px-6 py-5 sm:py-6">
                 <div className="relative z-10 docx-modal-content">
-                  {isDocLoading && (
+                    {isDocLoading && (
                     <div className="flex min-h-[280px] items-center justify-center">
-                      <div className="inline-flex items-center gap-3 rounded-full border-2 border-[#1B2A63] bg-white px-5 py-3 text-[#1B2A63] shadow-sm">
+                        <div className="inline-flex items-center gap-3 rounded-full border-2 border-[#1B2A63] bg-white px-5 py-3 text-[#1B2A63] shadow-sm">
                         <Loader2 size={18} className="animate-spin" />
                         <span className="text-sm font-mono font-bold">
-                          {pageText.loading}
+                            {pageText.loading}
                         </span>
-                      </div>
+                        </div>
                     </div>
-                  )}
+                    )}
 
-                  {docError && !isDocLoading && (
+                    {docError && !isDocLoading && (
                     <div className="flex min-h-[280px] items-center justify-center">
-                      <div className="max-w-md rounded-[24px] border-2 border-red-200 bg-red-50 px-6 py-5 text-center text-red-700">
+                        <div className="max-w-md rounded-[24px] border-2 border-red-200 bg-red-50 px-6 py-5 text-center text-red-700">
                         {docError}
-                      </div>
+                        </div>
                     </div>
-                  )}
+                    )}
 
-                  <div
+                    <div
                     ref={docxContainerRef}
                     className={isDocLoading ? "hidden" : "block"}
-                  />
+                    />
                 </div>
-              </div>
+                </div>
             </motion.div>
-          </motion.div>
+            </motion.div>
         )}
-      </AnimatePresence>
+        </AnimatePresence>
     </>
   );
 };
