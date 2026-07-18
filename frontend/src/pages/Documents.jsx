@@ -193,9 +193,32 @@ const Documents = () => {
           renderFooters: true,
           renderFootnotes: true,
         });
-        const renderedPages = container.querySelectorAll(
-        ".docx_page, .docx-section, section.docx, .docx-wrapper > div"
+        const wrapper =
+        container.querySelector(".docx-wrapper") || container;
+
+        const renderedPages = Array.from(wrapper.children).filter(
+        (node) => node instanceof HTMLElement
         );
+
+        renderedPages.forEach((page) => {
+        const existingWatermark = page.querySelector(".page-watermark-layer");
+        if (existingWatermark) {
+            existingWatermark.remove();
+        }
+
+        const watermarkLayer = document.createElement("div");
+        watermarkLayer.className = "page-watermark-layer";
+        watermarkLayer.innerHTML = `
+            <div class="page-watermark-stripes"></div>
+            <p class="page-watermark-text top">${pageText.watermark}</p>
+            <p class="page-watermark-text middle">${pageText.watermark}</p>
+            <p class="page-watermark-text bottom">${pageText.watermark}</p>
+        `;
+
+        page.style.position = "relative";
+        page.style.overflow = "hidden";
+        page.appendChild(watermarkLayer);
+        });
 
         renderedPages.forEach((page) => {
         const existingWatermark = page.querySelector(".page-watermark-layer");
@@ -317,7 +340,7 @@ const Documents = () => {
             position: absolute;
             inset: 0;
             pointer-events: none;
-            z-index: 30;
+            z-index: 999;
             overflow: hidden;
         }
 
@@ -353,7 +376,7 @@ const Documents = () => {
         }
 
         .page-watermark-text.top {
-            top: 12%;
+            
         }
 
         .page-watermark-text.middle {
