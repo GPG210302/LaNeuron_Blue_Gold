@@ -187,7 +187,7 @@ export const Navbar = () => {
       { path: "/gallery", label: t.gallery },
       { path: "/documents", label: t.documents },
     ];
-  }, [language, nav]);
+  }, [language]);
 
   const goTo = (path) => {
     setOpen(false);
