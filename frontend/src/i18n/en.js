@@ -5,8 +5,9 @@ export const en = {
     whatIsSteam: "What is STEAM?",
     whySteam: "Why STEAM?",
     programmes: "Programmes",
-    summerProgram: "Thematic Workshop",
-    faq: "FAQ",
+    summerProgram: "Thematic Workshops",
+    gallery: "Gallery",
+    documents: "Documents",
   },
 
   ui: {
@@ -265,9 +266,9 @@ export const en = {
   },
 
   programmeOptions: [
-    "Thematic STEAM workshop",   // was STEAM-themed workshop
+    "Thematic STEAM workshop",
     "Cyclic STEAM workshop",
-    "Single day workshop",       // was Single day
+    "Single day workshop",
     "Cognitive support session",
     "Not sure yet",
   ],

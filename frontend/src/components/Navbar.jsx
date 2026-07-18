@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -6,7 +6,8 @@ import { useLanguage } from "../i18n/LanguageContext";
 import { useData } from "../i18n/useData";
 import logo from "../assets/logo.png";
 
-const slug = (path) => (path === "/" ? "home" : path.replace(/\s+/g, "-").slice(1).toLowerCase());
+const slug = (path) =>
+  path === "/" ? "home" : path.replace(/\s+/g, "-").slice(1).toLowerCase();
 
 const SCRAMBLE_CHARS = "ABCDE01234!@#$%^&*";
 const SCRAMBLE_INTERVAL = 30;
@@ -23,7 +24,9 @@ function useScramble() {
       element.textContent = original
         .split("")
         .map((ch, idx) =>
-          idx < i ? ch : SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]
+          idx < i
+            ? ch
+            : SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]
         )
         .join("");
       if (i++ >= original.length) clearInterval(iv);
@@ -57,7 +60,6 @@ function LanguageSwitcher({ compact = false }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
-  // Close on outside click
   useEffect(() => {
     const handler = (e) => {
       if (ref.current && !ref.current.contains(e.target)) setOpen(false);
@@ -84,7 +86,9 @@ function LanguageSwitcher({ compact = false }) {
         aria-label="Switch language"
         aria-expanded={open}
       >
-        <span role="img" aria-label={current.label}>{current.flag}</span>
+        <span role="img" aria-label={current.label}>
+          {current.flag}
+        </span>
         <span>{current.code.toUpperCase()}</span>
         <ChevronDown
           size={14}
@@ -106,14 +110,19 @@ function LanguageSwitcher({ compact = false }) {
               <button
                 key={opt.code}
                 data-testid={`lang-option-${opt.code}`}
-                onClick={() => { setLanguage(opt.code); setOpen(false); }}
+                onClick={() => {
+                  setLanguage(opt.code);
+                  setOpen(false);
+                }}
                 className={`w-full flex items-center gap-2.5 px-4 py-3 text-sm font-bold font-mono transition-colors ${
                   language === opt.code
                     ? "bg-[#1B2A63] text-white"
                     : "hover:bg-[#E7EBF7] text-[#0F172A]"
                 }`}
               >
-                <span role="img" aria-label={opt.label}>{opt.flag}</span>
+                <span role="img" aria-label={opt.label}>
+                  {opt.flag}
+                </span>
                 {opt.label}
               </button>
             ))}
@@ -129,7 +138,8 @@ export const Navbar = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { nav, ui } = useData();
+  const { ui, nav } = useData();
+  const { language } = useLanguage();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -141,9 +151,52 @@ export const Navbar = () => {
   const isHome = pathname === "/";
   const big = isHome && !scrolled;
 
+  const topNav = useMemo(() => {
+    const labels = {
+      en: {
+        home: "Home",
+        about: "About",
+        whatIsSteam: "What is STEAM?",
+        whySteam: "Why STEAM?",
+        programmes: "Programmes",
+        workshops: "Thematic Workshops",
+        gallery: "Gallery",
+        documents: "Documents",
+      },
+      pl: {
+        home: "Strona główna",
+        about: "O nas",
+        whatIsSteam: "Czym jest STEAM?",
+        whySteam: "Dlaczego STEAM?",
+        programmes: "Programy",
+        workshops: "Warsztaty tematyczne",
+        gallery: "Galeria",
+        documents: "Dokumenty",
+      },
+    };
+
+    const t = labels[language] || labels.en;
+
+    return [
+      { path: "/", label: t.home },
+      { path: "/about", label: t.about },
+      { path: "/what-is-steam", label: t.whatIsSteam },
+      { path: "/why-steam", label: t.whySteam },
+      { path: "/programmes", label: t.programmes },
+      { path: "/thematic-workshops", label: t.workshops },
+      { path: "/gallery", label: t.gallery },
+      { path: "/documents", label: t.documents },
+    ];
+  }, [language, nav]);
+
   const goTo = (path) => {
     setOpen(false);
     navigate(path);
+  };
+
+  const isActive = (path) => {
+    if (path === "/") return pathname === "/";
+    return pathname === path || pathname.startsWith(`${path}/`);
   };
 
   return (
@@ -158,45 +211,49 @@ export const Navbar = () => {
           big ? "h-28 sm:h-[220px]" : "h-20"
         }`}
       >
-        {/* Logo */}
-        <button onClick={() => goTo("/")} data-testid="logo" className="flex items-center">
+        <button
+          onClick={() => goTo("/")}
+          data-testid="logo"
+          className="flex items-center shrink-0"
+        >
           <img
             src={logo}
             alt="La Neuron – STEAM Academy"
-            className={`w-auto transition-all duration-300 ${big ? "h-24 sm:h-[200px]" : "h-12 sm:h-16"}`}
+            className={`w-auto transition-all duration-300 ${
+              big ? "h-24 sm:h-[200px]" : "h-12 sm:h-16"
+            }`}
           />
         </button>
 
-        {/* Desktop nav links */}
-        <nav className="hidden lg:flex items-center gap-1">
-          {nav.map((n) => {
-            const active = n.path === pathname;
+        <nav className="hidden lg:flex items-center gap-1 ml-6">
+          {topNav.map((n) => {
+            const active = isActive(n.path);
             return (
               <ScrambleButton
                 key={n.path}
                 label={n.label}
                 data-testid={`nav-${slug(n.path)}`}
                 onClick={() => goTo(n.path)}
-                className={`px-3 py-2 text-sm font-bold rounded-full transition-colors font-mono tracking-wide ${
-                  active ? "bg-[#1B2A63] text-white" : "text-[#0F172A] hover:bg-[#E7EBF7]"
+                className={`px-3 py-2 text-sm font-bold rounded-full transition-colors font-mono tracking-wide whitespace-nowrap ${
+                  active
+                    ? "bg-[#1B2A63] text-white"
+                    : "text-[#0F172A] hover:bg-[#E7EBF7]"
                 }`}
               />
             );
           })}
         </nav>
 
-        {/* Desktop right side: language switcher + enquire button */}
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-3 ml-4 shrink-0">
           <LanguageSwitcher />
           <ScrambleButton
-            label={ui.enquireNow}
+            label={ui?.enquireNow || "Enquire Now"}
             data-testid="nav-register-btn"
             onClick={() => goTo("/register")}
-            className="ln-btn ln-btn-enquire !px-5 !py-2.5 !text-sm font-mono tracking-wide"
+            className="ln-btn ln-btn-enquire !px-5 !py-2.5 !text-sm font-mono tracking-wide whitespace-nowrap"
           />
         </div>
 
-        {/* Mobile: language switcher + hamburger */}
         <div className="flex lg:hidden items-center gap-2">
           <LanguageSwitcher compact />
           <button
@@ -210,7 +267,6 @@ export const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -221,18 +277,20 @@ export const Navbar = () => {
             data-testid="mobile-menu"
           >
             <div className="px-6 py-4 flex flex-col gap-1">
-              {nav.map((n) => (
+              {topNav.map((n) => (
                 <ScrambleButton
                   key={n.path}
                   label={n.label}
                   onClick={() => goTo(n.path)}
                   className={`text-left px-3 py-3 font-bold rounded-xl font-mono tracking-wide ${
-                    n.path === pathname ? "bg-[#1B2A63] text-white" : "hover:bg-[#E7EBF7]"
+                    isActive(n.path)
+                      ? "bg-[#1B2A63] text-white"
+                      : "hover:bg-[#E7EBF7]"
                   }`}
                 />
               ))}
               <ScrambleButton
-                label={ui.enquireNow}
+                label={ui?.enquireNow || "Enquire Now"}
                 onClick={() => goTo("/register")}
                 className="ln-btn ln-btn-enquire mt-2 font-mono tracking-wide"
               />

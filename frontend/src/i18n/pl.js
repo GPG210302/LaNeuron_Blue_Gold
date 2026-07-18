@@ -6,7 +6,8 @@ export const pl = {
     whySteam: "Dlaczego STEAM?",
     programmes: "Programy",
     summerProgram: "Tematyczne warsztaty",
-    faq: "FAQ",
+    gallery: "Galeria",
+    documents: "Dokumenty",
   },
 
   ui: {
