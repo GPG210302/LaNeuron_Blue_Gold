@@ -172,6 +172,21 @@ h1, h2, h3, h4, h5, .font-display {
         0 0 10px 3px rgba(220, 160, 20, 0.50);
 }
 
+.ln-btn-no-glow,
+.ln-btn-no-glow:hover,
+.ln-btn-no-glow:focus,
+.ln-btn-no-glow:active {
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+.ln-btn-no-glow::before,
+.ln-btn-no-glow::after {
+  box-shadow: none !important;
+  filter: none !important;
+}
+
 .heading-gold {
     color: #FBBF24 !important;
 }

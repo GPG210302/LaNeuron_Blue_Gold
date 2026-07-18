@@ -143,7 +143,7 @@ const Documents = () => {
                   <div className="mt-6">
                     <button
                       type="button"
-                      className="ln-btn ln-btn-enquire !px-5 !py-3 !text-sm font-mono tracking-wide"
+                      className="ln-btn ln-btn-enquire ln-btn-no-glow !px-5 !py-3 !text-sm font-mono tracking-wide"
                     >
                       {pageText.viewDocument}
                     </button>
