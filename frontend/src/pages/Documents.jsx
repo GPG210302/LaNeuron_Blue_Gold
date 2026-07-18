@@ -1,12 +1,21 @@
-import React from "react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Plus } from "lucide-react";
+import { Reveal, SectionHeading } from "@/components/Reveal";
 import { useData } from "@/i18n/useData";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const Documents = () => {
+  const [open, setOpen] = useState(0);
   const data = useData();
   const { language } = useLanguage();
-  const faq = data?.faq || [];
   const isPolish = language === "pl";
+
+  const rawFaq = data?.faq || [];
+  const faq = rawFaq.map((item) => ({
+    q: item?.q || item?.question || "",
+    a: item?.a || item?.answer || "",
+  }));
 
   const pageText = {
     badge: isPolish ? "Dokumenty" : "Documents",
@@ -19,13 +28,12 @@ const Documents = () => {
     jumpLabel: isPolish ? "Przejdź do sekcji" : "Jump to section",
     jumpDocs: isPolish ? "Dokumenty" : "Documents",
     jumpFaq: "FAQ",
-    faqBadge: "FAQ",
+    docsOverline: isPolish ? "Dla rodziców" : "For parents",
+    docsTitle: isPolish ? "Najważniejsze dokumenty" : "Key Documents",
+    faqOverline: isPolish ? "Warto wiedzieć" : "Good to know",
     faqTitle: isPolish
       ? "Najczęściej zadawane pytania"
       : "Frequently Asked Questions",
-    faqIntro: isPolish
-      ? "Poniżej znajdują się odpowiedzi na pytania, które rodzice zadają najczęściej przed zapisaniem dziecka na zajęcia."
-      : "Below are the answers to the questions parents ask most often before registering their child.",
     viewDocument: isPolish ? "Zobacz dokument" : "View document",
   };
 
@@ -67,111 +75,139 @@ const Documents = () => {
   ];
 
   return (
-    <main className="min-h-screen bg-[#F8FAFC] pt-32 pb-20 px-6">
-      <div className="max-w-6xl mx-auto">
-        <header className="mb-10">
-          <span className="inline-block px-4 py-2 rounded-full border-2 border-[#0F172A] bg-white text-[#1B2A63] text-sm font-bold font-mono">
-            {pageText.badge}
-          </span>
-
-          <h1 className="mt-5 text-4xl md:text-5xl font-black text-[#0F172A] leading-tight">
-            {pageText.title}
-          </h1>
-
-          <p className="mt-4 max-w-3xl text-lg text-[#334155] leading-relaxed">
-            {pageText.intro}
-          </p>
-        </header>
-
-        <nav
-          aria-label={pageText.jumpLabel}
-          className="mb-12 rounded-3xl border-2 border-[#0F172A] bg-white shadow-[6px_6px_0_#0F172A] p-4 md:p-5"
-        >
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="text-sm font-bold font-mono text-[#1B2A63]">
-              {pageText.jumpLabel}
+    <main className="ln-grid-bg min-h-screen pt-28 sm:pt-32 pb-20 lg:pb-28">
+      <div className="max-w-6xl mx-auto px-6 lg:px-8">
+        <Reveal>
+          <div className="max-w-3xl">
+            <span className="inline-flex items-center rounded-full border-2 border-[#1B2A63] bg-[#E7EBF7] px-4 py-2 text-xs font-black uppercase tracking-[0.25em] text-[#1B2A63]">
+              {pageText.badge}
             </span>
 
-            <a
-              href="#documents-section"
-              className="inline-flex items-center justify-center px-4 py-2 rounded-full border-2 border-[#0F172A] bg-[#E7EBF7] text-[#0F172A] font-bold font-mono text-sm hover:bg-[#D8E0F5] transition"
-            >
-              {pageText.jumpDocs}
-            </a>
+            <h1 className="mt-6 font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[0.95] text-[#0F172A]">
+              {pageText.title}
+            </h1>
 
-            <a
-              href="#faq-section"
-              className="inline-flex items-center justify-center px-4 py-2 rounded-full border-2 border-[#0F172A] bg-[#E7EBF7] text-[#0F172A] font-bold font-mono text-sm hover:bg-[#D8E0F5] transition"
-            >
-              {pageText.jumpFaq}
-            </a>
+            <p className="mt-5 text-base sm:text-lg leading-relaxed text-[#475569]">
+              {pageText.intro}
+            </p>
           </div>
-        </nav>
+        </Reveal>
 
-        <section id="documents-section" className="scroll-mt-32 mb-16">
-          <div className="grid md:grid-cols-2 gap-6">
-            {documents.map((doc) => (
-              <article
-                key={doc.id}
-                className="rounded-3xl border-2 border-[#0F172A] bg-white shadow-[6px_6px_0_#0F172A] p-6"
+        <Reveal delay={0.05}>
+          <nav
+            aria-label={pageText.jumpLabel}
+            className="mt-8 ln-card p-4 sm:p-5"
+          >
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="text-sm font-mono font-bold text-[#1B2A63]">
+                {pageText.jumpLabel}
+              </span>
+
+              <a
+                href="#documents-section"
+                className="inline-flex items-center justify-center rounded-full border-2 border-[#1B2A63] bg-[#E7EBF7] px-4 py-2 text-sm font-mono font-bold text-[#1B2A63] transition hover:-translate-y-0.5"
               >
-                <h2 className="text-2xl font-extrabold text-[#0F172A]">
-                  {doc.title}
-                </h2>
+                {pageText.jumpDocs}
+              </a>
 
-                <p className="mt-3 text-[#475569] leading-relaxed">
-                  {doc.description}
-                </p>
+              <a
+                href="#faq-section"
+                className="inline-flex items-center justify-center rounded-full border-2 border-[#1B2A63] bg-[#E7EBF7] px-4 py-2 text-sm font-mono font-bold text-[#1B2A63] transition hover:-translate-y-0.5"
+              >
+                {pageText.jumpFaq}
+              </a>
+            </div>
+          </nav>
+        </Reveal>
 
-                <button
-                  type="button"
-                  className="mt-5 inline-flex items-center justify-center px-5 py-3 rounded-full border-2 border-[#0F172A] bg-[#1B2A63] text-white font-bold font-mono hover:opacity-90 transition"
-                >
-                  {pageText.viewDocument}
-                </button>
-              </article>
+        <section id="documents-section" className="scroll-mt-32 pt-16">
+          <Reveal>
+            <SectionHeading
+              overline={pageText.docsOverline}
+              title={pageText.docsTitle}
+            />
+          </Reveal>
+
+          <div className="mt-12 grid gap-6 md:grid-cols-2">
+            {documents.map((doc, index) => (
+              <Reveal key={doc.id} delay={index * 0.04}>
+                <article className="ln-card p-6 sm:p-7 h-full flex flex-col">
+                  <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A] leading-tight">
+                    {doc.title}
+                  </h2>
+
+                  <p className="mt-3 text-[#475569] leading-relaxed text-base">
+                    {doc.description}
+                  </p>
+
+                  <div className="mt-6">
+                    <button
+                      type="button"
+                      className="ln-btn ln-btn-enquire !px-5 !py-3 !text-sm font-mono tracking-wide"
+                    >
+                      {pageText.viewDocument}
+                    </button>
+                  </div>
+                </article>
+              </Reveal>
             ))}
           </div>
         </section>
 
-        <section id="faq-section" className="scroll-mt-32">
-          <div className="mb-8">
-            <span className="inline-block px-4 py-2 rounded-full border-2 border-[#0F172A] bg-white text-[#1B2A63] text-sm font-bold font-mono">
-              {pageText.faqBadge}
-            </span>
+        <section id="faq-section" className="scroll-mt-32 pt-20">
+          <div className="max-w-3xl">
+            <Reveal>
+              <SectionHeading
+                overline={pageText.faqOverline}
+                title={pageText.faqTitle}
+              />
+            </Reveal>
 
-            <h2 className="mt-5 text-3xl md:text-4xl font-black text-[#0F172A] leading-tight">
-              {pageText.faqTitle}
-            </h2>
+            <div className="mt-12 space-y-3">
+              {faq.map((f, i) => {
+                const isOpen = open === i;
+                return (
+                  <Reveal key={`${f.q}-${i}`} delay={i * 0.03}>
+                    <div
+                      className="ln-card overflow-hidden"
+                      data-testid={`documents-faq-item-${i}`}
+                    >
+                      <button
+                        onClick={() => setOpen(isOpen ? -1 : i)}
+                        className="w-full flex items-center justify-between gap-4 text-left px-6 py-5"
+                        data-testid={`documents-faq-toggle-${i}`}
+                      >
+                        <span className="font-display font-extrabold text-lg text-[#0F172A]">
+                          {f.q}
+                        </span>
 
-            <p className="mt-3 max-w-3xl text-[#475569] leading-relaxed">
-              {pageText.faqIntro}
-            </p>
-          </div>
+                        <motion.span
+                          animate={{ rotate: isOpen ? 45 : 0 }}
+                          className="shrink-0 grid place-items-center w-8 h-8 rounded-lg bg-[#E7EBF7] text-[#1B2A63] border-2 border-[#1B2A63]"
+                        >
+                          <Plus size={18} />
+                        </motion.span>
+                      </button>
 
-          <div className="grid gap-5">
-            {faq.map((item, index) => (
-              <details
-                key={`${item.question}-${index}`}
-                className="group rounded-3xl border-2 border-[#0F172A] bg-white shadow-[6px_6px_0_#0F172A] overflow-hidden"
-              >
-                <summary className="list-none cursor-pointer px-6 py-5 flex items-start justify-between gap-4">
-                  <span className="text-left text-lg font-extrabold text-[#0F172A]">
-                    {item.question}
-                  </span>
-
-                  <span className="mt-1 text-[#1B2A63] font-black text-xl leading-none transition-transform duration-200 group-open:rotate-45">
-                    +
-                  </span>
-                </summary>
-
-                <div className="px-6 pb-6 border-t-2 border-[#E2E8F0]">
-                  <p className="pt-4 text-[#475569] leading-relaxed">
-                    {item.answer}
-                  </p>
-                </div>
-              </details>
-            ))}
+                      <AnimatePresence initial={false}>
+                        {isOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <p className="px-6 pb-5 text-[#475569] leading-relaxed">
+                              {f.a}
+                            </p>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  </Reveal>
+                );
+              })}
+            </div>
           </div>
         </section>
       </div>
