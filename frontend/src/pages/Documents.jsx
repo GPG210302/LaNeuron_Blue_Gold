@@ -1,6 +1,15 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, X } from "lucide-react";
+import { Plus, X, Loader2 } from "lucide-react";
+import { renderAsync } from "docx-preview";
+
+import rulesCombinedDoc from "@/assets/documents/rules-PL_EN.docx";
+import privacyCombinedDoc from "@/assets/documents/privacy_PL_EN.docx";
+import formsCombinedDoc from "@/assets/documents/forms-PL_EN.docx";
+import childProtectionShortCombinedDoc from "@/assets/documents/child-protection-short-PL_EN.docx";
+import childProtectionDetailedEnDoc from "@/assets/documents/child-protection-detailed-EN.docx";
+import childProtectionDetailedPlDoc from "@/assets/documents/child-protection-detailed-PL.docx";
+
 import { Reveal, SectionHeading } from "@/components/Reveal";
 import { useData } from "@/i18n/useData";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -9,6 +18,10 @@ const Documents = () => {
   const [open, setOpen] = useState(0);
   const [activeDocument, setActiveDocument] = useState(null);
   const [childProtectionVersion, setChildProtectionVersion] = useState("detailed");
+  const [isDocLoading, setIsDocLoading] = useState(false);
+  const [docError, setDocError] = useState("");
+
+  const docxContainerRef = useRef(null);
 
   const data = useData();
   const { language } = useLanguage();
@@ -42,6 +55,10 @@ const Documents = () => {
     watermark: isPolish ? "La Neuron • Tylko do wglądu" : "La Neuron • View Only",
     versionDetailed: isPolish ? "Wersja szczegółowa" : "Detailed version",
     versionShort: isPolish ? "Wersja krótka" : "Short version",
+    loading: isPolish ? "Ładowanie dokumentu..." : "Loading document...",
+    loadError: isPolish
+      ? "Nie udało się załadować dokumentu."
+      : "Could not load the document.",
   };
 
   const documents = [
@@ -81,96 +98,43 @@ const Documents = () => {
     },
   ];
 
-  const documentContent = useMemo(() => {
-    return {
-      rules: {
-        title: isPolish
-          ? "Regulamin i zasady uczestnictwa"
-          : "Rules & Regulations",
-        content: isPolish
-          ? [
-              "To jest treść zastępcza do testu modalnego podglądu dokumentu.",
-              "Tutaj później wstawimy pełną treść dokumentu w sekcjach i akapitach.",
-              "Modal powinien być przewijalny, czytelny i wygodny do zamknięcia.",
-              "Po zamknięciu użytkownik powinien móc od razu otworzyć inny dokument.",
-            ]
-          : [
-              "This is placeholder content for testing the document viewer modal.",
-              "Later, the full document text will be inserted here in clear sections and paragraphs.",
-              "The modal should be scrollable, readable, and easy to close.",
-              "After closing it, the user should be able to immediately open another document.",
-            ],
-      },
-      privacy: {
-        title: isPolish ? "Polityka prywatności" : "Privacy Policy",
-        content: isPolish
-          ? [
-              "To jest zastępcza treść polityki prywatności do testu działania popupu.",
-              "W kolejnym kroku podmienimy ten tekst na właściwą strukturę dokumentu.",
-              "Układ będzie zachowany, a treść zostanie uzupełniona sekcjami i nagłówkami.",
-            ]
-          : [
-              "This is placeholder privacy policy content for testing the popup behavior.",
-              "In the next step, this text will be replaced with the actual document structure.",
-              "The layout will stay the same while the real content is added with headings and sections.",
-            ],
-      },
-      "child-protection": {
-        title: isPolish ? "Polityka ochrony dzieci" : "Child Protection Policy",
-        detailed: isPolish
-          ? [
-              "To jest szczegółowa wersja polityki ochrony dzieci — treść zastępcza.",
-              "Tutaj pojawi się pełny dokument z wszystkimi zasadami, procedurami i standardami.",
-              "Wersja szczegółowa będzie dłuższa i podzielona na logiczne sekcje.",
-            ]
-          : [
-              "This is the detailed version of the child protection policy — placeholder content.",
-              "The full document with all principles, procedures, and standards will appear here.",
-              "The detailed version will be longer and split into clear logical sections.",
-            ],
-        short: isPolish
-          ? [
-              "To jest krótka wersja polityki ochrony dzieci — treść zastępcza.",
-              "Będzie to uproszczona i krótsza wersja dla szybkiego zapoznania się.",
-            ]
-          : [
-              "This is the short version of the child protection policy — placeholder content.",
-              "It will be a simplified and shorter version for quick reading.",
-            ],
-      },
-      forms: {
-        title: isPolish
-          ? "Formularze i dokumenty dla rodziców"
-          : "Parent Forms & Documents",
-        content: isPolish
-          ? [
-              "To jest zastępcza treść sekcji formularzy i dokumentów.",
-              "W następnym kroku dodamy tutaj właściwe informacje i układ.",
-            ]
-          : [
-              "This is placeholder content for the forms and parent documents section.",
-              "In the next step, the proper information and structure will be added here.",
-            ],
-      },
+  const getDocumentSource = useMemo(() => {
+    return () => {
+      if (!activeDocument) return null;
+
+      if (activeDocument === "rules") {
+        return rulesCombinedDoc;
+      }
+
+      if (activeDocument === "privacy") {
+        return privacyCombinedDoc;
+      }
+
+      if (activeDocument === "forms") {
+        return formsCombinedDoc;
+      }
+
+      if (activeDocument === "child-protection") {
+        if (childProtectionVersion === "short") {
+          return childProtectionShortCombinedDoc;
+        }
+
+        return isPolish
+          ? childProtectionDetailedPlDoc
+          : childProtectionDetailedEnDoc;
+      }
+
+      return null;
     };
-  }, [isPolish]);
+  }, [activeDocument, childProtectionVersion, isPolish]);
 
   const activeDocumentMeta = activeDocument
     ? documents.find((doc) => doc.id === activeDocument)
     : null;
 
-  const getActiveDocumentBody = () => {
-    if (!activeDocument) return [];
-
-    if (activeDocument === "child-protection") {
-      return documentContent["child-protection"][childProtectionVersion] || [];
-    }
-
-    return documentContent[activeDocument]?.content || [];
-  };
-
   const handleOpenDocument = (docId) => {
     setActiveDocument(docId);
+    setDocError("");
     if (docId === "child-protection") {
       setChildProtectionVersion("detailed");
     }
@@ -178,6 +142,12 @@ const Documents = () => {
 
   const handleCloseModal = () => {
     setActiveDocument(null);
+    setDocError("");
+    setIsDocLoading(false);
+
+    if (docxContainerRef.current) {
+      docxContainerRef.current.innerHTML = "";
+    }
   };
 
   useEffect(() => {
@@ -198,8 +168,77 @@ const Documents = () => {
     };
   }, [activeDocument]);
 
+  useEffect(() => {
+    const loadDocument = async () => {
+      const source = getDocumentSource();
+      const container = docxContainerRef.current;
+
+      if (!activeDocument || !source || !container) return;
+
+      setIsDocLoading(true);
+      setDocError("");
+      container.innerHTML = "";
+
+      try {
+        const response = await fetch(source);
+        const blob = await response.blob();
+
+        await renderAsync(blob, container, undefined, {
+          className: "docx-viewer-render",
+          inWrapper: true,
+          ignoreWidth: false,
+          ignoreHeight: false,
+          breakPages: true,
+          renderHeaders: true,
+          renderFooters: true,
+          renderFootnotes: true,
+        });
+      } catch (error) {
+        console.error("DOCX render error:", error);
+        setDocError(pageText.loadError);
+      } finally {
+        setIsDocLoading(false);
+      }
+    };
+
+    loadDocument();
+  }, [activeDocument, childProtectionVersion, getDocumentSource, pageText.loadError]);
+
   return (
     <>
+      <style>{`
+        .docx-modal-content .docx-wrapper {
+          background: transparent !important;
+          padding: 0 !important;
+        }
+
+        .docx-modal-content .docx {
+          margin: 0 auto 24px auto !important;
+          box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08) !important;
+          border-radius: 18px !important;
+          overflow: hidden !important;
+          max-width: 100% !important;
+        }
+
+        .docx-modal-content .docx table {
+          border-collapse: collapse !important;
+          width: 100% !important;
+        }
+
+        .docx-modal-content .docx img {
+          max-width: 100% !important;
+          height: auto !important;
+        }
+
+        .docx-modal-content .docx p,
+        .docx-modal-content .docx span,
+        .docx-modal-content .docx td,
+        .docx-modal-content .docx th,
+        .docx-modal-content .docx li {
+          word-break: break-word;
+        }
+      `}</style>
+
       <main className="ln-grid-bg min-h-screen pt-28 sm:pt-32 pb-20 lg:pb-28">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Reveal>
@@ -349,7 +388,7 @@ const Documents = () => {
             onClick={handleCloseModal}
           >
             <motion.div
-              className="relative mx-auto flex h-full max-h-[88vh] w-full max-w-4xl flex-col overflow-hidden rounded-[28px] border-2 border-[#0F172A] bg-white shadow-[8px_8px_0_#0F172A]"
+              className="relative mx-auto flex h-full max-h-[88vh] w-full max-w-5xl flex-col overflow-hidden rounded-[28px] border-2 border-[#0F172A] bg-white shadow-[8px_8px_0_#0F172A]"
               initial={{ opacity: 0, y: 24, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 16, scale: 0.98 }}
@@ -406,39 +445,52 @@ const Documents = () => {
                 </div>
               )}
 
-              <div className="relative flex-1 overflow-y-auto px-5 sm:px-7 py-6 sm:py-7">
+              <div className="relative flex-1 overflow-y-auto px-4 sm:px-6 py-5 sm:py-6">
                 <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 overflow-hidden"
-                    >
-                    <div className="absolute inset-0 opacity-[0.08] [background-image:repeating-linear-gradient(-32deg,transparent,transparent_120px,rgba(27,42,99,0.22)_120px,rgba(27,42,99,0.22)_190px)]" />
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 overflow-hidden"
+                >
+                  <div className="absolute inset-0 opacity-[0.08] [background-image:repeating-linear-gradient(-32deg,transparent,transparent_120px,rgba(27,42,99,0.22)_120px,rgba(27,42,99,0.22)_190px)]" />
 
-                    <div className="absolute inset-0">
-                        <p className="absolute left-1/2 top-[12%] -translate-x-1/2 rotate-[-32deg] select-none whitespace-nowrap text-[22px] sm:text-[32px] font-black uppercase tracking-[0.35em] text-[#1B2A63]/20">
-                        {pageText.watermark}
-                        </p>
+                  <div className="absolute inset-0">
+                    <p className="absolute left-1/2 top-[12%] -translate-x-1/2 rotate-[-32deg] select-none whitespace-nowrap text-[22px] sm:text-[32px] font-black uppercase tracking-[0.35em] text-[#1B2A63]/20">
+                      {pageText.watermark}
+                    </p>
 
-                        <p className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[-32deg] select-none whitespace-nowrap text-[22px] sm:text-[32px] font-black uppercase tracking-[0.35em] text-[#1B2A63]/20">
-                        {pageText.watermark}
-                        </p>
+                    <p className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[-32deg] select-none whitespace-nowrap text-[22px] sm:text-[32px] font-black uppercase tracking-[0.35em] text-[#1B2A63]/20">
+                      {pageText.watermark}
+                    </p>
 
-                        <p className="absolute left-1/2 bottom-[12%] -translate-x-1/2 rotate-[-32deg] select-none whitespace-nowrap text-[22px] sm:text-[32px] font-black uppercase tracking-[0.35em] text-[#1B2A63]/20">
-                        {pageText.watermark}
-                        </p>
-                    </div>
-                 </div>
-
-                <div className="relative z-10 max-w-none">
-                  <div className="space-y-5">
-                    {getActiveDocumentBody().map((paragraph, index) => (
-                      <p
-                        key={`${activeDocument}-${childProtectionVersion}-${index}`}
-                        className="text-[#334155] leading-8 text-[15px] sm:text-base"
-                      >
-                        {paragraph}
-                      </p>
-                    ))}
+                    <p className="absolute left-1/2 bottom-[12%] -translate-x-1/2 rotate-[-32deg] select-none whitespace-nowrap text-[22px] sm:text-[32px] font-black uppercase tracking-[0.35em] text-[#1B2A63]/20">
+                      {pageText.watermark}
+                    </p>
                   </div>
+                </div>
+
+                <div className="relative z-10 docx-modal-content">
+                  {isDocLoading && (
+                    <div className="flex min-h-[280px] items-center justify-center">
+                      <div className="inline-flex items-center gap-3 rounded-full border-2 border-[#1B2A63] bg-white px-5 py-3 text-[#1B2A63] shadow-sm">
+                        <Loader2 size={18} className="animate-spin" />
+                        <span className="text-sm font-mono font-bold">
+                          {pageText.loading}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+
+                  {docError && !isDocLoading && (
+                    <div className="flex min-h-[280px] items-center justify-center">
+                      <div className="max-w-md rounded-[24px] border-2 border-red-200 bg-red-50 px-6 py-5 text-center text-red-700">
+                        {docError}
+                      </div>
+                    </div>
+                  )}
+
+                  <div
+                    ref={docxContainerRef}
+                    className={isDocLoading ? "hidden" : "block"}
+                  />
                 </div>
               </div>
             </motion.div>

@@ -39,6 +39,7 @@
     "cra-template": "1.2.0",
     "date-fns": "4.1.0",
     "dayjs": "1.11.13",
+    "docx-preview": "^0.4.0",
     "embla-carousel-react": "8.6.0",
     "framer-motion": "11.18.0",
     "input-otp": "1.4.2",
@@ -63,10 +64,9 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test",
+    "test": "vitest",
     "deploy": "yarn run build && wrangler deploy",
     "preview": "yarn run build && wrangler dev",
-    "test": "vitest",
     "test:i18n": "vitest run src/__tests__/i18n.test.js"
   },
   "browserslist": {
