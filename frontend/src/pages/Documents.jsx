@@ -408,16 +408,25 @@ const Documents = () => {
 
               <div className="relative flex-1 overflow-y-auto px-5 sm:px-7 py-6 sm:py-7">
                 <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 overflow-hidden"
-                >
-                  <div className="absolute inset-0 opacity-[0.08] [background-image:repeating-linear-gradient(-32deg,transparent,transparent_120px,rgba(27,42,99,0.22)_120px,rgba(27,42,99,0.22)_190px)]" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <p className="rotate-[-24deg] select-none text-[28px] sm:text-[44px] font-black uppercase tracking-[0.35em] text-[#1B2A63]/20">
-                      {pageText.watermark}
-                    </p>
-                  </div>
-                </div>
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 overflow-hidden"
+                    >
+                    <div className="absolute inset-0 opacity-[0.08] [background-image:repeating-linear-gradient(-32deg,transparent,transparent_120px,rgba(27,42,99,0.22)_120px,rgba(27,42,99,0.22)_190px)]" />
+
+                    <div className="absolute inset-0">
+                        <p className="absolute left-1/2 top-[12%] -translate-x-1/2 rotate-[-32deg] select-none whitespace-nowrap text-[22px] sm:text-[32px] font-black uppercase tracking-[0.35em] text-[#1B2A63]/20">
+                        {pageText.watermark}
+                        </p>
+
+                        <p className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[-32deg] select-none whitespace-nowrap text-[22px] sm:text-[32px] font-black uppercase tracking-[0.35em] text-[#1B2A63]/20">
+                        {pageText.watermark}
+                        </p>
+
+                        <p className="absolute left-1/2 bottom-[12%] -translate-x-1/2 rotate-[-32deg] select-none whitespace-nowrap text-[22px] sm:text-[32px] font-black uppercase tracking-[0.35em] text-[#1B2A63]/20">
+                        {pageText.watermark}
+                        </p>
+                    </div>
+                 </div>
 
                 <div className="relative z-10 max-w-none">
                   <div className="space-y-5">
