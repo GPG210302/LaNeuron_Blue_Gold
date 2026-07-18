@@ -222,7 +222,13 @@ const Documents = () => {
     };
 
     loadDocument();
-  }, [activeDocument, childProtectionVersion, getDocumentSource, pageText.loadError]);
+    }, [
+    activeDocument,
+    childProtectionVersion,
+    getDocumentSource,
+    pageText.loadError,
+    pageText.watermark,
+    ]);
 
   return (
     <>
