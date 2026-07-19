@@ -4,6 +4,8 @@ import { Reveal, SectionHeading } from "../Reveal";
 import { STEAM, HERO } from "../../data";
 import { useData } from "../../i18n/useData";
 import "../../WhatIsSteam.css";
+import { WhySteam } from "./WhySteam";
+import { Approach } from "./Approach";
 
 const EXPO = [0.22, 1, 0.36, 1];
 const VIEWPORT = { once: true, margin: "-60px" };
@@ -427,7 +429,8 @@ export const WhatIsSteam = () => {
             </div>
           </div>
         </section>
-
+        <WhySteam />
+        <Approach />
       </div>
     </div>
   );
