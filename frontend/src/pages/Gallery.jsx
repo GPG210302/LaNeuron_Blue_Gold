@@ -45,96 +45,99 @@ const Gallery = () => {
     { key: "projects", label: isPolish ? "Projekty" : "Projects" },
   ];
 
-  const galleryItems = [
-    {
-      id: 1,
-      title: isPolish ? "Chwile z warsztatów" : "Workshop moments",
-      category: "workshops",
-      categoryLabel: isPolish ? "Warsztaty" : "Workshops",
-      blurb: isPolish
-        ? "Praktyczne zajęcia, prowadzone odkrywanie i wspólne aktywności STEAM."
-        : "Hands-on sessions, guided discovery, and team-based STEAM activities.",
-      size: "large",
-      tone: "from-[#DBEAFE] via-[#E7EBF7] to-[#FEF3C7]",
-    },
-    {
-      id: 2,
-      title: isPolish ? "Odkrywanie nauki" : "Science exploration",
-      category: "lab",
-      categoryLabel: isPolish ? "Laboratorium" : "Lab",
-      blurb: isPolish
-        ? "Obserwacja, badanie i momenty naukowych odkryć z bliska."
-        : "Observation, investigation, and close-up scientific discovery moments.",
-      size: "medium",
-      tone: "from-[#E0F2FE] via-[#DBEAFE] to-[#E2E8F0]",
-    },
-    {
-      id: 3,
-      title: isPolish ? "Odkrywanie w terenie" : "Outdoor discovery",
-      category: "outdoor",
-      categoryLabel: isPolish ? "Teren" : "Outdoor",
-      blurb: isPolish
-        ? "Spacery badawcze, zbieranie próbek i nauka poza salą zajęć."
-        : "Nature walks, collecting samples, and learning beyond the classroom.",
-      size: "tall",
-      tone: "from-[#DCFCE7] via-[#E0F2FE] to-[#FEF3C7]",
-    },
-    {
-      id: 4,
-      title: isPolish ? "Migawki z projektów" : "Project snapshots",
-      category: "projects",
-      categoryLabel: isPolish ? "Projekty" : "Projects",
-      blurb: isPolish
-        ? "Twórcze konstrukcje, zadania problemowe i efekty pracy dzieci."
-        : "Creative builds, problem-solving tasks, and student-made outcomes.",
-      size: "medium",
-      tone: "from-[#FCE7F3] via-[#E7EBF7] to-[#DBEAFE]",
-    },
-    {
-      id: 5,
-      title: isPolish ? "Tematyczne warsztaty" : "Thematic workshops",
-      category: "workshops",
-      categoryLabel: isPolish ? "Warsztaty" : "Workshops",
-      blurb: isPolish
-        ? "Specjalne zajęcia tematyczne z angażującymi aktywnościami opartymi na nauce."
-        : "Special themed sessions with immersive science-led activities.",
-      size: "wide",
-      tone: "from-[#FEF3C7] via-[#FDE68A] to-[#DBEAFE]",
-    },
-    {
-      id: 6,
-      title: isPolish ? "Chwile z laboratorium" : "Lab activity moments",
-      category: "lab",
-      categoryLabel: isPolish ? "Laboratorium" : "Lab",
-      blurb: isPolish
-        ? "Stanowiska eksperymentalne, materiały i prawdziwy przebieg badania."
-        : "Experiment stations, tools, materials, and real investigation flow.",
-      size: "medium",
-      tone: "from-[#E2E8F0] via-[#DBEAFE] to-[#E7EBF7]",
-    },
-    {
-      id: 7,
-      title: isPolish ? "Mali odkrywcy" : "Young explorers",
-      category: "projects",
-      categoryLabel: isPolish ? "Projekty" : "Projects",
-      blurb: isPolish
-        ? "Aktywności budujące pewność siebie i ciekawość młodszych dzieci."
-        : "Confidence-building activities designed for younger curious minds.",
-      size: "tall",
-      tone: "from-[#FEF3C7] via-[#FDE68A] to-[#F8FAFC]",
-    },
-    {
-      id: 8,
-      title: isPolish ? "STEAM w działaniu" : "STEAM in action",
-      category: "outdoor",
-      categoryLabel: isPolish ? "Teren" : "Outdoor",
-      blurb: isPolish
-        ? "Ruch, ciekawość, współpraca i eksperymentowanie uchwycone w jednym miejscu."
-        : "A visual glimpse of movement, curiosity, teamwork, and experimentation.",
-      size: "medium",
-      tone: "from-[#DBEAFE] via-[#E0F2FE] to-[#DCFCE7]",
-    },
-  ];
+    const galleryItems = useMemo(
+    () => [
+      {
+        id: 1,
+        title: isPolish ? "Chwile z warsztatów" : "Workshop moments",
+        category: "workshops",
+        categoryLabel: isPolish ? "Warsztaty" : "Workshops",
+        blurb: isPolish
+          ? "Praktyczne zajęcia, prowadzone odkrywanie i wspólne aktywności STEAM."
+          : "Hands-on sessions, guided discovery, and team-based STEAM activities.",
+        size: "large",
+        tone: "from-[#DBEAFE] via-[#E7EBF7] to-[#FEF3C7]",
+      },
+      {
+        id: 2,
+        title: isPolish ? "Odkrywanie nauki" : "Science exploration",
+        category: "lab",
+        categoryLabel: isPolish ? "Laboratorium" : "Lab",
+        blurb: isPolish
+          ? "Obserwacja, badanie i momenty naukowych odkryć z bliska."
+          : "Observation, investigation, and close-up scientific discovery moments.",
+        size: "medium",
+        tone: "from-[#E0F2FE] via-[#DBEAFE] to-[#E2E8F0]",
+      },
+      {
+        id: 3,
+        title: isPolish ? "Odkrywanie w terenie" : "Outdoor discovery",
+        category: "outdoor",
+        categoryLabel: isPolish ? "Teren" : "Outdoor",
+        blurb: isPolish
+          ? "Spacery badawcze, zbieranie próbek i nauka poza salą zajęć."
+          : "Nature walks, collecting samples, and learning beyond the classroom.",
+        size: "tall",
+        tone: "from-[#DCFCE7] via-[#E0F2FE] to-[#FEF3C7]",
+      },
+      {
+        id: 4,
+        title: isPolish ? "Migawki z projektów" : "Project snapshots",
+        category: "projects",
+        categoryLabel: isPolish ? "Projekty" : "Projects",
+        blurb: isPolish
+          ? "Twórcze konstrukcje, zadania problemowe i efekty pracy dzieci."
+          : "Creative builds, problem-solving tasks, and student-made outcomes.",
+        size: "medium",
+        tone: "from-[#FCE7F3] via-[#E7EBF7] to-[#DBEAFE]",
+      },
+      {
+        id: 5,
+        title: isPolish ? "Tematyczne warsztaty" : "Thematic workshops",
+        category: "workshops",
+        categoryLabel: isPolish ? "Warsztaty" : "Workshops",
+        blurb: isPolish
+          ? "Specjalne zajęcia tematyczne z angażującymi aktywnościami opartymi na nauce."
+          : "Special themed sessions with immersive science-led activities.",
+        size: "wide",
+        tone: "from-[#FEF3C7] via-[#FDE68A] to-[#DBEAFE]",
+      },
+      {
+        id: 6,
+        title: isPolish ? "Chwile z laboratorium" : "Lab activity moments",
+        category: "lab",
+        categoryLabel: isPolish ? "Laboratorium" : "Lab",
+        blurb: isPolish
+          ? "Stanowiska eksperymentalne, materiały i prawdziwy przebieg badania."
+          : "Experiment stations, tools, materials, and real investigation flow.",
+        size: "medium",
+        tone: "from-[#E2E8F0] via-[#DBEAFE] to-[#E7EBF7]",
+      },
+      {
+        id: 7,
+        title: isPolish ? "Mali odkrywcy" : "Young explorers",
+        category: "projects",
+        categoryLabel: isPolish ? "Projekty" : "Projects",
+        blurb: isPolish
+          ? "Aktywności budujące pewność siebie i ciekawość młodszych dzieci."
+          : "Confidence-building activities designed for younger curious minds.",
+        size: "tall",
+        tone: "from-[#FEF3C7] via-[#FDE68A] to-[#F8FAFC]",
+      },
+      {
+        id: 8,
+        title: isPolish ? "STEAM w działaniu" : "STEAM in action",
+        category: "outdoor",
+        categoryLabel: isPolish ? "Teren" : "Outdoor",
+        blurb: isPolish
+          ? "Ruch, ciekawość, współpraca i eksperymentowanie uchwycone w jednym miejscu."
+          : "A visual glimpse of movement, curiosity, teamwork, and experimentation.",
+        size: "medium",
+        tone: "from-[#DBEAFE] via-[#E0F2FE] to-[#DCFCE7]",
+      },
+    ],
+    [isPolish]
+  );
 
   const filteredItems = useMemo(() => {
     if (activeFilter === "all") return galleryItems;
