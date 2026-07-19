@@ -19,11 +19,10 @@ export const SITE = {
 export const NAV = [
   { label: "Home", path: "/" },
   { label: "About", path: "/about" },
-  { label: "What is STEAM?", path: "/what-is-steam" },
-  { label: "Why STEAM?", path: "/why-steam" },
-  { label: "Programmes", path: "/programmes" },
-  { label: "Thematic Workshop", path: "/Thematic Workshop" },
-  { label: "FAQ", path: "/faq" },
+  { label: "STEAM", path: "/what-is-steam" },
+  { label: "Workshops", path: "/programmes" },
+  { label: "Gallery", path: "/gallery" },
+  { label: "Documents", path: "/documents" },
 ];
 
 export const HERO = {

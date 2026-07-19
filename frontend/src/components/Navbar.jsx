@@ -207,7 +207,7 @@ export const Navbar = () => {
                 label={n.label}
                 data-testid={`nav-${slug(n.path)}`}
                 onClick={() => goTo(n.path)}
-                className={`px-3 py-2 text-sm font-bold rounded-full transition-colors font-mono tracking-wide whitespace-nowrap ${
+                className={`px-2.5 py-1.5 text-xs font-semibold rounded-full transition-colors font-mono tracking-normal whitespace-nowrap ${
                   active
                     ? "bg-[#1B2A63] text-white"
                     : "text-[#0F172A] hover:bg-[#E7EBF7]"
