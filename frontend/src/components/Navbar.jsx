@@ -152,42 +152,15 @@ export const Navbar = () => {
   const big = isHome && !scrolled;
 
   const topNav = useMemo(() => {
-    const labels = {
-      en: {
-        home: "Home",
-        about: "About",
-        whatIsSteam: "What is STEAM?",
-        whySteam: "Why STEAM?",
-        programmes: "Programmes",
-        workshops: "Thematic Workshops",
-        gallery: "Gallery",
-        documents: "Documents",
-      },
-      pl: {
-        home: "Strona główna",
-        about: "O nas",
-        whatIsSteam: "Czym jest STEAM?",
-        whySteam: "Dlaczego STEAM?",
-        programmes: "Programy",
-        workshops: "Warsztaty tematyczne",
-        gallery: "Galeria",
-        documents: "Dokumenty",
-      },
-    };
-
-    const t = labels[language] || labels.en;
-
     return [
-      { path: "/", label: t.home },
-      { path: "/about", label: t.about },
-      { path: "/what-is-steam", label: t.whatIsSteam },
-      { path: "/why-steam", label: t.whySteam },
-      { path: "/programmes", label: t.programmes },
-      { path: "/thematic-workshops", label: t.workshops },
-      { path: "/gallery", label: t.gallery },
-      { path: "/documents", label: t.documents },
+      { path: "/", label: nav?.home || "Home" },
+      { path: "/about", label: nav?.about || "About" },
+      { path: "/steam", label: nav?.steam || "STEAM" },
+      { path: "/programmes", label: nav?.workshops || "Workshops" },
+      { path: "/gallery", label: nav?.gallery || "Gallery" },
+      { path: "/documents", label: nav?.documents || "Documents" },
     ];
-  }, [language]);
+  }, [nav]);
 
   const goTo = (path) => {
     setOpen(false);
