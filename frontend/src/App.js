@@ -24,7 +24,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/what-is-steam" element={<WhatIsSteam />} />
-            <Route path="/why-steam" element={<WhySteamPage />} />
+            <Route path="/why-steam" element={<WhatIsSteam />} />
             <Route path="/programmes" element={<Programmes />} />
             <Route path="/thematic-workshops" element={<Events />} />
             <Route path="/gallery" element={<Gallery />} />
