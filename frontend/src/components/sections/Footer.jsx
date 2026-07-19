@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Phone, Mail, MapPin, Facebook, Instagram } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
 import { SITE } from "../../data";
 import { useData } from "../../i18n/useData";
 import logo from "../../assets/logo.png";
@@ -20,11 +20,14 @@ export const Footer = () => {
               {footer.description}
             </p>
             <div className="mt-5 flex gap-3">
-              <a href={SITE.social.facebook} aria-label="Facebook" data-testid="social-facebook" className="grid place-items-center w-10 h-10 rounded-xl bg-white/10 hover:bg-[#1B2A63] transition-colors">
+              <a href={SITE.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" data-testid="social-facebook" className="grid place-items-center w-10 h-10 rounded-xl bg-white/10 hover:bg-[#1B2A63] transition-colors">
                 <Facebook size={18} />
               </a>
-              <a href={SITE.social.instagram} aria-label="Instagram" data-testid="social-instagram" className="grid place-items-center w-10 h-10 rounded-xl bg-white/10 hover:bg-[#E0B33C] transition-colors">
+              <a href={SITE.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" data-testid="social-instagram" className="grid place-items-center w-10 h-10 rounded-xl bg-white/10 hover:bg-[#E0B33C] transition-colors">
                 <Instagram size={18} />
+              </a>
+              <a href={SITE.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" data-testid="social-linkedin" className="grid place-items-center w-10 h-10 rounded-xl bg-white/10 hover:bg-[#1B2A63] transition-colors">
+                <Linkedin size={18} />
               </a>
             </div>
           </div>

@@ -13,7 +13,7 @@ export const SITE = {
   email: "admin@laneuron.org",
   location: "Kraków",
   venue: "ul. Śniadeckich 3, Kraków, Poland",
-  social: { facebook: "https://www.facebook.com/share/1B87gctcBG/?mibextid=wwXIfr", instagram: "https://www.instagram.com/laneuron?igsh=MWxpOXRkdjh3bzBpbw==", youtube: "#" }, // placeholders – to be added later
+  social: { facebook: "https://www.facebook.com/share/1B87gctcBG/?mibextid=wwXIfr", instagram: "https://www.instagram.com/laneuron?igsh=MWxpOXRkdjh3bzBpbw==", linkedin: "https://www.linkedin.com/company/laneuron" }, // placeholders – to be added later
 };
 
 export const NAV = [
