@@ -20,6 +20,7 @@ const Documents = () => {
   const [childProtectionVersion, setChildProtectionVersion] = useState("detailed");
   const [isDocLoading, setIsDocLoading] = useState(false);
   const [docError, setDocError] = useState("");
+  const [showMobileHint, setShowMobileHint] = useState(false);
 
   const docxContainerRef = useRef(null);
 
@@ -59,6 +60,12 @@ const Documents = () => {
     loadError: isPolish
       ? "Nie udało się załadować dokumentu."
       : "Could not load the document.",
+    mobileHint: isPolish
+      ? "Przesuń w bok, aby zobaczyć całą stronę dokumentu."
+      : "Swipe sideways to view the full document page.",
+    blockedAction: isPolish
+      ? "Ta treść jest dostępna tylko do odczytu."
+      : "This content is view-only.",
   };
 
   const documents = [
@@ -135,6 +142,8 @@ const Documents = () => {
   const handleOpenDocument = (docId) => {
     setActiveDocument(docId);
     setDocError("");
+    setShowMobileHint(window.innerWidth < 640);
+
     if (docId === "child-protection") {
       setChildProtectionVersion("detailed");
     }
@@ -144,6 +153,7 @@ const Documents = () => {
     setActiveDocument(null);
     setDocError("");
     setIsDocLoading(false);
+    setShowMobileHint(false);
 
     if (docxContainerRef.current) {
       docxContainerRef.current.innerHTML = "";
@@ -167,6 +177,45 @@ const Documents = () => {
       document.body.style.overflow = "";
     };
   }, [activeDocument]);
+
+  useEffect(() => {
+    if (!activeDocument) return;
+
+    const blockContextMenu = (event) => {
+      event.preventDefault();
+    };
+
+    const blockShortcuts = (event) => {
+      const key = event.key?.toLowerCase();
+      const isModifier = event.ctrlKey || event.metaKey;
+
+      if (isModifier && ["c", "p", "s", "a", "x", "u"].includes(key)) {
+        event.preventDefault();
+      }
+
+      if (key === "printscreen") {
+        event.preventDefault();
+      }
+    };
+
+    document.addEventListener("contextmenu", blockContextMenu);
+    document.addEventListener("keydown", blockShortcuts);
+
+    return () => {
+      document.removeEventListener("contextmenu", blockContextMenu);
+      document.removeEventListener("keydown", blockShortcuts);
+    };
+  }, [activeDocument]);
+
+  useEffect(() => {
+    if (!showMobileHint) return;
+
+    const timer = setTimeout(() => {
+      setShowMobileHint(false);
+    }, 3500);
+
+    return () => clearTimeout(timer);
+  }, [showMobileHint]);
 
   useEffect(() => {
     const loadDocument = async () => {
@@ -616,6 +665,13 @@ const Documents = () => {
 
                 <div className="relative flex-1 overflow-auto px-2 sm:px-6 py-5 sm:py-6">
                 <div className="relative z-10 docx-modal-content">
+                  {showMobileHint && (
+                    <div className="mb-3 sm:hidden">
+                      <div className="rounded-2xl border-2 border-[#1B2A63] bg-[#E7EBF7] px-4 py-3 text-sm font-mono font-bold text-[#1B2A63]">
+                        {pageText.mobileHint}
+                      </div>
+                    </div>
+                  )}
                     {isDocLoading && (
                     <div className="flex min-h-[280px] items-center justify-center">
                         <div className="inline-flex items-center gap-3 rounded-full border-2 border-[#1B2A63] bg-white px-5 py-3 text-[#1B2A63] shadow-sm">
