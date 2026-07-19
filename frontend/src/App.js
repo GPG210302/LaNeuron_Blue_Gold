@@ -23,7 +23,7 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/steam" element={<WhatIsSteam />} />
+            <Route path="/what-is-steam" element={<WhatIsSteam />} />
             <Route path="/why-steam" element={<WhatIsSteam />} />
             <Route path="/programmes" element={<Programmes />} />
             <Route path="/thematic-workshops" element={<Events />} />
