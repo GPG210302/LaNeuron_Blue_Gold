@@ -329,7 +329,25 @@ const Documents = () => {
             }
         }
 
- 
+        .docx-modal-content {
+          min-width: max-content;
+        }
+
+        .docx-modal-content .docx-wrapper {
+          min-width: max-content !important;
+        }
+
+        .docx-modal-content .docx {
+          min-width: 794px !important;
+        }
+
+        @media (max-width: 640px) {
+          .docx-modal-content .docx {
+            min-width: 794px !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+          }
+        }
 
         .docx-modal-content .docx .docx_page {
             position: relative !important;
@@ -596,7 +614,7 @@ const Documents = () => {
                 </div>
                 )}
 
-                <div className="relative flex-1 overflow-y-auto px-4 sm:px-6 py-5 sm:py-6">
+                <div className="relative flex-1 overflow-auto px-2 sm:px-6 py-5 sm:py-6">
                 <div className="relative z-10 docx-modal-content">
                     {isDocLoading && (
                     <div className="flex min-h-[280px] items-center justify-center">
