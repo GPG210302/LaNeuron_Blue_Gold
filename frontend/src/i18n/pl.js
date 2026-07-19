@@ -1,13 +1,12 @@
 export const pl = {
   nav: {
-    home: "Strona główna",
+    home: "Start",
     about: "O nas",
-    whatIsSteam: "Czym jest STEAM?",
-    whySteam: "Dlaczego STEAM?",
-    programmes: "Programy",
-    summerProgram: "Tematyczne warsztaty",
+    steam: "STEAM",
+    workshops: "Warsztaty",
     gallery: "Galeria",
     documents: "Dokumenty",
+    enquireNow: "Zapytaj o zajęcia",
   },
 
   ui: {
