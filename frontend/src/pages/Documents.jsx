@@ -52,10 +52,11 @@ const Documents = () => {
       ? "Najczęściej zadawane pytania"
       : "Frequently Asked Questions",
     viewDocument: isPolish ? "Zobacz dokument" : "View document",
+    viewOnlyLabel: isPolish ? "Tylko do podglądu" : "View only",
     close: isPolish ? "Zamknij" : "Close",
-    watermark: isPolish ? "La Neuron • Tylko do wglądu" : "La Neuron • View Only",
+    watermark: isPolish ? "La Neuron • Tylko do podglądu" : "La Neuron • View Only",
     versionDetailed: isPolish ? "Wersja szczegółowa" : "Detailed version",
-    versionShort: isPolish ? "Wersja krótka" : "Short version",
+    versionShort: isPolish ? "Wersja skrócona" : "Short version",
     loading: isPolish ? "Ładowanie dokumentu..." : "Loading document...",
     loadError: isPolish
       ? "Nie udało się załadować dokumentu."
@@ -242,50 +243,32 @@ const Documents = () => {
           renderFooters: true,
           renderFootnotes: true,
         });
+
         const wrapper =
-        container.querySelector(".docx-wrapper") || container;
+          container.querySelector(".docx-wrapper") || container;
 
         const renderedPages = Array.from(wrapper.children).filter(
-        (node) => node instanceof HTMLElement
+          (node) => node instanceof HTMLElement
         );
 
         renderedPages.forEach((page) => {
-        const existingWatermark = page.querySelector(".page-watermark-layer");
-        if (existingWatermark) {
+          const existingWatermark = page.querySelector(".page-watermark-layer");
+          if (existingWatermark) {
             existingWatermark.remove();
-        }
+          }
 
-        const watermarkLayer = document.createElement("div");
-        watermarkLayer.className = "page-watermark-layer";
-        watermarkLayer.innerHTML = `
+          const watermarkLayer = document.createElement("div");
+          watermarkLayer.className = "page-watermark-layer";
+          watermarkLayer.innerHTML = `
             <div class="page-watermark-stripes"></div>
             <p class="page-watermark-text top">${pageText.watermark}</p>
             <p class="page-watermark-text middle">${pageText.watermark}</p>
             <p class="page-watermark-text bottom">${pageText.watermark}</p>
-        `;
+          `;
 
-        page.style.position = "relative";
-        page.style.overflow = "hidden";
-        page.appendChild(watermarkLayer);
-        });
-
-        renderedPages.forEach((page) => {
-        const existingWatermark = page.querySelector(".page-watermark-layer");
-        if (existingWatermark) {
-            existingWatermark.remove();
-        }
-
-        const watermarkLayer = document.createElement("div");
-        watermarkLayer.className = "page-watermark-layer";
-        watermarkLayer.innerHTML = `
-            <div class="page-watermark-stripes"></div>
-            <p class="page-watermark-text top">${pageText.watermark}</p>
-            <p class="page-watermark-text middle">${pageText.watermark}</p>
-            <p class="page-watermark-text bottom">${pageText.watermark}</p>
-        `;
-
-        page.style.position = "relative";
-        page.appendChild(watermarkLayer);
+          page.style.position = "relative";
+          page.style.overflow = "hidden";
+          page.appendChild(watermarkLayer);
         });
       } catch (error) {
         console.error("DOCX render error:", error);
@@ -296,65 +279,89 @@ const Documents = () => {
     };
 
     loadDocument();
-    }, [
+  }, [
     activeDocument,
     childProtectionVersion,
     getDocumentSource,
     pageText.loadError,
     pageText.watermark,
-    ]);
+  ]);
 
   return (
     <>
       <style>{`
         .docx-modal-content {
-            position: relative;
-            z-index: 1;
-            user-select: none !important;
-            -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
+          position: relative;
+          z-index: 1;
+          user-select: none !important;
+          -webkit-user-select: none !important;
+          -moz-user-select: none !important;
+          -ms-user-select: none !important;
+        }
+
+        .document-modal-title-row {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          flex-wrap: wrap;
+        }
+
+        .view-only-badge {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.25rem 0.65rem;
+          border-radius: 999px;
+          border: 1px solid rgba(27, 42, 99, 0.16);
+          background: rgba(231, 235, 247, 0.9);
+          color: #1B2A63;
+          font-size: 0.72rem;
+          font-weight: 800;
+          line-height: 1;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          white-space: nowrap;
         }
 
         .docx-modal-content .docx-wrapper {
-            background: transparent !important;
-            padding: 0 !important;
-            position: relative !important;
-            z-index: 1 !important;
-            user-select: none !important;
-            -webkit-user-select: none !important;
+          background: transparent !important;
+          padding: 0 !important;
+          position: relative !important;
+          z-index: 1 !important;
+          user-select: none !important;
+          -webkit-user-select: none !important;
         }
 
         .docx-modal-content .docx {
-            margin: 0 auto 24px auto !important;
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08) !important;
-            border-radius: 18px !important;
-            overflow: hidden !important;
-            max-width: 100% !important;
-            position: relative !important;
-            z-index: 1 !important;
-            background: rgba(255, 255, 255, 0.90) !important;
-            user-select: none !important;
-            -webkit-user-select: none !important;
+          margin: 0 auto 24px auto !important;
+          box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08) !important;
+          border-radius: 18px !important;
+          overflow: hidden !important;
+          max-width: 100% !important;
+          position: relative !important;
+          z-index: 1 !important;
+          background: rgba(255, 255, 255, 0.90) !important;
+          user-select: none !important;
+          -webkit-user-select: none !important;
         }
 
         .docx-modal-content .docx * {
-            user-select: none !important;
-            -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
+          user-select: none !important;
+          -webkit-user-select: none !important;
+          -moz-user-select: none !important;
+          -ms-user-select: none !important;
         }
 
         .docx-modal-content .docx table {
-            border-collapse: collapse !important;
-            width: 100% !important;
+          border-collapse: collapse !important;
+          width: 100% !important;
         }
 
         .docx-modal-content .docx img {
-            max-width: 100% !important;
-            height: auto !important;
-            pointer-events: none !important;
-            -webkit-user-drag: none !important;
+          max-width: 100% !important;
+          height: auto !important;
+          pointer-events: none !important;
+          -webkit-user-drag: none !important;
         }
 
         .docx-modal-content .docx p,
@@ -362,20 +369,12 @@ const Documents = () => {
         .docx-modal-content .docx td,
         .docx-modal-content .docx th,
         .docx-modal-content .docx li {
-            word-break: break-word;
+          word-break: break-word;
         }
 
         .docx-modal-content .docx .docx_page,
         .docx-modal-content .docx section.docx {
-            background: rgba(255, 255, 255, 0.88) !important;
-        }
-
-
-
-        @media (min-width: 640px) {
-            .docx-watermark-text {
-            font-size: 32px;
-            }
+          background: rgba(255, 255, 255, 0.88) !important;
         }
 
         .docx-modal-content {
@@ -399,63 +398,62 @@ const Documents = () => {
         }
 
         .docx-modal-content .docx .docx_page {
-            position: relative !important;
-            overflow: hidden !important;
+          position: relative !important;
+          overflow: hidden !important;
         }
 
         .page-watermark-layer {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            z-index: 999;
-            overflow: hidden;
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          z-index: 999;
+          overflow: hidden;
         }
 
         .page-watermark-stripes {
-            position: absolute;
-            inset: 0;
-            opacity: 0.12;
-            background-image: repeating-linear-gradient(
-                -32deg,
-                transparent,
-                transparent 120px,
-                rgba(27, 42, 99, 0.26) 120px,
-                rgba(27, 42, 99, 0.26) 190px
-            );
+          position: absolute;
+          inset: 0;
+          opacity: 0.12;
+          background-image: repeating-linear-gradient(
+            -32deg,
+            transparent,
+            transparent 120px,
+            rgba(27, 42, 99, 0.26) 120px,
+            rgba(27, 42, 99, 0.26) 190px
+          );
         }
 
         .page-watermark-text {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%) rotate(-32deg);
-            white-space: nowrap;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.35em;
-            color: rgba(27, 42, 99, 0.22);
-            font-size: 22px;
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%) rotate(-32deg);
+          white-space: nowrap;
+          font-weight: 900;
+          text-transform: uppercase;
+          letter-spacing: 0.35em;
+          color: rgba(27, 42, 99, 0.22);
+          font-size: 22px;
         }
 
         @media (min-width: 640px) {
-            .page-watermark-text {
-                font-size: 32px;
-            }
+          .page-watermark-text {
+            font-size: 32px;
+          }
         }
 
         .page-watermark-text.top {
-            
+          top: 12%;
         }
 
         .page-watermark-text.middle {
-            top: 50%;
-            transform: translateX(-50%) translateY(-50%) rotate(-32deg);
+          top: 50%;
+          transform: translateX(-50%) translateY(-50%) rotate(-32deg);
         }
 
         .page-watermark-text.bottom {
-            bottom: 12%;
+          bottom: 12%;
         }
-     `}</style>
-        
+      `}</style>
 
       <main className="ln-grid-bg min-h-screen pt-28 sm:pt-32 pb-20 lg:pb-28">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
@@ -596,74 +594,81 @@ const Documents = () => {
         </div>
       </main>
 
-        <AnimatePresence>
+      <AnimatePresence>
         {activeDocument && (
-            <motion.div
+          <motion.div
             className="fixed inset-0 z-[120] bg-[#0F172A]/60 backdrop-blur-sm px-4 sm:px-6 py-6 sm:py-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleCloseModal}
-            >
+          >
             <motion.div
-                className="relative mx-auto flex h-full max-h-[88vh] w-full max-w-5xl flex-col overflow-hidden rounded-[28px] border-2 border-[#0F172A] bg-white shadow-[8px_8px_0_#0F172A]"
-                initial={{ opacity: 0, y: 24, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 16, scale: 0.98 }}
-                transition={{ duration: 0.22 }}
-                onClick={(event) => event.stopPropagation()}
+              className="relative mx-auto flex h-full max-h-[88vh] w-full max-w-5xl flex-col overflow-hidden rounded-[28px] border-2 border-[#0F172A] bg-white shadow-[8px_8px_0_#0F172A]"
+              initial={{ opacity: 0, y: 24, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 16, scale: 0.98 }}
+              transition={{ duration: 0.22 }}
+              onClick={(event) => event.stopPropagation()}
             >
-                <div className="flex items-start justify-between gap-4 border-b-2 border-[#E2E8F0] px-5 sm:px-7 py-5">
+              <div className="flex items-start justify-between gap-4 border-b-2 border-[#E2E8F0] px-5 sm:px-7 py-5">
                 <div>
-                    <p className="text-xs font-black uppercase tracking-[0.25em] text-[#1B2A63]">
+                  <p className="text-xs font-black uppercase tracking-[0.25em] text-[#1B2A63]">
                     {pageText.badge}
-                    </p>
-                    <h3 className="mt-2 font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A] leading-tight">
-                    {activeDocumentMeta?.title}
+                  </p>
+
+                  <div className="document-modal-title-row mt-2">
+                    <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A] leading-tight">
+                      {activeDocumentMeta?.title}
                     </h3>
+
+                    <span className="view-only-badge">
+                      {pageText.viewOnlyLabel}
+                    </span>
+                  </div>
                 </div>
 
                 <button
-                    type="button"
-                    onClick={handleCloseModal}
-                    aria-label={pageText.close}
-                    className="shrink-0 inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#1B2A63] bg-[#E7EBF7] text-[#1B2A63] transition hover:-translate-y-0.5"
+                  type="button"
+                  onClick={handleCloseModal}
+                  aria-label={pageText.close}
+                  className="shrink-0 inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#1B2A63] bg-[#E7EBF7] text-[#1B2A63] transition hover:-translate-y-0.5"
                 >
-                    <X size={20} />
+                  <X size={20} />
                 </button>
-                </div>
+              </div>
 
-                {activeDocument === "child-protection" && (
+              {activeDocument === "child-protection" && (
                 <div className="border-b-2 border-[#E2E8F0] px-5 sm:px-7 py-4">
-                    <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap gap-3">
                     <button
-                        type="button"
-                        onClick={() => setChildProtectionVersion("detailed")}
-                        className={`inline-flex items-center justify-center rounded-full border-2 px-4 py-2 text-sm font-mono font-bold transition ${
+                      type="button"
+                      onClick={() => setChildProtectionVersion("detailed")}
+                      className={`inline-flex items-center justify-center rounded-full border-2 px-4 py-2 text-sm font-mono font-bold transition ${
                         childProtectionVersion === "detailed"
-                            ? "border-[#1B2A63] bg-[#1B2A63] text-white"
-                            : "border-[#1B2A63] bg-[#E7EBF7] text-[#1B2A63]"
-                        }`}
+                          ? "border-[#1B2A63] bg-[#1B2A63] text-white"
+                          : "border-[#1B2A63] bg-[#E7EBF7] text-[#1B2A63]"
+                      }`}
                     >
-                        {pageText.versionDetailed}
+                      {pageText.versionDetailed}
                     </button>
 
                     <button
-                        type="button"
-                        onClick={() => setChildProtectionVersion("short")}
-                        className={`inline-flex items-center justify-center rounded-full border-2 px-4 py-2 text-sm font-mono font-bold transition ${
+                      type="button"
+                      onClick={() => setChildProtectionVersion("short")}
+                      className={`inline-flex items-center justify-center rounded-full border-2 px-4 py-2 text-sm font-mono font-bold transition ${
                         childProtectionVersion === "short"
-                            ? "border-[#1B2A63] bg-[#1B2A63] text-white"
-                            : "border-[#1B2A63] bg-[#E7EBF7] text-[#1B2A63]"
-                        }`}
+                          ? "border-[#1B2A63] bg-[#1B2A63] text-white"
+                          : "border-[#1B2A63] bg-[#E7EBF7] text-[#1B2A63]"
+                      }`}
                     >
-                        {pageText.versionShort}
+                      {pageText.versionShort}
                     </button>
-                    </div>
+                  </div>
                 </div>
-                )}
+              )}
 
-                <div className="relative flex-1 overflow-auto px-2 sm:px-6 py-5 sm:py-6">
+              <div className="relative flex-1 overflow-auto px-2 sm:px-6 py-5 sm:py-6">
                 <div className="relative z-10 docx-modal-content">
                   {showMobileHint && (
                     <div className="mb-3 sm:hidden">
@@ -672,35 +677,36 @@ const Documents = () => {
                       </div>
                     </div>
                   )}
-                    {isDocLoading && (
+
+                  {isDocLoading && (
                     <div className="flex min-h-[280px] items-center justify-center">
-                        <div className="inline-flex items-center gap-3 rounded-full border-2 border-[#1B2A63] bg-white px-5 py-3 text-[#1B2A63] shadow-sm">
+                      <div className="inline-flex items-center gap-3 rounded-full border-2 border-[#1B2A63] bg-white px-5 py-3 text-[#1B2A63] shadow-sm">
                         <Loader2 size={18} className="animate-spin" />
                         <span className="text-sm font-mono font-bold">
-                            {pageText.loading}
+                          {pageText.loading}
                         </span>
-                        </div>
+                      </div>
                     </div>
-                    )}
+                  )}
 
-                    {docError && !isDocLoading && (
+                  {docError && !isDocLoading && (
                     <div className="flex min-h-[280px] items-center justify-center">
-                        <div className="max-w-md rounded-[24px] border-2 border-red-200 bg-red-50 px-6 py-5 text-center text-red-700">
+                      <div className="max-w-md rounded-[24px] border-2 border-red-200 bg-red-50 px-6 py-5 text-center text-red-700">
                         {docError}
-                        </div>
+                      </div>
                     </div>
-                    )}
+                  )}
 
-                    <div
+                  <div
                     ref={docxContainerRef}
                     className={isDocLoading ? "hidden" : "block"}
-                    />
+                  />
                 </div>
-                </div>
+              </div>
             </motion.div>
-            </motion.div>
+          </motion.div>
         )}
-        </AnimatePresence>
+      </AnimatePresence>
     </>
   );
 };
