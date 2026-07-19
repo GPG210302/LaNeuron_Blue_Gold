@@ -198,7 +198,7 @@ export const Navbar = () => {
           />
         </button>
 
-        <nav className="hidden lg:flex items-center gap-1 ml-6">
+        <nav className="hidden lg:flex items-center gap-0.5 ml-4">
           {topNav.map((n) => {
             const active = isActive(n.path);
             return (
