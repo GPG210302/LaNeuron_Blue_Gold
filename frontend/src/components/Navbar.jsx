@@ -155,7 +155,7 @@ export const Navbar = () => {
     return [
       { path: "/", label: nav?.home || "Home" },
       { path: "/about", label: nav?.about || "About" },
-      { path: "/steam", label: nav?.steam || "STEAM" },
+      { path: "/what-is-steam", label: nav?.steam || "STEAM" },
       { path: "/programmes", label: nav?.workshops || "Workshops" },
       { path: "/gallery", label: nav?.gallery || "Gallery" },
       { path: "/documents", label: nav?.documents || "Documents" },
