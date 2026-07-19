@@ -181,7 +181,7 @@ export const Navbar = () => {
     >
       <div
         className={`max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between transition-all duration-300 ${
-          big ? "h-24 sm:h-[190px]" : "h-20"
+          big ? "h-28 sm:h-[220px]" : "h-20"
         }`}
       >
         <button
