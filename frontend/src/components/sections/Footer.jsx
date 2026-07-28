@@ -6,15 +6,18 @@ import logo from "../../assets/logo.png";
 
 export const Footer = () => {
   const navigate = useNavigate();
-  const { nav, footer } = useData();
+  const data = useData();
+
+  const nav = data?.nav || {};
+  const footer = data?.footer || {};
 
   const footerLinks = [
-    { label: nav.home, path: "/" },
-    { label: nav.about, path: "/about" },
-    { label: nav.steam, path: "/steam" },
-    { label: nav.workshops, path: "/workshops" },
-    { label: nav.gallery, path: "/gallery" },
-    { label: nav.documents, path: "/documents" },
+    { label: nav.home || "Home", path: "/" },
+    { label: nav.about || "About", path: "/about" },
+    { label: nav.steam || "STEAM", path: "/steam" },
+    { label: nav.workshops || "Workshops", path: "/workshops" },
+    { label: nav.gallery || "Gallery", path: "/gallery" },
+    { label: nav.documents || "Documents", path: "/documents" },
   ];
 
   return (
@@ -36,7 +39,6 @@ export const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                data-testid="social-facebook"
                 className="grid place-items-center w-10 h-10 rounded-xl bg-white/10 hover:bg-[#1B2A63] transition-colors"
               >
                 <Facebook size={18} />
@@ -47,7 +49,6 @@ export const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                data-testid="social-instagram"
                 className="grid place-items-center w-10 h-10 rounded-xl bg-white/10 hover:bg-[#E0B33C] transition-colors"
               >
                 <Instagram size={18} />
@@ -58,7 +59,6 @@ export const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                data-testid="social-linkedin"
                 className="grid place-items-center w-10 h-10 rounded-xl bg-white/10 hover:bg-[#1B2A63] transition-colors"
               >
                 <Linkedin size={18} />
@@ -68,13 +68,14 @@ export const Footer = () => {
 
           <div>
             <h4 className="font-display font-extrabold mb-4 text-[#F5A623]">
-              {footer.exploreTitle}
+              {footer.exploreTitle || "Explore"}
             </h4>
 
             <ul className="space-y-2">
               {footerLinks.map((item) => (
                 <li key={item.path}>
                   <button
+                    type="button"
                     onClick={() => navigate(item.path)}
                     className="text-white/60 hover:text-white transition-colors text-sm"
                   >
@@ -87,7 +88,7 @@ export const Footer = () => {
 
           <div>
             <h4 className="font-display font-extrabold mb-4 text-[#F5A623]">
-              {footer.contactTitle}
+              {footer.contactTitle || "Contact"}
             </h4>
 
             <ul className="space-y-3 text-sm text-white/70">
@@ -115,17 +116,17 @@ export const Footer = () => {
             </ul>
 
             <button
+              type="button"
               onClick={() => navigate("/register")}
               className="ln-btn ln-btn-primary mt-5 !px-5 !py-2.5 !text-sm"
-              data-testid="footer-enquire-btn"
             >
-              {footer.enquireBtn}
+              {footer.enquireBtn || "Enquire Now"}
             </button>
           </div>
         </div>
 
         <div className="mt-12 flex flex-wrap gap-2 justify-center">
-          {footer.facts.map((f) => (
+          {(footer.facts || []).map((f) => (
             <span
               key={f}
               className="text-xs font-bold px-3 py-1.5 rounded-full bg-white/10 text-white/80"
