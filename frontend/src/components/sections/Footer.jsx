@@ -14,8 +14,8 @@ export const Footer = () => {
   const footerLinks = [
     { label: nav.home || "Home", path: "/" },
     { label: nav.about || "About", path: "/about" },
-    { label: nav.steam || "STEAM", path: "/steam" },
-    { label: nav.workshops || "Workshops", path: "/workshops" },
+    { label: nav.steam || "STEAM", path: "/what-is-steam" },
+    { label: nav.workshops || "Workshops", path: "/programmes" },
     { label: nav.gallery || "Gallery", path: "/gallery" },
     { label: nav.documents || "Documents", path: "/documents" },
   ];
