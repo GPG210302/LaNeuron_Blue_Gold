@@ -9,6 +9,10 @@ import {
 import { useRef } from "react";
 import { Hero } from "../components/sections/Hero";
 import { useData } from "../i18n/useData";
+import MaskedText from "../animations/MaskedText";
+import HoverLift from "../animations/HoverLift";
+import CursorSpotlight from "../animations/CursorSpotlight";
+import MagneticButton from "../animations/MagneticButton";
 
 const EXPO = [0.22, 1, 0.36, 1];
 const VIEWPORT = { once: true, margin: "-60px" };
@@ -46,9 +50,11 @@ function SectionIntro({ overline, title, sub }) {
           {overline}
         </p>
       ) : null}
-      <h2 className="text-3xl font-black tracking-tight text-[#1B2A63] sm:text-4xl">
+
+      <div className="text-3xl font-black tracking-tight text-[#1B2A63] sm:text-4xl">
         {title}
-      </h2>
+      </div>
+
       {sub ? (
         <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-7 text-slate-600 sm:text-base">
           {sub}
@@ -58,7 +64,7 @@ function SectionIntro({ overline, title, sub }) {
   );
 }
 
-// ─── TILT CARD WITH SHINE ─────────────────────────────────
+// Local tilt card kept because it is homepage-specific
 const TiltCard = ({ children, className = "" }) => {
   const ref = useRef(null);
   const rawX = useMotionValue(0);
@@ -105,7 +111,6 @@ const TiltCard = ({ children, className = "" }) => {
     >
       {children}
 
-      {/* Shine / glow overlay */}
       <motion.div
         style={{
           pointerEvents: "none",
@@ -128,18 +133,16 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero unchanged */}
       <Hero />
 
       <main className="relative bg-[#fbf7ee]">
-        {/* soft background glows */}
         <div className="pointer-events-none absolute inset-0 opacity-[0.06]">
           <div className="absolute left-[-8%] top-[8%] h-64 w-64 rounded-full bg-[#E0B33C] blur-3xl" />
           <div className="absolute right-[-10%] top-[26%] h-72 w-72 rounded-full bg-[#1B2A63] blur-3xl" />
           <div className="absolute bottom-[12%] left-[20%] h-64 w-64 rounded-full bg-[#10B981] blur-3xl" />
         </div>
 
-        {/* WHY PARENTS CHOOSE LA NEURON */}
+        {/* WHY PARENTS CHOOSE */}
         <section
           id="why-parents"
           className="relative z-10 px-4 pb-20 pt-24 sm:px-6 lg:px-8"
@@ -147,7 +150,11 @@ export default function Home() {
           <div className="mx-auto max-w-7xl">
             <SectionIntro
               overline={home?.whyParents?.overline}
-              title={home?.whyParents?.title}
+              title={
+                <MaskedText as="h2" className="text-3xl font-black tracking-tight text-[#1B2A63] sm:text-4xl">
+                  {home?.whyParents?.title}
+                </MaskedText>
+              }
               sub={home?.whyParents?.sub}
             />
 
@@ -159,19 +166,19 @@ export default function Home() {
               className="grid gap-6 md:grid-cols-2 xl:grid-cols-4"
             >
               {(home?.whyParents?.items || []).map((item) => (
-                <motion.div
-                  key={item.title}
-                  variants={fadeUp}
-                  className="rounded-[22px] border-[2px] border-[#1B2A63] bg-white shadow-[0_12px_36px_rgba(27,42,99,0.08)]"
-                >
-                  <TiltCard className="h-full px-6 py-6">
-                    <h3 className="text-lg font-black text-[#1B2A63]">
-                      {item.title}
-                    </h3>
-                    <p className="mt-3 text-[15px] leading-7 text-slate-600">
-                      {item.desc}
-                    </p>
-                  </TiltCard>
+                <motion.div key={item.title} variants={fadeUp}>
+                  <HoverLift className="rounded-[22px] border-[2px] border-[#1B2A63] bg-white shadow-[0_12px_36px_rgba(27,42,99,0.08)]">
+                    <CursorSpotlight className="rounded-[22px]">
+                      <TiltCard className="h-full px-6 py-6">
+                        <h3 className="text-lg font-black text-[#1B2A63]">
+                          {item.title}
+                        </h3>
+                        <p className="mt-3 text-[15px] leading-7 text-slate-600">
+                          {item.desc}
+                        </p>
+                      </TiltCard>
+                    </CursorSpotlight>
+                  </HoverLift>
                 </motion.div>
               ))}
             </motion.div>
@@ -180,10 +187,20 @@ export default function Home() {
 
         {/* ENROLLING NOW */}
         <section className="relative z-10 px-4 pb-24 pt-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl rounded-[28px] border border-[#d7dde9] bg-[#fdfaf1] p-6 shadow-[0_18px_60px_rgba(27,42,99,0.08)] sm:p-10">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={VIEWPORT}
+            className="mx-auto max-w-7xl rounded-[28px] border border-[#d7dde9] bg-[#fdfaf1] p-6 shadow-[0_18px_60px_rgba(27,42,99,0.08)] sm:p-10"
+          >
             <SectionIntro
               overline={home?.enrollingNow?.overline}
-              title={home?.enrollingNow?.title}
+              title={
+                <MaskedText as="h2" className="text-3xl font-black tracking-tight text-[#1B2A63] sm:text-4xl">
+                  {home?.enrollingNow?.title}
+                </MaskedText>
+              }
               sub={home?.enrollingNow?.sub}
             />
 
@@ -195,37 +212,53 @@ export default function Home() {
               className="grid gap-6 md:grid-cols-2 xl:grid-cols-4"
             >
               {(home?.enrollingNow?.items || []).map((item) => (
-                <motion.article
-                  key={item.title}
-                  variants={fadeUp}
-                  className="rounded-[22px] border border-[#d7dde9] bg-white shadow-[0_12px_40px_rgba(27,42,99,0.06)]"
-                >
-                  <TiltCard className="flex h-full flex-col p-6">
-                    <div className="mb-4 flex items-center justify-between gap-3">
-                      <span className="rounded-full bg-[#1B2A63] px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.18em] text-white">
-                        {item.title}
-                      </span>
-                      <span className="rounded-full border border-[#E0B33C]/60 bg-[#fff7dd] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#9b7515]">
-                        {item.status}
-                      </span>
-                    </div>
+                <motion.article key={item.title} variants={fadeUp}>
+                  <HoverLift className="rounded-[22px] border border-[#d7dde9] bg-white shadow-[0_12px_40px_rgba(27,42,99,0.06)]">
+                    <CursorSpotlight className="rounded-[22px]">
+                      <TiltCard className="flex h-full flex-col p-6">
+                        <div className="mb-4 flex items-center justify-between gap-3">
+                          <motion.span
+                            initial={{ opacity: 0, x: -18 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, ease: EXPO }}
+                            className="rounded-full bg-[#1B2A63] px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.18em] text-white"
+                          >
+                            {item.title}
+                          </motion.span>
 
-                    <p className="flex-1 text-[15px] leading-7 text-slate-600">
-                      {item.desc}
-                    </p>
+                          <motion.span
+                            initial={{ opacity: 0, x: 18 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: 0.1, ease: EXPO }}
+                            className="rounded-full border border-[#E0B33C]/60 bg-[#fff7dd] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#9b7515]"
+                          >
+                            {item.status}
+                          </motion.span>
+                        </div>
 
-                    <Link
-                      to="/programmes"
-                      className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#1B2A63]"
-                    >
-                      {home?.enrollingNow?.cta}
-                      <ArrowRight size={16} />
-                    </Link>
-                  </TiltCard>
+                        <p className="flex-1 text-[15px] leading-7 text-slate-600">
+                          {item.desc}
+                        </p>
+
+                        <Link
+                          to="/programmes"
+                          className="group mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#1B2A63]"
+                        >
+                          {home?.enrollingNow?.cta}
+                          <ArrowRight
+                            size={16}
+                            className="transition-transform duration-300 group-hover:translate-x-1"
+                          />
+                        </Link>
+                      </TiltCard>
+                    </CursorSpotlight>
+                  </HoverLift>
                 </motion.article>
               ))}
             </motion.div>
-          </div>
+          </motion.div>
         </section>
 
         {/* WHAT PARENTS SAY */}
@@ -233,24 +266,40 @@ export default function Home() {
           <div className="mx-auto max-w-7xl">
             <SectionIntro
               overline={home?.featuredReview?.overline}
-              title={home?.featuredReview?.title}
+              title={
+                <MaskedText as="h2" className="text-3xl font-black tracking-tight text-[#1B2A63] sm:text-4xl">
+                  {home?.featuredReview?.title}
+                </MaskedText>
+              }
               sub=""
             />
 
             <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={VIEWPORT}
+              initial={{ opacity: 0, scaleX: 0.94, y: 30 }}
+              whileInView={{ opacity: 1, scaleX: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.8, ease: EXPO }}
               className="relative overflow-hidden rounded-[26px] border-[2px] border-[#1B2A63] bg-[#1B2A63] px-6 py-7 text-white shadow-[0_22px_70px_rgba(17,31,84,0.28)] sm:px-8 sm:py-9"
             >
-              <div className="absolute right-6 top-6 opacity-20">
+              <motion.div
+                className="absolute right-6 top-6 opacity-20"
+                animate={{ y: [0, -4, 0], rotate: [0, 1.5, 0] }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
                 <Quote size={72} strokeWidth={1.6} />
-              </div>
+              </motion.div>
 
-              <p className="max-w-3xl text-[17px] leading-9 text-white/95 sm:text-[20px] sm:leading-[2rem]">
+              <MaskedText
+                as="p"
+                delay={0.1}
+                className="max-w-3xl text-[17px] leading-9 text-white/95 sm:text-[20px] sm:leading-[2rem]"
+              >
                 “{home?.featuredReview?.quote}”
-              </p>
+              </MaskedText>
 
               <div className="mt-8 flex flex-wrap items-center gap-3 text-sm text-white/85">
                 <span className="rounded-full bg-white/10 px-4 py-2 font-semibold">
@@ -259,6 +308,12 @@ export default function Home() {
                 <span className="rounded-full border border-white/20 px-4 py-2">
                   {home?.featuredReview?.source}
                 </span>
+              </div>
+
+              <div className="mt-6 flex gap-2">
+                <span className="h-2.5 w-8 rounded-full bg-white/90" />
+                <span className="h-2.5 w-2.5 rounded-full bg-white/35" />
+                <span className="h-2.5 w-2.5 rounded-full bg-white/35" />
               </div>
             </motion.div>
           </div>
@@ -269,7 +324,11 @@ export default function Home() {
           <div className="mx-auto max-w-7xl">
             <SectionIntro
               overline={home?.latest?.overline}
-              title={home?.latest?.title}
+              title={
+                <MaskedText as="h2" className="text-3xl font-black tracking-tight text-[#1B2A63] sm:text-4xl">
+                  {home?.latest?.title}
+                </MaskedText>
+              }
               sub={home?.latest?.sub}
             />
 
@@ -280,24 +339,44 @@ export default function Home() {
               viewport={VIEWPORT}
               className="grid gap-6 lg:grid-cols-3"
             >
-              {(home?.latest?.items || []).map((item) => (
+              {(home?.latest?.items || []).map((item, index) => (
                 <motion.article
                   key={item.title}
                   variants={fadeUp}
-                  className="overflow-hidden rounded-[22px] border border-[#d7dde9] bg-white shadow-[0_16px_50px_rgba(27,42,99,0.08)]"
                 >
-                  <div className="h-36 bg-[radial-gradient(circle_at_top_left,#dbe2f8,transparent_55%),radial-gradient(circle_at_bottom_right,#f4e0a6,transparent_60%)]" />
-                  <div className="p-6">
-                    <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#1B2A63]/70">
-                      {item.type}
-                    </p>
-                    <h3 className="mt-2 text-lg font-black text-[#1B2A63]">
-                      {item.title}
-                    </h3>
-                    <p className="mt-3 text-[15px] leading-7 text-slate-600">
-                      {item.desc}
-                    </p>
-                  </div>
+                  <HoverLift className="group overflow-hidden rounded-[22px] border border-[#d7dde9] bg-white shadow-[0_16px_50px_rgba(27,42,99,0.08)]">
+                    <div className="relative h-36 overflow-hidden bg-[radial-gradient(circle_at_top_left,#dbe2f8,transparent_55%),radial-gradient(circle_at_bottom_right,#f4e0a6,transparent_60%)]">
+                      <motion.div
+                        className="absolute inset-0 bg-[linear-gradient(to_top,rgba(16,28,68,0.75),transparent_65%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                      />
+                      <motion.div
+                        whileHover={{ scale: 1.08 }}
+                        transition={{ duration: 0.7, ease: EXPO }}
+                        className={`absolute inset-0 ${
+                          index === 0
+                            ? "bg-[radial-gradient(circle_at_top_left,#dbe2f8,transparent_55%),radial-gradient(circle_at_bottom_right,#f4e0a6,transparent_60%)]"
+                            : index === 1
+                            ? "bg-[radial-gradient(circle_at_top_left,#dce8ff,transparent_52%),radial-gradient(circle_at_bottom_right,#f2d778,transparent_62%)]"
+                            : "bg-[radial-gradient(circle_at_top_left,#c8f1e4,transparent_50%),radial-gradient(circle_at_bottom_right,#93d6c5,transparent_62%)]"
+                        }`}
+                      />
+                      <div className="absolute bottom-4 right-4 z-10 translate-y-2 text-sm font-bold text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                        Read more ↗
+                      </div>
+                    </div>
+
+                    <div className="p-6">
+                      <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#1B2A63]/70">
+                        {item.type}
+                      </p>
+                      <h3 className="mt-2 text-lg font-black text-[#1B2A63]">
+                        {item.title}
+                      </h3>
+                      <p className="mt-3 text-[15px] leading-7 text-slate-600">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </HoverLift>
                 </motion.article>
               ))}
             </motion.div>
@@ -311,9 +390,21 @@ export default function Home() {
             initial="hidden"
             whileInView="show"
             viewport={VIEWPORT}
-            className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 rounded-[26px] border border-[#e2c86e] bg-[#ffeebf] px-6 py-8 text-center shadow-[0_18px_60px_rgba(224,179,60,0.35)] sm:px-10 lg:flex-row lg:text-left"
+            className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 overflow-hidden rounded-[26px] border border-[#e2c86e] bg-[#ffeebf] px-6 py-8 text-center shadow-[0_18px_60px_rgba(224,179,60,0.35)] sm:px-10 lg:flex-row lg:text-left"
           >
-            <div>
+            <motion.div
+              className="absolute inset-0 opacity-60"
+              animate={{
+                background: [
+                  "linear-gradient(120deg, rgba(255,238,191,1) 0%, rgba(255,244,208,1) 45%, rgba(255,231,169,1) 100%)",
+                  "linear-gradient(120deg, rgba(255,244,208,1) 0%, rgba(255,231,169,1) 45%, rgba(255,238,191,1) 100%)",
+                  "linear-gradient(120deg, rgba(255,238,191,1) 0%, rgba(255,244,208,1) 45%, rgba(255,231,169,1) 100%)",
+                ],
+              }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+            />
+
+            <div className="relative z-10">
               <p className="text-[11px] font-extrabold uppercase tracking-[0.28em] text-[#8a6713]">
                 Start the conversation
               </p>
@@ -322,13 +413,11 @@ export default function Home() {
               </h3>
             </div>
 
-            <Link
-              to="/programmes"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-[#1B2A63] bg-[#1B2A63] px-6 py-3 text-sm font-extrabold text-white shadow-[0_12px_30px_rgba(27,42,99,0.28)] transition-all duration-200 hover:-translate-y-1"
-            >
-              View programme details
-              <ArrowRight size={16} />
-            </Link>
+            <div className="relative z-10">
+              <MagneticButton href="/programmes">
+                View programme details
+              </MagneticButton>
+            </div>
           </motion.div>
         </section>
       </main>
