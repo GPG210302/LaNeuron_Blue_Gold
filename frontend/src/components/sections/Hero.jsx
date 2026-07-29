@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { Atom, Rocket, Sparkles, FlaskConical, ArrowRight, Languages } from "lucide-react";
 import { useData } from "../../i18n/useData";
-import classroomBg from "../../assets/Group_of_kids.webp";
+import classroomBg from "../../assets/Group_of_kids.webp"; //added logo to the image
 
 const EXPO = [0.22, 1, 0.36, 1];
 
