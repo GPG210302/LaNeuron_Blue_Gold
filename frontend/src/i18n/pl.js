@@ -511,84 +511,125 @@ export const pl = {
     whyParents: {
       overline: "Dlaczego rodzice nam ufają",
       title: "Dlaczego rodzice wybierają La Neuron",
-      sub: "Tworzymy spokojne, mądre i angażujące środowisko, w którym dzieci rozwijają ciekawość, pewność siebie i prawdziwe myślenie badawcze.",
+      sub: "To spokojne, mądre i angażujące miejsce do nauki, w którym dzieci rozwijają ciekawość, pewność siebie i prawdziwe myślenie badawcze.",
       items: [
         {
           title: "Zajęcia prowadzone przez ekspertkę z tytułem PhD",
-          desc: "Program powstaje pod opieką edukatorki z doświadczeniem w anatomii, naukach kognitywnych i rozwoju dziecka.",
+          desc: "Program został stworzony przez edukatorkę z doświadczeniem w anatomii, naukach kognitywnych i rozwoju dziecka.",
         },
         {
-          title: "Anglojęzyczne środowisko nauki",
-          desc: "Dzieci uczą się przez pełne zanurzenie w języku angielskim, z delikatnym wsparciem po polsku tylko wtedy, gdy jest to naprawdę potrzebne.",
+          title: "Naturalne zanurzenie w języku angielskim",
+          desc: "Dzieci uczą się po angielsku w praktyczny i swobodny sposób, a wsparcie po polsku pojawia się tylko wtedy, gdy naprawdę jest potrzebne.",
         },
         {
           title: "Prawdziwa metoda naukowa",
-          desc: "Każde zajęcia prowadzą dziecko przez pełny proces badawczy — od hipotezy po obserwację, wyniki i wnioski.",
+          desc: "Każde zajęcia prowadzą dziecko krok po kroku przez proces badawczy — od hipotezy, przez eksperyment i obserwację, aż po wyniki i wnioski.",
         },
         {
           title: "Małe grupy i uważne podejście",
-          desc: "Kameralne grupy pozwalają zauważyć każde dziecko, lepiej je wesprzeć i dać mu przestrzeń do aktywnego udziału.",
+          desc: "Kameralne grupy pozwalają lepiej zauważyć każde dziecko, wesprzeć je i dać mu przestrzeń do aktywnego udziału.",
         },
       ],
     },
 
     enrollingNow: {
       overline: "Aktualnie trwa nabór",
-      title: "Trwa rekrutacja",
-      sub: "Zobacz, z jakich form zajęć dzieci i szkoły mogą obecnie skorzystać w La Neuron.",
+      title: "Trwają zapisy",
+      sub: "Zobacz, z jakich form zajęć dzieci i szkoły mogą teraz skorzystać w La Neuron.",
       cta: "Zobacz szczegóły programu",
       items: [
         {
           title: "Warsztaty tematyczne",
-          status: "Zapisy trwają",
-          desc: "Tematyczne warsztaty oparte na odkrywaniu, eksperymentowaniu i praktycznym działaniu.",
+          status: "Zapisy otwarte",
+          desc: "Tematyczne warsztaty oparte na odkrywaniu, eksperymentowaniu i praktycznym działaniu, które angażują dzieci od pierwszej minuty.",
+          href: "https://laneuron.org/thematic-workshops",
+          external: true,
+          cta: "Poznaj warsztat",
         },
         {
           title: "Cykliczne warsztaty STEAM",
           status: "Aktywne grupy",
-          desc: "Regularne zajęcia w małych grupach dla dzieci, które najlepiej rozwijają się dzięki ciągłości i systematyczności.",
+          desc: "Regularne zajęcia w małych grupach dla dzieci, które najlepiej rozwijają się dzięki systematyczności, rytmowi i spokojnemu budowaniu pewności siebie.",
+          href: "/programmes",
+          external: false,
+          cta: "Zobacz szczegóły",
         },
         {
           title: "Sesje wsparcia kognitywnego",
-          status: "Elastyczne godziny w ciągu dnia",
-          desc: "Indywidualne wsparcie w obszarze pamięci, uczenia się, koncentracji, pisania oraz innych trudności edukacyjnych.",
+          status: "Elastyczne terminy w ciągu dnia",
+          desc: "Indywidualne wsparcie w zakresie pamięci, strategii uczenia się, koncentracji, pisania i innych trudności edukacyjnych.",
+          href: "/programmes",
+          external: false,
+          cta: "Zobacz szczegóły",
         },
         {
           title: "Współpraca ze szkołami",
-          status: "Możliwość ustalenia programu",
-          desc: "Warsztaty pozalekcyjne i programy STEAM tworzone pod potrzeby szkoły, uczniów i konkretnego planu nauczania.",
+          status: "Program ustalany indywidualnie",
+          desc: "Warsztaty pozalekcyjne i zajęcia STEAM przygotowywane pod potrzeby szkoły, uczniów i konkretnego planu pracy.",
+          href: "/programmes",
+          external: false,
+          cta: "Zobacz szczegóły",
         },
       ],
     },
 
     featuredReview: {
-      overline: "Głos rodzica",
+      overline: "Głos rodziców",
       title: "Co mówią rodzice",
-      quote:
-        "La Neuron to dokładnie takie miejsce, jakiego szukaliśmy — mądre, angażujące i naprawdę edukacyjne. Widać, że każde zajęcia są przygotowane z ogromną uważnością.",
-      author: "Opinia rodzica",
-      source: "Google Review",
+      sub: "Kilka opinii od rodzin, które miały już okazję poznać La Neuron.",
+      items: [
+        {
+          quote:
+            "Warsztaty były bezpieczne, dobrze dopasowane do wieku, bardzo angażujące i naprawdę wartościowe edukacyjnie. Było dużo przestrzeni na odkrywanie, zadawanie pytań i samodzielne działanie. Moja córka miała w La Neuron wspaniałe doświadczenie.",
+          author: "Opinia rodzica",
+          source: "Opinia po warsztatach",
+        },
+        {
+          quote:
+            "Dr Priya jest kompetentna, cierpliwa i świetnie pracuje z dziećmi. Małe grupy, wysokiej jakości materiały i indywidualne podejście sprawiły, że program był naprawdę na wysokim poziomie, a jednocześnie w rozsądnej cenie.",
+          author: "Opinia rodzica",
+          source: "Opinia o programie",
+        },
+        {
+          quote:
+            "La Neuron w bardzo angażujący sposób łączy naukę, kreatywność i prawdziwe badanie świata. Moje dziecko zyskało wiedzę, pewność siebie i jeszcze większą ciekawość, a wszystko odbywało się w bezpiecznej i życzliwej atmosferze. To program, który naprawdę daje dużą wartość.",
+          author: "Opinia rodzica",
+          source: "Opinia rodzica",
+        },
+      ],
     },
 
     latest: {
       overline: "Najnowsze z La Neuron",
       title: "Aktualności La Neuron",
-      sub: "Krótki przegląd ostatnich artykułów, wydarzeń i materiałów z naszego świata nauki.",
+      sub: "Krótki przegląd ostatnich artykułów, pomysłów i aktualności z naszego świata nauki.",
       items: [
         {
           type: "Artykuł na LinkedIn",
-          title: "Artykuł o La Neuron",
-          desc: "Najnowszy materiał przedstawiający misję akademii i nasze podejście do edukacji STEAM.",
+          kicker: "Edukacja i praktyka",
+          title: "Dlaczego praktyczna nauka w polskich szkołach nie zawsze działa tak, jak powinna",
+          desc: "Krótki wstęp do refleksji o tym, że nauka przez działanie ma sens tylko wtedy, gdy prowadzi do prawdziwego myślenia, zadawania pytań i świadomego odkrywania, a nie tylko wykonywania kolejnych czynności.",
+          href: "https://www.linkedin.com/pulse/why-hands-on-science-failing-polish-classrooms-priyadarshini-chu9f/?trackingId=K5pniaFkDB0CFZefsdx9xA%3D%3D",
+          cta: "Przeczytaj na LinkedIn",
+          external: true,
         },
         {
           type: "Artykuł na LinkedIn",
-          title: "Artykuł o dr Priyi",
-          desc: "Materiał pokazujący doświadczenie edukatorki, jej wartości i sposób pracy z dziećmi.",
+          kicker: "AI i edukacja",
+          title: "Przyszłość uczenia się: dlaczego w erze AI ludzkie pytania są ważniejsze niż kiedykolwiek",
+          desc: "Tekst o tym, dlaczego w świecie pełnym gotowych odpowiedzi najcenniejsze pozostają ciekawość, umiejętność zadawania pytań i samodzielne myślenie.",
+          href: "https://www.linkedin.com/pulse/future-learning-why-ai-makes-human-inquiry-non-negotiable-upq5f/?trackingId=YdQHlq2nDPXwcSdL7WsWiQ%3D%3D",
+          cta: "Przeczytaj na LinkedIn",
+          external: true,
         },
         {
           type: "Aktualność społecznościowa",
-          title: "Najnowszy reel lub relacja z zajęć",
-          desc: "Ostatni moment z warsztatów, wydarzenia albo praktycznej aktywności pokazanej w mediach społecznościowych La Neuron.",
+          kicker: "Bądź na bieżąco",
+          title: "Obserwuj La Neuron online",
+          desc: "Zobacz kadry z zajęć, aktualności i nowe ogłoszenia publikowane na Instagramie i Facebooku La Neuron.",
+          href: "https://www.instagram.com/laneuron/",
+          cta: "Odwiedź Instagram",
+          external: true,
         },
       ],
     },

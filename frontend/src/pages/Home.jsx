@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Quote } from "lucide-react";
+import { ArrowRight, Quote, ExternalLink } from "lucide-react";
 import {
   motion,
   useMotionValue,
@@ -64,7 +64,6 @@ function SectionIntro({ overline, title, sub }) {
   );
 }
 
-// Local tilt card kept because it is homepage-specific
 const TiltCard = ({ children, className = "" }) => {
   const ref = useRef(null);
   const rawX = useMotionValue(0);
@@ -80,6 +79,7 @@ const TiltCard = ({ children, className = "" }) => {
   const handleMove = (e) => {
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
+
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
     const dx = e.clientX - cx;
@@ -128,8 +128,63 @@ const TiltCard = ({ children, className = "" }) => {
   );
 };
 
+function SmartLink({
+  href,
+  external,
+  className,
+  children,
+}) {
+  if (!href) {
+    return <div className={className}>{children}</div>;
+  }
+
+  if (external) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+      >
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <Link to={href} className={className}>
+      {children}
+    </Link>
+  );
+}
+
 export default function Home() {
   const { home } = useData();
+
+  const reviews =
+    home?.reviews?.items ||
+    home?.featuredReview?.items || [
+      {
+        quote:
+          "The workshop was safe, age-appropriate, hands-on and highly educational, with plenty of opportunities to explore and ask questions. My daughter had a wonderful experience at La Neuron.",
+        author: "Parent review",
+        source: "Workshop feedback",
+      },
+      {
+        quote:
+          "Dr Priya is knowledgeable, patient and excellent with children. The small-group environment, premium materials and personal attention made the programme feel high-quality while still being reasonably priced.",
+        author: "Parent review",
+        source: "Programme feedback",
+      },
+      {
+        quote:
+          "La Neuron combines science, creativity and real investigation in a very engaging way. My child gained knowledge, confidence and curiosity in a safe, welcoming environment, and the programme offers excellent value for money.",
+        author: "Parent review",
+        source: "Parent feedback",
+      },
+    ];
+
+  const featuredReview = reviews[0];
 
   return (
     <>
@@ -142,7 +197,7 @@ export default function Home() {
           <div className="absolute bottom-[12%] left-[20%] h-64 w-64 rounded-full bg-[#10B981] blur-3xl" />
         </div>
 
-        {/* WHY PARENTS CHOOSE */}
+        {/* WHY PARENTS CHOOSE LA NEURON */}
         <section
           id="why-parents"
           className="relative z-10 px-4 pb-20 pt-24 sm:px-6 lg:px-8"
@@ -151,7 +206,10 @@ export default function Home() {
             <SectionIntro
               overline={home?.whyParents?.overline}
               title={
-                <MaskedText as="h2" className="text-3xl font-black tracking-tight text-[#1B2A63] sm:text-4xl">
+                <MaskedText
+                  as="h2"
+                  className="text-3xl font-black tracking-tight text-[#1B2A63] sm:text-4xl"
+                >
                   {home?.whyParents?.title}
                 </MaskedText>
               }
@@ -197,7 +255,10 @@ export default function Home() {
             <SectionIntro
               overline={home?.enrollingNow?.overline}
               title={
-                <MaskedText as="h2" className="text-3xl font-black tracking-tight text-[#1B2A63] sm:text-4xl">
+                <MaskedText
+                  as="h2"
+                  className="text-3xl font-black tracking-tight text-[#1B2A63] sm:text-4xl"
+                >
                   {home?.enrollingNow?.title}
                 </MaskedText>
               }
@@ -227,31 +288,45 @@ export default function Home() {
                             {item.title}
                           </motion.span>
 
-                          <motion.span
-                            initial={{ opacity: 0, x: 18 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: 0.1, ease: EXPO }}
-                            className="rounded-full border border-[#E0B33C]/60 bg-[#fff7dd] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#9b7515]"
-                          >
-                            {item.status}
-                          </motion.span>
+                          {item.status ? (
+                            <motion.span
+                              initial={{ opacity: 0, x: 18 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              viewport={{ once: true }}
+                              transition={{
+                                duration: 0.5,
+                                delay: 0.1,
+                                ease: EXPO,
+                              }}
+                              className="rounded-full border border-[#E0B33C]/60 bg-[#fff7dd] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#9b7515]"
+                            >
+                              {item.status}
+                            </motion.span>
+                          ) : null}
                         </div>
 
                         <p className="flex-1 text-[15px] leading-7 text-slate-600">
                           {item.desc}
                         </p>
 
-                        <Link
-                          to="/programmes"
+                        <SmartLink
+                          href={item.href || "/programmes"}
+                          external={item.external}
                           className="group mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#1B2A63]"
                         >
-                          {home?.enrollingNow?.cta}
-                          <ArrowRight
-                            size={16}
-                            className="transition-transform duration-300 group-hover:translate-x-1"
-                          />
-                        </Link>
+                          {item.cta || home?.enrollingNow?.cta || "Explore details"}
+                          {item.external ? (
+                            <ExternalLink
+                              size={16}
+                              className="transition-transform duration-300 group-hover:translate-x-1"
+                            />
+                          ) : (
+                            <ArrowRight
+                              size={16}
+                              className="transition-transform duration-300 group-hover:translate-x-1"
+                            />
+                          )}
+                        </SmartLink>
                       </TiltCard>
                     </CursorSpotlight>
                   </HoverLift>
@@ -265,13 +340,16 @@ export default function Home() {
         <section className="relative z-10 px-4 pb-24 pt-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <SectionIntro
-              overline={home?.featuredReview?.overline}
+              overline={home?.featuredReview?.overline || "Parent reflections"}
               title={
-                <MaskedText as="h2" className="text-3xl font-black tracking-tight text-[#1B2A63] sm:text-4xl">
-                  {home?.featuredReview?.title}
+                <MaskedText
+                  as="h2"
+                  className="text-3xl font-black tracking-tight text-[#1B2A63] sm:text-4xl"
+                >
+                  {home?.featuredReview?.title || "What parents say"}
                 </MaskedText>
               }
-              sub=""
+              sub={home?.featuredReview?.sub || ""}
             />
 
             <motion.div
@@ -298,23 +376,34 @@ export default function Home() {
                 delay={0.1}
                 className="max-w-3xl text-[17px] leading-9 text-white/95 sm:text-[20px] sm:leading-[2rem]"
               >
-                “{home?.featuredReview?.quote}”
+                “{featuredReview?.quote}”
               </MaskedText>
 
               <div className="mt-8 flex flex-wrap items-center gap-3 text-sm text-white/85">
                 <span className="rounded-full bg-white/10 px-4 py-2 font-semibold">
-                  {home?.featuredReview?.author}
+                  {featuredReview?.author}
                 </span>
                 <span className="rounded-full border border-white/20 px-4 py-2">
-                  {home?.featuredReview?.source}
+                  {featuredReview?.source}
                 </span>
               </div>
 
-              <div className="mt-6 flex gap-2">
-                <span className="h-2.5 w-8 rounded-full bg-white/90" />
-                <span className="h-2.5 w-2.5 rounded-full bg-white/35" />
-                <span className="h-2.5 w-2.5 rounded-full bg-white/35" />
-              </div>
+              {reviews.length > 1 ? (
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {reviews.map((review, index) => (
+                    <span
+                      key={`${review.author}-${index}`}
+                      className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                        index === 0
+                          ? "bg-white text-[#1B2A63]"
+                          : "border border-white/20 text-white/80"
+                      }`}
+                    >
+                      {index === 0 ? "Featured" : `Review ${index + 1}`}
+                    </span>
+                  ))}
+                </div>
+              ) : null}
             </motion.div>
           </div>
         </section>
@@ -325,7 +414,10 @@ export default function Home() {
             <SectionIntro
               overline={home?.latest?.overline}
               title={
-                <MaskedText as="h2" className="text-3xl font-black tracking-tight text-[#1B2A63] sm:text-4xl">
+                <MaskedText
+                  as="h2"
+                  className="text-3xl font-black tracking-tight text-[#1B2A63] sm:text-4xl"
+                >
                   {home?.latest?.title}
                 </MaskedText>
               }
@@ -340,42 +432,60 @@ export default function Home() {
               className="grid gap-6 lg:grid-cols-3"
             >
               {(home?.latest?.items || []).map((item, index) => (
-                <motion.article
-                  key={item.title}
-                  variants={fadeUp}
-                >
-                  <HoverLift className="group overflow-hidden rounded-[22px] border border-[#d7dde9] bg-white shadow-[0_16px_50px_rgba(27,42,99,0.08)]">
-                    <div className="relative h-36 overflow-hidden bg-[radial-gradient(circle_at_top_left,#dbe2f8,transparent_55%),radial-gradient(circle_at_bottom_right,#f4e0a6,transparent_60%)]">
-                      <motion.div
-                        className="absolute inset-0 bg-[linear-gradient(to_top,rgba(16,28,68,0.75),transparent_65%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                      />
-                      <motion.div
-                        whileHover={{ scale: 1.08 }}
-                        transition={{ duration: 0.7, ease: EXPO }}
-                        className={`absolute inset-0 ${
-                          index === 0
-                            ? "bg-[radial-gradient(circle_at_top_left,#dbe2f8,transparent_55%),radial-gradient(circle_at_bottom_right,#f4e0a6,transparent_60%)]"
-                            : index === 1
-                            ? "bg-[radial-gradient(circle_at_top_left,#dce8ff,transparent_52%),radial-gradient(circle_at_bottom_right,#f2d778,transparent_62%)]"
-                            : "bg-[radial-gradient(circle_at_top_left,#c8f1e4,transparent_50%),radial-gradient(circle_at_bottom_right,#93d6c5,transparent_62%)]"
-                        }`}
-                      />
-                      <div className="absolute bottom-4 right-4 z-10 translate-y-2 text-sm font-bold text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                        Read more ↗
-                      </div>
-                    </div>
+                <motion.article key={item.title} variants={fadeUp}>
+                  <HoverLift className="group h-full overflow-hidden rounded-[22px] border border-[#d7dde9] bg-white shadow-[0_16px_50px_rgba(27,42,99,0.08)]">
+                    <SmartLink
+                      href={item.href}
+                      external={item.external}
+                      className="flex h-full flex-col"
+                    >
+                      <div className="relative h-36 overflow-hidden bg-[radial-gradient(circle_at_top_left,#dbe2f8,transparent_55%),radial-gradient(circle_at_bottom_right,#f4e0a6,transparent_60%)]">
+                        <motion.div
+                          className="absolute inset-0 bg-[linear-gradient(to_top,rgba(16,28,68,0.75),transparent_65%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                        />
+                        <motion.div
+                          whileHover={{ scale: 1.08 }}
+                          transition={{ duration: 0.7, ease: EXPO }}
+                          className={`absolute inset-0 ${
+                            index === 0
+                              ? "bg-[radial-gradient(circle_at_top_left,#dbe2f8,transparent_55%),radial-gradient(circle_at_bottom_right,#f4e0a6,transparent_60%)]"
+                              : index === 1
+                              ? "bg-[radial-gradient(circle_at_top_left,#dce8ff,transparent_52%),radial-gradient(circle_at_bottom_right,#f2d778,transparent_62%)]"
+                              : "bg-[radial-gradient(circle_at_top_left,#c8f1e4,transparent_50%),radial-gradient(circle_at_bottom_right,#93d6c5,transparent_62%)]"
+                          }`}
+                        />
 
-                    <div className="p-6">
-                      <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#1B2A63]/70">
-                        {item.type}
-                      </p>
-                      <h3 className="mt-2 text-lg font-black text-[#1B2A63]">
-                        {item.title}
-                      </h3>
-                      <p className="mt-3 text-[15px] leading-7 text-slate-600">
-                        {item.desc}
-                      </p>
-                    </div>
+                        <div className="absolute left-5 top-5 z-10">
+                          <span className="rounded-full bg-white/90 px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#1B2A63] shadow-sm">
+                            {item.type}
+                          </span>
+                        </div>
+
+                        <div className="absolute bottom-4 right-4 z-10 inline-flex translate-y-2 items-center gap-2 text-sm font-bold text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                          {item.cta || (item.external ? "Open article" : "Read more")}
+                          {item.external ? <ExternalLink size={15} /> : <ArrowRight size={15} />}
+                        </div>
+                      </div>
+
+                      <div className="flex flex-1 flex-col p-6">
+                        <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#1B2A63]/70">
+                          {item.kicker || item.type}
+                        </p>
+
+                        <h3 className="mt-2 text-lg font-black text-[#1B2A63]">
+                          {item.title}
+                        </h3>
+
+                        <p className="mt-3 flex-1 text-[15px] leading-7 text-slate-600">
+                          {item.desc}
+                        </p>
+
+                        <div className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#1B2A63]">
+                          {item.cta || (item.external ? "Open article" : "Read more")}
+                          {item.external ? <ExternalLink size={16} /> : <ArrowRight size={16} />}
+                        </div>
+                      </div>
+                    </SmartLink>
                   </HoverLift>
                 </motion.article>
               ))}
