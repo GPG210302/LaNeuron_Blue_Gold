@@ -504,43 +504,90 @@ export const en = {
   },
 
   home: {
-    overline: "Explore the academy",
-    sectionTitle: "Where would you like to start?",
-    sectionSub:
-      "Tap any card to dive into the details — no endless scrolling.",
-    exploreBtn: "Explore",
-    links: [
-      {
-        title: "Meet the Educator",
-        desc:
-          "Dr. Priyadarshini Gouthaman — PhD in Anatomy, cognitive scientist, and the mind behind La Neuron.",
-      },
-      {
-        title: "What is STEAM?",
-        desc:
-          "Explore the five disciplines — Science, Technology, Engineering, Art, and Mathematics — and how they connect.",
-      },
-      {
-        title: "Why STEAM?",
-        desc:
-          "Six reasons STEAM matters for your child, plus our full investigative scientific-method approach.",
-      },
-      {
-        title: "Programmes",
-        desc:
-          "Cyclic workshops, the Thematic Workshop, and one-to-one cognitive support sessions.",
-      },
-      {
-        title: "Thematic Workshop 2026",
-        desc:
-          "A themed week of Wonder, Build, Bio, Planet, and Food labs in Kraków. Registrations open!",
-      },
-      {
-        title: "FAQ",
-        desc:
-          "Ages, language, what to bring, learning differences, siblings, and the cancellation policy.",
-      },
-    ],
+    whyParents: {
+      overline: "Why families trust us",
+      title: "Why Parents Choose La Neuron",
+      sub: "A thoughtful, science-led learning environment where curiosity, confidence, and real investigation grow together.",
+      items: [
+        {
+          title: "PhD-led teaching",
+          desc: "Sessions are designed and guided by an educator with deep expertise in anatomy, cognitive science, and child development.",
+        },
+        {
+          title: "English-speaking environment",
+          desc: "Children learn through full English immersion, with gentle Polish support only where truly needed.",
+        },
+        {
+          title: "Real scientific method",
+          desc: "Every session follows a clear investigation path — hypothesis, experiment, observation, results, and conclusion.",
+        },
+        {
+          title: "Small-group learning",
+          desc: "Limited group sizes help each child feel seen, supported, and actively involved.",
+        },
+      ],
+    },
+
+    enrollingNow: {
+      overline: "Currently open",
+      title: "Enrolling Now",
+      sub: "Explore the active ways children and schools can learn with La Neuron.",
+      cta: "View programme details",
+      items: [
+        {
+          title: "Thematic Workshops",
+          status: "Ongoing enrolment",
+          desc: "Focused workshop experiences built around themed scientific exploration and hands-on discovery.",
+        },
+        {
+          title: "Cyclic STEAM Workshops",
+          status: "Active sessions",
+          desc: "Regular small-group STEAM learning for children who benefit from continuity, routine, and growing confidence.",
+        },
+        {
+          title: "Cognitive Support Sessions",
+          status: "Flexible daytime sessions",
+          desc: "One-to-one support for memory, learning strategies, attention, handwriting, and related learning needs.",
+        },
+        {
+          title: "School Collaborations",
+          status: "Custom planning available",
+          desc: "After-school and customised STEAM workshops designed around a school’s goals, timetable, and student needs.",
+        },
+      ],
+    },
+
+    featuredReview: {
+      overline: "Parent voice",
+      title: "What Parents Say",
+      quote:
+        "La Neuron creates exactly the kind of environment we were hoping for — thoughtful, engaging, and genuinely educational. You can feel the care behind every session.",
+      author: "Parent review",
+      source: "Google Review",
+    },
+
+    latest: {
+      overline: "Fresh from La Neuron",
+      title: "Latest from La Neuron",
+      sub: "A quick look at recent articles, highlights, and updates from our learning community.",
+      items: [
+        {
+          type: "LinkedIn Article",
+          title: "Featured article about La Neuron",
+          desc: "A recent LinkedIn article introducing the academy’s educational vision and mission.",
+        },
+        {
+          type: "LinkedIn Article",
+          title: "Featured article about Dr. Priya",
+          desc: "An article highlighting the educator’s background, values, and science-led teaching approach.",
+        },
+        {
+          type: "Social Highlight",
+          title: "Latest workshop or reel update",
+          desc: "A recent classroom moment, event update, or hands-on activity shared through La Neuron’s social channels.",
+        },
+      ],
+    },
   },
 
   register: {

@@ -287,28 +287,37 @@ export function useData() {
     receiveHeading: t("approach.receiveHeading"),
   };
 
-  // ── HOME LINKS ──────────────────────────────────────────────────────────────
-  // Colors and paths come from the static LINKS array; only title/desc are i18n.
-  const HOME_LINKS_STATIC = [
-    { to: "/about",          color: "#1B2A63" },
-    { to: "/what-is-steam",  color: "#10B981" },
-    { to: "/why-steam",      color: "#A855F7" },
-    { to: "/programmes",     color: "#F97316" },
-    { to: "/Thematic Workshop", color: "#E0B33C" },
-    { to: "/faq",            color: "#D97706" },
-  ];
-  const homeLinksI18n = t("home.links");
-  const homeLinks = HOME_LINKS_STATIC.map((item, i) => ({
-    ...item,
-    title: (Array.isArray(homeLinksI18n) && homeLinksI18n[i]?.title) || item.to,
-    desc:  (Array.isArray(homeLinksI18n) && homeLinksI18n[i]?.desc)  || "",
-  }));
+  // ── HOME ───────────────────────────────────────────────────────────────────
   const home = {
-    overline:     t("home.overline"),
-    sectionTitle: t("home.sectionTitle"),
-    sectionSub:   t("home.sectionSub"),
-    exploreBtn:   t("home.exploreBtn"),
-    links: homeLinks,
+    whyParents: {
+      overline: t("home.whyParents.overline"),
+      title: t("home.whyParents.title"),
+      sub: t("home.whyParents.sub"),
+      items: t("home.whyParents.items") || [],
+    },
+
+    enrollingNow: {
+      overline: t("home.enrollingNow.overline"),
+      title: t("home.enrollingNow.title"),
+      sub: t("home.enrollingNow.sub"),
+      cta: t("home.enrollingNow.cta"),
+      items: t("home.enrollingNow.items") || [],
+    },
+
+    featuredReview: {
+      overline: t("home.featuredReview.overline"),
+      title: t("home.featuredReview.title"),
+      quote: t("home.featuredReview.quote"),
+      author: t("home.featuredReview.author"),
+      source: t("home.featuredReview.source"),
+    },
+
+    latest: {
+      overline: t("home.latest.overline"),
+      title: t("home.latest.title"),
+      sub: t("home.latest.sub"),
+      items: t("home.latest.items") || [],
+    },
   };
 
   // ── UI ────────────────────────────────────────────────────────────────────

@@ -508,43 +508,90 @@ export const pl = {
   },
 
   home: {
-    overline: "Odkryj akademię",
-    sectionTitle: "Od czego chciałbyś zacząć?",
-    sectionSub:
-      "Kliknij dowolną kartę, aby zobaczyć szczegóły — bez niekończącego się przewijania.",
-    exploreBtn: "Sprawdź",
-    links: [
-      {
-        title: "Poznaj nauczyciela",
-        desc:
-          "Dr Priyadarshini Gouthaman — doktor anatomii, specjalistka nauk kognitywnych i umysł stojący za La Neuron.",
-      },
-      {
-        title: "Czym jest STEAM?",
-        desc:
-          "Poznaj pięć dyscyplin — Naukę, Technologię, Inżynierię, Sztukę i Matematykę — oraz ich wzajemne powiązania.",
-      },
-      {
-        title: "Dlaczego STEAM?",
-        desc:
-          "Sześć powodów, dla których STEAM jest ważny dla Twojego dziecka, wraz z naszym pełnym podejściem opartym na metodzie naukowej.",
-      },
-      {
-        title: "Programy",
-        desc:
-          "Cykliczne warsztaty, tematyczne warsztaty STEAM oraz indywidualne sesje wsparcia kognitywnego.",
-      },
-      {
-        title: "Tematyczne warsztaty STEAM 2026",
-        desc:
-          "Tydzień pełen Wonder Lab, Build Lab, Bio Lab, Planet Lab i Food Lab w Krakowie. Rejestracja otwarta!",
-      },
-      {
-        title: "FAQ",
-        desc:
-          "Wiek uczestników, język zajęć, co zabrać, trudności w uczeniu się, rodzeństwo i zasady anulowania.",
-      },
-    ],
+    whyParents: {
+      overline: "Dlaczego rodzice nam ufają",
+      title: "Dlaczego rodzice wybierają La Neuron",
+      sub: "Tworzymy spokojne, mądre i angażujące środowisko, w którym dzieci rozwijają ciekawość, pewność siebie i prawdziwe myślenie badawcze.",
+      items: [
+        {
+          title: "Zajęcia prowadzone przez ekspertkę z tytułem PhD",
+          desc: "Program powstaje pod opieką edukatorki z doświadczeniem w anatomii, naukach kognitywnych i rozwoju dziecka.",
+        },
+        {
+          title: "Anglojęzyczne środowisko nauki",
+          desc: "Dzieci uczą się przez pełne zanurzenie w języku angielskim, z delikatnym wsparciem po polsku tylko wtedy, gdy jest to naprawdę potrzebne.",
+        },
+        {
+          title: "Prawdziwa metoda naukowa",
+          desc: "Każde zajęcia prowadzą dziecko przez pełny proces badawczy — od hipotezy po obserwację, wyniki i wnioski.",
+        },
+        {
+          title: "Małe grupy i uważne podejście",
+          desc: "Kameralne grupy pozwalają zauważyć każde dziecko, lepiej je wesprzeć i dać mu przestrzeń do aktywnego udziału.",
+        },
+      ],
+    },
+
+    enrollingNow: {
+      overline: "Aktualnie trwa nabór",
+      title: "Trwa rekrutacja",
+      sub: "Zobacz, z jakich form zajęć dzieci i szkoły mogą obecnie skorzystać w La Neuron.",
+      cta: "Zobacz szczegóły programu",
+      items: [
+        {
+          title: "Warsztaty tematyczne",
+          status: "Zapisy trwają",
+          desc: "Tematyczne warsztaty oparte na odkrywaniu, eksperymentowaniu i praktycznym działaniu.",
+        },
+        {
+          title: "Cykliczne warsztaty STEAM",
+          status: "Aktywne grupy",
+          desc: "Regularne zajęcia w małych grupach dla dzieci, które najlepiej rozwijają się dzięki ciągłości i systematyczności.",
+        },
+        {
+          title: "Sesje wsparcia kognitywnego",
+          status: "Elastyczne godziny w ciągu dnia",
+          desc: "Indywidualne wsparcie w obszarze pamięci, uczenia się, koncentracji, pisania oraz innych trudności edukacyjnych.",
+        },
+        {
+          title: "Współpraca ze szkołami",
+          status: "Możliwość ustalenia programu",
+          desc: "Warsztaty pozalekcyjne i programy STEAM tworzone pod potrzeby szkoły, uczniów i konkretnego planu nauczania.",
+        },
+      ],
+    },
+
+    featuredReview: {
+      overline: "Głos rodzica",
+      title: "Co mówią rodzice",
+      quote:
+        "La Neuron to dokładnie takie miejsce, jakiego szukaliśmy — mądre, angażujące i naprawdę edukacyjne. Widać, że każde zajęcia są przygotowane z ogromną uważnością.",
+      author: "Opinia rodzica",
+      source: "Google Review",
+    },
+
+    latest: {
+      overline: "Najnowsze z La Neuron",
+      title: "Aktualności La Neuron",
+      sub: "Krótki przegląd ostatnich artykułów, wydarzeń i materiałów z naszego świata nauki.",
+      items: [
+        {
+          type: "Artykuł na LinkedIn",
+          title: "Artykuł o La Neuron",
+          desc: "Najnowszy materiał przedstawiający misję akademii i nasze podejście do edukacji STEAM.",
+        },
+        {
+          type: "Artykuł na LinkedIn",
+          title: "Artykuł o dr Priyi",
+          desc: "Materiał pokazujący doświadczenie edukatorki, jej wartości i sposób pracy z dziećmi.",
+        },
+        {
+          type: "Aktualność społecznościowa",
+          title: "Najnowszy reel lub relacja z zajęć",
+          desc: "Ostatni moment z warsztatów, wydarzenia albo praktycznej aktywności pokazanej w mediach społecznościowych La Neuron.",
+        },
+      ],
+    },
   },
 
   register: {
