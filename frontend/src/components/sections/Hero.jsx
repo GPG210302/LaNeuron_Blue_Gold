@@ -54,7 +54,6 @@ const Floating = ({ children, className = "", delay = 0 }) => (
 export const Hero = () => {
   const navigate = useNavigate();
   const { hero, ui, language } = useData();
-  const heroRef = useRef(null);
 
   const handleScrollToWhy = () => {
     const section = document.getElementById("why-parents");
@@ -69,11 +68,8 @@ export const Hero = () => {
       : "Why choose La Neuron?";
 
   return (
-    <section
-      ref={heroRef}
-      className="relative overflow-hidden bg-[#fcfbf8] pb-12 pt-6 sm:pb-16 lg:pb-20"
-    >
-      {/* Background image */}
+    <section className="relative overflow-hidden bg-[#fcfbf8] pb-12 pt-6 sm:pb-16 lg:pb-20">
+      {/* Background image and overlay — same as before */}
       <div className="absolute inset-0">
         <img
           src={classroomBg}
@@ -84,12 +80,8 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(224,179,60,0.12),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(27,42,99,0.10),transparent_28%)]" />
       </div>
 
-      {/* Decorative soft glow */}
-      <div className="pointer-events-none absolute left-[-6rem] top-[8rem] h-48 w-48 rounded-full bg-[#E0B33C]/20 blur-3xl" />
-      <div className="pointer-events-none absolute right-[-5rem] top-[10rem] h-56 w-56 rounded-full bg-[#1B2A63]/10 blur-3xl" />
-
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
-        {/* LEFT CONTENT */}
+        {/* LEFT COLUMN — restore original heading and text stacking */}
         <div className="max-w-2xl">
           <Floating delay={0.08}>
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#1B2A63]/20 bg-white/90 px-4 py-2 text-[12px] font-extrabold uppercase tracking-[0.14em] text-[#1B2A63] shadow-sm">
@@ -99,9 +91,8 @@ export const Hero = () => {
           </Floating>
 
           <Floating delay={0.14}>
-            <h1 className="max-w-[12ch] text-[clamp(2.8rem,6vw,5rem)] font-black leading-[0.95] tracking-[-0.04em] text-[#1B2A63]">
-              {hero.headline.split("Young Minds")[0]}
-              <span className="text-[#E0B33C]">Young Minds</span>
+            <h1 className="max-w-[16ch] text-[clamp(3rem,6.4vw,5.4rem)] font-black leading-[0.95] tracking-[-0.06em] text-[#1B2A63]">
+              {hero.headline}
             </h1>
           </Floating>
 
@@ -111,9 +102,8 @@ export const Hero = () => {
             </p>
           </Floating>
 
-          {/* English immersion card */}
           <Floating delay={0.28}>
-            <div className="mt-7 rounded-[24px] border-[2px] border-[#1B2A63] bg-white/92 px-5 py-4 shadow-[0_18px_50px_rgba(12,26,84,0.08)] backdrop-blur-sm sm:px-6 sm:py-5">
+            <div className="mt-7 rounded-[26px] border-[2px] border-[#1B2A63] bg-white/92 px-6 py-5 shadow-[0_18px_50px_rgba(12,26,84,0.08)] backdrop-blur-sm">
               <div className="flex items-start gap-4">
                 <div className="mt-1 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#1B2A63] text-white">
                   <Languages size={18} />
@@ -133,7 +123,7 @@ export const Hero = () => {
             </div>
           </Floating>
 
-          {/* CTA buttons */}
+          {/* CTA buttons — only behavior changed */}
           <Floating delay={0.34}>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <button
@@ -154,7 +144,6 @@ export const Hero = () => {
             </div>
           </Floating>
 
-          {/* Stats */}
           <Floating delay={0.42}>
             <div className="mt-10 grid max-w-xl grid-cols-3 gap-4">
               {(hero.stats || []).map((stat) => (
@@ -174,7 +163,7 @@ export const Hero = () => {
           </Floating>
         </div>
 
-        {/* RIGHT VISUAL SIDE */}
+        {/* RIGHT COLUMN — restore image card composition */}
         <div className="relative hidden min-h-[620px] lg:block">
           <Floating
             delay={0.18}
@@ -227,7 +216,7 @@ export const Hero = () => {
         </div>
       </div>
 
-      {/* Bottom statement strip */}
+      {/* Bottom strip */}
       <div className="relative z-10 mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
