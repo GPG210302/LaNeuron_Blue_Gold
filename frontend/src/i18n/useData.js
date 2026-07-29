@@ -34,7 +34,6 @@ import {
 export function useData() {
   const { t, language } = useLanguage();
 
-  // ── NAV ──────────────────────────────────────────────────────────────────
   const nav = NAV.map((n) => {
     const keyMap = {
       "/": "nav.home",
@@ -48,13 +47,11 @@ export function useData() {
     return { ...n, label: t(keyMap[n.path]) || n.label };
   });
 
-  // ── SITE ─────────────────────────────────────────────────────────────────
   const site = {
     ...SITE,
     tagline: t("site.tagline"),
   };
 
-  // ── HERO ─────────────────────────────────────────────────────────────────
   const heroStats = (t("hero.stats") || HERO.stats).map
     ? t("hero.stats") || HERO.stats
     : HERO.stats;
@@ -71,7 +68,6 @@ export function useData() {
       : HERO.stats,
   };
 
-  // ── EDUCATOR ─────────────────────────────────────────────────────────────
   const educator = {
     ...EDUCATOR,
     overline: t("educator.overline"),
@@ -87,7 +83,6 @@ export function useData() {
     publishedTitle: t("educator.publishedTitle"),
   };
 
-  // ── STEAM ─────────────────────────────────────────────────────────────────
   const steam = STEAM.map((item) => {
     const trans = t(`steam.${item.word}`);
     return {
@@ -97,7 +92,6 @@ export function useData() {
     };
   });
 
-  // ── WHY ───────────────────────────────────────────────────────────────────
   const why = WHY.map((item) => {
     const trans = t(`why.${item.title}`);
     return {
@@ -107,7 +101,6 @@ export function useData() {
     };
   });
 
-  // ── METHOD ────────────────────────────────────────────────────────────────
   const method = METHOD.map((item, i) => {
     const trans = t("method");
     const transItem = Array.isArray(trans) ? trans[i] : null;
@@ -118,7 +111,6 @@ export function useData() {
     };
   });
 
-  // ── RECEIVE ───────────────────────────────────────────────────────────────
   const receive = RECEIVE.map((item, i) => {
     const trans = t("receive");
     const transText = Array.isArray(trans) ? trans[i] : null;
@@ -127,7 +119,6 @@ export function useData() {
       : transText || item;
   });
 
-  // ── AGE GROUPS ────────────────────────────────────────────────────────────
   const ageGroups = AGE_GROUPS.map((group) => {
     const trans = t(`ageGroups.${group.title}`);
     return {
@@ -138,7 +129,6 @@ export function useData() {
     };
   });
 
-  // ── PROGRAMMES ────────────────────────────────────────────────────────────
   const programmes = PROGRAMMES.map((prog) => {
     const trans = t(`programmes.${prog.title}`);
     return {
@@ -149,7 +139,6 @@ export function useData() {
     };
   });
 
-  // ── WORKSHOP DAYS ────────────────────────────────────────────────────────
   const workshopDays = WORKSHOP_DAYS.map((day, i) => {
     const trans = t("workshopDays");
     const transDay = Array.isArray(trans) ? trans[i] : null;
@@ -162,7 +151,6 @@ export function useData() {
     };
   });
 
-  // ── WORKSHOP FACTS ───────────────────────────────────────────────────────
   const workshopFactsKeys = [
     "startDate",
     "endDate",
@@ -183,7 +171,6 @@ export function useData() {
     };
   });
 
-  // ── WEEKS ────────────────────────────────────────────────────────────────
   const weeksKeys = [
     "week1",
     "week2",
@@ -197,13 +184,11 @@ export function useData() {
   ];
   const weeks = WEEKS.map((w, i) => t(`weeks.${weeksKeys[i]}`) || w);
 
-  // ── PROGRAMME OPTIONS ────────────────────────────────────────────────────
   const programmeOptions = PROGRAMME_OPTIONS.map((opt, i) => {
     const trans = t("programmeOptions");
-    return (Array.isArray(trans) && trans[i]) ? trans[i] : opt;
+    return Array.isArray(trans) && trans[i] ? trans[i] : opt;
   });
 
-  // ── FAQ ──────────────────────────────────────────────────────────────────
   const faq = FAQ.map((item, i) => {
     const trans = t("faq");
     const transItem = Array.isArray(trans) ? trans[i] : null;
@@ -213,7 +198,6 @@ export function useData() {
     };
   });
 
-  // ── FOOTER ───────────────────────────────────────────────────────────────
   const footer = {
     description: t("footer.description"),
     exploreTitle: t("footer.exploreTitle"),
@@ -233,7 +217,6 @@ export function useData() {
       ],
   };
 
-  // ── REGISTER ─────────────────────────────────────────────────────────────
   const register = {
     overline: t("register.overline"),
     heading: t("register.heading"),
@@ -251,7 +234,6 @@ export function useData() {
     errorGeneral: t("register.errorGeneral"),
   };
 
-  // ── EVENTS ───────────────────────────────────────────────────────────────
   const events = {
     overline: t("events.overline"),
     heading: t("events.heading"),
@@ -268,7 +250,6 @@ export function useData() {
     reserveBtn: t("events.reserveBtn"),
   };
 
-  // ── WHAT IS STEAM ────────────────────────────────────────────────────────
   const whatIsSteamI18n = {
     s1Overline: t("whatIsSteam.s1Overline"),
     s1Title: t("whatIsSteam.s1Title"),
@@ -296,7 +277,6 @@ export function useData() {
     misconceptions: t("whatIsSteam.misconceptions") || [],
   };
 
-  // ── WHY STEAM ────────────────────────────────────────────────────────────
   const whySteamI18n = {
     overline: t("whySteam.overline"),
     title: t("whySteam.title"),
@@ -304,7 +284,6 @@ export function useData() {
     tapExplore: t("whySteam.tapExplore"),
   };
 
-  // ── APPROACH ─────────────────────────────────────────────────────────────
   const approachI18n = {
     overline: t("approach.overline"),
     heading: t("approach.heading"),
@@ -312,7 +291,6 @@ export function useData() {
     receiveHeading: t("approach.receiveHeading"),
   };
 
-  // ── HOME ────────────────────────────────────────────────────────────────
   const home = {
     whyParents: {
       overline: t("home.whyParents.overline"),
@@ -344,7 +322,6 @@ export function useData() {
     },
   };
 
-  // ── UI ───────────────────────────────────────────────────────────────────
   const ui = {
     enquireNow: t("ui.enquireNow"),
   };

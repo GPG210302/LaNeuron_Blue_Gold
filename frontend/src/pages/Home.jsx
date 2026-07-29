@@ -109,7 +109,7 @@ const reviewPalette = [
 ];
 
 function ReviewDeck({ featuredReview }) {
-  const items = featuredReview?.items || [];
+  const items = useMemo(() => featuredReview?.items ?? [], [featuredReview]);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const orderedItems = useMemo(() => {
@@ -352,78 +352,7 @@ export default function Home() {
     <>
       <Hero />
 
-      <section className="py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 28, filter: "blur(6px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            viewport={VIEWPORT}
-            transition={{ duration: 0.65, ease: EXPO }}
-          >
-            <SectionHeading
-              overline={home.overline}
-              title={home.sectionTitle}
-              sub={home.sectionSub}
-            />
-          </motion.div>
-
-          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {home.links.map((l, i) => (
-              <TiltCard key={l.to}>
-                <motion.div
-                  initial={{ opacity: 0, y: 28, filter: "blur(6px)" }}
-                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  viewport={VIEWPORT}
-                  transition={{
-                    duration: 0.6,
-                    delay: i * 0.08,
-                    ease: EXPO,
-                  }}
-                  whileHover={{
-                    y: -4,
-                    transition: { type: "spring", stiffness: 300, damping: 20 },
-                  }}
-                  className="h-full"
-                >
-                  <Link
-                    to={l.to}
-                    className="ln-card ln-card-hover p-7 flex flex-col h-full"
-                    data-testid={`home-link-${l.to.replace(/\W+/g, "")}`}
-                  >
-                    <h3
-                      className="font-display font-extrabold text-2xl"
-                      style={{ color: l.color }}
-                    >
-                      {l.title}
-                    </h3>
-
-                    <p className="mt-3 text-slate-600 leading-relaxed flex-1">
-                      {l.desc}
-                    </p>
-
-                    <motion.span
-                      className="mt-5 inline-flex items-center gap-1 font-bold"
-                      style={{ color: l.color }}
-                      whileHover={{ x: 4 }}
-                      transition={{ type: "spring", stiffness: 400 }}
-                    >
-                      {home.exploreBtn}
-                      <motion.span
-                        whileHover={{ x: 3 }}
-                        transition={{ type: "spring", stiffness: 400 }}
-                      >
-                        <ArrowRight size={18} />
-                      </motion.span>
-                    </motion.span>
-                  </Link>
-                </motion.div>
-              </TiltCard>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <ReviewDeck featuredReview={home.featuredReview} />
+      {home?.featuredReview && <ReviewDeck featuredReview={home.featuredReview} />}
     </>
   );
 }
