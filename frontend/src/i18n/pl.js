@@ -574,27 +574,27 @@ export const pl = {
     },
 
     featuredReview: {
-      overline: "Głos rodziców",
+      overline: "Głos rodzica",
       title: "Co mówią rodzice",
-      sub: "Kilka opinii od rodzin, które miały już okazję poznać La Neuron.",
+      sub: "Kliknij wybraną opinię, aby wysunąć ją do przodu i przeczytać całość.",
       items: [
         {
           quote:
-            "Warsztaty były bezpieczne, dobrze dopasowane do wieku, bardzo angażujące i naprawdę wartościowe edukacyjnie. Było dużo przestrzeni na odkrywanie, zadawanie pytań i samodzielne działanie. Moja córka miała w La Neuron wspaniałe doświadczenie.",
+            "La Neuron to dokładnie takie miejsce, jakiego szukaliśmy — mądre, angażujące i naprawdę edukacyjne. Widać, że każde zajęcia są przygotowane z ogromną uważnością.",
           author: "Opinia rodzica",
-          source: "Opinia po warsztatach",
+          source: "Google Review",
         },
         {
           quote:
-            "Dr Priya jest kompetentna, cierpliwa i świetnie pracuje z dziećmi. Małe grupy, wysokiej jakości materiały i indywidualne podejście sprawiły, że program był naprawdę na wysokim poziomie, a jednocześnie w rozsądnej cenie.",
-          author: "Opinia rodzica",
-          source: "Opinia o programie",
-        },
-        {
-          quote:
-            "La Neuron w bardzo angażujący sposób łączy naukę, kreatywność i prawdziwe badanie świata. Moje dziecko zyskało wiedzę, pewność siebie i jeszcze większą ciekawość, a wszystko odbywało się w bezpiecznej i życzliwej atmosferze. To program, który naprawdę daje dużą wartość.",
+            "Najbardziej zachwyciło mnie to, jak naturalnie połączono tu naukę, kreatywność i budowanie pewności siebie. Moje dziecko wracało do domu pełne energii i ciekawości.",
           author: "Opinia rodzica",
           source: "Opinia rodzica",
+        },
+        {
+          quote:
+            "Te zajęcia są jednocześnie ciepłe i bardzo dobrze uporządkowane. Rzadko spotyka się program dla dzieci, który jest tak wspierający, a jednocześnie tak merytoryczny.",
+          author: "Opinia rodzica",
+          source: "Rekomendacja rodzica",
         },
       ],
     },

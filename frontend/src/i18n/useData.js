@@ -149,7 +149,7 @@ export function useData() {
     };
   });
 
-  // ── WORKSHOP DAYS ─────────────────────────────────────────────────────────────
+  // ── WORKSHOP DAYS ────────────────────────────────────────────────────────
   const workshopDays = WORKSHOP_DAYS.map((day, i) => {
     const trans = t("workshopDays");
     const transDay = Array.isArray(trans) ? trans[i] : null;
@@ -162,8 +162,18 @@ export function useData() {
     };
   });
 
-  // ── WORKSHOP FACTS ────────────────────────────────────────────────────────────
-  const workshopFactsKeys = ["startDate", "endDate", "duration", "dailyTiming", "days", "groupSize", "location", "language"];
+  // ── WORKSHOP FACTS ───────────────────────────────────────────────────────
+  const workshopFactsKeys = [
+    "startDate",
+    "endDate",
+    "duration",
+    "dailyTiming",
+    "days",
+    "groupSize",
+    "location",
+    "language",
+  ];
+
   const workshopFacts = WORKSHOP_FACTS.map((fact, i) => {
     const key = workshopFactsKeys[i];
     const trans = t(`workshopFacts.${key}`);
@@ -173,17 +183,27 @@ export function useData() {
     };
   });
 
-  // ── WEEKS ─────────────────────────────────────────────────────────────────
-  const weeksKeys = ["week1","week2","week3","week4","week5","week6","week7","week8","multiple"];
+  // ── WEEKS ────────────────────────────────────────────────────────────────
+  const weeksKeys = [
+    "week1",
+    "week2",
+    "week3",
+    "week4",
+    "week5",
+    "week6",
+    "week7",
+    "week8",
+    "multiple",
+  ];
   const weeks = WEEKS.map((w, i) => t(`weeks.${weeksKeys[i]}`) || w);
 
-  // ── PROGRAMME OPTIONS ─────────────────────────────────────────────────────
+  // ── PROGRAMME OPTIONS ────────────────────────────────────────────────────
   const programmeOptions = PROGRAMME_OPTIONS.map((opt, i) => {
     const trans = t("programmeOptions");
     return (Array.isArray(trans) && trans[i]) ? trans[i] : opt;
   });
 
-  // ── FAQ ───────────────────────────────────────────────────────────────────
+  // ── FAQ ──────────────────────────────────────────────────────────────────
   const faq = FAQ.map((item, i) => {
     const trans = t("faq");
     const transItem = Array.isArray(trans) ? trans[i] : null;
@@ -193,7 +213,7 @@ export function useData() {
     };
   });
 
-  // ── FOOTER ────────────────────────────────────────────────────────────────
+  // ── FOOTER ───────────────────────────────────────────────────────────────
   const footer = {
     description: t("footer.description"),
     exploreTitle: t("footer.exploreTitle"),
@@ -204,11 +224,16 @@ export function useData() {
       t("footer.designerCredit") ||
       "Website crafted by G3 Creative Labs · Ghavish V G · +48 579 156 009",
     facts:
-      t("footer.facts") ||
-      ["Ages 6–13", "Mon–Fri 9AM–12PM", "Max 10 per week", "Starts 6 July 2026", "Kraków"],
+      t("footer.facts") || [
+        "Ages 6–13",
+        "Mon–Fri 9AM–12PM",
+        "Max 10 per week",
+        "Starts 6 July 2026",
+        "Kraków",
+      ],
   };
 
-  // ── REGISTER ──────────────────────────────────────────────────────────────
+  // ── REGISTER ─────────────────────────────────────────────────────────────
   const register = {
     overline: t("register.overline"),
     heading: t("register.heading"),
@@ -226,68 +251,68 @@ export function useData() {
     errorGeneral: t("register.errorGeneral"),
   };
 
-  // ── EVENTS ────────────────────────────────────────────────────────────────
+  // ── EVENTS ───────────────────────────────────────────────────────────────
   const events = {
-    overline:            t("events.overline"),
-    heading:             t("events.heading"),
-    tag:                 t("events.tag"),
-    intro:               t("events.intro"),
-    weekHeading:         t("events.weekHeading"),
-    weekSub:             t("events.weekSub"),
-    tapExplore:          t("events.tapExplore"),
-    workshopDetailsHeading:  t("events.workshopDetailsHeading"),
-    statEducator:         t('events.statEducator'),
-    statAgeGroup:         t('events.statAgeGroup'),
-    statDiscount:         t('events.statDiscount'),
-    suitableNote:        t("events.suitableNote"),
-    reserveBtn:          t("events.reserveBtn"),
+    overline: t("events.overline"),
+    heading: t("events.heading"),
+    tag: t("events.tag"),
+    intro: t("events.intro"),
+    weekHeading: t("events.weekHeading"),
+    weekSub: t("events.weekSub"),
+    tapExplore: t("events.tapExplore"),
+    workshopDetailsHeading: t("events.workshopDetailsHeading"),
+    statEducator: t("events.statEducator"),
+    statAgeGroup: t("events.statAgeGroup"),
+    statDiscount: t("events.statDiscount"),
+    suitableNote: t("events.suitableNote"),
+    reserveBtn: t("events.reserveBtn"),
   };
 
   // ── WHAT IS STEAM ────────────────────────────────────────────────────────
   const whatIsSteamI18n = {
-    s1Overline:       t("whatIsSteam.s1Overline"),
-    s1Title:          t("whatIsSteam.s1Title"),
-    s1Sub:            t("whatIsSteam.s1Sub"),
-    s2Overline:       t("whatIsSteam.s2Overline"),
-    s2Title:          t("whatIsSteam.s2Title"),
-    s2Sub:            t("whatIsSteam.s2Sub"),
-    s3Overline:       t("whatIsSteam.s3Overline"),
-    s3Title:          t("whatIsSteam.s3Title"),
-    s3TimelineHeading:t("whatIsSteam.s3TimelineHeading"),
-    s3Body1:          t("whatIsSteam.s3Body1"),
-    s3Body2:          t("whatIsSteam.s3Body2"),
-    s3Body3:          t("whatIsSteam.s3Body3"),
-    s3Quote:          t("whatIsSteam.s3Quote"),
-    s3QuoteCite:      t("whatIsSteam.s3QuoteCite"),
-    s4Overline:       t("whatIsSteam.s4Overline"),
-    s4Title:          t("whatIsSteam.s4Title"),
-    s4Sub:            t("whatIsSteam.s4Sub"),
-    s5Overline:       t("whatIsSteam.s5Overline"),
-    s5Title:          t("whatIsSteam.s5Title"),
-    s5Sub:            t("whatIsSteam.s5Sub"),
-    stats:            t("whatIsSteam.stats")            || [],
-    timeline:         t("whatIsSteam.timeline")         || [],
-    whoFollows:       t("whatIsSteam.whoFollows")       || [],
-    misconceptions:   t("whatIsSteam.misconceptions")   || [],
+    s1Overline: t("whatIsSteam.s1Overline"),
+    s1Title: t("whatIsSteam.s1Title"),
+    s1Sub: t("whatIsSteam.s1Sub"),
+    s2Overline: t("whatIsSteam.s2Overline"),
+    s2Title: t("whatIsSteam.s2Title"),
+    s2Sub: t("whatIsSteam.s2Sub"),
+    s3Overline: t("whatIsSteam.s3Overline"),
+    s3Title: t("whatIsSteam.s3Title"),
+    s3TimelineHeading: t("whatIsSteam.s3TimelineHeading"),
+    s3Body1: t("whatIsSteam.s3Body1"),
+    s3Body2: t("whatIsSteam.s3Body2"),
+    s3Body3: t("whatIsSteam.s3Body3"),
+    s3Quote: t("whatIsSteam.s3Quote"),
+    s3QuoteCite: t("whatIsSteam.s3QuoteCite"),
+    s4Overline: t("whatIsSteam.s4Overline"),
+    s4Title: t("whatIsSteam.s4Title"),
+    s4Sub: t("whatIsSteam.s4Sub"),
+    s5Overline: t("whatIsSteam.s5Overline"),
+    s5Title: t("whatIsSteam.s5Title"),
+    s5Sub: t("whatIsSteam.s5Sub"),
+    stats: t("whatIsSteam.stats") || [],
+    timeline: t("whatIsSteam.timeline") || [],
+    whoFollows: t("whatIsSteam.whoFollows") || [],
+    misconceptions: t("whatIsSteam.misconceptions") || [],
   };
 
   // ── WHY STEAM ────────────────────────────────────────────────────────────
   const whySteamI18n = {
-    overline:    t("whySteam.overline"),
-    title:       t("whySteam.title"),
-    sub:         t("whySteam.sub"),
-    tapExplore:  t("whySteam.tapExplore"),
+    overline: t("whySteam.overline"),
+    title: t("whySteam.title"),
+    sub: t("whySteam.sub"),
+    tapExplore: t("whySteam.tapExplore"),
   };
 
   // ── APPROACH ─────────────────────────────────────────────────────────────
   const approachI18n = {
-    overline:       t("approach.overline"),
-    heading:        t("approach.heading"),
-    sub:            t("approach.sub"),
+    overline: t("approach.overline"),
+    heading: t("approach.heading"),
+    sub: t("approach.sub"),
     receiveHeading: t("approach.receiveHeading"),
   };
 
-  // ── HOME ───────────────────────────────────────────────────────────────────
+  // ── HOME ────────────────────────────────────────────────────────────────
   const home = {
     whyParents: {
       overline: t("home.whyParents.overline"),
@@ -307,9 +332,8 @@ export function useData() {
     featuredReview: {
       overline: t("home.featuredReview.overline"),
       title: t("home.featuredReview.title"),
-      quote: t("home.featuredReview.quote"),
-      author: t("home.featuredReview.author"),
-      source: t("home.featuredReview.source"),
+      sub: t("home.featuredReview.sub"),
+      items: t("home.featuredReview.items") || [],
     },
 
     latest: {
@@ -320,7 +344,7 @@ export function useData() {
     },
   };
 
-  // ── UI ────────────────────────────────────────────────────────────────────
+  // ── UI ───────────────────────────────────────────────────────────────────
   const ui = {
     enquireNow: t("ui.enquireNow"),
   };

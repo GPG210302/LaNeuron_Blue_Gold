@@ -1,536 +1,429 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Quote, ExternalLink } from "lucide-react";
+import { ArrowRight, Quote } from "lucide-react";
 import {
+  AnimatePresence,
   motion,
   useMotionValue,
   useSpring,
   useTransform,
 } from "framer-motion";
-import { useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Hero } from "../components/sections/Hero";
+import { SectionHeading } from "../components/Reveal";
 import { useData } from "../i18n/useData";
-import MaskedText from "../animations/MaskedText";
-import HoverLift from "../animations/HoverLift";
-import CursorSpotlight from "../animations/CursorSpotlight";
-import MagneticButton from "../animations/MagneticButton";
 
 const EXPO = [0.22, 1, 0.36, 1];
 const VIEWPORT = { once: true, margin: "-60px" };
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: EXPO },
-  },
-};
-
-const staggerWrap = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.08,
-    },
-  },
-};
-
-function SectionIntro({ overline, title, sub }) {
-  return (
-    <motion.div
-      variants={fadeUp}
-      initial="hidden"
-      whileInView="show"
-      viewport={VIEWPORT}
-      className="mx-auto mb-10 max-w-3xl text-center"
-    >
-      {overline ? (
-        <p className="mb-3 text-[11px] font-extrabold uppercase tracking-[0.28em] text-[#1B2A63]/70">
-          {overline}
-        </p>
-      ) : null}
-
-      <div className="text-3xl font-black tracking-tight text-[#1B2A63] sm:text-4xl">
-        {title}
-      </div>
-
-      {sub ? (
-        <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-7 text-slate-600 sm:text-base">
-          {sub}
-        </p>
-      ) : null}
-    </motion.div>
-  );
-}
 
 const TiltCard = ({ children, className = "" }) => {
   const ref = useRef(null);
   const rawX = useMotionValue(0);
   const rawY = useMotionValue(0);
+  const rotateX = useSpring(rawX, { stiffness: 180, damping: 22 });
+  const rotateY = useSpring(rawY, { stiffness: 180, damping: 22 });
+  const scale = useSpring(1, { stiffness: 280, damping: 22 });
 
-  const tiltX = useSpring(rawX, { stiffness: 220, damping: 24 });
-  const tiltY = useSpring(rawY, { stiffness: 220, damping: 24 });
-
-  const glareX = useTransform(tiltY, [-12, 12], ["120%", "-20%"]);
-  const glareY = useTransform(tiltX, [-12, 12], ["120%", "-20%"]);
-  const glareOpacity = useTransform(tiltY, [-12, 0, 12], [0.14, 0, 0.14]);
+  const glareX = useTransform(rotateY, [-12, 12], ["120%", "-20%"]);
+  const glareY = useTransform(rotateX, [-12, 12], ["120%", "-20%"]);
+  const glareOpacity = useTransform(rotateY, [-12, 0, 12], [0.15, 0, 0.15]);
 
   const handleMove = (e) => {
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
-
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
-    const dx = e.clientX - cx;
-    const dy = e.clientY - cy;
-
-    rawX.set((-dy / (rect.height / 2)) * 12);
-    rawY.set((dx / (rect.width / 2)) * 12);
-  };
-
-  const reset = () => {
-    rawX.set(0);
-    rawY.set(0);
+    rawY.set(((e.clientX - cx) / (rect.width / 2)) * 12);
+    rawX.set(((e.clientY - cy) / (rect.height / 2)) * -12);
   };
 
   return (
     <motion.div
       ref={ref}
       onMouseMove={handleMove}
-      onMouseLeave={reset}
-      style={{
-        rotateX: tiltX,
-        rotateY: tiltY,
-        transformStyle: "preserve-3d",
-        perspective: 1100,
+      onMouseEnter={() => scale.set(1.03)}
+      onMouseLeave={() => {
+        rawX.set(0);
+        rawY.set(0);
+        scale.set(1);
       }}
-      whileHover={{ scale: 1.03, y: -6 }}
-      transition={{ duration: 0.28, ease: EXPO }}
+      style={{
+        rotateX,
+        rotateY,
+        scale,
+        transformStyle: "preserve-3d",
+        perspective: 1000,
+      }}
       className={`relative ${className}`}
     >
       {children}
 
       <motion.div
-        style={{
-          pointerEvents: "none",
-          position: "absolute",
-          inset: "-40%",
-          background:
-            "radial-gradient(circle at 0% 0%, rgba(255,255,255,0.45), transparent 60%)",
-          mixBlendMode: "soft-light",
-          opacity: glareOpacity,
-          translateX: glareX,
-          translateY: glareY,
-        }}
-      />
+        className="absolute inset-0 rounded-[inherit] pointer-events-none overflow-hidden z-10"
+        style={{ opacity: glareOpacity }}
+      >
+        <motion.div
+          className="absolute w-[180%] h-[180%] -top-12 -left-12 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(255,255,255,0.45) 0%, transparent 65%)",
+            x: glareX,
+            y: glareY,
+          }}
+        />
+      </motion.div>
     </motion.div>
   );
 };
 
-function SmartLink({
-  href,
-  external,
-  className,
-  children,
-}) {
-  if (!href) {
-    return <div className={className}>{children}</div>;
-  }
+const reviewPalette = [
+  {
+    ring: "from-fuchsia-500/30 via-rose-400/15 to-transparent",
+    border: "border-fuchsia-200/60",
+    glow: "shadow-[0_24px_60px_-26px_rgba(217,70,239,0.45)]",
+    chip: "bg-fuchsia-100 text-fuchsia-700",
+  },
+  {
+    ring: "from-sky-500/30 via-cyan-400/15 to-transparent",
+    border: "border-sky-200/60",
+    glow: "shadow-[0_24px_60px_-26px_rgba(14,165,233,0.42)]",
+    chip: "bg-sky-100 text-sky-700",
+  },
+  {
+    ring: "from-emerald-500/30 via-lime-400/15 to-transparent",
+    border: "border-emerald-200/60",
+    glow: "shadow-[0_24px_60px_-26px_rgba(16,185,129,0.4)]",
+    chip: "bg-emerald-100 text-emerald-700",
+  },
+  {
+    ring: "from-amber-500/30 via-orange-400/15 to-transparent",
+    border: "border-amber-200/60",
+    glow: "shadow-[0_24px_60px_-26px_rgba(245,158,11,0.38)]",
+    chip: "bg-amber-100 text-amber-700",
+  },
+  {
+    ring: "from-violet-500/30 via-purple-400/15 to-transparent",
+    border: "border-violet-200/60",
+    glow: "shadow-[0_24px_60px_-26px_rgba(139,92,246,0.42)]",
+    chip: "bg-violet-100 text-violet-700",
+  },
+];
 
-  if (external) {
-    return (
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={className}
-      >
-        {children}
-      </a>
-    );
-  }
+function ReviewDeck({ featuredReview }) {
+  const items = featuredReview?.items || [];
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const orderedItems = useMemo(() => {
+    if (!items.length) return [];
+    return items.map((item, index) => {
+      const distance = (index - activeIndex + items.length) % items.length;
+      return {
+        ...item,
+        originalIndex: index,
+        distance,
+      };
+    });
+  }, [items, activeIndex]);
+
+  if (!items.length) return null;
 
   return (
-    <Link to={href} className={className}>
-      {children}
-    </Link>
+    <section className="py-20 lg:py-28">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 28, filter: "blur(6px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={VIEWPORT}
+          transition={{ duration: 0.65, ease: EXPO }}
+          className="max-w-3xl"
+        >
+          <SectionHeading
+            overline={featuredReview.overline}
+            title={featuredReview.title}
+            sub={featuredReview.sub}
+          />
+        </motion.div>
+
+        <div className="mt-12 grid lg:grid-cols-[1.15fr_0.85fr] gap-8 items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 34, filter: "blur(8px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={VIEWPORT}
+            transition={{ duration: 0.7, ease: EXPO, delay: 0.08 }}
+            className="relative min-h-[440px] sm:min-h-[500px]"
+          >
+            {orderedItems.map((item) => {
+              const palette =
+                reviewPalette[item.originalIndex % reviewPalette.length];
+              const isActive = item.originalIndex === activeIndex;
+
+              const layerY =
+                item.distance === 0
+                  ? 0
+                  : item.distance === 1
+                  ? 32
+                  : item.distance === 2
+                  ? 64
+                  : 92;
+
+              const layerX =
+                item.distance === 0
+                  ? 0
+                  : item.distance === 1
+                  ? 18
+                  : item.distance === 2
+                  ? 34
+                  : 44;
+
+              const layerScale =
+                item.distance === 0
+                  ? 1
+                  : item.distance === 1
+                  ? 0.965
+                  : item.distance === 2
+                  ? 0.93
+                  : 0.905;
+
+              const layerOpacity =
+                item.distance === 0
+                  ? 1
+                  : item.distance === 1
+                  ? 0.82
+                  : item.distance === 2
+                  ? 0.68
+                  : 0.52;
+
+              return (
+                <motion.button
+                  key={item.originalIndex}
+                  type="button"
+                  onClick={() => setActiveIndex(item.originalIndex)}
+                  initial={false}
+                  animate={{
+                    x: layerX,
+                    y: layerY,
+                    scale: layerScale,
+                    opacity: layerOpacity,
+                    zIndex: 100 - item.distance,
+                  }}
+                  transition={{ duration: 0.55, ease: EXPO }}
+                  whileHover={
+                    !isActive
+                      ? {
+                          x: layerX - 6,
+                          y: layerY - 6,
+                          opacity: Math.min(layerOpacity + 0.12, 1),
+                        }
+                      : {}
+                  }
+                  className={`absolute inset-0 text-left rounded-[2rem] overflow-hidden border ${palette.border} ${palette.glow} ${
+                    isActive
+                      ? "cursor-default"
+                      : "cursor-pointer hover:border-slate-300"
+                  } bg-white/90 backdrop-blur-xl`}
+                  aria-pressed={isActive}
+                  aria-label={`Open review ${item.originalIndex + 1}`}
+                >
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${palette.ring} pointer-events-none`}
+                  />
+                  <div className="relative h-full p-6 sm:p-8 lg:p-10 flex flex-col">
+                    <div className="flex items-center justify-between gap-3">
+                      <span
+                        className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-bold tracking-[0.16em] uppercase ${palette.chip}`}
+                      >
+                        Review {item.originalIndex + 1}
+                      </span>
+                      <Quote className="w-5 h-5 text-slate-300" />
+                    </div>
+
+                    <p
+                      className={`mt-6 text-slate-800 leading-relaxed transition-all duration-500 ${
+                        isActive
+                          ? "text-lg sm:text-[1.35rem]"
+                          : "text-sm sm:text-base line-clamp-4"
+                      }`}
+                    >
+                      “{item.quote}”
+                    </p>
+
+                    <div className="mt-auto pt-8">
+                      <div className="h-px w-full bg-gradient-to-r from-slate-200 via-slate-300/70 to-transparent" />
+                      <div className="mt-4 flex items-end justify-between gap-4">
+                        <div>
+                          <p className="font-semibold text-slate-900">
+                            {item.author}
+                          </p>
+                          <p className="text-sm text-slate-500">{item.source}</p>
+                        </div>
+
+                        {!isActive && (
+                          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
+                            Tap to open
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </motion.button>
+              );
+            })}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 26, filter: "blur(6px)" }}
+            whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+            viewport={VIEWPORT}
+            transition={{ duration: 0.65, ease: EXPO, delay: 0.12 }}
+            className="rounded-[2rem] border border-slate-200 bg-white/80 backdrop-blur-xl p-6 sm:p-8 shadow-[0_24px_70px_-32px_rgba(15,23,42,0.25)]"
+          >
+            <p className="text-xs font-bold tracking-[0.18em] uppercase text-slate-400">
+              Browse parent reflections
+            </p>
+
+            <div className="mt-5 space-y-3">
+              {items.map((item, index) => {
+                const isActive = index === activeIndex;
+                return (
+                  <button
+                    key={index}
+                    type="button"
+                    onClick={() => setActiveIndex(index)}
+                    className={`w-full rounded-2xl border px-4 py-4 text-left transition-all duration-300 ${
+                      isActive
+                        ? "border-slate-900 bg-slate-900 text-white shadow-lg"
+                        : "border-slate-200 bg-slate-50/80 text-slate-700 hover:bg-white hover:border-slate-300"
+                    }`}
+                    aria-pressed={isActive}
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <p className="text-sm font-semibold">
+                          Review {index + 1}
+                        </p>
+                        <p
+                          className={`mt-1 text-sm ${
+                            isActive ? "text-white/80" : "text-slate-500"
+                          }`}
+                        >
+                          {item.author}
+                        </p>
+                      </div>
+                      <span
+                        className={`text-[11px] font-bold uppercase tracking-[0.16em] ${
+                          isActive ? "text-white/65" : "text-slate-400"
+                        }`}
+                      >
+                        {item.source}
+                      </span>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeIndex}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.28, ease: EXPO }}
+                className="mt-6 rounded-2xl bg-slate-50 border border-slate-200 p-5"
+              >
+                <p className="text-sm font-semibold text-slate-900">
+                  Now reading
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                  {items[activeIndex]?.quote}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+          </motion.div>
+        </div>
+      </div>
+    </section>
   );
 }
 
 export default function Home() {
   const { home } = useData();
 
-  const reviews =
-    home?.reviews?.items ||
-    home?.featuredReview?.items || [
-      {
-        quote:
-          "The workshop was safe, age-appropriate, hands-on and highly educational, with plenty of opportunities to explore and ask questions. My daughter had a wonderful experience at La Neuron.",
-        author: "Parent review",
-        source: "Workshop feedback",
-      },
-      {
-        quote:
-          "Dr Priya is knowledgeable, patient and excellent with children. The small-group environment, premium materials and personal attention made the programme feel high-quality while still being reasonably priced.",
-        author: "Parent review",
-        source: "Programme feedback",
-      },
-      {
-        quote:
-          "La Neuron combines science, creativity and real investigation in a very engaging way. My child gained knowledge, confidence and curiosity in a safe, welcoming environment, and the programme offers excellent value for money.",
-        author: "Parent review",
-        source: "Parent feedback",
-      },
-    ];
-
-  const featuredReview = reviews[0];
-
   return (
     <>
       <Hero />
 
-      <main className="relative bg-[#fbf7ee]">
-        <div className="pointer-events-none absolute inset-0 opacity-[0.06]">
-          <div className="absolute left-[-8%] top-[8%] h-64 w-64 rounded-full bg-[#E0B33C] blur-3xl" />
-          <div className="absolute right-[-10%] top-[26%] h-72 w-72 rounded-full bg-[#1B2A63] blur-3xl" />
-          <div className="absolute bottom-[12%] left-[20%] h-64 w-64 rounded-full bg-[#10B981] blur-3xl" />
-        </div>
-
-        {/* WHY PARENTS CHOOSE LA NEURON */}
-        <section
-          id="why-parents"
-          className="relative z-10 px-4 pb-20 pt-24 sm:px-6 lg:px-8"
-        >
-          <div className="mx-auto max-w-7xl">
-            <SectionIntro
-              overline={home?.whyParents?.overline}
-              title={
-                <MaskedText
-                  as="h2"
-                  className="text-3xl font-black tracking-tight text-[#1B2A63] sm:text-4xl"
-                >
-                  {home?.whyParents?.title}
-                </MaskedText>
-              }
-              sub={home?.whyParents?.sub}
+      <section className="py-20 lg:py-28">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 28, filter: "blur(6px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={VIEWPORT}
+            transition={{ duration: 0.65, ease: EXPO }}
+          >
+            <SectionHeading
+              overline={home.overline}
+              title={home.sectionTitle}
+              sub={home.sectionSub}
             />
+          </motion.div>
 
-            <motion.div
-              variants={staggerWrap}
-              initial="hidden"
-              whileInView="show"
-              viewport={VIEWPORT}
-              className="grid gap-6 md:grid-cols-2 xl:grid-cols-4"
-            >
-              {(home?.whyParents?.items || []).map((item) => (
-                <motion.div key={item.title} variants={fadeUp}>
-                  <HoverLift className="rounded-[22px] border-[2px] border-[#1B2A63] bg-white shadow-[0_12px_36px_rgba(27,42,99,0.08)]">
-                    <CursorSpotlight className="rounded-[22px]">
-                      <TiltCard className="h-full px-6 py-6">
-                        <h3 className="text-lg font-black text-[#1B2A63]">
-                          {item.title}
-                        </h3>
-                        <p className="mt-3 text-[15px] leading-7 text-slate-600">
-                          {item.desc}
-                        </p>
-                      </TiltCard>
-                    </CursorSpotlight>
-                  </HoverLift>
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {home.links.map((l, i) => (
+              <TiltCard key={l.to}>
+                <motion.div
+                  initial={{ opacity: 0, y: 28, filter: "blur(6px)" }}
+                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  viewport={VIEWPORT}
+                  transition={{
+                    duration: 0.6,
+                    delay: i * 0.08,
+                    ease: EXPO,
+                  }}
+                  whileHover={{
+                    y: -4,
+                    transition: { type: "spring", stiffness: 300, damping: 20 },
+                  }}
+                  className="h-full"
+                >
+                  <Link
+                    to={l.to}
+                    className="ln-card ln-card-hover p-7 flex flex-col h-full"
+                    data-testid={`home-link-${l.to.replace(/\W+/g, "")}`}
+                  >
+                    <h3
+                      className="font-display font-extrabold text-2xl"
+                      style={{ color: l.color }}
+                    >
+                      {l.title}
+                    </h3>
+
+                    <p className="mt-3 text-slate-600 leading-relaxed flex-1">
+                      {l.desc}
+                    </p>
+
+                    <motion.span
+                      className="mt-5 inline-flex items-center gap-1 font-bold"
+                      style={{ color: l.color }}
+                      whileHover={{ x: 4 }}
+                      transition={{ type: "spring", stiffness: 400 }}
+                    >
+                      {home.exploreBtn}
+                      <motion.span
+                        whileHover={{ x: 3 }}
+                        transition={{ type: "spring", stiffness: 400 }}
+                      >
+                        <ArrowRight size={18} />
+                      </motion.span>
+                    </motion.span>
+                  </Link>
                 </motion.div>
-              ))}
-            </motion.div>
+              </TiltCard>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* ENROLLING NOW */}
-        <section className="relative z-10 px-4 pb-24 pt-4 sm:px-6 lg:px-8">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={VIEWPORT}
-            className="mx-auto max-w-7xl rounded-[28px] border border-[#d7dde9] bg-[#fdfaf1] p-6 shadow-[0_18px_60px_rgba(27,42,99,0.08)] sm:p-10"
-          >
-            <SectionIntro
-              overline={home?.enrollingNow?.overline}
-              title={
-                <MaskedText
-                  as="h2"
-                  className="text-3xl font-black tracking-tight text-[#1B2A63] sm:text-4xl"
-                >
-                  {home?.enrollingNow?.title}
-                </MaskedText>
-              }
-              sub={home?.enrollingNow?.sub}
-            />
-
-            <motion.div
-              variants={staggerWrap}
-              initial="hidden"
-              whileInView="show"
-              viewport={VIEWPORT}
-              className="grid gap-6 md:grid-cols-2 xl:grid-cols-4"
-            >
-              {(home?.enrollingNow?.items || []).map((item) => (
-                <motion.article key={item.title} variants={fadeUp}>
-                  <HoverLift className="rounded-[22px] border border-[#d7dde9] bg-white shadow-[0_12px_40px_rgba(27,42,99,0.06)]">
-                    <CursorSpotlight className="rounded-[22px]">
-                      <TiltCard className="flex h-full flex-col p-6">
-                        <div className="mb-4 flex items-center justify-between gap-3">
-                          <motion.span
-                            initial={{ opacity: 0, x: -18 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, ease: EXPO }}
-                            className="rounded-full bg-[#1B2A63] px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.18em] text-white"
-                          >
-                            {item.title}
-                          </motion.span>
-
-                          {item.status ? (
-                            <motion.span
-                              initial={{ opacity: 0, x: 18 }}
-                              whileInView={{ opacity: 1, x: 0 }}
-                              viewport={{ once: true }}
-                              transition={{
-                                duration: 0.5,
-                                delay: 0.1,
-                                ease: EXPO,
-                              }}
-                              className="rounded-full border border-[#E0B33C]/60 bg-[#fff7dd] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#9b7515]"
-                            >
-                              {item.status}
-                            </motion.span>
-                          ) : null}
-                        </div>
-
-                        <p className="flex-1 text-[15px] leading-7 text-slate-600">
-                          {item.desc}
-                        </p>
-
-                        <SmartLink
-                          href={item.href || "/programmes"}
-                          external={item.external}
-                          className="group mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#1B2A63]"
-                        >
-                          {item.cta || home?.enrollingNow?.cta || "Explore details"}
-                          {item.external ? (
-                            <ExternalLink
-                              size={16}
-                              className="transition-transform duration-300 group-hover:translate-x-1"
-                            />
-                          ) : (
-                            <ArrowRight
-                              size={16}
-                              className="transition-transform duration-300 group-hover:translate-x-1"
-                            />
-                          )}
-                        </SmartLink>
-                      </TiltCard>
-                    </CursorSpotlight>
-                  </HoverLift>
-                </motion.article>
-              ))}
-            </motion.div>
-          </motion.div>
-        </section>
-
-        {/* WHAT PARENTS SAY */}
-        <section className="relative z-10 px-4 pb-24 pt-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
-            <SectionIntro
-              overline={home?.featuredReview?.overline || "Parent reflections"}
-              title={
-                <MaskedText
-                  as="h2"
-                  className="text-3xl font-black tracking-tight text-[#1B2A63] sm:text-4xl"
-                >
-                  {home?.featuredReview?.title || "What parents say"}
-                </MaskedText>
-              }
-              sub={home?.featuredReview?.sub || ""}
-            />
-
-            <motion.div
-              initial={{ opacity: 0, scaleX: 0.94, y: 30 }}
-              whileInView={{ opacity: 1, scaleX: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.8, ease: EXPO }}
-              className="relative overflow-hidden rounded-[26px] border-[2px] border-[#1B2A63] bg-[#1B2A63] px-6 py-7 text-white shadow-[0_22px_70px_rgba(17,31,84,0.28)] sm:px-8 sm:py-9"
-            >
-              <motion.div
-                className="absolute right-6 top-6 opacity-20"
-                animate={{ y: [0, -4, 0], rotate: [0, 1.5, 0] }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                <Quote size={72} strokeWidth={1.6} />
-              </motion.div>
-
-              <MaskedText
-                as="p"
-                delay={0.1}
-                className="max-w-3xl text-[17px] leading-9 text-white/95 sm:text-[20px] sm:leading-[2rem]"
-              >
-                “{featuredReview?.quote}”
-              </MaskedText>
-
-              <div className="mt-8 flex flex-wrap items-center gap-3 text-sm text-white/85">
-                <span className="rounded-full bg-white/10 px-4 py-2 font-semibold">
-                  {featuredReview?.author}
-                </span>
-                <span className="rounded-full border border-white/20 px-4 py-2">
-                  {featuredReview?.source}
-                </span>
-              </div>
-
-              {reviews.length > 1 ? (
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {reviews.map((review, index) => (
-                    <span
-                      key={`${review.author}-${index}`}
-                      className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                        index === 0
-                          ? "bg-white text-[#1B2A63]"
-                          : "border border-white/20 text-white/80"
-                      }`}
-                    >
-                      {index === 0 ? "Featured" : `Review ${index + 1}`}
-                    </span>
-                  ))}
-                </div>
-              ) : null}
-            </motion.div>
-          </div>
-        </section>
-
-        {/* LATEST FROM LA NEURON */}
-        <section className="relative z-10 px-4 pb-28 pt-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
-            <SectionIntro
-              overline={home?.latest?.overline}
-              title={
-                <MaskedText
-                  as="h2"
-                  className="text-3xl font-black tracking-tight text-[#1B2A63] sm:text-4xl"
-                >
-                  {home?.latest?.title}
-                </MaskedText>
-              }
-              sub={home?.latest?.sub}
-            />
-
-            <motion.div
-              variants={staggerWrap}
-              initial="hidden"
-              whileInView="show"
-              viewport={VIEWPORT}
-              className="grid gap-6 lg:grid-cols-3"
-            >
-              {(home?.latest?.items || []).map((item, index) => (
-                <motion.article key={item.title} variants={fadeUp}>
-                  <HoverLift className="group h-full overflow-hidden rounded-[22px] border border-[#d7dde9] bg-white shadow-[0_16px_50px_rgba(27,42,99,0.08)]">
-                    <SmartLink
-                      href={item.href}
-                      external={item.external}
-                      className="flex h-full flex-col"
-                    >
-                      <div className="relative h-36 overflow-hidden bg-[radial-gradient(circle_at_top_left,#dbe2f8,transparent_55%),radial-gradient(circle_at_bottom_right,#f4e0a6,transparent_60%)]">
-                        <motion.div
-                          className="absolute inset-0 bg-[linear-gradient(to_top,rgba(16,28,68,0.75),transparent_65%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                        />
-                        <motion.div
-                          whileHover={{ scale: 1.08 }}
-                          transition={{ duration: 0.7, ease: EXPO }}
-                          className={`absolute inset-0 ${
-                            index === 0
-                              ? "bg-[radial-gradient(circle_at_top_left,#dbe2f8,transparent_55%),radial-gradient(circle_at_bottom_right,#f4e0a6,transparent_60%)]"
-                              : index === 1
-                              ? "bg-[radial-gradient(circle_at_top_left,#dce8ff,transparent_52%),radial-gradient(circle_at_bottom_right,#f2d778,transparent_62%)]"
-                              : "bg-[radial-gradient(circle_at_top_left,#c8f1e4,transparent_50%),radial-gradient(circle_at_bottom_right,#93d6c5,transparent_62%)]"
-                          }`}
-                        />
-
-                        <div className="absolute left-5 top-5 z-10">
-                          <span className="rounded-full bg-white/90 px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#1B2A63] shadow-sm">
-                            {item.type}
-                          </span>
-                        </div>
-
-                        <div className="absolute bottom-4 right-4 z-10 inline-flex translate-y-2 items-center gap-2 text-sm font-bold text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                          {item.cta || (item.external ? "Open article" : "Read more")}
-                          {item.external ? <ExternalLink size={15} /> : <ArrowRight size={15} />}
-                        </div>
-                      </div>
-
-                      <div className="flex flex-1 flex-col p-6">
-                        <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#1B2A63]/70">
-                          {item.kicker || item.type}
-                        </p>
-
-                        <h3 className="mt-2 text-lg font-black text-[#1B2A63]">
-                          {item.title}
-                        </h3>
-
-                        <p className="mt-3 flex-1 text-[15px] leading-7 text-slate-600">
-                          {item.desc}
-                        </p>
-
-                        <div className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#1B2A63]">
-                          {item.cta || (item.external ? "Open article" : "Read more")}
-                          {item.external ? <ExternalLink size={16} /> : <ArrowRight size={16} />}
-                        </div>
-                      </div>
-                    </SmartLink>
-                  </HoverLift>
-                </motion.article>
-              ))}
-            </motion.div>
-          </div>
-        </section>
-
-        {/* FINAL CTA BAND */}
-        <section className="relative z-10 px-4 pb-32 pt-4 sm:px-6 lg:px-8">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={VIEWPORT}
-            className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 overflow-hidden rounded-[26px] border border-[#e2c86e] bg-[#ffeebf] px-6 py-8 text-center shadow-[0_18px_60px_rgba(224,179,60,0.35)] sm:px-10 lg:flex-row lg:text-left"
-          >
-            <motion.div
-              className="absolute inset-0 opacity-60"
-              animate={{
-                background: [
-                  "linear-gradient(120deg, rgba(255,238,191,1) 0%, rgba(255,244,208,1) 45%, rgba(255,231,169,1) 100%)",
-                  "linear-gradient(120deg, rgba(255,244,208,1) 0%, rgba(255,231,169,1) 45%, rgba(255,238,191,1) 100%)",
-                  "linear-gradient(120deg, rgba(255,238,191,1) 0%, rgba(255,244,208,1) 45%, rgba(255,231,169,1) 100%)",
-                ],
-              }}
-              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            />
-
-            <div className="relative z-10">
-              <p className="text-[11px] font-extrabold uppercase tracking-[0.28em] text-[#8a6713]">
-                Start the conversation
-              </p>
-              <h3 className="mt-2 text-2xl font-black text-[#1B2A63] sm:text-3xl">
-                Explore the right next step for your child.
-              </h3>
-            </div>
-
-            <div className="relative z-10">
-              <MagneticButton href="/programmes">
-                View programme details
-              </MagneticButton>
-            </div>
-          </motion.div>
-        </section>
-      </main>
+      <ReviewDeck featuredReview={home.featuredReview} />
     </>
   );
 }

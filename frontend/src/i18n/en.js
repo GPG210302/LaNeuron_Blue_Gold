@@ -570,27 +570,27 @@ export const en = {
     },
 
     featuredReview: {
-      overline: "Parent reflections",
+      overline: "Parent voice",
       title: "What Parents Say",
-      sub: "A few words from families who have already experienced La Neuron.",
+      sub: "Tap any review card to bring it forward and read the full reflection.",
       items: [
         {
           quote:
-            "The workshop was safe, age-appropriate, hands-on and highly educational, with plenty of opportunities to explore and ask questions. My daughter had a wonderful experience at La Neuron.",
+            "La Neuron creates exactly the kind of environment we were hoping for — thoughtful, engaging, and genuinely educational. You can feel the care behind every session.",
           author: "Parent review",
-          source: "Workshop feedback",
+          source: "Google Review",
         },
         {
           quote:
-            "Dr Priya is knowledgeable, patient and excellent with children. The small-group environment, premium materials and personal attention made the programme feel high-quality while still being reasonably priced.",
-          author: "Parent review",
-          source: "Programme feedback",
-        },
-        {
-          quote:
-            "La Neuron combines science, creativity and real investigation in a very engaging way. My child gained knowledge, confidence and curiosity in a safe, welcoming environment, and the programme offers excellent value for money.",
+            "What stood out most was how naturally science, creativity, and confidence came together. My child came home excited, curious, and eager to share every discovery.",
           author: "Parent review",
           source: "Parent feedback",
+        },
+        {
+          quote:
+            "The sessions feel warm and personal, but also very structured. It is rare to find something this nurturing and this intellectually serious for children.",
+          author: "Parent review",
+          source: "Parent testimonial",
         },
       ],
     },
