@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useAnimationFrame, useMotionValue, useTransform } from "framer-motion";
 import { ArrowRight, Quote, Star } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Hero } from "../components/sections/Hero";
 import { useData } from "../i18n/useData";
 
@@ -25,13 +25,11 @@ function SectionIntro({ overline, title, sub, align = "left", theme = "default" 
           {overline}
         </p>
       )}
-
       {title && (
         <h2 className="mt-3 text-4xl md:text-5xl font-bold tracking-tight text-slate-900">
           {title}
         </h2>
       )}
-
       {sub && (
         <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-600">
           {sub}
@@ -61,14 +59,39 @@ function Stars({ value = 5 }) {
   );
 }
 
+function wrapDistance(value, size) {
+  let wrapped = ((value % size) + size) % size;
+  if (wrapped > size / 2) wrapped -= size;
+  return wrapped;
+}
+
 function ReviewDeck({ featuredReview }) {
   const items = useMemo(() => featuredReview?.items ?? [], [featuredReview]);
-  const [isPaused, setIsPaused] = useState(false);
+  const [paused, setPaused] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [viewportWidth, setViewportWidth] = useState(1400);
+  const progress = useMotionValue(0);
+
+  useEffect(() => {
+    const update = () => setViewportWidth(window.innerWidth);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  useAnimationFrame((_, delta) => {
+    if (paused || !items.length) return;
+    const speed = 0.22;
+    const next = progress.get() + (delta / 1000) * speed;
+    progress.set(next);
+  });
 
   if (!items.length) return null;
 
-  const rail = [...items, ...items];
+  const CARD_W = 390;
+  const CENTER_GAP = 260;
+  const radius = Math.max(520, Math.min(700, viewportWidth * 0.42));
+  const angleStep = 360 / items.length;
 
   return (
     <section className="relative py-20 lg:py-28 overflow-hidden bg-[linear-gradient(180deg,#ffffff_0%,#f8fafc_100%)]">
@@ -91,122 +114,152 @@ function ReviewDeck({ featuredReview }) {
 
       <div
         className="relative mt-14 overflow-hidden"
-        onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => {
-          setIsPaused(false);
+          setPaused(false);
           setHoveredIndex(null);
         }}
       >
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-white via-white/80 to-transparent z-20" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white via-white/80 to-transparent z-20" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white via-white/90 to-transparent z-20" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white via-white/90 to-transparent z-20" />
 
-        <motion.div
-          className="flex gap-7 w-max pl-6 lg:pl-8 pr-6 lg:pr-8"
-          animate={isPaused ? { x: undefined } : { x: ["0px", "-50%"] }}
-          transition={
-            isPaused
-              ? { duration: 0 }
-              : {
-                  duration: 34,
-                  ease: "linear",
-                  repeat: Infinity,
-                }
-          }
-          style={{ willChange: "transform" }}
-        >
-          {rail.map((item, index) => {
-            const isHovered = hoveredIndex === index;
-            const positionType = index % 5;
-
-            const shapeClass =
-              positionType === 0
-                ? "rounded-[2.6rem]"
-                : positionType === 1
-                ? "rounded-[2.2rem]"
-                : positionType === 2
-                ? "rounded-[2.9rem]"
-                : positionType === 3
-                ? "rounded-[2.1rem]"
-                : "rounded-[2.5rem]";
-
-            const tiltClass =
-              positionType === 0
-                ? "-rotate-[2.5deg]"
-                : positionType === 1
-                ? "rotate-[1.4deg]"
-                : positionType === 2
-                ? "-rotate-[1deg]"
-                : positionType === 3
-                ? "rotate-[2.2deg]"
-                : "-rotate-[1.6deg]";
-
-            return (
-              <motion.article
-                key={`${item.author}-${index}`}
-                onMouseEnter={() => {
-                  setIsPaused(true);
-                  setHoveredIndex(index);
-                }}
-                onMouseLeave={() => {
-                  setIsPaused(false);
-                  setHoveredIndex(null);
-                }}
-                animate={{
-                  scale: isHovered ? 1.08 : 1,
-                  rotate: isHovered ? 0 : undefined,
-                  y: isHovered ? -12 : 0,
-                  opacity: isHovered ? 1 : 0.96,
-                }}
-                transition={{ duration: 0.35, ease: EXPO }}
-                className={`group relative w-[320px] sm:w-[360px] md:w-[390px] lg:w-[410px] shrink-0 ${shapeClass} ${
-                  isHovered ? "rotate-0 z-20" : tiltClass
-                } border border-white/70 bg-white/92 backdrop-blur-xl shadow-[0_30px_80px_-36px_rgba(15,23,42,0.24)] overflow-hidden`}
-                style={{ willChange: "transform" }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-100/35 via-sky-100/28 to-emerald-100/20 opacity-80" />
-                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-white/10 via-white/80 to-white/10" />
-                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/85 to-transparent" />
-
-                <div className="relative h-full p-6 sm:p-7 lg:p-8 flex flex-col min-h-[292px]">
-                  <div className="flex items-start justify-between gap-4">
-                    <Stars value={item.rating || 5} />
-                    <Quote className="h-5 w-5 text-slate-300" />
-                  </div>
-
-                  <p
-                    className={`mt-6 text-slate-800 text-base sm:text-lg leading-relaxed transition-all duration-300 ${
-                      isHovered ? "line-clamp-none" : "line-clamp-5"
-                    }`}
-                  >
-                    “{item.quote}”
-                  </p>
-
-                  <div className="mt-auto pt-8">
-                    <div className="h-px w-full bg-gradient-to-r from-slate-200 via-slate-300/70 to-transparent" />
-                    <div className="mt-4">
-                      <p className="font-semibold text-slate-900">{item.author}</p>
-
-                      {item.href ? (
-                        <a
-                          href={item.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm text-slate-500 underline-offset-4 hover:text-slate-700 hover:underline"
-                        >
-                          {item.source}
-                        </a>
-                      ) : (
-                        <p className="text-sm text-slate-500">{item.source}</p>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </motion.article>
-            );
-          })}
-        </motion.div>
+        <div className="relative mx-auto h-[390px] max-w-[1600px] [perspective:2200px]">
+          {items.map((item, index) => (
+            <CoverflowCard
+              key={`${item.author}-${index}`}
+              item={item}
+              index={index}
+              count={items.length}
+              hovered={hoveredIndex === index}
+              paused={paused}
+              progress={progress}
+              radius={radius}
+              angleStep={angleStep}
+              centerGap={CENTER_GAP}
+              cardWidth={CARD_W}
+              onHoverStart={() => {
+                setPaused(true);
+                setHoveredIndex(index);
+              }}
+              onHoverEnd={() => {
+                setPaused(false);
+                setHoveredIndex(null);
+              }}
+            />
+          ))}
+        </div>
       </div>
     </section>
+  );
+}
+
+function CoverflowCard({
+  item,
+  index,
+  count,
+  hovered,
+  progress,
+  radius,
+  angleStep,
+  centerGap,
+  cardWidth,
+  onHoverStart,
+  onHoverEnd,
+}) {
+  const angle = useTransform(progress, (p) => {
+    const raw = index * angleStep - p * 360;
+    return wrapDistance(raw, 360);
+  });
+
+  const x = useTransform(angle, (a) => {
+    const r = (a * Math.PI) / 180;
+    return Math.sin(r) * radius;
+  });
+
+  const rotateY = useTransform(angle, [-90, -45, 0, 45, 90], [56, 26, 0, -26, -56]);
+  const scale = useTransform(angle, [-90, -45, 0, 45, 90], [0.72, 0.88, 1.08, 0.88, 0.72]);
+  const opacity = useTransform(angle, [-100, -65, 0, 65, 100], [0.18, 0.5, 1, 0.5, 0.18]);
+  const y = useTransform(angle, [-90, -45, 0, 45, 90], [18, 8, -4, 8, 18]);
+  const blur = useTransform(angle, [-90, -50, 0, 50, 90], [4, 1.8, 0, 1.8, 4]);
+  const zIndex = useTransform(angle, (a) => 1000 - Math.abs(a) * 10);
+  const shadowOpacity = useTransform(angle, [-90, -45, 0, 45, 90], [0.08, 0.14, 0.22, 0.14, 0.08]);
+
+  return (
+    <motion.article
+      onMouseEnter={onHoverStart}
+      onMouseLeave={onHoverEnd}
+      animate={
+        hovered
+          ? {
+              scale: 1.14,
+              rotateY: 0,
+              y: -10,
+            }
+          : {}
+      }
+      transition={{ duration: 0.32, ease: EXPO }}
+      style={{
+        width: cardWidth,
+        x,
+        y,
+        rotateY,
+        scale,
+        opacity,
+        zIndex,
+        filter: useTransform(blur, (b) => `blur(${b}px)`),
+        left: "50%",
+        marginLeft: -(cardWidth / 2),
+        transformStyle: "preserve-3d",
+      }}
+      className="absolute top-4 group rounded-[2.2rem] border border-white/75 bg-white/92 backdrop-blur-xl overflow-hidden will-change-transform"
+    >
+      <motion.div
+        style={{
+          boxShadow: useTransform(
+            shadowOpacity,
+            (o) => `0 30px 80px -34px rgba(15,23,42,${o})`
+          ),
+        }}
+        className="absolute inset-0 rounded-[2.2rem]"
+      />
+
+      <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-100/35 via-sky-100/28 to-emerald-100/20 opacity-80" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-white/10 via-white/80 to-white/10" />
+      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/85 to-transparent" />
+
+      <div className="relative h-full p-6 sm:p-7 lg:p-8 flex flex-col min-h-[292px]">
+        <div className="flex items-start justify-between gap-4">
+          <Stars value={item.rating || 5} />
+          <Quote className="h-5 w-5 text-slate-300" />
+        </div>
+
+        <p
+          className={`mt-6 text-slate-800 text-base sm:text-lg leading-relaxed transition-all duration-300 ${
+            hovered ? "line-clamp-none" : "line-clamp-5"
+          }`}
+        >
+          “{item.quote}”
+        </p>
+
+        <div className="mt-auto pt-8">
+          <div className="h-px w-full bg-gradient-to-r from-slate-200 via-slate-300/70 to-transparent" />
+          <div className="mt-4">
+            <p className="font-semibold text-slate-900">{item.author}</p>
+            {item.href ? (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-slate-500 underline-offset-4 hover:text-slate-700 hover:underline"
+              >
+                {item.source}
+              </a>
+            ) : (
+              <p className="text-sm text-slate-500">{item.source}</p>
+            )}
+          </div>
+        </div>
+      </div>
+    </motion.article>
   );
 }
 
