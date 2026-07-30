@@ -93,6 +93,8 @@ function ReviewDeck({ featuredReview }) {
 
   const prevIndex = wrapIndex(activeIndex - 1, items.length);
   const nextIndex = wrapIndex(activeIndex + 1, items.length);
+  const farPrevIndex = wrapIndex(activeIndex - 2, items.length);
+  const farNextIndex = wrapIndex(activeIndex + 2, items.length);
 
   const goPrev = () => {
     setDirection(-1);
@@ -106,7 +108,7 @@ function ReviewDeck({ featuredReview }) {
 
   return (
     <section className="relative py-16 lg:py-24 overflow-hidden bg-[linear-gradient(180deg,#ffffff_0%,#f8fafc_100%)]">
-      <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 xl:px-10 2xl:px-14">
         <motion.div
           initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -189,18 +191,21 @@ function ReviewDeck({ featuredReview }) {
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
-            <div className="relative mx-auto h-[520px] max-w-[1380px] overflow-hidden [perspective:1600px]">
-              <div className="absolute inset-0 rounded-[3rem] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.82)_0%,rgba(248,250,252,0.94)_48%,rgba(241,245,249,1)_100%)]" />
-              <div className="absolute inset-x-[8%] bottom-5 h-16 rounded-full bg-slate-900/6 blur-3xl" />
+            <div className="relative mx-auto h-[560px] w-full max-w-[1680px] overflow-hidden [perspective:2200px]">
+              <div className="absolute inset-0 rounded-[3rem] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.88)_0%,rgba(248,250,252,0.96)_46%,rgba(241,245,249,1)_100%)]" />
+              <div className="absolute left-[4%] right-[4%] bottom-7 h-20 rounded-full bg-slate-900/6 blur-3xl" />
 
-              <div className="relative h-full w-full flex items-center justify-center [transform-style:preserve-3d]">
+              <div className="relative h-full w-full [transform-style:preserve-3d]">
+                <FarEdgeCard item={items[farPrevIndex]} side="far-left" />
+                <FarEdgeCard item={items[farNextIndex]} side="far-right" />
+
                 <PanoramaSideCard
                   item={items[prevIndex]}
                   side="left"
                   onClick={goPrev}
                 />
 
-                <div className="relative z-20 mx-auto w-full max-w-[760px]">
+                <div className="absolute left-1/2 top-1/2 z-20 w-[min(54vw,860px)] -translate-x-1/2 -translate-y-1/2">
                   <AnimatePresence mode="wait" initial={false} custom={direction}>
                     <PanoramaCenterCard
                       key={activeIndex}
@@ -258,6 +263,226 @@ function ReviewDeck({ featuredReview }) {
         )}
       </div>
     </section>
+  );
+}
+
+function GlassCardBase({ children, className = "" }) {
+  return (
+    <div
+      className={`relative overflow-hidden rounded-[2rem] border border-white/30 bg-[rgba(255,255,255,0.16)] shadow-[0_30px_80px_-34px_rgba(15,23,42,0.22)] backdrop-blur-xl ${className}`}
+    >
+      <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.22),rgba(255,255,255,0.08)_38%,rgba(15,23,42,0.04)_100%)] pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/80 to-transparent pointer-events-none" />
+      {children}
+    </div>
+  );
+}
+
+function RibbedGlassOverlay() {
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 opacity-90"
+      style={{
+        backgroundImage:
+          "repeating-linear-gradient(90deg, rgba(255,255,255,0.12) 0px, rgba(255,255,255,0.12) 2px, rgba(255,255,255,0.02) 9px, rgba(15,23,42,0.06) 18px)",
+        backdropFilter: "blur(6px)",
+      }}
+    />
+  );
+}
+
+function ClearGlassOverlay() {
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.18)_0%,rgba(255,255,255,0.04)_100%)]"
+      style={{ backdropFilter: "blur(14px)" }}
+    />
+  );
+}
+
+function PanoramaCenterCard({ item, direction }) {
+  return (
+    <motion.div
+      custom={direction}
+      initial={{ opacity: 0, x: direction > 0 ? 90 : -90, scale: 0.95 }}
+      animate={{ opacity: 1, x: 0, scale: 1 }}
+      exit={{ opacity: 0, x: direction > 0 ? -90 : 90, scale: 0.95 }}
+      transition={{ duration: 0.55, ease: EXPO }}
+      className="relative z-20"
+    >
+      <GlassCardBase className="min-h-[410px] border-[rgba(244,183,112,0.34)] bg-[rgba(255,248,240,0.18)]">
+        <ClearGlassOverlay />
+
+        <div className="relative z-10 flex min-h-[410px] flex-col p-9 xl:p-10">
+          <div className="flex items-start justify-between gap-4">
+            <Stars value={item.rating || 5} />
+            <Quote className="h-6 w-6 text-slate-300 shrink-0" />
+          </div>
+
+          <p className="mt-7 text-[clamp(2rem,2.15vw,2.4rem)] leading-[1.36] tracking-[-0.03em] text-slate-900">
+            “{item.quote}”
+          </p>
+
+          <div className="mt-auto pt-10">
+            <div className="h-px w-full bg-gradient-to-r from-slate-200/80 via-slate-300/80 to-transparent" />
+            <div className="mt-5">
+              <p className="font-semibold text-[17px] text-slate-900">{item.author}</p>
+              {item.href ? (
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-slate-500 underline-offset-4 hover:text-slate-700 hover:underline"
+                >
+                  {item.source}
+                </a>
+              ) : (
+                <p className="text-sm text-slate-500">{item.source}</p>
+              )}
+            </div>
+          </div>
+        </div>
+      </GlassCardBase>
+    </motion.div>
+  );
+}
+
+function PanoramaSideCard({ item, side, onClick }) {
+  const isLeft = side === "left";
+
+  return (
+    <motion.button
+      type="button"
+      onClick={onClick}
+      whileHover={{
+        scale: 1.03,
+        opacity: 0.9,
+      }}
+      transition={{ duration: 0.4, ease: EXPO }}
+      className={`absolute top-1/2 z-10 hidden h-[340px] w-[min(26vw,430px)] -translate-y-1/2 xl:block ${
+        isLeft ? "left-[11%]" : "right-[11%]"
+      }`}
+      style={{
+        transformStyle: "preserve-3d",
+        transform: isLeft
+          ? "translateY(-50%) rotateY(38deg) scale(0.88)"
+          : "translateY(-50%) rotateY(-38deg) scale(0.88)",
+      }}
+      aria-label={isLeft ? "Show previous review" : "Show next review"}
+    >
+      <GlassCardBase className="h-full w-full border-white/20 bg-[rgba(255,248,240,0.10)]">
+        <RibbedGlassOverlay />
+
+        <div className="relative z-10 flex h-full flex-col justify-end p-7 text-left">
+          <span className="mb-4 inline-flex w-fit rounded-full bg-white/14 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-700">
+            Parent voice
+          </span>
+
+          <div className="flex items-start justify-between gap-3">
+            <Stars value={item.rating || 5} />
+            <Quote className="h-5 w-5 text-slate-300 shrink-0" />
+          </div>
+
+          <p className="mt-5 line-clamp-5 text-[clamp(1.25rem,1.5vw,1.65rem)] leading-[1.34] tracking-[-0.02em] text-slate-700">
+            “{item.quote}”
+          </p>
+
+          <div className="mt-7 h-px w-full bg-gradient-to-r from-slate-200/70 via-slate-300/70 to-transparent" />
+          <div className="mt-4">
+            <p className="font-semibold text-slate-800">{item.author}</p>
+            <p className="text-sm text-slate-500">{item.source}</p>
+          </div>
+        </div>
+      </GlassCardBase>
+    </motion.button>
+  );
+}
+
+function FarEdgeCard({ item, side }) {
+  const isLeft = side === "far-left";
+
+  return (
+    <div
+      className={`absolute top-1/2 z-0 hidden h-[290px] w-[min(19vw,320px)] -translate-y-1/2 2xl:block ${
+        isLeft ? "-left-[1.5%]" : "-right-[1.5%]"
+      }`}
+      style={{
+        transformStyle: "preserve-3d",
+        transform: isLeft
+          ? "translateY(-50%) rotateY(58deg) scale(0.72)"
+          : "translateY(-50%) rotateY(-58deg) scale(0.72)",
+        opacity: 0.22,
+      }}
+      aria-hidden="true"
+    >
+      <GlassCardBase className="h-full w-full border-white/15 bg-[rgba(255,248,240,0.08)]">
+        <RibbedGlassOverlay />
+        <div className="relative z-10 flex h-full flex-col justify-end p-6 text-left">
+          <span className="mb-4 inline-flex w-fit rounded-full bg-white/12 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-600">
+            Parent voice
+          </span>
+          <p className="line-clamp-3 text-[1.05rem] leading-[1.35] text-slate-600">
+            “{item.quote}”
+          </p>
+          <div className="mt-5">
+            <p className="font-semibold text-slate-700">{item.author}</p>
+          </div>
+        </div>
+      </GlassCardBase>
+    </div>
+  );
+}
+
+function MobileSwipeCard({ item, direction, onDragEnd }) {
+  return (
+    <motion.div
+      custom={direction}
+      initial={{ opacity: 0, x: direction > 0 ? 80 : -80, scale: 0.98 }}
+      animate={{ opacity: 1, x: 0, scale: 1 }}
+      exit={{ opacity: 0, x: direction > 0 ? -80 : 80, scale: 0.98 }}
+      transition={{ duration: 0.42, ease: EXPO }}
+      drag="x"
+      dragConstraints={{ left: 0, right: 0 }}
+      dragElastic={0.9}
+      onDragEnd={(_, info) => onDragEnd(info.offset.x)}
+      className="touch-pan-y"
+    >
+      <GlassCardBase className="min-h-[360px] border-[rgba(244,183,112,0.28)] bg-[rgba(255,248,240,0.16)]">
+        <ClearGlassOverlay />
+
+        <div className="relative z-10 flex min-h-[360px] flex-col p-5 sm:p-6">
+          <div className="flex items-start justify-between gap-4">
+            <Stars value={item.rating || 5} />
+            <Quote className="h-5 w-5 text-slate-300 shrink-0" />
+          </div>
+
+          <p className="mt-6 text-[clamp(1.2rem,3.8vw,1.65rem)] leading-[1.55] text-slate-900">
+            “{item.quote}”
+          </p>
+
+          <div className="mt-auto pt-8">
+            <div className="h-px w-full bg-gradient-to-r from-slate-200/80 via-slate-300/80 to-transparent" />
+            <div className="mt-4">
+              <p className="font-semibold text-slate-900">{item.author}</p>
+              {item.href ? (
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-slate-500 underline-offset-4 hover:text-slate-700 hover:underline"
+                >
+                  {item.source}
+                </a>
+              ) : (
+                <p className="text-sm text-slate-500">{item.source}</p>
+              )}
+            </div>
+          </div>
+        </div>
+      </GlassCardBase>
+    </motion.div>
   );
 }
 
