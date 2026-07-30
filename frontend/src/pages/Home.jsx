@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
-import { motion, useAnimationFrame, useMotionValue, useTransform } from "framer-motion";
-import { ArrowRight, Quote, Star } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 import { Hero } from "../components/sections/Hero";
 import { useData } from "../i18n/useData";
 
 const EXPO = [0.22, 1, 0.36, 1];
 const VIEWPORT = { once: true, margin: "-60px" };
+const SWIPE_CONFIDENCE = 80;
 
 function SectionIntro({ overline, title, sub, align = "left", theme = "default" }) {
   const isCenter = align === "center";
@@ -59,276 +60,206 @@ function Stars({ value = 5 }) {
   );
 }
 
-function wrapDistance(value, size) {
-  let wrapped = ((value % size) + size) % size;
-  if (wrapped > size / 2) wrapped -= size;
-  return wrapped;
+function wrapIndex(index, length) {
+  return (index + length) % length;
 }
 
 function ReviewDeck({ featuredReview }) {
   const items = useMemo(() => featuredReview?.items ?? [], [featuredReview]);
-  const [viewportWidth, setViewportWidth] = useState(1400);
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [mobileActiveIndex, setMobileActiveIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
-  const progress = useMotionValue(0);
-  const targetProgress = useRef(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [direction, setDirection] = useState(1);
 
   useEffect(() => {
-    const update = () => {
-      const width = window.innerWidth;
-      setViewportWidth(width);
-      setIsMobile(width < 768);
-    };
-
+    const update = () => setIsMobile(window.innerWidth < 1024);
     update();
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  useAnimationFrame((_, delta) => {
-    if (!items.length) return;
+  useEffect(() => {
+    if (!items.length || isPaused) return;
 
-    const current = progress.get();
-    const target = targetProgress.current;
-    const diff = target - current;
-    const eased = current + diff * Math.min(1, delta / 220);
+    const interval = setInterval(() => {
+      setDirection(1);
+      setActiveIndex((prev) => wrapIndex(prev + 1, items.length));
+    }, isMobile ? 7000 : 5200);
 
-    const isPaused = hoveredIndex !== null || (isMobile && mobileActiveIndex !== null);
-    const autoSpeed = isMobile ? 0.014 : 0.01925;
-
-    const next = isPaused ? eased : eased + (delta / 1000) * autoSpeed;
-
-    progress.set(next);
-
-    if (!isPaused) {
-      targetProgress.current = next;
-    }
-  });
+    return () => clearInterval(interval);
+  }, [items.length, isPaused, isMobile]);
 
   if (!items.length) return null;
 
-  if (isMobile) {
-    return (
-      <section className="relative py-16 overflow-hidden bg-[linear-gradient(180deg,#ffffff_0%,#f8fafc_100%)]">
-        <div className="max-w-7xl mx-auto px-5">
-          <motion.div
-            initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            viewport={VIEWPORT}
-            transition={{ duration: 0.6, ease: EXPO }}
-          >
-            <SectionIntro
-              overline={featuredReview.overline}
-              title={featuredReview.title}
-              sub={featuredReview.sub}
-              align="center"
-              theme="gold-navy"
-            />
-          </motion.div>
+  const prevIndex = wrapIndex(activeIndex - 1, items.length);
+  const nextIndex = wrapIndex(activeIndex + 1, items.length);
 
-          <div className="mt-10 relative h-[350px] overflow-hidden">
-            {items.map((item, index) => (
-              <MobileReviewCard
-                key={`${item.author}-${index}`}
-                item={item}
-                index={index}
-                total={items.length}
-                progress={progress}
-                active={mobileActiveIndex === index}
-                onSelect={() => {
-                  if (mobileActiveIndex === index) {
-                    setMobileActiveIndex(null);
-                    return;
-                  }
+  const goPrev = () => {
+    setDirection(-1);
+    setActiveIndex((prev) => wrapIndex(prev - 1, items.length));
+  };
 
-                  setMobileActiveIndex(index);
-
-                  const current = progress.get();
-                  const currentAngle = wrapDistance(index * (360 / items.length) - current * 360, 360);
-                  const neededRotation = currentAngle / 360;
-                  targetProgress.current = current + neededRotation;
-                }}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  const radius = Math.max(430, Math.min(680, viewportWidth * 0.35));
-  const angleStep = 20;
-  const visibleArc = 74;
-  const cardWidth = Math.min(560, Math.max(430, viewportWidth * 0.27));
-
-  const repeatedItems = [-1, 0, 1].flatMap((loop) =>
-    items.map((item, index) => ({
-      ...item,
-      _virtualIndex: index + loop * items.length,
-      _realIndex: index,
-      _key: `${loop}-${index}-${item.author}`,
-    }))
-  );
+  const goNext = () => {
+    setDirection(1);
+    setActiveIndex((prev) => wrapIndex(prev + 1, items.length));
+  };
 
   return (
-    <section className="relative py-20 lg:py-28 overflow-hidden bg-[linear-gradient(180deg,#ffffff_0%,#f8fafc_100%)]">
-      <div className="max-w-[1680px] mx-auto px-6 lg:px-8">
+    <section className="relative py-16 lg:py-24 overflow-hidden bg-[linear-gradient(180deg,#ffffff_0%,#f8fafc_100%)]">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 28, filter: "blur(6px)" }}
+          initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={VIEWPORT}
-          transition={{ duration: 0.65, ease: EXPO }}
+          transition={{ duration: 0.6, ease: EXPO }}
         >
           <SectionIntro
             overline={featuredReview.overline}
             title={featuredReview.title}
-            sub={featuredReview.sub}
+            sub={
+              isMobile
+                ? "Swipe to read parent reflections."
+                : featuredReview.sub
+            }
             align="center"
             theme="gold-navy"
           />
         </motion.div>
-      </div>
 
-      <div
-        className="relative mt-14 overflow-hidden"
-        onMouseLeave={() => {
-          setHoveredIndex(null);
-        }}
-      >
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-white via-white/95 to-transparent z-30" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-28 bg-gradient-to-l from-white via-white/95 to-transparent z-30" />
+        {isMobile ? (
+          <div
+            className="mt-10"
+            onTouchStart={() => setIsPaused(true)}
+            onTouchEnd={() => setIsPaused(false)}
+          >
+            <div className="relative mx-auto max-w-xl overflow-hidden">
+              <AnimatePresence mode="wait" initial={false} custom={direction}>
+                <MobileSwipeCard
+                  key={activeIndex}
+                  item={items[activeIndex]}
+                  direction={direction}
+                  onDragEnd={(offsetX) => {
+                    if (offsetX < -SWIPE_CONFIDENCE) goNext();
+                    else if (offsetX > SWIPE_CONFIDENCE) goPrev();
+                  }}
+                />
+              </AnimatePresence>
+            </div>
 
-        <div className="relative mx-auto h-[450px] max-w-[1900px] [perspective:2000px]">
-          {repeatedItems.map((item) => (
-            <CoverflowCard
-              key={item._key}
-              item={item}
-              index={item._virtualIndex}
-              realIndex={item._realIndex}
-              progress={progress}
-              radius={radius}
-              angleStep={angleStep}
-              visibleArc={visibleArc}
-              cardWidth={cardWidth}
-              hovered={hoveredIndex === item._realIndex}
-              onHoverStart={() => {
-                setHoveredIndex(item._realIndex);
-                const current = progress.get();
-                const currentAngle = wrapDistance(
-                  item._virtualIndex * angleStep - current * 360,
-                  360
-                );
-                const neededRotation = currentAngle / 360;
-                targetProgress.current = current + neededRotation;
-              }}
-              onHoverEnd={() => {
-                setHoveredIndex(null);
-              }}
-            />
-          ))}
-        </div>
+            <div className="mt-5 flex items-center justify-center gap-3">
+              <button
+                type="button"
+                onClick={goPrev}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm"
+                aria-label="Previous review"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+
+              <div className="flex items-center gap-2">
+                {items.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => {
+                      setDirection(i > activeIndex ? 1 : -1);
+                      setActiveIndex(i);
+                    }}
+                    className={`h-2.5 rounded-full transition-all ${
+                      i === activeIndex ? "w-6 bg-slate-900" : "w-2.5 bg-slate-300"
+                    }`}
+                    aria-label={`Go to review ${i + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={goNext}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm"
+                aria-label="Next review"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div
+            className="mt-14"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            <div className="relative mx-auto flex h-[430px] max-w-[1320px] items-center justify-center overflow-hidden">
+              <DesktopSideCard item={items[prevIndex]} side="left" />
+              <div className="relative z-20 mx-auto w-full max-w-[760px]">
+                <AnimatePresence mode="wait" initial={false} custom={direction}>
+                  <DesktopActiveCard
+                    key={activeIndex}
+                    item={items[activeIndex]}
+                    direction={direction}
+                  />
+                </AnimatePresence>
+              </div>
+              <DesktopSideCard item={items[nextIndex]} side="right" />
+            </div>
+
+            <div className="mt-8 flex items-center justify-center gap-4">
+              <button
+                type="button"
+                onClick={goPrev}
+                className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50"
+                aria-label="Previous review"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+
+              <div className="flex items-center gap-2">
+                {items.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => {
+                      setDirection(i > activeIndex ? 1 : -1);
+                      setActiveIndex(i);
+                    }}
+                    className={`h-2.5 rounded-full transition-all ${
+                      i === activeIndex ? "w-7 bg-slate-900" : "w-2.5 bg-slate-300"
+                    }`}
+                    aria-label={`Go to review ${i + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={goNext}
+                className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50"
+                aria-label="Next review"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
 }
 
-function CoverflowCard({
-  item,
-  index,
-  realIndex,
-  progress,
-  radius,
-  angleStep,
-  visibleArc,
-  cardWidth,
-  hovered,
-  onHoverStart,
-  onHoverEnd,
-}) {
-  const angle = useTransform(progress, (p) => {
-    const raw = index * angleStep - p * 360;
-    return wrapDistance(raw, 360);
-  });
-
-  const x = useTransform(angle, (a) => {
-    const r = (a * Math.PI) / 180;
-    return -Math.sin(r) * radius;
-  });
-
-  const y = useTransform(angle, (a) => Math.abs(a) * 0.18);
-  const rotateY = useTransform(
-    angle,
-    [-visibleArc, -36, 0, 36, visibleArc],
-    [-62, -30, 0, 30, 62]
-  );
-  const scale = useTransform(
-    angle,
-    [-visibleArc, -34, 0, 34, visibleArc],
-    [0.82, 0.93, 1.08, 0.93, 0.82]
-  );
-  const opacity = useTransform(
-    angle,
-    [-visibleArc, -50, 0, 50, visibleArc],
-    [0, 0.66, 1, 0.66, 0]
-  );
-  const blur = useTransform(
-    angle,
-    [-visibleArc, -44, 0, 44, visibleArc],
-    [4.5, 1.4, 0, 1.4, 4.5]
-  );
-  const zIndex = useTransform(angle, (a) => 1000 - Math.abs(a) * 10);
-
+function ReviewCardShell({ item, className = "", bodyClassName = "", quoteClassName = "" }) {
   return (
-    <motion.article
-      onMouseEnter={onHoverStart}
-      onMouseLeave={onHoverEnd}
-      animate={
-        hovered
-          ? {
-              scale: 1.08,
-              rotateY: 0,
-              y: -8,
-              opacity: 1,
-            }
-          : {}
-      }
-      transition={{ duration: 0.42, ease: EXPO }}
-      style={{
-        width: cardWidth,
-        left: "50%",
-        top: 18,
-        marginLeft: -(cardWidth / 2),
-        x,
-        y,
-        rotateY,
-        scale,
-        opacity,
-        zIndex,
-        filter: useTransform(blur, (b) => `blur(${b}px)`),
-        transformStyle: "preserve-3d",
-        backfaceVisibility: "hidden",
-        pointerEvents: "auto",
-      }}
-      className="absolute rounded-[2.35rem] border border-white/75 bg-white/92 backdrop-blur-xl overflow-hidden will-change-transform shadow-[0_30px_80px_-34px_rgba(15,23,42,0.18)]"
+    <article
+      className={`rounded-[2rem] border border-white/75 bg-white/92 backdrop-blur-xl overflow-hidden shadow-[0_30px_80px_-34px_rgba(15,23,42,0.18)] ${className}`}
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-100/22 via-sky-100/16 to-emerald-100/14 opacity-70" />
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-white/10 via-white/80 to-white/10" />
-      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/85 to-transparent" />
-
-      <div className="relative h-full p-7 sm:p-8 lg:p-9 flex flex-col min-h-[320px]">
+      <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-100/18 via-sky-100/14 to-emerald-100/10 opacity-70 pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-white/10 via-white/80 to-white/10 pointer-events-none" />
+      <div className={`relative h-full flex flex-col ${bodyClassName}`}>
         <div className="flex items-start justify-between gap-4">
           <Stars value={item.rating || 5} />
-          <Quote className="h-5 w-5 text-slate-300" />
+          <Quote className="h-5 w-5 text-slate-300 shrink-0" />
         </div>
 
-        <p
-          className={`mt-7 text-slate-800 text-lg leading-relaxed transition-all duration-300 ${
-            hovered ? "line-clamp-none" : "line-clamp-5"
-          }`}
-        >
-          “{item.quote}”
-        </p>
+        <p className={`mt-6 text-slate-800 ${quoteClassName}`}>“{item.quote}”</p>
 
         <div className="mt-auto pt-8">
           <div className="h-px w-full bg-gradient-to-r from-slate-200 via-slate-300/70 to-transparent" />
@@ -349,68 +280,80 @@ function CoverflowCard({
           </div>
         </div>
       </div>
-    </motion.article>
+    </article>
   );
 }
 
-function MobileReviewCard({ item, index, total, progress, active, onSelect }) {
-  const angle = useTransform(progress, (p) => {
-    const raw = index * (360 / total) - p * 360;
-    return wrapDistance(raw, 360);
-  });
+function DesktopActiveCard({ item, direction }) {
+  return (
+    <motion.div
+      custom={direction}
+      initial={{ opacity: 0, x: direction > 0 ? 80 : -80, scale: 0.96 }}
+      animate={{ opacity: 1, x: 0, scale: 1 }}
+      exit={{ opacity: 0, x: direction > 0 ? -80 : 80, scale: 0.96 }}
+      transition={{ duration: 0.5, ease: EXPO }}
+      className="relative"
+    >
+      <ReviewCardShell
+        item={item}
+        bodyClassName="min-h-[360px] p-8 lg:p-10"
+        quoteClassName="text-[31px] leading-[1.38] tracking-[-0.02em]"
+      />
+    </motion.div>
+  );
+}
 
-  const opacity = useTransform(angle, [-180, -60, 0, 60, 180], [0, 0.15, 1, 0.15, 0]);
-  const scale = useTransform(angle, [-180, -60, 0, 60, 180], [0.92, 0.96, 1, 0.96, 0.92]);
-  const x = useTransform(angle, [-180, -90, 0, 90, 180], [80, 28, 0, -28, -80]);
-  const zIndex = useTransform(angle, (a) => 1000 - Math.abs(a) * 10);
+function DesktopSideCard({ item, side }) {
+  const sideClass =
+    side === "left"
+      ? "left-0 -translate-x-6 -rotate-[5deg]"
+      : "right-0 translate-x-6 rotate-[5deg]";
 
   return (
-    <motion.button
-      type="button"
-      onClick={onSelect}
-      style={{
-        opacity,
-        scale,
-        x,
-        zIndex,
-      }}
-      className={`absolute inset-0 mx-auto w-full max-w-[92vw] rounded-[1.8rem] border border-white/75 bg-white/95 backdrop-blur-xl overflow-hidden shadow-[0_24px_60px_-32px_rgba(15,23,42,0.18)] text-left transition-all ${
-        active ? "ring-2 ring-amber-300/70" : ""
-      }`}
+    <div
+      className={`absolute top-1/2 z-10 hidden h-[300px] w-[360px] -translate-y-1/2 lg:block ${sideClass}`}
+      aria-hidden="true"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-100/18 via-sky-100/14 to-emerald-100/10 opacity-70" />
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-white/10 via-white/80 to-white/10" />
-      <div className="relative h-full p-5 flex flex-col min-h-[320px]">
-        <div className="flex items-start justify-between gap-3">
-          <Stars value={item.rating || 5} />
-          <Quote className="h-5 w-5 text-slate-300" />
-        </div>
-
-        <p className="mt-6 text-slate-800 text-base leading-7">
-          “{item.quote}”
-        </p>
-
-        <div className="mt-auto pt-7">
-          <div className="h-px w-full bg-gradient-to-r from-slate-200 via-slate-300/70 to-transparent" />
+      <div className="h-full w-full rounded-[1.75rem] border border-white/70 bg-white/60 backdrop-blur-md shadow-[0_24px_60px_-36px_rgba(15,23,42,0.14)] opacity-50 overflow-hidden">
+        <div className="p-6">
+          <div className="flex items-start justify-between gap-4">
+            <Stars value={item.rating || 5} />
+            <Quote className="h-5 w-5 text-slate-300 shrink-0" />
+          </div>
+          <p className="mt-5 line-clamp-4 text-[22px] leading-[1.35] tracking-[-0.02em] text-slate-500">
+            “{item.quote}”
+          </p>
+          <div className="mt-6 h-px w-full bg-gradient-to-r from-slate-200 via-slate-300/70 to-transparent" />
           <div className="mt-4">
-            <p className="font-semibold text-slate-900">{item.author}</p>
-            {item.href ? (
-              <a
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-slate-500 underline-offset-4 hover:text-slate-700 hover:underline"
-                onClick={(e) => e.stopPropagation()}
-              >
-                {item.source}
-              </a>
-            ) : (
-              <p className="text-sm text-slate-500">{item.source}</p>
-            )}
+            <p className="font-semibold text-slate-700">{item.author}</p>
+            <p className="text-sm text-slate-400">{item.source}</p>
           </div>
         </div>
       </div>
-    </motion.button>
+    </div>
+  );
+}
+
+function MobileSwipeCard({ item, direction, onDragEnd }) {
+  return (
+    <motion.div
+      custom={direction}
+      initial={{ opacity: 0, x: direction > 0 ? 80 : -80, scale: 0.98 }}
+      animate={{ opacity: 1, x: 0, scale: 1 }}
+      exit={{ opacity: 0, x: direction > 0 ? -80 : 80, scale: 0.98 }}
+      transition={{ duration: 0.42, ease: EXPO }}
+      drag="x"
+      dragConstraints={{ left: 0, right: 0 }}
+      dragElastic={0.9}
+      onDragEnd={(_, info) => onDragEnd(info.offset.x)}
+      className="touch-pan-y"
+    >
+      <ReviewCardShell
+        item={item}
+        bodyClassName="min-h-[360px] p-5 sm:p-6"
+        quoteClassName="text-[clamp(1.25rem,3.5vw,1.7rem)] leading-[1.55]"
+      />
+    </motion.div>
   );
 }
 
