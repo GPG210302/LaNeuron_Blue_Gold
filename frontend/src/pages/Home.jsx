@@ -145,51 +145,45 @@ function WhyParentsSection({ data }) {
   const palettes = [
     {
       shell: "from-amber-200 via-orange-100 to-rose-100",
-      border: "border-amber-200/70",
       front: "bg-gradient-to-br from-amber-50 to-orange-50",
       back: "bg-gradient-to-br from-amber-500 to-orange-500",
       accent: "bg-amber-500",
-      glow: "shadow-[0_24px_60px_-30px_rgba(245,158,11,0.45)]",
+      glow: "shadow-[0_12px_30px_-20px_rgba(15,23,42,0.12)]",
     },
     {
       shell: "from-sky-200 via-cyan-100 to-blue-100",
-      border: "border-sky-200/70",
       front: "bg-gradient-to-br from-sky-50 to-cyan-50",
       back: "bg-gradient-to-br from-sky-500 to-cyan-500",
       accent: "bg-sky-500",
-      glow: "shadow-[0_24px_60px_-30px_rgba(14,165,233,0.45)]",
+      glow: "shadow-[0_12px_30px_-20px_rgba(15,23,42,0.12)]",
     },
     {
       shell: "from-violet-200 via-fuchsia-100 to-pink-100",
-      border: "border-fuchsia-200/70",
       front: "bg-gradient-to-br from-fuchsia-50 to-violet-50",
       back: "bg-gradient-to-br from-fuchsia-500 to-violet-500",
       accent: "bg-fuchsia-500",
-      glow: "shadow-[0_24px_60px_-30px_rgba(217,70,239,0.38)]",
+      glow: "shadow-[0_12px_30px_-20px_rgba(15,23,42,0.12)]",
     },
     {
       shell: "from-emerald-200 via-lime-100 to-green-100",
-      border: "border-emerald-200/70",
       front: "bg-gradient-to-br from-emerald-50 to-lime-50",
       back: "bg-gradient-to-br from-emerald-500 to-green-500",
       accent: "bg-emerald-500",
-      glow: "shadow-[0_24px_60px_-30px_rgba(16,185,129,0.4)]",
+      glow: "shadow-[0_12px_30px_-20px_rgba(15,23,42,0.12)]",
     },
     {
       shell: "from-rose-200 via-pink-100 to-orange-100",
-      border: "border-rose-200/70",
       front: "bg-gradient-to-br from-rose-50 to-pink-50",
       back: "bg-gradient-to-br from-rose-500 to-pink-500",
       accent: "bg-rose-500",
-      glow: "shadow-[0_24px_60px_-30px_rgba(244,63,94,0.36)]",
+      glow: "shadow-[0_12px_30px_-20px_rgba(15,23,42,0.12)]",
     },
     {
       shell: "from-indigo-200 via-blue-100 to-slate-100",
-      border: "border-indigo-200/70",
       front: "bg-gradient-to-br from-indigo-50 to-blue-50",
       back: "bg-gradient-to-br from-indigo-500 to-blue-500",
       accent: "bg-indigo-500",
-      glow: "shadow-[0_24px_60px_-30px_rgba(99,102,241,0.38)]",
+      glow: "shadow-[0_12px_30px_-20px_rgba(15,23,42,0.12)]",
     },
   ];
 
@@ -234,7 +228,7 @@ function WhyParentsSection({ data }) {
                   } group-hover:[transform:rotateY(180deg)]`}
                 >
                   <div
-                    className={`absolute inset-0 rounded-[2rem] border ${palette.border} ${palette.front} ${palette.glow} overflow-hidden [backface-visibility:hidden]`}
+                    className={`absolute inset-0 rounded-[2rem] border-2 border-slate-800/80 ${palette.front} ${palette.glow} shadow-[0_10px_0_rgba(15,23,42,0.92),0_24px_50px_-24px_rgba(15,23,42,0.28)] overflow-hidden [backface-visibility:hidden]`}
                   >
                     <div className={`absolute inset-x-0 top-0 h-2 ${palette.accent}`} />
                     <div className={`absolute inset-0 bg-gradient-to-br ${palette.shell} opacity-40`} />
@@ -263,7 +257,7 @@ function WhyParentsSection({ data }) {
                   </div>
 
                   <div
-                    className={`absolute inset-0 rounded-[2rem] border border-white/40 ${palette.back} overflow-hidden [transform:rotateY(180deg)] [backface-visibility:hidden]`}
+                    className={`absolute inset-0 rounded-[2rem] border-2 border-slate-800/80 ${palette.back} shadow-[0_10px_0_rgba(15,23,42,0.92),0_24px_50px_-24px_rgba(15,23,42,0.28)] overflow-hidden [transform:rotateY(180deg)] [backface-visibility:hidden]`}
                   >
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.32),transparent_35%)]" />
                     <div className="relative h-full p-7 flex flex-col text-white">
