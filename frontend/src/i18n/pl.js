@@ -576,25 +576,28 @@ export const pl = {
     featuredReview: {
       overline: "Głos rodzica",
       title: "Co mówią rodzice",
-      sub: "Kliknij wybraną opinię, aby wysunąć ją do przodu i przeczytać całość.",
+      sub: "Spokojny strumień opinii rodziców — najedź na wybraną kartę, aby zatrzymać ruch i przeczytać więcej.",
       items: [
         {
           quote:
             "La Neuron to dokładnie takie miejsce, jakiego szukaliśmy — mądre, angażujące i naprawdę edukacyjne. Widać, że każde zajęcia są przygotowane z ogromną uważnością.",
-          author: "Opinia rodzica",
+          author: "Debika Ghosh",
           source: "Google Review",
+          rating: 5,
         },
         {
           quote:
             "Najbardziej zachwyciło mnie to, jak naturalnie połączono tu naukę, kreatywność i budowanie pewności siebie. Moje dziecko wracało do domu pełne energii i ciekawości.",
           author: "Opinia rodzica",
-          source: "Opinia rodzica",
+          source: "Refleksja rodzica",
+          rating: 4.5,
         },
         {
           quote:
             "Te zajęcia są jednocześnie ciepłe i bardzo dobrze uporządkowane. Rzadko spotyka się program dla dzieci, który jest tak wspierający, a jednocześnie tak merytoryczny.",
-          author: "Opinia rodzica",
-          source: "Rekomendacja rodzica",
+          author: "Refleksja rodzica",
+          source: "Bezpośrednia opinia rodzica",
+          rating: 5,
         },
       ],
     },

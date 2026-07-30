@@ -572,25 +572,28 @@ export const en = {
     featuredReview: {
       overline: "Parent voice",
       title: "What Parents Say",
-      sub: "Tap any review card to bring it forward and read the full reflection.",
+      sub: "A gentle stream of parent reflections — hover on any card to pause and read more closely.",
       items: [
         {
           quote:
             "La Neuron creates exactly the kind of environment we were hoping for — thoughtful, engaging, and genuinely educational. You can feel the care behind every session.",
-          author: "Parent review",
+          author: "Debika Ghosh",
           source: "Google Review",
+          rating: 5,
         },
         {
           quote:
             "What stood out most was how naturally science, creativity, and confidence came together. My child came home excited, curious, and eager to share every discovery.",
-          author: "Parent review",
-          source: "Parent feedback",
+          author: "Parent feedback",
+          source: "Parent reflection",
+          rating: 4.5,
         },
         {
           quote:
             "The sessions feel warm and personal, but also very structured. It is rare to find something this nurturing and this intellectually serious for children.",
-          author: "Parent review",
-          source: "Parent testimonial",
+          author: "Parent reflection",
+          source: "Direct parent feedback",
+          rating: 5,
         },
       ],
     },
