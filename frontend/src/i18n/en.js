@@ -505,8 +505,8 @@ export const en = {
 
   home: {
     whyParents: {
-      overline: "WHY PARENTS CHOOSE LA NEURON",
-      title: "A place where curiosity is protected and confidence grows",
+      overline: "FAMILIES TRUST US",
+      title: "Why Parents Choose La Neuron",
       sub: "Thoughtfully designed sessions led by real expertise — so children do not just stay busy, they investigate, think, create, and develop lasting confidence.",
       items: [
         {

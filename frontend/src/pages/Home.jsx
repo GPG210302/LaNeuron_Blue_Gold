@@ -26,24 +26,12 @@ function SectionIntro({ overline, title, sub, align = "left", theme = "default" 
         </p>
       )}
       {title && (
-        <h2
-          className={
-            isGoldNavy
-              ? "mt-3 text-4xl md:text-5xl font-bold tracking-tight text-slate-900"
-              : "mt-3 text-4xl md:text-5xl font-bold tracking-tight text-slate-900"
-          }
-        >
+        <h2 className="mt-3 text-4xl md:text-5xl font-bold tracking-tight text-slate-900">
           {title}
         </h2>
       )}
       {sub && (
-        <p
-          className={
-            isGoldNavy
-              ? "mt-4 text-base md:text-lg leading-relaxed text-slate-600"
-              : "mt-4 text-base md:text-lg leading-relaxed text-slate-600"
-          }
-        >
+        <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-600">
           {sub}
         </p>
       )}
@@ -255,9 +243,6 @@ function WhyParentsSection({ data }) {
                         <span className="inline-flex items-center rounded-full bg-white/80 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500">
                           Why parents choose us
                         </span>
-                        <span className="text-xs font-semibold text-slate-400">
-                          Tap / hover
-                        </span>
                       </div>
 
                       <div className="mt-8">
@@ -268,7 +253,7 @@ function WhyParentsSection({ data }) {
 
                       <div className="mt-auto flex items-end justify-between">
                         <p className="max-w-[16rem] text-sm leading-relaxed text-slate-500">
-                          Discover what makes this meaningful for your child.
+                          Hover to flip and see how.
                         </p>
                         <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/80 shadow-sm">
                           <ArrowRight className="h-5 w-5 text-slate-700" />
@@ -299,12 +284,7 @@ function WhyParentsSection({ data }) {
                         {item.desc}
                       </p>
 
-                      <div className="mt-auto pt-6">
-                        <div className="h-px w-full bg-white/25" />
-                        <p className="mt-4 text-sm text-white/80">
-                          Built for confidence, curiosity, and meaningful learning.
-                        </p>
-                      </div>
+                      <div className="mt-auto" />
                     </div>
                   </div>
                 </div>
