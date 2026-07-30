@@ -505,25 +505,33 @@ export const en = {
 
   home: {
     whyParents: {
-      overline: "Why families trust us",
-      title: "Why Parents Choose La Neuron",
-      sub: "A thoughtful, science-led learning environment where curiosity, confidence, and real investigation grow together.",
+      overline: "WHY PARENTS CHOOSE LA NEURON",
+      title: "A place where curiosity is protected and confidence grows",
+      sub: "Thoughtfully designed sessions led by real expertise — so children do not just stay busy, they investigate, think, create, and develop lasting confidence.",
       items: [
         {
-          title: "PhD-led teaching",
-          desc: "Sessions are designed and guided by an educator with deep expertise in anatomy, cognitive science, and child development.",
+          title: "Real scientific thinking",
+          desc: "Children do not just complete activities. They learn to ask questions, make predictions, observe carefully, and draw conclusions through a real scientific process.",
         },
         {
-          title: "English-speaking environment",
-          desc: "Children learn through full English immersion, with gentle Polish support only where truly needed.",
+          title: "Led by deep expertise",
+          desc: "Sessions are shaped by an educator with a PhD in Human Anatomy, specialisation in cognitive science, and years of experience helping children learn in ways that truly suit developing minds.",
         },
         {
-          title: "Real scientific method",
-          desc: "Every session follows a clear investigation path — hypothesis, experiment, observation, results, and conclusion.",
+          title: "English that feels natural",
+          desc: "Because sessions happen in an English-speaking environment, children build listening, speaking, and subject vocabulary naturally while staying focused on discovery.",
         },
         {
-          title: "Small-group learning",
-          desc: "Limited group sizes help each child feel seen, supported, and actively involved.",
+          title: "Small groups, real attention",
+          desc: "With limited group sizes, each child is seen, supported, encouraged, and guided at a pace that helps them participate with confidence.",
+        },
+        {
+          title: "Creative and structured",
+          desc: "La Neuron brings together science, imagination, design, and hands-on making — so children experience learning as both joyful and intellectually meaningful.",
+        },
+        {
+          title: "Built for lasting confidence",
+          desc: "The goal is not only knowledge in the moment, but a child who leaves feeling capable, curious, expressive, and proud of what they discovered.",
         },
       ],
     },

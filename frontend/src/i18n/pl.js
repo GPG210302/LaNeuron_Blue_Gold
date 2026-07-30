@@ -509,25 +509,33 @@ export const pl = {
 
   home: {
     whyParents: {
-      overline: "Dlaczego rodzice nam ufają",
-      title: "Dlaczego rodzice wybierają La Neuron",
-      sub: "To spokojne, mądre i angażujące miejsce do nauki, w którym dzieci rozwijają ciekawość, pewność siebie i prawdziwe myślenie badawcze.",
+      overline: "DLACZEGO RODZICE WYBIERAJĄ LA NEURON",
+      title: "Miejsce, w którym ciekawość jest chroniona, a pewność siebie rośnie",
+      sub: "Starannie zaprojektowane zajęcia prowadzone przez osobę z prawdziwym doświadczeniem — tak, aby dzieci nie były tylko zajęte, lecz naprawdę badały, myślały, tworzyły i rozwijały trwałą pewność siebie.",
       items: [
         {
-          title: "Zajęcia prowadzone przez ekspertkę z tytułem PhD",
-          desc: "Program został stworzony przez edukatorkę z doświadczeniem w anatomii, naukach kognitywnych i rozwoju dziecka.",
+          title: "Prawdziwe myślenie naukowe",
+          desc: "Dzieci nie tylko wykonują aktywności. Uczą się zadawać pytania, stawiać przewidywania, uważnie obserwować i wyciągać wnioski poprzez prawdziwy proces badawczy.",
         },
         {
-          title: "Naturalne zanurzenie w języku angielskim",
-          desc: "Dzieci uczą się po angielsku w praktyczny i swobodny sposób, a wsparcie po polsku pojawia się tylko wtedy, gdy naprawdę jest potrzebne.",
+          title: "Prowadzone przez realne doświadczenie",
+          desc: "Zajęcia tworzy i prowadzi edukatorka z tytułem doktora anatomii człowieka, specjalizacją w naukach kognitywnych oraz wieloletnim doświadczeniem w pracy z dziećmi i ich rozwojem poznawczym.",
         },
         {
-          title: "Prawdziwa metoda naukowa",
-          desc: "Każde zajęcia prowadzą dziecko krok po kroku przez proces badawczy — od hipotezy, przez eksperyment i obserwację, aż po wyniki i wnioski.",
+          title: "Angielski, który przychodzi naturalnie",
+          desc: "Ponieważ zajęcia odbywają się w anglojęzycznym środowisku, dzieci naturalnie rozwijają rozumienie, mówienie i słownictwo przedmiotowe, pozostając skupione na odkrywaniu.",
         },
         {
-          title: "Małe grupy i uważne podejście",
-          desc: "Kameralne grupy pozwalają lepiej zauważyć każde dziecko, wesprzeć je i dać mu przestrzeń do aktywnego udziału.",
+          title: "Małe grupy, prawdziwa uwaga",
+          desc: "Dzięki kameralnym grupom każde dziecko jest zauważone, wspierane, zachęcane i prowadzone w tempie, które pomaga mu uczestniczyć z pewnością siebie.",
+        },
+        {
+          title: "Kreatywnie i jednocześnie z sensem",
+          desc: "La Neuron łączy naukę, wyobraźnię, projektowanie i praktyczne tworzenie — dzięki temu dzieci doświadczają nauki jako czegoś radosnego, ale też naprawdę wartościowego intelektualnie.",
+        },
+        {
+          title: "Pewność siebie, która zostaje",
+          desc: "Celem nie jest tylko wiedza na chwilę, lecz dziecko, które wychodzi z zajęć z poczuciem sprawczości, ciekawością, odwagą wyrażania siebie i dumą z własnych odkryć.",
         },
       ],
     },

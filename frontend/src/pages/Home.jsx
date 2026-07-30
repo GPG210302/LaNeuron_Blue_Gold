@@ -1,28 +1,49 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Quote, Star } from "lucide-react";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Hero } from "../components/sections/Hero";
 import { useData } from "../i18n/useData";
 
 const EXPO = [0.22, 1, 0.36, 1];
 const VIEWPORT = { once: true, margin: "-60px" };
 
-function SectionIntro({ overline, title, sub, align = "left" }) {
+function SectionIntro({ overline, title, sub, align = "left", theme = "default" }) {
+  const isCenter = align === "center";
+  const isGoldNavy = theme === "gold-navy";
+
   return (
-    <div className={align === "center" ? "max-w-3xl mx-auto text-center" : "max-w-3xl"}>
+    <div className={isCenter ? "max-w-3xl mx-auto text-center" : "max-w-3xl"}>
       {overline && (
-        <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-slate-500">
+        <p
+          className={
+            isGoldNavy
+              ? "text-[11px] font-bold uppercase tracking-[0.28em] text-amber-600"
+              : "text-[11px] font-bold uppercase tracking-[0.28em] text-slate-500"
+          }
+        >
           {overline}
         </p>
       )}
       {title && (
-        <h2 className="mt-3 text-4xl md:text-5xl font-bold tracking-tight text-slate-900">
+        <h2
+          className={
+            isGoldNavy
+              ? "mt-3 text-4xl md:text-5xl font-bold tracking-tight text-slate-900"
+              : "mt-3 text-4xl md:text-5xl font-bold tracking-tight text-slate-900"
+          }
+        >
           {title}
         </h2>
       )}
       {sub && (
-        <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-600">
+        <p
+          className={
+            isGoldNavy
+              ? "mt-4 text-base md:text-lg leading-relaxed text-slate-600"
+              : "mt-4 text-base md:text-lg leading-relaxed text-slate-600"
+          }
+        >
           {sub}
         </p>
       )}
@@ -129,34 +150,167 @@ function ReviewDeck({ featuredReview }) {
 }
 
 function WhyParentsSection({ data }) {
+  const [activeIndex, setActiveIndex] = useState(null);
+
   if (!data?.items?.length) return null;
 
+  const palettes = [
+    {
+      shell: "from-amber-200 via-orange-100 to-rose-100",
+      border: "border-amber-200/70",
+      front: "bg-gradient-to-br from-amber-50 to-orange-50",
+      back: "bg-gradient-to-br from-amber-500 to-orange-500",
+      accent: "bg-amber-500",
+      glow: "shadow-[0_24px_60px_-30px_rgba(245,158,11,0.45)]",
+    },
+    {
+      shell: "from-sky-200 via-cyan-100 to-blue-100",
+      border: "border-sky-200/70",
+      front: "bg-gradient-to-br from-sky-50 to-cyan-50",
+      back: "bg-gradient-to-br from-sky-500 to-cyan-500",
+      accent: "bg-sky-500",
+      glow: "shadow-[0_24px_60px_-30px_rgba(14,165,233,0.45)]",
+    },
+    {
+      shell: "from-violet-200 via-fuchsia-100 to-pink-100",
+      border: "border-fuchsia-200/70",
+      front: "bg-gradient-to-br from-fuchsia-50 to-violet-50",
+      back: "bg-gradient-to-br from-fuchsia-500 to-violet-500",
+      accent: "bg-fuchsia-500",
+      glow: "shadow-[0_24px_60px_-30px_rgba(217,70,239,0.38)]",
+    },
+    {
+      shell: "from-emerald-200 via-lime-100 to-green-100",
+      border: "border-emerald-200/70",
+      front: "bg-gradient-to-br from-emerald-50 to-lime-50",
+      back: "bg-gradient-to-br from-emerald-500 to-green-500",
+      accent: "bg-emerald-500",
+      glow: "shadow-[0_24px_60px_-30px_rgba(16,185,129,0.4)]",
+    },
+    {
+      shell: "from-rose-200 via-pink-100 to-orange-100",
+      border: "border-rose-200/70",
+      front: "bg-gradient-to-br from-rose-50 to-pink-50",
+      back: "bg-gradient-to-br from-rose-500 to-pink-500",
+      accent: "bg-rose-500",
+      glow: "shadow-[0_24px_60px_-30px_rgba(244,63,94,0.36)]",
+    },
+    {
+      shell: "from-indigo-200 via-blue-100 to-slate-100",
+      border: "border-indigo-200/70",
+      front: "bg-gradient-to-br from-indigo-50 to-blue-50",
+      back: "bg-gradient-to-br from-indigo-500 to-blue-500",
+      accent: "bg-indigo-500",
+      glow: "shadow-[0_24px_60px_-30px_rgba(99,102,241,0.38)]",
+    },
+  ];
+
   return (
-    <section className="py-20 lg:py-28 bg-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section className="relative py-20 lg:py-28 bg-[linear-gradient(180deg,#fffdf7_0%,#ffffff_40%,#f8fafc_100%)] overflow-hidden">
+      <div className="absolute inset-x-0 top-0 h-32 bg-[radial-gradient(circle_at_top,rgba(251,191,36,0.14),transparent_70%)]" />
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT}
           transition={{ duration: 0.6, ease: EXPO }}
         >
-          <SectionIntro overline={data.overline} title={data.title} sub={data.sub} />
+          <SectionIntro
+            overline={data.overline}
+            title={data.title}
+            sub={data.sub}
+            align="center"
+            theme="gold-navy"
+          />
         </motion.div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {data.items.map((item, i) => (
-            <motion.div
-              key={`${item.title}-${i}`}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={VIEWPORT}
-              transition={{ duration: 0.55, ease: EXPO, delay: i * 0.06 }}
-              className="rounded-[2rem] border border-slate-200 bg-slate-50/80 p-7 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.18)]"
-            >
-              <h3 className="text-xl font-semibold text-slate-900">{item.title}</h3>
-              <p className="mt-3 text-slate-600 leading-relaxed">{item.desc}</p>
-            </motion.div>
-          ))}
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 xl:grid-cols-3 [perspective:1400px]">
+          {data.items.map((item, i) => {
+            const palette = palettes[i % palettes.length];
+            const isActive = activeIndex === i;
+
+            return (
+              <motion.button
+                key={`${item.title}-${i}`}
+                type="button"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={VIEWPORT}
+                transition={{ duration: 0.55, ease: EXPO, delay: i * 0.06 }}
+                onClick={() => setActiveIndex(isActive ? null : i)}
+                className="group text-left h-[320px] rounded-[2rem] focus:outline-none focus-visible:ring-4 focus-visible:ring-amber-300/60"
+              >
+                <div
+                  className={`relative h-full w-full rounded-[2rem] transition-transform duration-700 [transform-style:preserve-3d] ${
+                    isActive ? "[transform:rotateY(180deg)]" : ""
+                  } group-hover:[transform:rotateY(180deg)]`}
+                >
+                  <div
+                    className={`absolute inset-0 rounded-[2rem] border ${palette.border} ${palette.front} ${palette.glow} overflow-hidden [backface-visibility:hidden]`}
+                  >
+                    <div className={`absolute inset-x-0 top-0 h-2 ${palette.accent}`} />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${palette.shell} opacity-40`} />
+                    <div className="relative h-full p-7 flex flex-col">
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="inline-flex items-center rounded-full bg-white/80 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500">
+                          Why parents choose us
+                        </span>
+                        <span className="text-xs font-semibold text-slate-400">
+                          Tap / hover
+                        </span>
+                      </div>
+
+                      <div className="mt-8">
+                        <h3 className="text-2xl font-bold leading-tight text-slate-900">
+                          {item.title}
+                        </h3>
+                      </div>
+
+                      <div className="mt-auto flex items-end justify-between">
+                        <p className="max-w-[16rem] text-sm leading-relaxed text-slate-500">
+                          Discover what makes this meaningful for your child.
+                        </p>
+                        <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/80 shadow-sm">
+                          <ArrowRight className="h-5 w-5 text-slate-700" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    className={`absolute inset-0 rounded-[2rem] border border-white/40 ${palette.back} overflow-hidden [transform:rotateY(180deg)] [backface-visibility:hidden]`}
+                  >
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.32),transparent_35%)]" />
+                    <div className="relative h-full p-7 flex flex-col text-white">
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="inline-flex items-center rounded-full bg-white/18 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-white/90">
+                          La Neuron
+                        </span>
+                        <span className="text-xs font-semibold text-white/80">
+                          Parent benefit
+                        </span>
+                      </div>
+
+                      <h3 className="mt-6 text-2xl font-bold leading-tight">
+                        {item.title}
+                      </h3>
+
+                      <p className="mt-5 text-[15px] leading-relaxed text-white/92">
+                        {item.desc}
+                      </p>
+
+                      <div className="mt-auto pt-6">
+                        <div className="h-px w-full bg-white/25" />
+                        <p className="mt-4 text-sm text-white/80">
+                          Built for confidence, curiosity, and meaningful learning.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.button>
+            );
+          })}
         </div>
       </div>
     </section>
