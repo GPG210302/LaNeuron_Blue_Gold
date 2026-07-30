@@ -177,8 +177,6 @@ function CoverflowCard({
     return wrapDistance(raw, 360);
   });
 
-  const visible = useTransform(angle, (a) => Math.abs(a) <= visibleArc);
-
   const x = useTransform(angle, (a) => {
     const r = (a * Math.PI) / 180;
     return -Math.sin(r) * radius;
@@ -197,16 +195,15 @@ function CoverflowCard({
   );
   const opacity = useTransform(
     angle,
-    [-visibleArc, -36, 0, 36, visibleArc],
-    [0.2, 0.72, 1, 0.72, 0.2]
+    [-visibleArc, -40, 0, 40, visibleArc],
+    [0, 0.72, 1, 0.72, 0]
   );
   const blur = useTransform(
     angle,
     [-visibleArc, -36, 0, 36, visibleArc],
-    [3.2, 1.2, 0, 1.2, 3.2]
+    [4, 1.2, 0, 1.2, 4]
   );
   const zIndex = useTransform(angle, (a) => 1000 - Math.abs(a) * 12);
-  const frontVisibility = useTransform(angle, (a) => (Math.abs(a) <= visibleArc ? 1 : 0));
 
   return (
     <motion.article
@@ -236,52 +233,48 @@ function CoverflowCard({
         zIndex,
         filter: useTransform(blur, (b) => `blur(${b}px)`),
         transformStyle: "preserve-3d",
-        pointerEvents: useTransform(visible, (v) => (v ? "auto" : "none")),
+        pointerEvents: "auto",
+        backfaceVisibility: "hidden",
       }}
       className="absolute rounded-[2.2rem] border border-white/75 bg-white/92 backdrop-blur-xl overflow-hidden will-change-transform shadow-[0_30px_80px_-34px_rgba(15,23,42,0.18)]"
     >
-      <motion.div
-        style={{ opacity: frontVisibility }}
-        className="absolute inset-0"
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-100/22 via-sky-100/16 to-emerald-100/14 opacity-70" />
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-white/10 via-white/80 to-white/10" />
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/85 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-100/22 via-sky-100/16 to-emerald-100/14 opacity-70" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-white/10 via-white/80 to-white/10" />
+      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/85 to-transparent" />
 
-        <div className="relative h-full p-6 sm:p-7 lg:p-8 flex flex-col min-h-[292px]">
-          <div className="flex items-start justify-between gap-4">
-            <Stars value={item.rating || 5} />
-            <Quote className="h-5 w-5 text-slate-300" />
-          </div>
+      <div className="relative h-full p-6 sm:p-7 lg:p-8 flex flex-col min-h-[292px]">
+        <div className="flex items-start justify-between gap-4">
+          <Stars value={item.rating || 5} />
+          <Quote className="h-5 w-5 text-slate-300" />
+        </div>
 
-          <p
-            className={`mt-6 text-slate-800 text-base sm:text-lg leading-relaxed transition-all duration-300 ${
-              hovered ? "line-clamp-none" : "line-clamp-5"
-            }`}
-          >
-            “{item.quote}”
-          </p>
+        <p
+          className={`mt-6 text-slate-800 text-base sm:text-lg leading-relaxed transition-all duration-300 ${
+            hovered ? "line-clamp-none" : "line-clamp-5"
+          }`}
+        >
+          “{item.quote}”
+        </p>
 
-          <div className="mt-auto pt-8">
-            <div className="h-px w-full bg-gradient-to-r from-slate-200 via-slate-300/70 to-transparent" />
-            <div className="mt-4">
-              <p className="font-semibold text-slate-900">{item.author}</p>
-              {item.href ? (
-                <a
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-slate-500 underline-offset-4 hover:text-slate-700 hover:underline"
-                >
-                  {item.source}
-                </a>
-              ) : (
-                <p className="text-sm text-slate-500">{item.source}</p>
-              )}
-            </div>
+        <div className="mt-auto pt-8">
+          <div className="h-px w-full bg-gradient-to-r from-slate-200 via-slate-300/70 to-transparent" />
+          <div className="mt-4">
+            <p className="font-semibold text-slate-900">{item.author}</p>
+            {item.href ? (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-slate-500 underline-offset-4 hover:text-slate-700 hover:underline"
+              >
+                {item.source}
+              </a>
+            ) : (
+              <p className="text-sm text-slate-500">{item.source}</p>
+            )}
           </div>
         </div>
-      </motion.div>
+      </div>
     </motion.article>
   );
 }
