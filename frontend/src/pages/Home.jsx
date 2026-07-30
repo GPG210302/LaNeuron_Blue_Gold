@@ -69,6 +69,7 @@ function ReviewDeck({ featuredReview }) {
   const items = useMemo(() => featuredReview?.items ?? [], [featuredReview]);
   const [viewportWidth, setViewportWidth] = useState(1400);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [mobileActiveIndex, setMobileActiveIndex] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const progress = useMotionValue(0);
   const targetProgress = useRef(0);
@@ -93,13 +94,14 @@ function ReviewDeck({ featuredReview }) {
     const diff = target - current;
     const eased = current + diff * Math.min(1, delta / 220);
 
-    const autoSpeed = isMobile ? 0.028 : 0.0385;
-    const next =
-      hoveredIndex === null ? eased + (delta / 1000) * autoSpeed : eased;
+    const isPaused = hoveredIndex !== null || (isMobile && mobileActiveIndex !== null);
+    const autoSpeed = isMobile ? 0.014 : 0.01925;
+
+    const next = isPaused ? eased : eased + (delta / 1000) * autoSpeed;
 
     progress.set(next);
 
-    if (hoveredIndex === null) {
+    if (!isPaused) {
       targetProgress.current = next;
     }
   });
@@ -133,6 +135,20 @@ function ReviewDeck({ featuredReview }) {
                 index={index}
                 total={items.length}
                 progress={progress}
+                active={mobileActiveIndex === index}
+                onSelect={() => {
+                  if (mobileActiveIndex === index) {
+                    setMobileActiveIndex(null);
+                    return;
+                  }
+
+                  setMobileActiveIndex(index);
+
+                  const current = progress.get();
+                  const currentAngle = wrapDistance(index * (360 / items.length) - current * 360, 360);
+                  const neededRotation = currentAngle / 360;
+                  targetProgress.current = current + neededRotation;
+                }}
               />
             ))}
           </div>
@@ -337,7 +353,7 @@ function CoverflowCard({
   );
 }
 
-function MobileReviewCard({ item, index, total, progress }) {
+function MobileReviewCard({ item, index, total, progress, active, onSelect }) {
   const angle = useTransform(progress, (p) => {
     const raw = index * (360 / total) - p * 360;
     return wrapDistance(raw, 360);
@@ -349,14 +365,18 @@ function MobileReviewCard({ item, index, total, progress }) {
   const zIndex = useTransform(angle, (a) => 1000 - Math.abs(a) * 10);
 
   return (
-    <motion.article
+    <motion.button
+      type="button"
+      onClick={onSelect}
       style={{
         opacity,
         scale,
         x,
         zIndex,
       }}
-      className="absolute inset-0 mx-auto w-full max-w-[92vw] rounded-[1.8rem] border border-white/75 bg-white/95 backdrop-blur-xl overflow-hidden shadow-[0_24px_60px_-32px_rgba(15,23,42,0.18)]"
+      className={`absolute inset-0 mx-auto w-full max-w-[92vw] rounded-[1.8rem] border border-white/75 bg-white/95 backdrop-blur-xl overflow-hidden shadow-[0_24px_60px_-32px_rgba(15,23,42,0.18)] text-left transition-all ${
+        active ? "ring-2 ring-amber-300/70" : ""
+      }`}
     >
       <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-100/18 via-sky-100/14 to-emerald-100/10 opacity-70" />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-white/10 via-white/80 to-white/10" />
@@ -380,6 +400,7 @@ function MobileReviewCard({ item, index, total, progress }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-slate-500 underline-offset-4 hover:text-slate-700 hover:underline"
+                onClick={(e) => e.stopPropagation()}
               >
                 {item.source}
               </a>
@@ -389,7 +410,7 @@ function MobileReviewCard({ item, index, total, progress }) {
           </div>
         </div>
       </div>
-    </motion.article>
+    </motion.button>
   );
 }
 
