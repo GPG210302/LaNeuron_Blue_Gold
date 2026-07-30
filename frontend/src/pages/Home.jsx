@@ -1,13 +1,7 @@
 import { Link } from "react-router-dom";
-import {
-  motion,
-  useAnimationFrame,
-  useMotionValue,
-  useSpring,
-  useTransform,
-} from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight, Quote, Star } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { Hero } from "../components/sections/Hero";
 import { useData } from "../i18n/useData";
 
@@ -50,17 +44,16 @@ function SectionIntro({ overline, title, sub, align = "left", theme = "default" 
 function Stars({ value = 5 }) {
   return (
     <div className="flex items-center gap-1">
-      {Array.from({ length: 5 }).map((_, i) => {
-        const filled = i < Math.floor(value);
-        return (
-          <Star
-            key={i}
-            className={`h-4 w-4 ${
-              filled ? "fill-amber-400 text-amber-400" : "fill-transparent text-slate-300"
-            }`}
-          />
-        );
-      })}
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star
+          key={i}
+          className={`h-4 w-4 ${
+            i < Math.floor(value)
+              ? "fill-amber-400 text-amber-400"
+              : "fill-transparent text-slate-300"
+          }`}
+        />
+      ))}
       <span className="ml-2 text-sm font-semibold text-slate-500">
         {Number(value).toFixed(1)}/5
       </span>
@@ -70,51 +63,12 @@ function Stars({ value = 5 }) {
 
 function ReviewDeck({ featuredReview }) {
   const items = useMemo(() => featuredReview?.items ?? [], [featuredReview]);
-  const [paused, setPaused] = useState(false);
-  const [hoveredKey, setHoveredKey] = useState(null);
-  const [viewportWidth, setViewportWidth] = useState(1440);
-
-  const CARD_WIDTH = 410;
-  const CARD_GAP = 28;
-  const STEP = CARD_WIDTH + CARD_GAP;
-  const TRACK_REPEAT = 3;
-
-  useEffect(() => {
-    const update = () => setViewportWidth(window.innerWidth);
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
-
-  const repeatedItems = useMemo(() => {
-    if (!items.length) return [];
-    return Array.from({ length: TRACK_REPEAT }, (_, setIndex) =>
-      items.map((item, itemIndex) => ({
-        ...item,
-        _key: `${setIndex}-${itemIndex}-${item.author}`,
-        _index: itemIndex,
-      }))
-    ).flat();
-  }, [items]);
-
-  const loopWidth = items.length * STEP;
-  const x = useMotionValue(0);
-
-  useAnimationFrame((_, delta) => {
-    if (!items.length || paused) return;
-
-    const speed = 42;
-    const movement = (speed * delta) / 1000;
-    let next = x.get() - movement;
-
-    if (Math.abs(next) >= loopWidth) {
-      next += loopWidth;
-    }
-
-    x.set(next);
-  });
+  const [isPaused, setIsPaused] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   if (!items.length) return null;
+
+  const rail = [...items, ...items];
 
   return (
     <section className="relative py-20 lg:py-28 overflow-hidden bg-[linear-gradient(180deg,#ffffff_0%,#f8fafc_100%)]">
@@ -135,176 +89,124 @@ function ReviewDeck({ featuredReview }) {
         </motion.div>
       </div>
 
-      <div className="relative mt-14 overflow-hidden">
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white via-white/80 to-transparent z-20" />
+      <div
+        className="relative mt-14 overflow-hidden"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => {
+          setIsPaused(false);
+          setHoveredIndex(null);
+        }}
+      >
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-white via-white/80 to-transparent z-20" />
         <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white via-white/80 to-transparent z-20" />
 
-        <div
-          className="relative mx-auto h-[380px] max-w-[1600px] [perspective:2200px]"
-          onMouseLeave={() => {
-            setPaused(false);
-            setHoveredKey(null);
-          }}
+        <motion.div
+          className="flex gap-7 w-max pl-6 lg:pl-8 pr-6 lg:pr-8"
+          animate={isPaused ? { x: undefined } : { x: ["0px", "-50%"] }}
+          transition={
+            isPaused
+              ? { duration: 0 }
+              : {
+                  duration: 34,
+                  ease: "linear",
+                  repeat: Infinity,
+                }
+          }
+          style={{ willChange: "transform" }}
         >
-          <motion.div
-            className="absolute left-0 top-0 flex items-center gap-7"
-            style={{
-              x,
-              transformStyle: "preserve-3d",
-              paddingLeft: "180px",
-              paddingRight: "180px",
-            }}
-          >
-            {repeatedItems.map((item, index) => (
-              <CoverflowReviewCard
-                key={item._key}
-                item={item}
-                index={index}
-                step={STEP}
-                x={x}
-                viewportWidth={viewportWidth}
-                isHovered={hoveredKey === item._key}
-                onHoverStart={() => {
-                  setPaused(true);
-                  setHoveredKey(item._key);
+          {rail.map((item, index) => {
+            const isHovered = hoveredIndex === index;
+            const positionType = index % 5;
+
+            const shapeClass =
+              positionType === 0
+                ? "rounded-[2.6rem]"
+                : positionType === 1
+                ? "rounded-[2.2rem]"
+                : positionType === 2
+                ? "rounded-[2.9rem]"
+                : positionType === 3
+                ? "rounded-[2.1rem]"
+                : "rounded-[2.5rem]";
+
+            const tiltClass =
+              positionType === 0
+                ? "-rotate-[2.5deg]"
+                : positionType === 1
+                ? "rotate-[1.4deg]"
+                : positionType === 2
+                ? "-rotate-[1deg]"
+                : positionType === 3
+                ? "rotate-[2.2deg]"
+                : "-rotate-[1.6deg]";
+
+            return (
+              <motion.article
+                key={`${item.author}-${index}`}
+                onMouseEnter={() => {
+                  setIsPaused(true);
+                  setHoveredIndex(index);
                 }}
-                onHoverEnd={() => {
-                  setPaused(false);
-                  setHoveredKey(null);
+                onMouseLeave={() => {
+                  setIsPaused(false);
+                  setHoveredIndex(null);
                 }}
-              />
-            ))}
-          </motion.div>
-        </div>
+                animate={{
+                  scale: isHovered ? 1.08 : 1,
+                  rotate: isHovered ? 0 : undefined,
+                  y: isHovered ? -12 : 0,
+                  opacity: isHovered ? 1 : 0.96,
+                }}
+                transition={{ duration: 0.35, ease: EXPO }}
+                className={`group relative w-[320px] sm:w-[360px] md:w-[390px] lg:w-[410px] shrink-0 ${shapeClass} ${
+                  isHovered ? "rotate-0 z-20" : tiltClass
+                } border border-white/70 bg-white/92 backdrop-blur-xl shadow-[0_30px_80px_-36px_rgba(15,23,42,0.24)] overflow-hidden`}
+                style={{ willChange: "transform" }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-100/35 via-sky-100/28 to-emerald-100/20 opacity-80" />
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-white/10 via-white/80 to-white/10" />
+                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/85 to-transparent" />
+
+                <div className="relative h-full p-6 sm:p-7 lg:p-8 flex flex-col min-h-[292px]">
+                  <div className="flex items-start justify-between gap-4">
+                    <Stars value={item.rating || 5} />
+                    <Quote className="h-5 w-5 text-slate-300" />
+                  </div>
+
+                  <p
+                    className={`mt-6 text-slate-800 text-base sm:text-lg leading-relaxed transition-all duration-300 ${
+                      isHovered ? "line-clamp-none" : "line-clamp-5"
+                    }`}
+                  >
+                    “{item.quote}”
+                  </p>
+
+                  <div className="mt-auto pt-8">
+                    <div className="h-px w-full bg-gradient-to-r from-slate-200 via-slate-300/70 to-transparent" />
+                    <div className="mt-4">
+                      <p className="font-semibold text-slate-900">{item.author}</p>
+
+                      {item.href ? (
+                        <a
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-slate-500 underline-offset-4 hover:text-slate-700 hover:underline"
+                        >
+                          {item.source}
+                        </a>
+                      ) : (
+                        <p className="text-sm text-slate-500">{item.source}</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </motion.article>
+            );
+          })}
+        </motion.div>
       </div>
     </section>
-  );
-}
-
-function CoverflowReviewCard({
-  item,
-  index,
-  step,
-  x,
-  viewportWidth,
-  isHovered,
-  onHoverStart,
-  onHoverEnd,
-}) {
-  const baseCenterOffset = 260;
-  const cardCenter = useTransform(x, (latest) => baseCenterOffset + index * step + latest);
-  const distanceFromCenter = useTransform(cardCenter, (v) => v - viewportWidth / 2);
-
-  const rotateYRaw = useTransform(
-    distanceFromCenter,
-    [-1000, -700, -350, 0, 350, 700, 1000],
-    [62, 44, 20, 0, -20, -44, -62]
-  );
-
-  const scaleRaw = useTransform(
-    distanceFromCenter,
-    [-1000, -700, -350, 0, 350, 700, 1000],
-    [0.62, 0.74, 0.88, 1.02, 0.88, 0.74, 0.62]
-  );
-
-  const yRaw = useTransform(
-    distanceFromCenter,
-    [-1000, -700, -350, 0, 350, 700, 1000],
-    [26, 18, 8, 0, 8, 18, 26]
-  );
-
-  const zRaw = useTransform(
-    distanceFromCenter,
-    [-1000, -700, -350, 0, 350, 700, 1000],
-    [-340, -220, -80, 120, -80, -220, -340]
-  );
-
-  const opacityRaw = useTransform(
-    distanceFromCenter,
-    [-1100, -750, -350, 0, 350, 750, 1100],
-    [0.14, 0.34, 0.72, 1, 0.72, 0.34, 0.14]
-  );
-
-  const blurRaw = useTransform(
-    distanceFromCenter,
-    [-1000, -700, -350, 0, 350, 700, 1000],
-    [4.2, 2.6, 1.1, 0, 1.1, 2.6, 4.2]
-  );
-
-  const rotateY = useSpring(rotateYRaw, { stiffness: 120, damping: 22 });
-  const scale = useSpring(scaleRaw, { stiffness: 120, damping: 22 });
-  const y = useSpring(yRaw, { stiffness: 120, damping: 22 });
-  const z = useSpring(zRaw, { stiffness: 120, damping: 22 });
-  const opacity = useSpring(opacityRaw, { stiffness: 120, damping: 26 });
-  const blur = useSpring(blurRaw, { stiffness: 120, damping: 26 });
-
-  return (
-    <motion.article
-      onMouseEnter={onHoverStart}
-      onMouseLeave={onHoverEnd}
-      animate={
-        isHovered
-          ? {
-              scale: 1.1,
-              rotateY: 0,
-              y: -12,
-              z: 180,
-              opacity: 1,
-            }
-          : {}
-      }
-      transition={{ duration: 0.34, ease: EXPO }}
-      style={{
-        width: CARD_WIDTH,
-        rotateY,
-        scale,
-        y,
-        z,
-        opacity,
-        filter: useTransform(blur, (b) => `blur(${b}px)`),
-        transformStyle: "preserve-3d",
-      }}
-      className="group relative shrink-0 rounded-[2.35rem] border border-white/75 bg-white/92 backdrop-blur-xl shadow-[0_30px_80px_-36px_rgba(15,23,42,0.22)] overflow-hidden will-change-transform"
-    >
-      <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-100/35 via-sky-100/28 to-emerald-100/20 opacity-80" />
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-white/10 via-white/80 to-white/10" />
-      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/85 to-transparent" />
-
-      <div className="relative h-full p-6 sm:p-7 lg:p-8 flex flex-col min-h-[292px]">
-        <div className="flex items-start justify-between gap-4">
-          <Stars value={item.rating || 5} />
-          <Quote className="h-5 w-5 text-slate-300" />
-        </div>
-
-        <p
-          className={`mt-6 text-slate-800 text-base sm:text-lg leading-relaxed transition-all duration-300 ${
-            isHovered ? "line-clamp-none" : "line-clamp-5"
-          }`}
-        >
-          “{item.quote}”
-        </p>
-
-        <div className="mt-auto pt-8">
-          <div className="h-px w-full bg-gradient-to-r from-slate-200 via-slate-300/70 to-transparent" />
-          <div className="mt-4">
-            <p className="font-semibold text-slate-900">{item.author}</p>
-
-            {item.href ? (
-              <a
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-slate-500 underline-offset-4 hover:text-slate-700 hover:underline"
-              >
-                {item.source}
-              </a>
-            ) : (
-              <p className="text-sm text-slate-500">{item.source}</p>
-            )}
-          </div>
-        </div>
-      </div>
-    </motion.article>
   );
 }
 
