@@ -148,42 +148,36 @@ function WhyParentsSection({ data }) {
       front: "bg-gradient-to-br from-amber-50 to-orange-50",
       back: "bg-gradient-to-br from-amber-500 to-orange-500",
       accent: "bg-amber-500",
-      glow: "shadow-[0_12px_30px_-20px_rgba(15,23,42,0.12)]",
     },
     {
       shell: "from-sky-200 via-cyan-100 to-blue-100",
       front: "bg-gradient-to-br from-sky-50 to-cyan-50",
       back: "bg-gradient-to-br from-sky-500 to-cyan-500",
       accent: "bg-sky-500",
-      glow: "shadow-[0_12px_30px_-20px_rgba(15,23,42,0.12)]",
     },
     {
       shell: "from-violet-200 via-fuchsia-100 to-pink-100",
       front: "bg-gradient-to-br from-fuchsia-50 to-violet-50",
       back: "bg-gradient-to-br from-fuchsia-500 to-violet-500",
       accent: "bg-fuchsia-500",
-      glow: "shadow-[0_12px_30px_-20px_rgba(15,23,42,0.12)]",
     },
     {
       shell: "from-emerald-200 via-lime-100 to-green-100",
       front: "bg-gradient-to-br from-emerald-50 to-lime-50",
       back: "bg-gradient-to-br from-emerald-500 to-green-500",
       accent: "bg-emerald-500",
-      glow: "shadow-[0_12px_30px_-20px_rgba(15,23,42,0.12)]",
     },
     {
       shell: "from-rose-200 via-pink-100 to-orange-100",
       front: "bg-gradient-to-br from-rose-50 to-pink-50",
       back: "bg-gradient-to-br from-rose-500 to-pink-500",
       accent: "bg-rose-500",
-      glow: "shadow-[0_12px_30px_-20px_rgba(15,23,42,0.12)]",
     },
     {
       shell: "from-indigo-200 via-blue-100 to-slate-100",
       front: "bg-gradient-to-br from-indigo-50 to-blue-50",
       back: "bg-gradient-to-br from-indigo-500 to-blue-500",
       accent: "bg-indigo-500",
-      glow: "shadow-[0_12px_30px_-20px_rgba(15,23,42,0.12)]",
     },
   ];
 
@@ -228,7 +222,7 @@ function WhyParentsSection({ data }) {
                   } group-hover:[transform:rotateY(180deg)]`}
                 >
                   <div
-                    className={`absolute inset-0 rounded-[2rem] border-2 border-slate-800/80 ${palette.front} ${palette.glow} shadow-[0_10px_0_rgba(15,23,42,0.92),0_24px_50px_-24px_rgba(15,23,42,0.28)] overflow-hidden [backface-visibility:hidden]`}
+                    className={`absolute inset-0 rounded-[2rem] border-[1.5px] border-slate-700 ${palette.front} shadow-[6px_8px_0_0_rgba(30,41,59,0.98)] overflow-hidden [backface-visibility:hidden]`}
                   >
                     <div className={`absolute inset-x-0 top-0 h-2 ${palette.accent}`} />
                     <div className={`absolute inset-0 bg-gradient-to-br ${palette.shell} opacity-40`} />
@@ -257,7 +251,7 @@ function WhyParentsSection({ data }) {
                   </div>
 
                   <div
-                    className={`absolute inset-0 rounded-[2rem] border-2 border-slate-800/80 ${palette.back} shadow-[0_10px_0_rgba(15,23,42,0.92),0_24px_50px_-24px_rgba(15,23,42,0.28)] overflow-hidden [transform:rotateY(180deg)] [backface-visibility:hidden]`}
+                    className={`absolute inset-0 rounded-[2rem] border-[1.5px] border-slate-700 ${palette.back} shadow-[6px_8px_0_0_rgba(30,41,59,0.98)] overflow-hidden [transform:rotateY(180deg)] [backface-visibility:hidden]`}
                   >
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.32),transparent_35%)]" />
                     <div className="relative h-full p-7 flex flex-col text-white">
