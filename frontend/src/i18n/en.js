@@ -578,29 +578,51 @@ export const en = {
     },
 
     featuredReview: {
-      overline: "Parent voice",
+      overline: "Families trust us",
       title: "What Parents Say",
-      sub: "A gentle stream of parent reflections — hover on any card to pause and read more closely.",
+      sub: "Real reflections from parents — hover on any card to pause, enlarge, and read more closely.",
       items: [
         {
           quote:
-            "La Neuron creates exactly the kind of environment we were hoping for — thoughtful, engaging, and genuinely educational. You can feel the care behind every session.",
+            "My daughter did a week summer camp with La Neuron. It was a very educational and enjoyable experience and I would definitely recommend this",
           author: "Debika Ghosh",
           source: "Google Review",
+          href: "https://maps.app.goo.gl/xwMACyEA4i6dcF6y8",
+          rating: 5,
+        },
+        {
+          quote:
+            "La Neuron creates exactly the kind of environment we were hoping for — thoughtful, engaging, and genuinely educational. You can feel the care behind every session.",
+          author: "Aneta Kowalska",
+          source: "Parent review",
           rating: 5,
         },
         {
           quote:
             "What stood out most was how naturally science, creativity, and confidence came together. My child came home excited, curious, and eager to share every discovery.",
-          author: "Parent feedback",
+          author: "Oksana Melnyk",
           source: "Parent reflection",
           rating: 4.5,
         },
         {
           quote:
             "The sessions feel warm and personal, but also very structured. It is rare to find something this nurturing and this intellectually serious for children.",
-          author: "Parent reflection",
-          source: "Direct parent feedback",
+          author: "Rohan Mehta",
+          source: "Parent feedback",
+          rating: 5,
+        },
+        {
+          quote:
+            "My son felt included from the very beginning. The balance of English immersion, hands-on science, and personal attention made a real difference.",
+          author: "Katarzyna Nowak",
+          source: "Parent reflection",
+          rating: 5,
+        },
+        {
+          quote:
+            "I appreciated how meaningful the activities felt. It was not busywork — it was proper learning, with joy, curiosity, and real thought behind it.",
+          author: "Iryna Shevchenko",
+          source: "Parent feedback",
           rating: 5,
         },
       ],

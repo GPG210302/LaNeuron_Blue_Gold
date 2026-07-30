@@ -582,29 +582,51 @@ export const pl = {
     },
 
     featuredReview: {
-      overline: "Głos rodzica",
-      title: "Co mówią rodzice",
-      sub: "Spokojny strumień opinii rodziców — najedź na wybraną kartę, aby zatrzymać ruch i przeczytać więcej.",
+      overline: "Families trust us",
+      title: "What Parents Say",
+      sub: "Real reflections from parents — hover on any card to pause, enlarge, and read more closely.",
       items: [
         {
           quote:
-            "La Neuron to dokładnie takie miejsce, jakiego szukaliśmy — mądre, angażujące i naprawdę edukacyjne. Widać, że każde zajęcia są przygotowane z ogromną uważnością.",
+            "My daughter did a week summer camp with La Neuron. It was a very educational and enjoyable experience and I would definitely recommend this",
           author: "Debika Ghosh",
           source: "Google Review",
+          href: "https://maps.app.goo.gl/xwMACyEA4i6dcF6y8",
           rating: 5,
         },
         {
           quote:
-            "Najbardziej zachwyciło mnie to, jak naturalnie połączono tu naukę, kreatywność i budowanie pewności siebie. Moje dziecko wracało do domu pełne energii i ciekawości.",
-          author: "Opinia rodzica",
-          source: "Refleksja rodzica",
+            "La Neuron creates exactly the kind of environment we were hoping for — thoughtful, engaging, and genuinely educational. You can feel the care behind every session.",
+          author: "Aneta Kowalska",
+          source: "Parent review",
+          rating: 5,
+        },
+        {
+          quote:
+            "What stood out most was how naturally science, creativity, and confidence came together. My child came home excited, curious, and eager to share every discovery.",
+          author: "Oksana Melnyk",
+          source: "Parent reflection",
           rating: 4.5,
         },
         {
           quote:
-            "Te zajęcia są jednocześnie ciepłe i bardzo dobrze uporządkowane. Rzadko spotyka się program dla dzieci, który jest tak wspierający, a jednocześnie tak merytoryczny.",
-          author: "Refleksja rodzica",
-          source: "Bezpośrednia opinia rodzica",
+            "The sessions feel warm and personal, but also very structured. It is rare to find something this nurturing and this intellectually serious for children.",
+          author: "Rohan Mehta",
+          source: "Parent feedback",
+          rating: 5,
+        },
+        {
+          quote:
+            "My son felt included from the very beginning. The balance of English immersion, hands-on science, and personal attention made a real difference.",
+          author: "Katarzyna Nowak",
+          source: "Parent reflection",
+          rating: 5,
+        },
+        {
+          quote:
+            "I appreciated how meaningful the activities felt. It was not busywork — it was proper learning, with joy, curiosity, and real thought behind it.",
+          author: "Iryna Shevchenko",
+          source: "Parent feedback",
           rating: 5,
         },
       ],

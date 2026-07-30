@@ -48,7 +48,7 @@ function Stars({ value = 5 }) {
           className={`h-4 w-4 ${
             i < Math.floor(value)
               ? "fill-amber-400 text-amber-400"
-              : "text-slate-300"
+              : "fill-transparent text-slate-300"
           }`}
         />
       ))}
@@ -61,13 +61,15 @@ function Stars({ value = 5 }) {
 
 function ReviewDeck({ featuredReview }) {
   const items = useMemo(() => featuredReview?.items ?? [], [featuredReview]);
+  const [isPaused, setIsPaused] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   if (!items.length) return null;
 
   const rail = [...items, ...items];
 
   return (
-    <section className="relative py-20 lg:py-28 overflow-hidden">
+    <section className="relative py-20 lg:py-28 overflow-hidden bg-[linear-gradient(180deg,#ffffff_0%,#f8fafc_100%)]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 28, filter: "blur(6px)" }}
@@ -80,57 +82,100 @@ function ReviewDeck({ featuredReview }) {
             title={featuredReview.title}
             sub={featuredReview.sub}
             align="center"
+            theme="gold-navy"
           />
         </motion.div>
       </div>
 
-      <div className="relative mt-12">
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white via-white/70 to-transparent z-20" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white via-white/70 to-transparent z-20" />
+      <div
+        className="relative mt-14 overflow-hidden"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => {
+          setIsPaused(false);
+          setHoveredIndex(null);
+        }}
+      >
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white via-white/80 to-transparent z-20" />
 
         <motion.div
-          className="flex gap-6 w-max px-6 lg:px-8"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{
-            duration: 32,
-            ease: "linear",
-            repeat: Infinity,
-          }}
+          className="flex gap-7 w-max pl-6 lg:pl-8 pr-6 lg:pr-8"
+          animate={isPaused ? { x: undefined } : { x: ["0px", "-50%"] }}
+          transition={
+            isPaused
+              ? { duration: 0 }
+              : {
+                  duration: 36,
+                  ease: "linear",
+                  repeat: Infinity,
+                }
+          }
+          style={{ willChange: "transform" }}
         >
-          {rail.map((item, index) => (
-            <motion.article
-              key={`${item.author}-${index}`}
-              whileHover={{
-                y: -10,
-                scale: 1.03,
-                width: 560,
-              }}
-              transition={{ duration: 0.35, ease: EXPO }}
-              className="group relative w-[320px] sm:w-[360px] md:w-[400px] lg:w-[430px] shrink-0 rounded-[2rem] border border-white/60 bg-white/85 backdrop-blur-xl shadow-[0_24px_70px_-32px_rgba(15,23,42,0.25)] overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-200/45 via-sky-100/35 to-emerald-100/30 opacity-80" />
-              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/75 to-transparent" />
+          {rail.map((item, index) => {
+            const isHovered = hoveredIndex === index;
 
-              <div className="relative h-full p-6 sm:p-7 lg:p-8 flex flex-col min-h-[280px]">
-                <div className="flex items-start justify-between gap-4">
-                  <Stars value={item.rating || 5} />
-                  <Quote className="h-5 w-5 text-slate-300" />
-                </div>
+            return (
+              <motion.article
+                key={`${item.author}-${index}`}
+                onMouseEnter={() => {
+                  setIsPaused(true);
+                  setHoveredIndex(index);
+                }}
+                onMouseLeave={() => {
+                  setIsPaused(false);
+                  setHoveredIndex(null);
+                }}
+                animate={{
+                  scale: isHovered ? 1.08 : 0.94,
+                  opacity: isHovered ? 1 : 0.88,
+                  rotateY: isHovered ? 0 : index % 3 === 0 ? -8 : index % 3 === 1 ? 0 : 8,
+                  y: isHovered ? -12 : 0,
+                }}
+                transition={{ duration: 0.35, ease: EXPO }}
+                className="group relative w-[320px] sm:w-[360px] md:w-[390px] lg:w-[410px] shrink-0 rounded-[2.2rem] border border-white/70 bg-white/90 backdrop-blur-xl shadow-[0_30px_80px_-36px_rgba(15,23,42,0.24)] overflow-hidden [transform-style:preserve-3d]"
+                style={{
+                  transformOrigin: "center center",
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-100/40 via-sky-100/30 to-emerald-100/25 opacity-80" />
+                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/80 to-transparent" />
 
-                <p className="mt-6 text-slate-800 text-base sm:text-lg leading-relaxed line-clamp-5 group-hover:line-clamp-none transition-all duration-300">
-                  “{item.quote}”
-                </p>
+                <div className="relative h-full p-6 sm:p-7 lg:p-8 flex flex-col min-h-[285px]">
+                  <div className="flex items-start justify-between gap-4">
+                    <Stars value={item.rating || 5} />
+                    <Quote className="h-5 w-5 text-slate-300" />
+                  </div>
 
-                <div className="mt-auto pt-8">
-                  <div className="h-px w-full bg-gradient-to-r from-slate-200 via-slate-300/70 to-transparent" />
-                  <div className="mt-4">
-                    <p className="font-semibold text-slate-900">{item.author}</p>
-                    <p className="text-sm text-slate-500">{item.source}</p>
+                  <p
+                    className={`mt-6 text-slate-800 text-base sm:text-lg leading-relaxed transition-all duration-300 ${
+                      isHovered ? "line-clamp-none" : "line-clamp-5"
+                    }`}
+                  >
+                    “{item.quote}”
+                  </p>
+
+                  <div className="mt-auto pt-8">
+                    <div className="h-px w-full bg-gradient-to-r from-slate-200 via-slate-300/70 to-transparent" />
+                    <div className="mt-4">
+                      <p className="font-semibold text-slate-900">{item.author}</p>
+                      {item.href ? (
+                        <a
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-slate-500 underline-offset-4 hover:text-slate-700 hover:underline"
+                        >
+                          {item.source}
+                        </a>
+                      ) : (
+                        <p className="text-sm text-slate-500">{item.source}</p>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </motion.article>
-          ))}
+              </motion.article>
+            );
+          })}
         </motion.div>
       </div>
     </section>
