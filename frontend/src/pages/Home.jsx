@@ -69,11 +69,17 @@ function ReviewDeck({ featuredReview }) {
   const items = useMemo(() => featuredReview?.items ?? [], [featuredReview]);
   const [viewportWidth, setViewportWidth] = useState(1400);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
   const progress = useMotionValue(0);
   const targetProgress = useRef(0);
 
   useEffect(() => {
-    const update = () => setViewportWidth(window.innerWidth);
+    const update = () => {
+      const width = window.innerWidth;
+      setViewportWidth(width);
+      setIsMobile(width < 768);
+    };
+
     update();
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
@@ -87,7 +93,7 @@ function ReviewDeck({ featuredReview }) {
     const diff = target - current;
     const eased = current + diff * Math.min(1, delta / 220);
 
-    const autoSpeed = 0.055;
+    const autoSpeed = isMobile ? 0.028 : 0.0385;
     const next =
       hoveredIndex === null ? eased + (delta / 1000) * autoSpeed : eased;
 
@@ -100,13 +106,58 @@ function ReviewDeck({ featuredReview }) {
 
   if (!items.length) return null;
 
-  const radius = Math.max(360, Math.min(500, viewportWidth * 0.24));
-  const angleStep = 24;
-  const visibleArc = 58;
+  if (isMobile) {
+    return (
+      <section className="relative py-16 overflow-hidden bg-[linear-gradient(180deg,#ffffff_0%,#f8fafc_100%)]">
+        <div className="max-w-7xl mx-auto px-5">
+          <motion.div
+            initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={VIEWPORT}
+            transition={{ duration: 0.6, ease: EXPO }}
+          >
+            <SectionIntro
+              overline={featuredReview.overline}
+              title={featuredReview.title}
+              sub={featuredReview.sub}
+              align="center"
+              theme="gold-navy"
+            />
+          </motion.div>
+
+          <div className="mt-10 relative h-[350px] overflow-hidden">
+            {items.map((item, index) => (
+              <MobileReviewCard
+                key={`${item.author}-${index}`}
+                item={item}
+                index={index}
+                total={items.length}
+                progress={progress}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  const radius = Math.max(430, Math.min(680, viewportWidth * 0.35));
+  const angleStep = 20;
+  const visibleArc = 74;
+  const cardWidth = Math.min(560, Math.max(430, viewportWidth * 0.27));
+
+  const repeatedItems = [-1, 0, 1].flatMap((loop) =>
+    items.map((item, index) => ({
+      ...item,
+      _virtualIndex: index + loop * items.length,
+      _realIndex: index,
+      _key: `${loop}-${index}-${item.author}`,
+    }))
+  );
 
   return (
     <section className="relative py-20 lg:py-28 overflow-hidden bg-[linear-gradient(180deg,#ffffff_0%,#f8fafc_100%)]">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-[1680px] mx-auto px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 28, filter: "blur(6px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -129,24 +180,29 @@ function ReviewDeck({ featuredReview }) {
           setHoveredIndex(null);
         }}
       >
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white via-white/95 to-transparent z-30" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white via-white/95 to-transparent z-30" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-white via-white/95 to-transparent z-30" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-28 bg-gradient-to-l from-white via-white/95 to-transparent z-30" />
 
-        <div className="relative mx-auto h-[410px] max-w-[1500px] [perspective:1800px]">
-          {items.map((item, index) => (
+        <div className="relative mx-auto h-[450px] max-w-[1900px] [perspective:2000px]">
+          {repeatedItems.map((item) => (
             <CoverflowCard
-              key={`${item.author}-${index}`}
+              key={item._key}
               item={item}
-              index={index}
+              index={item._virtualIndex}
+              realIndex={item._realIndex}
               progress={progress}
               radius={radius}
               angleStep={angleStep}
               visibleArc={visibleArc}
-              hovered={hoveredIndex === index}
+              cardWidth={cardWidth}
+              hovered={hoveredIndex === item._realIndex}
               onHoverStart={() => {
-                setHoveredIndex(index);
+                setHoveredIndex(item._realIndex);
                 const current = progress.get();
-                const currentAngle = wrapDistance(index * angleStep - current * 360, 360);
+                const currentAngle = wrapDistance(
+                  item._virtualIndex * angleStep - current * 360,
+                  360
+                );
                 const neededRotation = currentAngle / 360;
                 targetProgress.current = current + neededRotation;
               }}
@@ -164,10 +220,12 @@ function ReviewDeck({ featuredReview }) {
 function CoverflowCard({
   item,
   index,
+  realIndex,
   progress,
   radius,
   angleStep,
   visibleArc,
+  cardWidth,
   hovered,
   onHoverStart,
   onHoverEnd,
@@ -182,28 +240,28 @@ function CoverflowCard({
     return -Math.sin(r) * radius;
   });
 
-  const y = useTransform(angle, (a) => Math.abs(a) * 0.28);
+  const y = useTransform(angle, (a) => Math.abs(a) * 0.18);
   const rotateY = useTransform(
     angle,
-    [-visibleArc, -28, 0, 28, visibleArc],
-    [-58, -28, 0, 28, 58]
+    [-visibleArc, -36, 0, 36, visibleArc],
+    [-62, -30, 0, 30, 62]
   );
   const scale = useTransform(
     angle,
-    [-visibleArc, -30, 0, 30, visibleArc],
-    [0.82, 0.93, 1.04, 0.93, 0.82]
+    [-visibleArc, -34, 0, 34, visibleArc],
+    [0.82, 0.93, 1.08, 0.93, 0.82]
   );
   const opacity = useTransform(
     angle,
-    [-visibleArc, -40, 0, 40, visibleArc],
-    [0, 0.72, 1, 0.72, 0]
+    [-visibleArc, -50, 0, 50, visibleArc],
+    [0, 0.66, 1, 0.66, 0]
   );
   const blur = useTransform(
     angle,
-    [-visibleArc, -36, 0, 36, visibleArc],
-    [4, 1.2, 0, 1.2, 4]
+    [-visibleArc, -44, 0, 44, visibleArc],
+    [4.5, 1.4, 0, 1.4, 4.5]
   );
-  const zIndex = useTransform(angle, (a) => 1000 - Math.abs(a) * 12);
+  const zIndex = useTransform(angle, (a) => 1000 - Math.abs(a) * 10);
 
   return (
     <motion.article
@@ -212,19 +270,19 @@ function CoverflowCard({
       animate={
         hovered
           ? {
-              scale: 1.1,
+              scale: 1.08,
               rotateY: 0,
-              y: -6,
+              y: -8,
               opacity: 1,
             }
           : {}
       }
       transition={{ duration: 0.42, ease: EXPO }}
       style={{
-        width: 388,
+        width: cardWidth,
         left: "50%",
         top: 18,
-        marginLeft: -194,
+        marginLeft: -(cardWidth / 2),
         x,
         y,
         rotateY,
@@ -233,23 +291,23 @@ function CoverflowCard({
         zIndex,
         filter: useTransform(blur, (b) => `blur(${b}px)`),
         transformStyle: "preserve-3d",
-        pointerEvents: "auto",
         backfaceVisibility: "hidden",
+        pointerEvents: "auto",
       }}
-      className="absolute rounded-[2.2rem] border border-white/75 bg-white/92 backdrop-blur-xl overflow-hidden will-change-transform shadow-[0_30px_80px_-34px_rgba(15,23,42,0.18)]"
+      className="absolute rounded-[2.35rem] border border-white/75 bg-white/92 backdrop-blur-xl overflow-hidden will-change-transform shadow-[0_30px_80px_-34px_rgba(15,23,42,0.18)]"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-100/22 via-sky-100/16 to-emerald-100/14 opacity-70" />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-white/10 via-white/80 to-white/10" />
       <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/85 to-transparent" />
 
-      <div className="relative h-full p-6 sm:p-7 lg:p-8 flex flex-col min-h-[292px]">
+      <div className="relative h-full p-7 sm:p-8 lg:p-9 flex flex-col min-h-[320px]">
         <div className="flex items-start justify-between gap-4">
           <Stars value={item.rating || 5} />
           <Quote className="h-5 w-5 text-slate-300" />
         </div>
 
         <p
-          className={`mt-6 text-slate-800 text-base sm:text-lg leading-relaxed transition-all duration-300 ${
+          className={`mt-7 text-slate-800 text-lg leading-relaxed transition-all duration-300 ${
             hovered ? "line-clamp-none" : "line-clamp-5"
           }`}
         >
@@ -257,6 +315,62 @@ function CoverflowCard({
         </p>
 
         <div className="mt-auto pt-8">
+          <div className="h-px w-full bg-gradient-to-r from-slate-200 via-slate-300/70 to-transparent" />
+          <div className="mt-4">
+            <p className="font-semibold text-slate-900">{item.author}</p>
+            {item.href ? (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-slate-500 underline-offset-4 hover:text-slate-700 hover:underline"
+              >
+                {item.source}
+              </a>
+            ) : (
+              <p className="text-sm text-slate-500">{item.source}</p>
+            )}
+          </div>
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
+function MobileReviewCard({ item, index, total, progress }) {
+  const angle = useTransform(progress, (p) => {
+    const raw = index * (360 / total) - p * 360;
+    return wrapDistance(raw, 360);
+  });
+
+  const opacity = useTransform(angle, [-180, -60, 0, 60, 180], [0, 0.15, 1, 0.15, 0]);
+  const scale = useTransform(angle, [-180, -60, 0, 60, 180], [0.92, 0.96, 1, 0.96, 0.92]);
+  const x = useTransform(angle, [-180, -90, 0, 90, 180], [80, 28, 0, -28, -80]);
+  const zIndex = useTransform(angle, (a) => 1000 - Math.abs(a) * 10);
+
+  return (
+    <motion.article
+      style={{
+        opacity,
+        scale,
+        x,
+        zIndex,
+      }}
+      className="absolute inset-0 mx-auto w-full max-w-[92vw] rounded-[1.8rem] border border-white/75 bg-white/95 backdrop-blur-xl overflow-hidden shadow-[0_24px_60px_-32px_rgba(15,23,42,0.18)]"
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-100/18 via-sky-100/14 to-emerald-100/10 opacity-70" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-white/10 via-white/80 to-white/10" />
+      <div className="relative h-full p-5 flex flex-col min-h-[320px]">
+        <div className="flex items-start justify-between gap-3">
+          <Stars value={item.rating || 5} />
+          <Quote className="h-5 w-5 text-slate-300" />
+        </div>
+
+        <p className="mt-6 text-slate-800 text-base leading-7">
+          “{item.quote}”
+        </p>
+
+        <div className="mt-auto pt-7">
           <div className="h-px w-full bg-gradient-to-r from-slate-200 via-slate-300/70 to-transparent" />
           <div className="mt-4">
             <p className="font-semibold text-slate-900">{item.author}</p>
