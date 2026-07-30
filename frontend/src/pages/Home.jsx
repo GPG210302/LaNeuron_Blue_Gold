@@ -4,6 +4,7 @@ import { ArrowRight, ChevronLeft, ChevronRight, Quote, Star } from "lucide-react
 import { useEffect, useMemo, useState } from "react";
 import { Hero } from "../components/sections/Hero";
 import { useData } from "../i18n/useData";
+import { PanoramicReviews } from "../components/sections/PanoramicReviews";
 
 const EXPO = [0.22, 1, 0.36, 1];
 const VIEWPORT = { once: true, margin: "-60px" };
@@ -723,7 +724,7 @@ export default function Home() {
       <Hero />
       <WhyParentsSection data={home?.whyParents} />
       <EnrollingNowSection data={home?.enrollingNow} />
-      <ReviewDeck featuredReview={home?.featuredReview} />
+      <PanoramicReviews featuredReview={home?.featuredReview} />
       <LatestSection data={home?.latest} />
     </>
   );
