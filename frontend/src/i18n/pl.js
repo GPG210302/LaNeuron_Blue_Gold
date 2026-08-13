@@ -206,6 +206,19 @@ export const pl = {
       description:
         "Intensywne tematyczne warsztaty STEAM realizowane w trakcie lata 2026. Każdy dzień ma własny motyw przewodni i 3 godziny prowadzonych badań naukowych — wewnątrz i na zewnątrz. Szczegółowe informacje znajdziesz w sekcji STEAM Thematic Workshop poniżej.",
     },
+    // ✅ NEW: Young Scientist Research Workshop
+    "Young Scientist Research Workshop": {
+      title: "Warsztat Młodych Naukowców",
+      type: "Regularne",
+      description:
+        "Specjalny program badawczy dla dzieci i młodzieży. Uczestnicy tworzą własne projekty naukowe, plakaty i prezentacje, budując portfolio pracy, które można pokazać na uniwersytetach, w szkołach i na wystawach naukowych.",
+    },
+    "School & College Collaboration": {
+      title: "Współpraca ze szkołami i uczelniami",
+      type: "Dla szkół i uczelni",
+      description:
+        "Prowadzimy praktyczne warsztaty STEAM oraz cykle zajęć projektowych dla szkół i uczelni. Program dopasowujemy do wieku uczniów, programu nauczania, planu zajęć i celów edukacyjnych placówki.",
+    },
     "Cognitive Support Sessions": {
       title: "Sesje wsparcia kognitywnego",
       type: "Indywidualne",
@@ -578,6 +591,14 @@ export const pl = {
           external: false,
           cta: "Zobacz szczegóły",
         },
+        {
+          title: "Warsztaty Badawcze dla Młodych Naukowców",
+          status: "Nabór otwarty",
+          desc: "Praca badawcza pod opieką mentora dla uczniów w wieku 13–18 lat — od pierwszego pytania do gotowej pracy naukowej, ze wsparciem w publikacji i prezentacji na konferencji.",
+          href: "/research-workshop",
+          external: false,
+          cta: "Zobacz szczegóły programu",
+        },
       ],
     },
 
@@ -674,8 +695,10 @@ export const pl = {
     subtext:
       "Liczba miejsc jest ograniczona do maksymalnie 10 dzieci, aby każde dziecko mogło otrzymać indywidualną uwagę. Wypełnij formularz – odpowiedź otrzymasz w ciągu 24 godzin.",
     promises: [
-      "Osobista odpowiedź w ciągu 24 godzin",
+      "Osobista odpowied w ciągu 24 godzin",
       "Możliwość podania alergii i szczególnych potrzeb",
+      "Indywidualne podejście do każdego dziecka",
+      "Zniżki za polecenie",
       "Zniżka dla rodzeństwa",
     ],
     labels: {
@@ -712,5 +735,40 @@ export const pl = {
     errorRequired: "Proszę wypełnić wszystkie pola oznaczone gwiazdką.",
     errorGeneral:
       "Wystąpił błąd. Spróbuj ponownie lub napisz bezpośrednio na adres [admin@laneuron.org](mailto:admin@laneuron.org).",
+    form: {
+      programmes: [
+        { id: "thematic", label: "Tematyczne warsztaty STEAM" },
+        { id: "cyclic", label: "Cykliczne zajęcia STEAM" },
+        { id: "single-day", label: "Jednodniowe warsztaty STEAM" },
+        { id: "research", label: "Program Młody Badacz – badania i publikacje" },
+        { id: "collaboration", label: "Współpraca ze szkołą lub uczelnią" },
+        { id: "cognitive", label: "Indywidualne wsparcie w nauce i koncentracji" },
+        { id: "not-sure", label: "Nie wiem jeszcze – proszę o pomoc w wyborze" },
+      ],
+      contactMethods: ["Telefon", "WhatsApp", "SMS", "E-mail"],
+      supportAreas: ["Pamięć", "Uwaga i koncentracja", "Czytanie", "Pisanie / pismo odręczne", "Trudności z odrabianiem prac domowych", "Przygotowanie do egzaminów", "Stres przed sprawdzianami i egzaminami", "Inne trudności w uczeniu się, np. ADHD, dysleksja lub SPE"],
+      sessionPatterns: ["Jednorazowa konsultacja", "Krótki cykl spotkań (4–6 spotkań)", "Regularne wsparcie"],
+      yesNo: ["Tak", "Nie"],
+      englishComfortOptions: ["Tak", "Nie", "Nie wiem"],
+      weeklyTimeOptions: ["Mniej niż 1 godzina", "1–2 godziny", "3–4 godziny", "Ponad 5 godzin", "Jeszcze nie wiem"],
+      projectStyles: ["Projekt indywidualny", "Projekt w małej grupie"],
+      institutionTypes: [{ id: "primary", label: "Szkoła podstawowa" }, { id: "secondary", label: "Szkoła ponadpodstawowa" }, { id: "college", label: "Uczelnia / szkoła wyższa" }, { id: "other", label: "Inna placówka" }],
+      contactRoles: ["Nauczyciel / nauczycielka", "Koordynator / koordynatorka", "Dyrektor / dyrektorka", "Przedstawiciel / przedstawicielka uczniów"],
+      collaborationTypes: ["Pozalekcyjne koło STEAM", "Jednorazowe warsztaty lub wydarzenie", "Program STEAM oparty na projektach", "Mentoring badawczy lub wsparcie w konkursach"],
+      deliveryLanguages: ["Angielski", "Polski", "Dwujęzycznie"],
+      labels: {
+        programmeInterest: "Jakim programem są Państwo zainteresowani? *", parentName: "Imię i nazwisko rodzica / opiekuna *", email: "Adres e-mail *", phone: "Telefon / WhatsApp", childName: "Imię dziecka *", childAge: "Wiek dziecka (6–14 lat) *", studentName: "Imię i nazwisko uczestnika *", studentAge: "Wiek uczestnika (13–18 lat) *", startDate: "Preferowana data rozpoczęcia *", endDate: "Preferowana data zakończenia *", preferredContact: "Jak możemy się z Państwem skontaktować? (wybierz co najmniej jedną opcję) *", notes: "Pytania, alergie lub ważne informacje o dziecku", researchNotes: "Dodatkowe informacje lub pytania", collaborationNotes: "Dodatkowe informacje, dostępne terminy lub ograniczenia", supportAreas: "W jakich obszarach dziecko potrzebuje wsparcia? *", sessionPattern: "Jaka forma spotkań będzie najlepsza? *", learningSituation: "Czy jest coś ważnego, co warto wiedzieć o obecnej sytuacji dziecka w nauce?", researchExperience: "Czy dziecko realizowało wcześniej projekt badawczy, brało udział w konkursie lub przygotowało pracę naukową?", englishComfort: "Czy dziecko swobodnie czyta materiały naukowe po angielsku?", researchDescription: "Prosimy krótko opisać wcześniejszy projekt lub doświadczenie", weeklyTime: "Ile czasu tygodniowo dziecko może poświęcić na samodzielną pracę nad projektem? *", projectStyle: "Jaka forma pracy będzie najlepsza?", researchInterests: "Jakie tematy naukowe interesują dziecko?", contactName: "Imię i nazwisko osoby do kontaktu *", workEmail: "Służbowy adres e-mail *", institutionName: "Nazwa placówki *", institutionType: "Rodzaj placówki *", institutionOther: "Prosimy podać rodzaj placówki *", contactRole: "Pełniona funkcja *", studentCount: "Przybliżona liczba uczniów", studentAgeRange: "Wiek uczniów *", timeline: "Proponowany termin", collaborationTypes: "Jaka forma współpracy Państwa interesuje? *", deliveryLanguages: "W jakim języku mają odbywać się zajęcia?", collaborationGoals: "Jakie umiejętności lub efekty chcieliby Państwo rozwinąć u uczniów?",
+      },
+      placeholders: {
+        programme: "Wybierz program", select: "Wybierz opcję", parentName: "Imię i nazwisko", email: "twoj@email.pl", phone: "Numer telefonu", childName: "Imię dziecka", childAge: "np. 9", studentName: "Imię i nazwisko uczestnika", notes: "Napisz, jeśli jest coś ważnego, o czym powinniśmy wiedzieć.", researchNotes: "Można wpisać pytania, dodatkowe informacje o uczestniku lub inne ważne uwagi.", collaborationNotes: "Można wpisać informacje o organizacji zajęć, ograniczeniach czasowych lub potrzebach placówki.", learningSituation: "Np. trudności w szkole, obecne formy wsparcia, zbliżające się egzaminy lub inne informacje pomocne przed pierwszą rozmową.", researchDescription: "Np. temat projektu, konkurs, projekt szkolny, plakat naukowy lub publikacja.", researchInterests: "Np. biologia, psychologia, ekologia, chemia, fizyka, inżynieria lub kosmos.", contactName: "Imię i nazwisko", workEmail: "kontakt@szkola.pl", institutionName: "Nazwa szkoły, uczelni lub innej placówki", institutionOther: "Opisz rodzaj placówki", studentCount: "Np. 18 uczniów", studentAgeRange: "Np. 10–12 lat lub 13–16 lat", timeline: "Np. październik–grudzień 2026, raz w tygodniu", collaborationGoals: "Opisz najważniejsze cele, oczekiwane efekty lub potrzeby uczniów i placówki.",
+      },
+      tips: {
+        programme: "Najpierw wybierz program. Poniżej pojawią się pytania odpowiednie dla wybranej formy zajęć.", startDate: "Można wybrać dzisiejszą datę lub późniejszą. Niedziele są niedostępne.", endDate: "W przypadku zajęć jednodniowych wybierz tę samą datę.", supportAreas: "Można zaznaczyć więcej niż jedną odpowiedź.", researchExperience: "Może to być projekt szkolny, konkurs, plakat naukowy, praca badawcza lub publikacja.", weeklyTime: "Ta informacja pomoże nam zaproponować realny i wygodny plan pracy.", timeline: "Można podać miesiące, możliwe dni, częstotliwość spotkań lub napisać: „do ustalenia”.",
+      },
+      goalsNote: { title: "Co uczniowie mogą zyskać dzięki współpracy z La Neuron:", text: "Ciekawość naukową, samodzielne myślenie, praktyczne umiejętności badawcze, kreatywność, większą pewność w komunikacji po angielsku oraz konkretne efekty pracy projektowej. Program możemy dopasować do wieku uczniów, planu zajęć i celów placówki." },
+      validation: {
+        programme: "Prosimy najpierw wybrać program.", parentName: "Prosimy wpisać imię i nazwisko rodzica lub opiekuna.", contactName: "Prosimy wpisać imię i nazwisko osoby do kontaktu.", email: "Prosimy wpisać poprawny adres e-mail.", contactMethod: "Prosimy wybrać przynajmniej jedną formę kontaktu.", childName: "Prosimy wpisać imię dziecka.", childAge: "Prosimy wpisać wiek dziecka.", studentName: "Prosimy wpisać imię i nazwisko uczestnika.", studentAge: "Prosimy wpisać wiek uczestnika.", startDate: "Prosimy wybrać preferowaną datę rozpoczęcia.", endDate: "Prosimy wybrać preferowaną datę zakończenia.", futureDate: "Prosimy wybrać dzisiejszą datę lub późniejszą.", noSunday: "Niedziele są dniami wolnymi. Prosimy wybrać inny dzień.", endBeforeStart: "Data zakończenia nie może być wcześniejsza niż data rozpoczęcia.", supportArea: "Prosimy zaznaczyć przynajmniej jeden obszar wsparcia.", sessionPattern: "Prosimy wybrać preferowaną formę spotkań.", weeklyTime: "Prosimy określić, ile czasu tygodniowo dziecko może poświęcić na pracę nad projektem.", institutionName: "Prosimy wpisać nazwę placówki.", institutionType: "Prosimy wybrać rodzaj placówki.", institutionOther: "Prosimy podać rodzaj placówki.", contactRole: "Prosimy wybrać pełnioną funkcję.", studentAgeRange: "Prosimy podać wiek uczniów.", collaborationType: "Prosimy wybrać przynajmniej jedną formę współpracy.",
+      },
+    },
   },
 };

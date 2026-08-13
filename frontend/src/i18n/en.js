@@ -207,6 +207,12 @@ export const en = {
       description:
         "An intensive themed workshop running through summer 2026. Each day has a dedicated theme with 3 hours of guided scientific investigation, indoors and outdoors. See the Thematic Workshop section below for full details.",
     },
+    "School & College Collaboration": {
+      title: "School & College Collaboration",
+      type: "For Schools & Colleges",
+      description:
+        "Tailored, hands-on STEAM workshops and project series for schools and colleges—designed around your learners, curriculum, timetable, and wider educational goals.",
+    },
     "Cognitive Support Sessions": {
       title: "Cognitive Support Sessions",
       type: "One-to-one",
@@ -574,6 +580,14 @@ export const en = {
           external: false,
           cta: "View programme details",
         },
+        {
+          title: "Young Scientist Research Workshop",
+          status: "Applications open",
+          desc: "Guided research for ages 13–18 — from a first question to a finished scientific paper, with support towards publication and conference presentation.",
+          href: "/research-workshop",
+          external: false,
+          cta: "View programme details",
+        },
       ],
     },
 
@@ -634,11 +648,21 @@ export const en = {
       sub: "A quick look at recent articles, ideas, and updates from our learning community.",
       items: [
         {
+          type: "Live contest",
+          kicker: "Open now",
+          title: "Science in a Snapshot — World Photography Day Contest 2026",
+          desc: "Can one photograph lead to a scientific discovery? Open to ages 6–18 across Poland: capture an everyday moment, ask a scientific question about it, and explain the science behind it. Six book prizes, a certificate for every eligible entry, free to enter. Submit by 30 August 2026, results 5 September.",
+          links: [
+            { label: "Enter the contest", href: "https://forms.gle/8SxWmEb1dzxrCvFo7", icon: "external" },
+            { label: "See the post", href: "https://www.facebook.com/share/r/1EkdKJ38F4/", icon: "facebook" },
+          ],
+        },
+        {
           type: "LinkedIn article",
           kicker: "Ideas in education",
           title: "Why hands-on science is failing in Polish classrooms",
           desc: "A short reflection on why practical science only works when it is purposeful, inquiry-led, and connected to real understanding rather than routine activity.",
-          href: "https://www.linkedin.com/pulse/why-hands-on-science-failing-polish-classrooms-priyadarshini-chu9f/?trackingId=K5pniaFkDB0CFZefsdx9xA%3D%3D",
+          href: "https://www.linkedin.com/pulse/why-hands-on-science-failing-polish-classrooms-priyadarshini-chu9f/",
           cta: "Read on LinkedIn",
           external: true,
         },
@@ -647,7 +671,25 @@ export const en = {
           kicker: "AI and education",
           title: "The future of learning: why AI makes human inquiry non-negotiable",
           desc: "An exploration of why, in an AI-shaped world, the most important skills may be curiosity, questioning, and the ability to think beyond ready-made answers.",
-          href: "https://www.linkedin.com/pulse/future-learning-why-ai-makes-human-inquiry-non-negotiable-upq5f/?trackingId=YdQHlq2nDPXwcSdL7WsWiQ%3D%3D",
+          href: "https://www.linkedin.com/pulse/future-learning-why-ai-makes-human-inquiry-non-negotiable-upq5f/",
+          cta: "Read on LinkedIn",
+          external: true,
+        },
+        {
+          type: "LinkedIn article",
+          kicker: "Inclusive education",
+          title: "Teaching every learner: inclusion is a method, not an add-on",
+          desc: "Why inclusive practice and support for special educational needs work best when built into how a lesson is designed, rather than added afterwards.",
+          href: "https://www.linkedin.com/posts/schools-in-poland-sip_edukacjainkluzywna-specjalnepotrzeby-nauczyciel-activity-7490025388086210560-asda",
+          cta: "Read on LinkedIn",
+          external: true,
+        },
+        {
+          type: "LinkedIn article",
+          kicker: "Resilience in learning",
+          title: "Resilience in the science classroom: why a failed experiment is a good lesson",
+          desc: "How STEAM investigation teaches children that a wrong hypothesis is data, not defeat — and why that mindset outlasts any single lesson.",
+          href: "https://www.linkedin.com/posts/schools-in-poland-sip_edukacja-resilienceineducation-steam-activity-7493187923278905344-92AW",
           cta: "Read on LinkedIn",
           external: true,
         },
@@ -655,10 +697,12 @@ export const en = {
           type: "Social highlight",
           kicker: "Stay connected",
           title: "Follow La Neuron online",
-          desc: "See classroom moments, updates, and new announcements through La Neuron’s Instagram and Facebook presence.",
-          href: "https://www.instagram.com/laneuron/",
-          cta: "Visit Instagram",
-          external: true,
+          desc: "Classroom moments, updates, and new announcements across our channels.",
+          links: [
+            { label: "Facebook", href: "https://www.facebook.com/share/1KD4pL1rRG/", icon: "facebook" },
+            { label: "LinkedIn", href: "https://www.linkedin.com/company/laneuron/", icon: "linkedin" },
+            { label: "Instagram", href: "https://www.instagram.com/laneuron", icon: "instagram" },
+          ],
         },
       ],
     },
@@ -672,6 +716,8 @@ export const en = {
     promises: [
       "Personal response within 24 hours",
       "Mention allergies or learning needs",
+      "Learning Tailored to Each Child",
+      "Referral discounts available",
       "Sibling discount available",
     ],
     labels: {
@@ -707,5 +753,40 @@ export const en = {
     errorRequired: "Please fill in all required fields.",
     errorGeneral:
       "Something went wrong. Please try again or email [admin@laneuron.org](mailto:admin@laneuron.org) directly.",
+    form: {
+      programmes: [
+        { id: "thematic", label: "Thematic STEAM Workshop" },
+        { id: "cyclic", label: "Cyclic STEAM Workshop" },
+        { id: "single-day", label: "Single Day Workshop" },
+        { id: "research", label: "Young Scientist Research & Publishing" },
+        { id: "collaboration", label: "School & College Collaboration" },
+        { id: "cognitive", label: "Cognitive Support Session" },
+        { id: "not-sure", label: "Not Sure Yet" },
+      ],
+      contactMethods: ["Call", "WhatsApp", "SMS", "Email"],
+      supportAreas: ["Memory", "Attention / focus", "Reading", "Writing / handwriting", "Struggles with homework", "Exam preparation", "Anxiety around tests", "Other learning differences (ADHD, dyslexia, SEN, etc.)"],
+      sessionPatterns: ["One-off consultation", "Short block (4–6 sessions)", "Regular support"],
+      yesNo: ["Yes", "No"],
+      englishComfortOptions: ["Yes", "No", "Not sure"],
+      weeklyTimeOptions: ["Less than 1 hour", "1–2 hours", "3–4 hours", "5+ hours", "Not sure yet"],
+      projectStyles: ["Individual project", "Small group project"],
+      institutionTypes: [{ id: "primary", label: "Primary school" }, { id: "secondary", label: "Secondary school" }, { id: "college", label: "College / university" }, { id: "other", label: "Other" }],
+      contactRoles: ["Tutor", "Coordinator", "Principal", "Student representative"],
+      collaborationTypes: ["After-school STEAM club", "One-off workshop / event", "Project-based STEAM module", "Research mentoring / competition support"],
+      deliveryLanguages: ["English", "Polish", "Bilingual"],
+      labels: {
+        programmeInterest: "Programme interest *", parentName: "Parent / guardian full name *", email: "Email address *", phone: "Phone / WhatsApp", childName: "Child first name *", childAge: "Child age (6–14) *", studentName: "Student full name *", studentAge: "Student age (13–18) *", startDate: "Preferred start date *", endDate: "Preferred end date *", preferredContact: "Preferred contact method (choose at least one) *", notes: "Questions, allergies, or learning needs", researchNotes: "Additional information or questions", collaborationNotes: "Additional details, timetable, or constraints", supportAreas: "Area(s) of support *", sessionPattern: "Preferred session pattern *", learningSituation: "Anything important about your child’s current learning situation?", researchExperience: "Previous research or publishing experience", englishComfort: "Comfort reading scientific material in English", researchDescription: "Briefly describe the previous project or experience", weeklyTime: "Independent time available each week *", projectStyle: "Preferred project style", researchInterests: "Research interests", contactName: "Contact person’s full name *", workEmail: "Work email address *", institutionName: "Institution name *", institutionType: "Institution type *", institutionOther: "Please specify institution type *", contactRole: "Your role *", studentCount: "Approximate number of students", studentAgeRange: "Age range of students *", timeline: "Proposed timeline", collaborationTypes: "Preferred collaboration type(s) *", deliveryLanguages: "Preferred language(s) of delivery", collaborationGoals: "What would you like students to gain from this collaboration?",
+      },
+      placeholders: {
+        programme: "Select a programme", select: "Select an option", parentName: "Your full name", email: "you@email.com", phone: "Phone number", childName: "Child name", childAge: "e.g. 9", studentName: "Student full name", notes: "Anything the educator should know", researchNotes: "Include questions, relevant student context, or anything else we should know.", collaborationNotes: "Include practical requirements, timetable limits, or useful background information.", learningSituation: "For example: school challenges, current support, upcoming exams, or anything helpful for the first conversation.", researchDescription: "Include the topic, school project, science fair, poster, or publication if relevant.", researchInterests: "For example: biology, psychology, environmental science, chemistry, physics, engineering, or space science.", contactName: "Your full name", workEmail: "you@school.edu", institutionName: "Name of school, college, or university", institutionOther: "Describe the institution type", studentCount: "For example, 18 students", studentAgeRange: "For example, 10–12 or 13–16", timeline: "For example, October–December 2026", collaborationGoals: "Describe the learning goals, intended outcomes, or wider school aims.",
+      },
+      tips: {
+        programme: "Choose the programme first. The form will then show the information needed for that enquiry.", startDate: "From today onwards. Sundays cannot be selected.", endDate: "Choose the same date for a single-day workshop.", supportAreas: "Select all areas where support may be useful.", researchExperience: "This may include a previous project, science fair, poster, research assignment, or publication.", weeklyTime: "This helps us suggest a realistic research pathway.", timeline: "Include possible months, days, frequency, or write ‘to be discussed’.",
+      },
+      goalsNote: { title: "What students gain with La Neuron:", text: "Scientific curiosity, critical thinking, practical investigation skills, creativity, confident communication in English, and meaningful project outcomes. Programmes can be tailored to your curriculum, age group, timetable, and wider learning goals." },
+      validation: {
+        programme: "Please select a programme first.", parentName: "Please enter the parent or guardian’s full name.", contactName: "Please enter the contact person’s full name.", email: "Please enter a valid email address.", contactMethod: "Please select at least one preferred contact method.", childName: "Please enter the child’s first name.", childAge: "Please enter the child’s age.", studentName: "Please enter the student’s full name.", studentAge: "Please enter the student’s age.", startDate: "Please choose a preferred start date.", endDate: "Please choose a preferred end date.", futureDate: "Please choose today or a future date.", noSunday: "Sundays are holidays. Please choose another date.", endBeforeStart: "End date cannot be before the start date.", supportArea: "Please select at least one area of support.", sessionPattern: "Please select a preferred session pattern.", weeklyTime: "Please select weekly independent time available.", institutionName: "Please enter the institution name.", institutionType: "Please select an institution type.", institutionOther: "Please specify the institution type.", contactRole: "Please select your role.", studentAgeRange: "Please enter the students’ age range.", collaborationType: "Please select at least one collaboration type.",
+      },
+    },
   },
 };

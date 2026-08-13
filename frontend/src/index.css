@@ -210,3 +210,11 @@ h1, h2, h3, h4, h5, .font-display {
 .ln-dash { stroke-dasharray: 10 12; animation: ln-dash 30s linear infinite; }
 
 [data-debug-wrapper="true"] { display: contents !important; }
+
+@media print {
+  .gallery-root,
+  [role="dialog"],
+  .fixed.inset-0 {
+    display: none !important;
+  }
+}

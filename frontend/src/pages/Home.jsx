@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Quote, Star, ArrowUpRight, Facebook, Instagram, Linkedin } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Hero } from "../components/sections/Hero";
 import { useData } from "../i18n/useData";
@@ -237,7 +237,7 @@ function EnrollingNowSection({ data }) {
           </Link>
         </motion.div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {data.items.map((item, i) => (
             <motion.article
               key={`${item.title}-${i}`}
@@ -245,13 +245,13 @@ function EnrollingNowSection({ data }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VIEWPORT}
               transition={{ duration: 0.55, ease: EXPO, delay: i * 0.05 }}
-              className="rounded-[2rem] bg-white border border-slate-200 p-6 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.16)]"
+              className="rounded-[2rem] bg-white border border-slate-200 p-5 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.16)]"
             >
               <p className="inline-flex rounded-full bg-amber-100 text-amber-800 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em]">
                 {item.status}
               </p>
-              <h3 className="mt-4 text-xl font-semibold text-slate-900">{item.title}</h3>
-              <p className="mt-3 text-slate-600 leading-relaxed">{item.desc}</p>
+              <h3 className="mt-4 text-lg font-semibold text-slate-900">{item.title}</h3>
+              <p className="mt-3 text-sm text-slate-600 leading-relaxed">{item.desc}</p>
             </motion.article>
           ))}
         </div>
@@ -283,13 +283,43 @@ function LatestSection({ data }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VIEWPORT}
               transition={{ duration: 0.55, ease: EXPO, delay: i * 0.05 }}
-              className="rounded-[2rem] border border-slate-200 bg-slate-50/80 p-7 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.14)]"
+              className="group flex flex-col rounded-[2rem] border border-slate-200 bg-slate-50/80 p-7 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.14)] transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-[0_28px_70px_-34px_rgba(15,23,42,0.22)]"
             >
               <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500">
                 {item.type}
               </p>
               <h3 className="mt-4 text-xl font-semibold text-slate-900">{item.title}</h3>
-              <p className="mt-3 text-slate-600 leading-relaxed">{item.desc}</p>
+              <p className="mt-3 flex-1 text-slate-600 leading-relaxed">{item.desc}</p>
+
+              {item.links ? (
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {item.links.map((link) => {
+                    const Icon = { facebook: Facebook, instagram: Instagram, linkedin: Linkedin }[link.icon] || ArrowUpRight;
+                    return (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-900 hover:text-slate-900"
+                      >
+                        <Icon className="h-4 w-4" />
+                        {link.label}
+                      </a>
+                    );
+                  })}
+                </div>
+              ) : item.href ? (
+                <a
+                  href={item.href}
+                  target={item.external ? "_blank" : undefined}
+                  rel={item.external ? "noopener noreferrer" : undefined}
+                  className="mt-5 inline-flex items-center gap-1.5 self-start text-sm font-bold text-slate-900 hover:underline"
+                >
+                  {item.cta}
+                  <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
+              ) : null}
             </motion.article>
           ))}
         </div>

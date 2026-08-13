@@ -4,6 +4,9 @@ import {
   Lightbulb, TrendingUp, Shapes, Trees, Microscope, Leaf, Apple,
   FlaskConical, ClipboardList, Search, Eye, BarChart3, CheckCircle2,
 } from "lucide-react";
+import youngScientistImage from "./assets/young-scientist-research-workshop.webp";
+import SchoolCollegeImage from "./assets/School_College_Collaboration.webp";
+import CognitiveImage from "./assets/Cognitive.webp";
 
 export const SITE = {
   name: "La Neuron",
@@ -129,19 +132,50 @@ export const AGE_GROUPS = [
 
 export const PROGRAMMES = [
   {
-    tag: "Regular", title: "Cyclic STEAM Workshops", color: "#3B82F6",
-    text: "Small group sessions for children aged 6–13. Each day focuses on a different STEAM theme. Children work through complete scientific investigations with worksheets, materials, and outdoor components — both indoor experiments and outdoor discovery.",
-    image: "https://images.pexels.com/photos/7869034/pexels-photo-7869034.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    tag: "Regular",
+    title: "Cyclic STEAM Workshops",
+    color: "#0F8A78", tint: "#E7FAF6",
+    text:
+      "Small group sessions for children aged 6–14. Each day focuses on a different STEAM theme. Children work through complete scientific investigations with worksheets, materials, and outdoor components — both indoor experiments and outdoor discovery.",
+    image:
+      "https://images.pexels.com/photos/7869034/pexels-photo-7869034.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   },
   {
-    tag: "Upcoming", title: "STEAM Thematic Workshop 2026", color: "#FB7185", link: "/thematic-workshops",
-    text: "An intensivethemed workshop running through summer 2026. Each day has a dedicated theme with 3 hours of guided scientific investigation, indoors and outdoors. See the Thematic Workshop section below for full details.",
-    image: "https://images.pexels.com/photos/8471975/pexels-photo-8471975.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    tag: "Upcoming",
+    title: "STEAM Thematic Workshop 2026",
+    color: "#D65D16", tint: "#FFF1E7",
+    link: "thematic-workshops",
+    text:
+      "An intensive themed workshop running through summer 2026. Each day has a dedicated theme with 3 hours of guided scientific investigation, indoors and outdoors. See the Thematic Workshop section below for full details.",
+    image:
+      "https://images.pexels.com/photos/8471975/pexels-photo-8471975.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  },
+  // ✅ NEW: Young Scientist Research Workshop
+  {
+    tag: "Regular",
+    title: "Young Scientist Research Workshop",
+    color: "#1B2A63", tint: "#E7EBF7",
+    link: "research-workshop",
+    text:
+      "A dedicated pathway for young scientists to design real research projects, create scientific posters and presentations, and build a growing portfolio of academic work that can be shared in universities and schools.",
+    image: youngScientistImage,
   },
   {
-    tag: "One-to-one", title: "Cognitive Support Sessions", color: "#10B981",
-    text: "Individual sessions for children who need support with memory, learning strategies, exam preparation, handwriting, or cognitive challenges such as ADHD, dyslexia, or other learning differences. Delivered by a certified Neuroscience Coach.",
-    image: "https://images.pexels.com/photos/8471835/pexels-photo-8471835.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    tag: "For Schools & Colleges",
+    title: "School & College Collaboration",
+    color: "#7C3AED", tint: "#F5EEFF",
+    link: "school-college-collaboration",
+    text:
+      "Tailored, hands-on STEAM workshops and project series for schools and colleges—designed around your learners, curriculum, timetable, and wider educational goals.",
+    image: SchoolCollegeImage,
+  },
+  {
+    tag: "One-to-one",
+    title: "Cognitive Support Sessions",
+    color: "#BE185D", tint: "#FFF1F6",
+    text:
+      "Individual sessions for children who need support with memory, learning strategies, exam preparation, handwriting, or cognitive challenges such as ADHD, dyslexia, or other learning differences. Delivered by a certified Neuroscience Coach.",
+    image: CognitiveImage,
   },
 ];
 

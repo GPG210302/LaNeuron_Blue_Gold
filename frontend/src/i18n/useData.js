@@ -232,6 +232,9 @@ export function useData() {
     successBtn: t("register.successBtn"),
     errorRequired: t("register.errorRequired"),
     errorGeneral: t("register.errorGeneral"),
+
+    // New bilingual conditional-form content
+    form: t("register.form") || {},
   };
 
   const events = {
