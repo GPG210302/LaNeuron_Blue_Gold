@@ -17,6 +17,12 @@
     --ln-math: #FBBF24;
     --ln-art: #A855F7;
     --ln-eng: #F97316;
+    /* Secondary palette — in use across recent pages */
+    --ln-gold-deep: #D4A514;
+    --ln-ink-soft: #334155;
+    --ln-ink-faint: #94A3B8;
+    --ln-navy-deep: #111A34;
+    --ln-on-navy: #F1F5FF;
 }
 
 body {
