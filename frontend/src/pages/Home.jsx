@@ -245,13 +245,35 @@ function EnrollingNowSection({ data }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VIEWPORT}
               transition={{ duration: 0.55, ease: EXPO, delay: i * 0.05 }}
-              className="rounded-[2rem] bg-white border border-slate-200 p-5 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.16)]"
+              className="group flex flex-col rounded-[2rem] bg-white border border-slate-200 p-5 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.16)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_70px_-34px_rgba(15,23,42,0.24)]"
             >
-              <p className="inline-flex rounded-full bg-amber-100 text-amber-800 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em]">
+              <p className="inline-flex self-start rounded-full bg-amber-100 text-amber-800 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em]">
                 {item.status}
               </p>
               <h3 className="mt-4 text-lg font-semibold text-slate-900">{item.title}</h3>
-              <p className="mt-3 text-sm text-slate-600 leading-relaxed">{item.desc}</p>
+              <p className="mt-3 flex-1 text-sm text-slate-600 leading-relaxed">{item.desc}</p>
+
+              {item.href ? (
+                item.external ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 inline-flex items-center gap-1.5 self-start text-sm font-bold text-slate-900 hover:underline"
+                  >
+                    {item.cta}
+                    <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </a>
+                ) : (
+                  <Link
+                    to={item.href}
+                    className="mt-4 inline-flex items-center gap-1.5 self-start text-sm font-bold text-slate-900 hover:underline"
+                  >
+                    {item.cta}
+                    <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </Link>
+                )
+              ) : null}
             </motion.article>
           ))}
         </div>

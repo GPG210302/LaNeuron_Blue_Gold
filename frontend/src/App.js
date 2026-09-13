@@ -17,6 +17,7 @@ import { Register } from "@/components/sections/Register";
 import { Faq } from "@/components/sections/Faq";
 import ResearchWorkshop from "@/components/sections/ResearchWorkshop"; // default export we created
 import SchoolCollegeCollaboration from "@/pages/SchoolCollegeCollaboration";
+import CyclicSteamWorkshops from "./pages/CyclicSteamWorkshops";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path="thematic-workshops" element={<Events />} />
             <Route path="research-workshop" element={<ResearchWorkshop />} />
             <Route path="school-college-collaboration" element={<SchoolCollegeCollaboration />} />
+            <Route path="cyclic-steam-workshops" element={<CyclicSteamWorkshops />} />
             <Route path="gallery" element={<Gallery />} />
             <Route path="documents" element={<Documents />} />
             <Route path="register" element={<Register />} />

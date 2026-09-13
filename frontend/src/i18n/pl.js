@@ -198,7 +198,7 @@ export const pl = {
       title: "Cykliczne warsztaty STEAM",
       type: "Regularne",
       description:
-        "Zajęcia w małych grupach dla dzieci w wieku 6–14 lat. Każde spotkanie poświęcone jest innemu zagadnieniu STEAM. Dzieci przeprowadzają pełne badania naukowe z arkuszami, materiałami i elementami na świeżym powietrzu — zarówno eksperymenty wewnątrz, jak i odkrywanie na zewnątrz.",
+        "Cotygodniowe zajęcia popołudniowe dla dzieci w wieku 6–14 lat. Każde spotkanie łączy kilka dziedzin STEAM naraz — dzieci przewidują, budują, testują i samodzielnie dochodzą do rozwiązań, zamiast wykonywać gotowe instrukcje.",
     },
     "STEAM Thematic Workshop 2026": {
       title: "Tematyczne warsztaty STEAM 2026",
@@ -570,8 +570,8 @@ export const pl = {
         {
           title: "Cykliczne warsztaty STEAM",
           status: "Aktywne grupy",
-          desc: "Regularne zajęcia w małych grupach dla dzieci, które najlepiej rozwijają się dzięki systematyczności, rytmowi i spokojnemu budowaniu pewności siebie.",
-          href: "/programmes",
+          desc: "Cotygodniowe zajęcia STEAM dla dzieci 6–14 lat, w grupach do dziesięciu osób. Dzieci badają, budują i samodzielnie dochodzą do rozwiązań.",
+          href: "/cyclic-steam-workshops",
           external: false,
           cta: "Zobacz szczegóły",
         },

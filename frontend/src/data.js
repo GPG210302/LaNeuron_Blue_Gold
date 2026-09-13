@@ -133,10 +133,12 @@ export const AGE_GROUPS = [
 export const PROGRAMMES = [
   {
     tag: "Regular",
+    id: "cyclic",
     title: "Cyclic STEAM Workshops",
     color: "#0F8A78", tint: "#E7FAF6",
+    link: "cyclic-steam-workshops",
     text:
-      "Small group sessions for children aged 6–14. Each day focuses on a different STEAM theme. Children work through complete scientific investigations with worksheets, materials, and outdoor components — both indoor experiments and outdoor discovery.",
+      "A weekly after-school workshop for children aged 6–14. Each session combines several STEAM fields at once — children predict, build, test and work things out for themselves, rather than following a set of ready-made steps.",
     image:
       "https://images.pexels.com/photos/7869034/pexels-photo-7869034.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   },

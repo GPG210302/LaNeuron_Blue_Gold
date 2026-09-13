@@ -199,7 +199,7 @@ export const en = {
       title: "Cyclic STEAM Workshops",
       type: "Regular",
       description:
-        "Small group sessions for children aged 6–14. Each day focuses on a different STEAM theme. Children work through complete scientific investigations with worksheets, materials, and outdoor components — both indoor experiments and outdoor discovery.",
+        "A weekly after-school workshop for children aged 6–14. Each session combines several STEAM fields at once — children predict, build, test and work things out for themselves, rather than following a set of ready-made steps.",
     },
     "STEAM Thematic Workshop 2026": {
       title: "STEAM Thematic Workshop 2026",
@@ -559,8 +559,8 @@ export const en = {
         {
           title: "Cyclic STEAM Workshops",
           status: "Active sessions",
-          desc: "Regular small-group STEAM learning for children who benefit from continuity, routine, and growing confidence over time.",
-          href: "/programmes",
+          desc: "Weekly after-school STEAM for ages 6–14, in groups of ten. Children investigate, build and reason their own way to an answer.",
+          href: "/cyclic-steam-workshops",
           external: false,
           cta: "View programme details",
         },
