@@ -339,10 +339,11 @@ export const pl = {
     designerCredit:
       "Website crafted by G3 Creative Labs · Ghavish V G · +48 579 156 009",
     facts: [
-      "Wiek 6–14 lat",
-      "Pon–Pt 9:00–12:00",
-      "Maks. 10 dzieci tygodniowo",
-      "Start 6 lipca 2026",
+      "Wiek 6–18 lat",
+      "Maksymalnie 10 osób w grupie",
+      "Angielski ze wsparciem po polsku",
+      "Zajęcia popołudniowe i wakacyjne",
+      "Ścieżka badawcza i publikacyjna",
       "Kraków",
     ],
   },
