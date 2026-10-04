@@ -2,6 +2,14 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    // ── Connect QR (review + social) — page with downloads ──────────
+    // The image files live in src/connect/ and are served automatically.
+    if (url.pathname === '/connect' || url.pathname === '/connect/') {
+      return new Response(connectPage(), {
+        headers: { 'Content-Type': 'text/html; charset=utf-8' }
+      });
+    }
+
     // Serve logo.PNG as a static asset
     if (url.pathname === './logo.PNG') {
       return env.ASSETS.fetch(request);
@@ -211,3 +219,90 @@ export default {
     });
   }
 };
+
+
+// ─── Connect QR page ──────────────────────────────────────────────
+function connectPage() {
+  const files = (name) => ['png', 'svg', 'pdf']
+    .map((ext) => `<a class="dl" href="/connect/${name}.${ext}" download>${ext.toUpperCase()}</a>`)
+    .join('');
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>La Neuron Connect QR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: linear-gradient(145deg, #0a1235 0%, #0d1b4b 60%, #101e52 100%);
+      min-height: 100vh; font-family: 'DM Sans', -apple-system, sans-serif;
+      display: flex; flex-direction: column; align-items: center; padding: 40px 16px; color: #0d1b4b;
+    }
+    .head { text-align: center; color: #fff; margin-bottom: 28px; }
+    .head img { width: 56px; height: 56px; object-fit: contain; background: #fff; border-radius: 14px; padding: 6px; }
+    .head h1 { margin-top: 12px; font-size: 26px; }
+    .head h1 span { color: #E0B33C; }
+    .head p { margin-top: 6px; color: rgba(255,255,255,.65); font-size: 14px; }
+    .grid { display: grid; gap: 24px; width: 100%; max-width: 980px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .card { background: #fff; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.18), 0 16px 48px rgba(0,0,0,.28); border: 2px solid transparent; }
+    .card:hover { border-color: #E0B33C; }
+    .card img.qr { width: 100%; height: auto; border-radius: 14px; background: #fff; }
+    .tag { align-self: flex-start; font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+           padding: 6px 12px; border-radius: 999px; background: linear-gradient(135deg, #F4D07A, #E0B33C); color: #0f172a; }
+    h2 { font-size: 19px; }
+    .note { font-size: 13px; color: #555; line-height: 1.5; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .dl { flex: 1; text-align: center; padding: 11px 0; border-radius: 999px; background: #0d1b4b; color: #fff;
+          font-weight: 700; font-size: 14px; text-decoration: none; transition: background .2s, transform .12s; }
+    .dl:hover { background: #E0B33C; color: #0f172a; transform: translateY(-1px); }
+    .foot { margin-top: 28px; font-size: 12px; color: rgba(255,255,255,.4); text-align: center; line-height: 1.6; }
+    .foot a { color: #E0B33C; }
+  </style>
+</head>
+<body>
+  <div class="head">
+    <img src="/logo.PNG" alt="La Neuron">
+    <h1>La Neuron <span>Connect QR</span></h1>
+    <p>Opens laneuron.org/connect — Google review · social media · contact</p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <span class="tag">Card · A6 and up</span>
+      <img class="qr" src="/connect/laneuron-connect-qr-large-card.png" alt="Connect QR card">
+      <h2>Framed card</h2>
+      <p class="note">Ready to print: SCAN ME, Review · Follow · Connect, official logos. Use the PDF for a print shop.</p>
+      <div class="row">
+        <a class="dl" href="/connect/laneuron-connect-qr-large-card.png" download>PNG</a>
+        <a class="dl" href="/connect/laneuron-connect-qr-large-card.pdf" download>PDF</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="tag">Large · 3 cm and up</span>
+      <img class="qr" src="/connect/laneuron-connect-qr-large.png" alt="Large Connect QR">
+      <h2>QR only — large</h2>
+      <p class="note">La Neuron logo with the five social logos in the centre. For posters, flyers and screens.</p>
+      <div class="row">${files('laneuron-connect-qr-large')}</div>
+    </div>
+
+    <div class="card">
+      <span class="tag">Small · 1.5–3 cm</span>
+      <img class="qr" src="/connect/laneuron-connect-qr-small.png" alt="Small Connect QR">
+      <h2>QR only — small</h2>
+      <p class="note">Bigger dots for tiny prints. Keep at least 2 mm of white around it.</p>
+      <div class="row">${files('laneuron-connect-qr-small')}</div>
+    </div>
+  </div>
+
+  <p class="foot">Website QR generator stays at <a href="/">the main page</a>.<br>laneuron.org · STEAM Education</p>
+</body>
+</html>`;
+}
