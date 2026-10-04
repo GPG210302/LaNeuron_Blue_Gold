@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import {
   ArrowUpRight,
@@ -541,6 +541,16 @@ const Connect = () => {
   const { language } = useLanguage();
   const isPolish = language === "pl";
   const reduceMotion = useReducedMotion();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  /* The small QR code opens /CONNECT (uppercase keeps the code smaller):
+     tidy the address to /connect */
+  useEffect(() => {
+    if (location.pathname !== "/connect") {
+      navigate(`/connect${location.search}`, { replace: true });
+    }
+  }, [location.pathname, location.search, navigate]);
 
   const text = {
     badge: isPolish ? "Dziękujemy" : "Thank you",

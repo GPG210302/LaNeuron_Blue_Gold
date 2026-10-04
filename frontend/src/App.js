@@ -39,6 +39,7 @@ function App() {
             <Route path="gallery" element={<Gallery />} />
             <Route path="documents" element={<Documents />} />
             <Route path="connect" element={<Connect />} />
+            <Route path="c" element={<Connect />} />
             <Route path="register" element={<Register />} />
             <Route path="faq" element={<Faq />} />
             <Route path="*" element={<Navigate to="/" replace />} />
