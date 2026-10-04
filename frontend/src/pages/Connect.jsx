@@ -54,7 +54,7 @@ const CONTACT = {
  */
 const BRAND_LOGOS = {
   google: "/brand/google.png",
-  instagram: "/brand/instagram.svg",
+  instagram: "/brand/instagram.png",
   facebook: "/brand/facebook.svg",
   linkedin: "/brand/linkedin.svg",
   whatsapp: "/brand/whatsapp.svg",
