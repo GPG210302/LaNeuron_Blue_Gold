@@ -8,6 +8,7 @@ import Home from "@/pages/Home";
 import WhySteamPage from "@/pages/WhySteamPage";
 import Gallery from "@/pages/Gallery";
 import Documents from "@/pages/Documents";
+import Connect from "@/pages/Connect";
 
 import { About } from "@/components/sections/About";
 import { WhatIsSteam } from "@/components/sections/WhatIsSteam";
@@ -37,6 +38,7 @@ function App() {
             <Route path="cyclic-steam-workshops" element={<CyclicSteamWorkshops />} />
             <Route path="gallery" element={<Gallery />} />
             <Route path="documents" element={<Documents />} />
+            <Route path="connect" element={<Connect />} />
             <Route path="register" element={<Register />} />
             <Route path="faq" element={<Faq />} />
             <Route path="*" element={<Navigate to="/" replace />} />

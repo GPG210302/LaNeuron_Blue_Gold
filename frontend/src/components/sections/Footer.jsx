@@ -2,11 +2,14 @@ import { useNavigate } from "react-router-dom";
 import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
 import { SITE } from "../../data";
 import { useData } from "../../i18n/useData";
+import { useLanguage } from "../../i18n/LanguageContext";
 import logo from "../../assets/logo.png";
 
 export const Footer = () => {
   const navigate = useNavigate();
   const data = useData();
+  const { language } = useLanguage();
+  const isPolish = language === "pl";
 
   const nav = data?.nav || {};
   const footer = data?.footer || {};
@@ -18,6 +21,7 @@ export const Footer = () => {
     { label: nav.workshops || "Workshops", path: "/programmes" },
     { label: nav.gallery || "Gallery", path: "/gallery" },
     { label: nav.documents || "Documents", path: "/documents" },
+    { label: nav.connect || (isPolish ? "Kontakt" : "Connect"), path: "/connect" },
   ];
 
   return (
@@ -63,6 +67,37 @@ export const Footer = () => {
               >
                 <Linkedin size={18} />
               </a>
+            </div>
+
+            {/* Quick connect */}
+            <div className="mt-5 flex flex-wrap gap-3">
+              <a
+                href="https://g.page/r/CYwos_0CjH9iEBM/review"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-[#0F172A] transition hover:-translate-y-0.5"
+              >
+                <img src="/brand/google.png" alt="" aria-hidden="true" className="h-4 w-4 object-contain" />
+                {isPolish ? "Oceń nas w Google" : "Review us on Google"}
+              </a>
+
+              <a
+                href="https://wa.me/message/UOGCXAUNI63MC1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-white/20"
+              >
+                <img src="/brand/whatsapp.svg" alt="" aria-hidden="true" className="h-4 w-4 object-contain" />
+                {isPolish ? "Napisz na WhatsApp" : "WhatsApp us"}
+              </a>
+
+              <button
+                type="button"
+                onClick={() => navigate("/connect")}
+                className="inline-flex items-center gap-2 rounded-full border border-[#E0B33C]/60 px-4 py-2 text-sm font-bold text-[#E0B33C] transition hover:-translate-y-0.5 hover:bg-[#E0B33C] hover:text-[#0F172A]"
+              >
+                {isPolish ? "Wszystkie kontakty" : "All ways to connect"} →
+              </button>
             </div>
           </div>
 

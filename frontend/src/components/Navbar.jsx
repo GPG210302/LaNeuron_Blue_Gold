@@ -159,8 +159,9 @@ export const Navbar = () => {
       { path: "/programmes", label: nav?.workshops || "Workshops" },
       { path: "/gallery", label: nav?.gallery || "Gallery" },
       { path: "/documents", label: nav?.documents || "Documents" },
+      { path: "/connect", label: nav?.connect || (language === "pl" ? "Kontakt" : "Connect") },
     ];
-  }, [nav]);
+  }, [nav, language]);
 
   const goTo = (path) => {
     setOpen(false);

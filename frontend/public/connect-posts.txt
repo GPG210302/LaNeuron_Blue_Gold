@@ -1,0 +1,33 @@
+# ============================================================
+#  La Neuron — posts shown on laneuron.org/connect
+#  ("See what we're building" flicking wall)
+# ============================================================
+#
+#  HOW TO USE
+#  - Put ONE link per line under the right platform.
+#  - Lines starting with # are notes and are ignored.
+#  - To remove a post, delete its line (or put # in front of it).
+#  - 4–8 posts in total works best. They show in random order.
+#  - Only PUBLIC posts can be shown.
+#  - After saving, publish the site so the change goes live.
+#
+#  WHICH LINK TO COPY
+#  Instagram : post > ⋯ > Copy link
+#              e.g. https://www.instagram.com/p/ABC123/  or  /reel/ABC123/
+#  Facebook  : post > ⋯ > Copy link, open it in a browser and copy
+#              the FULL address it changes to (not facebook.com/share/...)
+#  LinkedIn  : post > ⋯ > Embed this post > copy the address inside src="..."
+#              e.g. https://www.linkedin.com/embed/feed/update/urn:li:share:1234567890
+# ============================================================
+
+[Instagram]
+https://www.instagram.com/reel/Ddcf0OCI6bS/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==
+https://www.instagram.com/reel/DdurptRIvP_/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==
+
+[Facebook]
+https://www.facebook.com/permalink.php?story_fbid=pfbid02t5WtVS9ype4XZnCHcioB8c9xKTxix4m3Mmi6sfdq44J487oeSWqMZoXtSTtARar9l&id=61590731642982
+https://www.facebook.com/reel/2562608837514643
+
+[LinkedIn]
+https://lnkd.in/p/dRkg6sUe
+https://www.linkedin.com/posts/laneuron_steamacademy-buildlab-shapetostructures-activity-7512160250028777472-TrVs?utm_source=share&utm_medium=member_desktop&rcm=ACoAABWwZJ4BAIZWhapqMUVXASyuKxlCsQrspbc
