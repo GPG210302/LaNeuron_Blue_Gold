@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import {
   ArrowUpRight,
+  Pause,
+  Play,
   ArrowRight,
   Briefcase,
   Camera,
@@ -37,7 +39,7 @@ const CONTACT = {
   googleReview: "https://g.page/r/CYwos_0CjH9iEBM/review",
   instagram: "https://www.instagram.com/laneuron/",
   facebook: "https://www.facebook.com/p/La-Neuron-STEAM-Academy-61590731642982/",
-  linkedin: "https://www.linkedin.com/company/laneuron/posts/?feedView=all",
+  linkedin: "https://www.linkedin.com/company/laneuron/",
   whatsappMessage: "https://wa.me/message/UOGCXAUNI63MC1",
   whatsappCall: "https://call.whatsapp.com/voice/E0sTyslwioHikjhwn37Siv",
   email: "admin@laneuron.org",
@@ -175,6 +177,38 @@ const shuffle = (list) => {
   return copy;
 };
 
+/* ---------- open links in the native app where possible ---------- */
+const UA = typeof navigator !== "undefined" ? navigator.userAgent : "";
+const IS_ANDROID = /Android/i.test(UA);
+const IS_MOBILE = /Android|iPhone|iPad|iPod/i.test(UA);
+
+/* Android: ask for the app directly, fall back to the browser if it is missing */
+const ANDROID_APPS = [
+  [/linkedin\.com/i, "com.linkedin.android"],
+  [/instagram\.com/i, "com.instagram.android"],
+  [/facebook\.com|fb\.watch/i, "com.facebook.katana"],
+  [/wa\.me|whatsapp\.com/i, "com.whatsapp"],
+];
+
+const toIntent = (url, pkg) => {
+  const u = new URL(url);
+  return `intent://${u.host}${u.pathname}${u.search}#Intent;scheme=${u.protocol.replace(
+    ":",
+    ""
+  )};package=${pkg};S.browser_fallback_url=${encodeURIComponent(url)};end`;
+};
+
+/* Props for an outside link: app on phones, new tab on computers */
+const extLink = (url) => {
+  if (!/^https?:/i.test(url)) return { href: url };
+  if (IS_ANDROID) {
+    const match = ANDROID_APPS.find(([re]) => re.test(url));
+    if (match) return { href: toIntent(url, match[1]) };
+  }
+  if (IS_MOBILE) return { href: url }; // same tab lets iPhone hand over to the app
+  return { href: url, target: "_blank", rel: "noopener noreferrer" };
+};
+
 /* Seconds each post / channel stays on screen (top strip and post wall move together) */
 const SLIDE_MS = 4000;
 
@@ -231,9 +265,7 @@ const ChannelCard = ({ channel, text, wide = false }) => {
     }
   };
 
-  const linkProps = channel.external
-    ? { target: "_blank", rel: "noopener noreferrer" }
-    : {};
+  const linkProps = channel.external ? extLink(channel.href) : { href: channel.href };
 
   return (
     <motion.article
@@ -253,7 +285,6 @@ const ChannelCard = ({ channel, text, wide = false }) => {
       />
 
       <a
-        href={channel.href}
         {...linkProps}
         className={`relative flex h-full flex-col p-6 sm:p-7 ${
           channel.copy ? "pr-16 sm:pr-20" : ""
@@ -362,7 +393,17 @@ const ChannelCard = ({ channel, text, wide = false }) => {
 /* ================================================================== */
 /*  Live post wall (real embeds, random order, auto-flick)             */
 /* ================================================================== */
-const PostWall = ({ text, posts, index, onSelect, onPause }) => {
+const PostWall = ({
+  text,
+  posts,
+  index,
+  onSelect,
+  onHover,
+  paused,
+  onTogglePause,
+  wallRef,
+  reloadKeys,
+}) => {
   const count = posts.length;
   const go = (next) => onSelect((next + count) % count);
 
@@ -373,8 +414,9 @@ const PostWall = ({ text, posts, index, onSelect, onPause }) => {
   return (
     <div
       className="mx-auto w-full max-w-[400px]"
-      onPointerEnter={() => onPause(true)}
-      onPointerLeave={() => onPause(false)}
+      ref={wallRef}
+      onPointerEnter={(e) => e.pointerType === "mouse" && onHover(true)}
+      onPointerLeave={(e) => e.pointerType === "mouse" && onHover(false)}
     >
       <div className="mb-4 flex items-center justify-between gap-3">
         <span className="inline-flex items-center gap-2 rounded-full border-2 border-[#1B2A63] bg-[#E7EBF7] px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-[#1B2A63]">
@@ -391,9 +433,7 @@ const PostWall = ({ text, posts, index, onSelect, onPause }) => {
           {text.live}
         </span>
         <a
-          href={current.open}
-          target="_blank"
-          rel="noopener noreferrer"
+          {...extLink(current.open)}
           className="group inline-flex items-center gap-1.5 font-mono text-sm font-bold text-[#1B2A63]"
         >
           <BrandIcon brand={current.brand} fallback={current.icon} size={16} />
@@ -424,7 +464,7 @@ const PostWall = ({ text, posts, index, onSelect, onPause }) => {
         >
           {posts.map((post, i) => (
               <div
-                key={post.embed}
+                key={`${post.embed}-${reloadKeys[i] || 0}`}
                 className={`absolute inset-0 transition-all duration-500 ease-out ${
                   i === index
                     ? "opacity-100 translate-x-0 scale-100"
@@ -472,6 +512,16 @@ const PostWall = ({ text, posts, index, onSelect, onPause }) => {
           </div>
           <button
             type="button"
+            onClick={onTogglePause}
+            aria-label={paused ? text.resume : text.pause}
+            title={paused ? text.resume : text.pause}
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#1B2A63] text-[#0F172A] transition hover:-translate-y-0.5"
+            style={{ background: paused ? GOLD_GRADIENT : "#fff" }}
+          >
+            {paused ? <Play size={18} /> : <Pause size={18} />}
+          </button>
+          <button
+            type="button"
             onClick={() => go(index + 1)}
             aria-label={text.next}
             className="inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#1B2A63] bg-[#E7EBF7] text-[#1B2A63] transition hover:-translate-y-0.5"
@@ -506,6 +556,8 @@ const Connect = () => {
     live: isPolish ? "Z naszych kanałów" : "From our channels",
     openOn: isPolish ? "Otwórz w" : "Open on",
     previous: isPolish ? "Poprzedni" : "Previous",
+    pause: isPolish ? "Zatrzymaj przewijanie" : "Pause slideshow",
+    resume: isPolish ? "Wznów przewijanie" : "Resume slideshow",
     next: isPolish ? "Następny" : "Next",
     siteTitle: isPolish ? "Poznaj całą stronę" : "Explore the full website",
     siteText: isPolish
@@ -657,8 +709,41 @@ const Connect = () => {
 
   /* one shared timer drives the top strip AND the post wall */
   const [slide, setSlide] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [hoverPaused, setHoverPaused] = useState(false); // mouse over the wall
+  const [engaged, setEngaged] = useState(false); // viewer tapped into a post / video
+  const [userPaused, setUserPaused] = useState(false); // pause button
+  const [reloadKeys, setReloadKeys] = useState({});
+  const wallRef = useRef(null);
+  const touchedRef = useRef(new Set());
+  const prevSlideRef = useRef(0);
+  const paused = hoverPaused || engaged || userPaused;
   const slideCount = hasPosts ? posts.length : follow.length;
+
+  /* Tapping into an embedded post moves focus into its frame: pause until
+     the viewer comes back to the page (or after 3 minutes at the latest). */
+  useEffect(() => {
+    const onBlur = () =>
+      setTimeout(() => {
+        const el = document.activeElement;
+        if (el && el.tagName === "IFRAME" && wallRef.current?.contains(el)) {
+          touchedRef.current.add(prevSlideRef.current);
+          setEngaged(true);
+        }
+      }, 0);
+    const onFocus = () => setEngaged(false);
+    window.addEventListener("blur", onBlur);
+    window.addEventListener("focus", onFocus);
+    return () => {
+      window.removeEventListener("blur", onBlur);
+      window.removeEventListener("focus", onFocus);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!engaged) return undefined;
+    const id = setTimeout(() => setEngaged(false), 180000);
+    return () => clearTimeout(id);
+  }, [engaged]);
 
   useEffect(() => {
     setSlide(0);
@@ -671,6 +756,18 @@ const Connect = () => {
   }, [reduceMotion, paused, slideCount]);
 
   const safeSlide = slide % slideCount;
+
+  /* When moving away from a post the viewer played, reload it so the
+     video stops instead of playing on in the background. */
+  useEffect(() => {
+    const prev = prevSlideRef.current;
+    if (prev !== safeSlide && touchedRef.current.has(prev)) {
+      touchedRef.current.delete(prev);
+      setReloadKeys((keys) => ({ ...keys, [prev]: (keys[prev] || 0) + 1 }));
+      setEngaged(false);
+    }
+    prevSlideRef.current = safeSlide;
+  }, [safeSlide]);
   const current = hasPosts
     ? follow.find((f) => f.id === posts[safeSlide]?.brand) || follow[0]
     : follow[safeSlide];
@@ -842,9 +939,7 @@ const Connect = () => {
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.a
                     key={current.id}
-                    href={current.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    {...extLink(current.href)}
                     initial={{ rotateX: -90, opacity: 0 }}
                     animate={{ rotateX: 0, opacity: 1 }}
                     exit={{ rotateX: 90, opacity: 0 }}
@@ -891,7 +986,18 @@ const Connect = () => {
                   posts={posts}
                   index={safeSlide}
                   onSelect={setSlide}
-                  onPause={setPaused}
+                  onHover={setHoverPaused}
+                  paused={paused}
+                  onTogglePause={() => {
+                    if (paused) {
+                      setUserPaused(false);
+                      setEngaged(false);
+                    } else {
+                      setUserPaused(true);
+                    }
+                  }}
+                  wallRef={wallRef}
+                  reloadKeys={reloadKeys}
                 />
               </Appear>
             </div>
