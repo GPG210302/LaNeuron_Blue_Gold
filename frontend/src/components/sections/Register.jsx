@@ -268,7 +268,7 @@ function StudentFields({ form, t, set, countryCode, setCountryCode, research }) 
     <Field label={t.labels.email}><input type="email" value={form.email} onChange={set("email")} className={inputCls} placeholder={t.placeholders.email} /></Field>
     <Field label={t.labels.phone}><div className="flex gap-2"><select value={countryCode} onChange={(event) => setCountryCode(event.target.value)} className={countryCls}>{COUNTRY_CODES.map(({ code, label }, index) => <option key={`${label}-${index}`} value={code}>{label}</option>)}</select><input value={form.phone} onChange={set("phone")} className={inputCls} placeholder={t.placeholders.phone} /></div></Field>
     <Field label={research ? t.labels.studentName : t.labels.childName}><input value={form.child_name} onChange={set("child_name")} className={inputCls} placeholder={research ? t.placeholders.studentName : t.placeholders.childName} /></Field>
-    <Field label={research ? t.labels.studentAge : t.labels.childAge}><input type="number" min={research ? "13" : "6"} max={research ? "18" : "14"} value={form.child_age} onChange={set("child_age")} className={inputCls} placeholder={research ? "np. 15" : t.placeholders.childAge} /></Field>
+    <Field label={research ? t.labels.studentAge : t.labels.childAge}><input type="number" min={research ? "13" : "3"} max={research ? "18" : "14"} value={form.child_age} onChange={set("child_age")} className={inputCls} placeholder={research ? "np. 15" : t.placeholders.childAge} /></Field>
   </div>;
 }
 

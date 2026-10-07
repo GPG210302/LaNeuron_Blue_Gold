@@ -209,7 +209,7 @@ export function useData() {
       "Website crafted by G3 Creative Labs · Ghavish V G · +48 579 156 009",
     facts:
       t("footer.facts") || [
-        "Ages 6–13",
+        "Ages 3–14",
         "Mon–Fri 9AM–12PM",
         "Max 10 per week",
         "Starts 6 July 2026",

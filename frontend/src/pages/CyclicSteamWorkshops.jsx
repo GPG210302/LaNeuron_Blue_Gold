@@ -11,7 +11,7 @@ import HoverLift from "@/animations/HoverLift";
 
 const content = {
   en: {
-    badge: "Weekly after-school · Ages 6–14",
+    badge: "Weekly after-school · Ages 3–14",
     heroTitle: "Cyclic STEAM Workshops",
     strapline: "Hands-on learning. Independent thinking. Real-world science.",
     heroText:
@@ -83,12 +83,23 @@ const content = {
       "Each module introduces the concepts and tools it needs",
     ],
 
-    agesOverline: "Two age groups",
+    agesOverline: "Three age groups",
     agesTitle: "Grouped by Age, Taught Accordingly",
     agesSub:
-      "Children aged 6–10 and 11–14 work separately. The materials, challenge level, vocabulary and expected outcomes are matched to the group — so nobody is held back or left behind.",
+      "Children aged 3–5, 6–10 and 11–14 work separately. The materials, challenge level, vocabulary and expected outcomes are matched to the group — so nobody is held back or left behind.",
     agesToggleHint: "Choose an age group",
     ageGroups: [
+      {
+        id: "little",
+        label: "Ages 3–5",
+        title: "Play & Discover",
+        text: "Playful, hands-on discovery through the senses. Little ones mix, pour, build and sort, ask “why?” and try again — growing early science words, number sense and confidence.",
+        scheduleLabel: "Schedule",
+        scheduleValue: "New dedicated slot opening",
+        scheduleTime: "90 minutes — day and time agreed directly with interested parents",
+        scheduleNote: "We are forming this group now. Parents are welcome to stay and join in during sessions. Submit an enquiry and we will contact you to agree a day and time that works for the families joining.",
+        points: ["Learning through play and the senses", "First experiments: mix, pour, sink or float", "Early counting, sorting and shapes", "Building and simple construction play"],
+      },
       {
         id: "junior",
         label: "Ages 6–10",
@@ -116,9 +127,9 @@ const content = {
     rewardOverline: "Recognition",
     rewardTitle: "Every Module Ends With Something Real",
     rewardText:
-      "After each 12-week module, every child receives a certificate and an attractive prize recognising the work they have put in. Selected projects and models are chosen for the La Neuron Science & Innovation Day at the end of the year — where children present what they made to families and guests.",
+      "After each 15-week module, every child receives a certificate and an attractive prize recognising the work they have put in. Selected projects and models are chosen for the La Neuron Science & Innovation Day at the end of the year — where children present what they made to families and guests.",
     rewardItems: [
-      { title: "Certificate", text: "Awarded at the close of every 12-week module." },
+      { title: "Certificate", text: "Awarded at the close of every 15-week module." },
       { title: "An attractive prize", text: "Recognising effort, persistence and progress." },
       { title: "Science & Innovation Day", text: "Selected projects presented at our end-of-year showcase." },
     ],
@@ -126,11 +137,11 @@ const content = {
     factsOverline: "Practical details",
     factsTitle: "The Essentials",
     facts: [
-      { icon: Users, label: "Age groups", value: "6–10 and 11–14, taught separately" },
+      { icon: Users, label: "Age groups", value: "3–5, 6–10 and 11–14, taught separately" },
       { icon: CalendarDays, label: "Frequency", value: "Weekly — Fridays for ages 6–10" },
       { icon: Clock, label: "Session length", value: "90 minutes, between 16:00 and 18:00" },
       { icon: Sparkles, label: "Group size", value: "Maximum 10 children" },
-      { icon: Award, label: "Module length", value: "12 continuous weeks" },
+      { icon: Award, label: "Module length", value: "15 continuous weeks" },
       { icon: Lightbulb, label: "Language", value: "English, with light Polish support" },
       { icon: MapPin, label: "Venue", value: "Jana i Jędrzeja Śniadeckich 3, 31-531 Kraków" },
       { icon: Beaker, label: "Fees", value: "On enquiry — we will explain the options" },
@@ -143,7 +154,7 @@ const content = {
   },
 
   pl: {
-    badge: "Zajęcia popołudniowe · Wiek 6–14 lat",
+    badge: "Zajęcia popołudniowe · Wiek 3–14 lat",
     heroTitle: "Cykliczne warsztaty STEAM",
     strapline: "Nauka przez działanie. Samodzielne myślenie. Prawdziwa nauka.",
     heroText:
@@ -215,12 +226,23 @@ const content = {
       "Każdy moduł wprowadza potrzebne pojęcia i narzędzia",
     ],
 
-    agesOverline: "Dwie grupy wiekowe",
+    agesOverline: "Trzy grupy wiekowe",
     agesTitle: "Podział na grupy wiekowe",
     agesSub:
-      "Dzieci w wieku 6–10 i 11–14 lat pracują osobno. Materiały, poziom trudności, słownictwo i oczekiwane efekty są dopasowane do grupy — nikt się nie nudzi ani nie zostaje w tyle.",
+      "Dzieci w wieku 3–5, 6–10 i 11–14 lat pracują osobno. Materiały, poziom trudności, słownictwo i oczekiwane efekty są dopasowane do grupy — nikt się nie nudzi ani nie zostaje w tyle.",
     agesToggleHint: "Wybierz grupę wiekową",
     ageGroups: [
+      {
+        id: "little",
+        label: "Wiek 3–5 lat",
+        title: "Baw się i odkrywaj",
+        text: "Odkrywanie przez zabawę z udziałem wszystkich zmysłów. Maluchy mieszają, przelewają, budują i sortują, pytają „dlaczego?” i próbują ponownie — rozwijając pierwsze słownictwo naukowe, wyczucie liczb i pewność siebie.",
+        scheduleLabel: "Termin",
+        scheduleValue: "Otwieramy nowy, dedykowany termin",
+        scheduleTime: "90 minut — dzień i godzina ustalane bezpośrednio z zainteresowanymi rodzicami",
+        scheduleNote: "Właśnie tworzymy tę grupę. Rodzice mogą zostać na zajęciach razem z dzieckiem. Wyślij zgłoszenie, a skontaktujemy się, aby ustalić termin dogodny dla rodzin, które dołączą.",
+        points: ["Nauka przez zabawę i zmysły", "Pierwsze eksperymenty: mieszanie, przelewanie, tonie czy pływa", "Pierwsze liczenie, sortowanie i kształty", "Zabawy konstrukcyjne i proste budowanie"],
+      },
       {
         id: "junior",
         label: "Wiek 6–10 lat",
@@ -248,9 +270,9 @@ const content = {
     rewardOverline: "Docenienie pracy",
     rewardTitle: "Każdy moduł kończy się czymś konkretnym",
     rewardText:
-      "Po każdym 12-tygodniowym module każde dziecko otrzymuje dyplom oraz atrakcyjną nagrodę doceniającą włożoną pracę. Wybrane projekty i modele prezentowane są podczas Dnia Nauki i Innowacji La Neuron na koniec roku, gdzie dzieci pokazują swoje prace rodzinom i gościom.",
+      "Po każdym 15-tygodniowym module każde dziecko otrzymuje dyplom oraz atrakcyjną nagrodę doceniającą włożoną pracę. Wybrane projekty i modele prezentowane są podczas Dnia Nauki i Innowacji La Neuron na koniec roku, gdzie dzieci pokazują swoje prace rodzinom i gościom.",
     rewardItems: [
-      { title: "Dyplom", text: "Wręczany na zakończenie każdego 12-tygodniowego modułu." },
+      { title: "Dyplom", text: "Wręczany na zakończenie każdego 15-tygodniowego modułu." },
       { title: "Atrakcyjna nagroda", text: "Doceniająca zaangażowanie, wytrwałość i postępy." },
       { title: "Dzień Nauki i Innowacji", text: "Wybrane projekty prezentowane podczas naszego pokazu na koniec roku." },
     ],
@@ -258,11 +280,11 @@ const content = {
     factsOverline: "Informacje praktyczne",
     factsTitle: "Najważniejsze informacje",
     facts: [
-      { icon: Users, label: "Grupy wiekowe", value: "6–10 i 11–14 lat, zajęcia osobno" },
+      { icon: Users, label: "Grupy wiekowe", value: "3–5, 6–10 i 11–14 lat, zajęcia osobno" },
       { icon: CalendarDays, label: "Częstotliwość", value: "Co tydzień — piątki dla grupy 6–10 lat" },
       { icon: Clock, label: "Czas trwania", value: "90 minut, między 16:00 a 18:00" },
       { icon: Sparkles, label: "Liczebność grupy", value: "Maksymalnie 10 dzieci" },
-      { icon: Award, label: "Długość modułu", value: "12 kolejnych tygodni" },
+      { icon: Award, label: "Długość modułu", value: "15 kolejnych tygodni" },
       { icon: Lightbulb, label: "Język", value: "Angielski, ze wsparciem po polsku" },
       { icon: MapPin, label: "Miejsce", value: "Jana i Jędrzeja Śniadeckich 3, 31-531 Kraków" },
       { icon: Beaker, label: "Opłaty", value: "Ustalane indywidualnie — zapytaj nas" },

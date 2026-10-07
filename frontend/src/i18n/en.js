@@ -22,14 +22,14 @@ export const en = {
   },
 
   hero: {
-    badge: "Ages 6–14 • Kraków, Poland",
+    badge: "Ages 3–14 • Kraków, Poland",
     headline: "Real-World Science for Young Minds",
-    sub: "We believe every child is a natural scientist. We give children aged 6–14 the tools, the method, and the wonder to investigate the world around them through hands-on STEAM education.",
+    sub: "We believe every child is a natural scientist. We give children aged 3–14 the tools, the method, and the wonder to investigate the world around them through hands-on STEAM education.",
     english:
       "At La Neuron, every session is conducted entirely in English, with minimal Polish support available where necessary. Through hands-on STEAM experiences, children naturally develop the ability to think, question, create, and communicate in English building confidence while staying fully immersed in an English speaking environment.",
     key: "This is not just fun with science materials. Every session follows a proper scientific investigation — hypothesis, experiment, observation, results, and conclusion.",
     stats: [
-      { value: "6–14", label: "Age range" },
+      { value: "3–14", label: "Age range" },
       { value: "Max 10", label: "Per group" },
       { value: "5", label: "STEAM disciplines" },
     ],
@@ -170,26 +170,37 @@ export const en = {
   ],
 
   ageGroups: {
+    "Little Discoverers": {
+      title: "Little Discoverers",
+      ageRange: "Ages 3–5",
+      activities: [
+        "Hands-on experiments: sink or float, magnets and colour mixing",
+        "First scientist tools: magnifying glasses, pipettes and funnels",
+        "Building towers, bridges and rolling tracks",
+        "Early maths through sorting, counting, patterns and shapes",
+        "Nature art: leaf prints, textures and light-and-shadow play",
+      ],
+    },
     "Young Explorers": {
       title: "Young Explorers",
-      ageRange: "Ages 6–9",
+      ageRange: "Ages 6–10",
       activities: [
-        "Simple, sensory-led experiments",
-        "Guided worksheets with pictures and prompts",
-        "Focus on observation and questioning",
-        "Outdoor nature walks and collection activities",
-        "Science drawing and journalling",
+        "Guided experiments that answer “What happens if…?” questions",
+        "Real tools — rulers, timers, thermometers — to measure and record results",
+        "Design-and-build challenges: balloon cars, catapults and simple machines",
+        "Outdoor field science: plants, insects, soil and weather",
+        "Science journals with drawings, labels and diagrams",
       ],
     },
     "Junior Scientists": {
       title: "Junior Scientists",
-      ageRange: "Ages 10–14",
+      ageRange: "Ages 11–14",
       activities: [
-        "Full scientific method investigations",
-        "Structured hypothesis, variables, and data recording",
-        "Quantitative results and written conclusions",
-        "Cross-disciplinary STEAM projects",
-        "Presentation of findings to the group",
+        "Full investigations: hypothesis, variables, fair testing and conclusions",
+        "Collecting and analysing data with tables, graphs and averages",
+        "Engineering design cycle: plan, prototype, test and improve",
+        "Coding and electronics projects linking science to real technology",
+        "Presenting findings through posters, models and short talks",
       ],
     },
   },
@@ -199,7 +210,7 @@ export const en = {
       title: "Cyclic STEAM Workshops",
       type: "Regular",
       description:
-        "A weekly after-school workshop for children aged 6–14. Each session combines several STEAM fields at once — children predict, build, test and work things out for themselves, rather than following a set of ready-made steps.",
+        "A weekly after-school workshop for children aged 3–14. Each session combines several STEAM fields at once — children predict, build, test and work things out for themselves, rather than following a set of ready-made steps.",
     },
     "STEAM Thematic Workshop 2026": {
       title: "STEAM Thematic Workshop 2026",
@@ -282,7 +293,7 @@ export const en = {
     {
       question: "What ages can attend?",
       answer:
-        "Children aged 6 to 14 are welcome. Sessions are differentiated — younger children (6–9) follow a guided, sensory-led approach while older children (10–14) complete full scientific investigations.",
+        "Children aged 3 to 14 are welcome. Sessions are differentiated by age — the youngest (3–5) learn through play, stories and the senses; younger children (6–10) follow a guided, hands-on approach; and older children (11–14) complete full scientific investigations.",
     },
     {
       question: "What language are sessions delivered in?",
@@ -307,7 +318,7 @@ export const en = {
     {
       question: "Can siblings attend together?",
       answer:
-        "Yes. Siblings within the 6–14 age range are welcome in the same week. A sibling discount is available — mention this when registering.",
+        "Yes. Siblings within the 3–14 age range are welcome in the same week. A sibling discount is available — mention this when registering.",
     },
     {
       question: "What will my child bring home?",
@@ -323,7 +334,7 @@ export const en = {
 
   footer: {
     description:
-      "Hands-on STEAM education for children aged 6–14. Led by a PhD Cognitive Scientist and certified Neuroscience Coach. Every child deserves to experience the wonder of discovery.",
+      "Hands-on STEAM education for children aged 3–14. Led by a PhD Cognitive Scientist and certified Neuroscience Coach. Every child deserves to experience the wonder of discovery.",
     exploreTitle: "Explore",
     contactTitle: "Contact",
     enquireBtn: "Enquire Now",
@@ -345,13 +356,13 @@ export const en = {
     heading: "STEAM Thematic Workshop 2026",
     tag: "Registrations open • limited spots",
     intro:
-      "An intensive STEAM Thematic Workshop for children aged 6–14. Each day is a different themed lab. Children spend 3 hours per day in guided scientific investigations, both indoors and outdoors.",
+      "An intensive STEAM Thematic Workshop for children aged 3–14. Each day is a different themed lab. Children spend 3 hours per day in guided scientific investigations, both indoors and outdoors.",
     weekHeading: "Daily workshop",
     weekSub: "(tap a day to explore)",
     tapExplore: "Tap to explore",
     workshopDetailsHeading: "workshop details",
     statEducator: "Cognitive Scientist & Neuroscience Coach",
-    statAgeGroup: "Ages 6–14",
+    statAgeGroup: "Ages 3–14",
     statDiscount: "Discounted Rates",
     suitableNote:
       "Suitable for children with learning differences. Our educator is a certified Neuroscience Coach experienced with ADHD, dyslexia, memory challenges, and SEN. Children take home Science project final outcomes, Skill Badges and Certificate of Achievement.",
@@ -491,7 +502,7 @@ export const en = {
       {
         myth: "“STEAM is only for older children.”",
         truth:
-          "Ages 6–9 benefit the most from early STEAM exposure. Young Explorers sessions are sensory-led and visual, designed precisely for how young brains form foundational concepts.",
+          "Ages 3–10 benefit the most from early STEAM exposure. Little Discoverers and Young Explorers sessions are play-led, sensory and visual, designed precisely for how young brains form foundational concepts.",
       },
     ],
   },
@@ -560,7 +571,7 @@ export const en = {
         {
           title: "Cyclic STEAM Workshops",
           status: "Active sessions",
-          desc: "Weekly after-school STEAM for ages 6–14, in groups of ten. Children investigate, build and reason their own way to an answer.",
+          desc: "Weekly after-school STEAM for ages 3–14, in groups of ten. Children investigate, build and reason their own way to an answer.",
           href: "/cyclic-steam-workshops",
           external: false,
           cta: "View programme details",
@@ -726,7 +737,7 @@ export const en = {
       email: "Email address *",
       phone: "Phone / WhatsApp (optional)",
       childName: "Child first name *",
-      childAge: "Child age (6-14) *",
+      childAge: "Child age (3–14) *",
       startDate: "Preferred start date *",
       endDate: "Preferred end date *",
       programmeInterest: "Programme interest *",
@@ -776,7 +787,7 @@ export const en = {
       collaborationTypes: ["After-school STEAM club", "One-off workshop / event", "Project-based STEAM module", "Research mentoring / competition support"],
       deliveryLanguages: ["English", "Polish", "Bilingual"],
       labels: {
-        programmeInterest: "Programme interest *", parentName: "Parent / guardian full name *", email: "Email address *", phone: "Phone / WhatsApp", childName: "Child first name *", childAge: "Child age (6–14) *", studentName: "Student full name *", studentAge: "Student age (13–18) *", startDate: "Preferred start date *", endDate: "Preferred end date *", preferredContact: "Preferred contact method (choose at least one) *", notes: "Questions, allergies, or learning needs", researchNotes: "Additional information or questions", collaborationNotes: "Additional details, timetable, or constraints", supportAreas: "Area(s) of support *", sessionPattern: "Preferred session pattern *", learningSituation: "Anything important about your child’s current learning situation?", researchExperience: "Previous research or publishing experience", englishComfort: "Comfort reading scientific material in English", researchDescription: "Briefly describe the previous project or experience", weeklyTime: "Independent time available each week *", projectStyle: "Preferred project style", researchInterests: "Research interests", contactName: "Contact person’s full name *", workEmail: "Work email address *", institutionName: "Institution name *", institutionType: "Institution type *", institutionOther: "Please specify institution type *", contactRole: "Your role *", studentCount: "Approximate number of students", studentAgeRange: "Age range of students *", timeline: "Proposed timeline", collaborationTypes: "Preferred collaboration type(s) *", deliveryLanguages: "Preferred language(s) of delivery", collaborationGoals: "What would you like students to gain from this collaboration?",
+        programmeInterest: "Programme interest *", parentName: "Parent / guardian full name *", email: "Email address *", phone: "Phone / WhatsApp", childName: "Child first name *", childAge: "Child age (3–14) *", studentName: "Student full name *", studentAge: "Student age (13–18) *", startDate: "Preferred start date *", endDate: "Preferred end date *", preferredContact: "Preferred contact method (choose at least one) *", notes: "Questions, allergies, or learning needs", researchNotes: "Additional information or questions", collaborationNotes: "Additional details, timetable, or constraints", supportAreas: "Area(s) of support *", sessionPattern: "Preferred session pattern *", learningSituation: "Anything important about your child’s current learning situation?", researchExperience: "Previous research or publishing experience", englishComfort: "Comfort reading scientific material in English", researchDescription: "Briefly describe the previous project or experience", weeklyTime: "Independent time available each week *", projectStyle: "Preferred project style", researchInterests: "Research interests", contactName: "Contact person’s full name *", workEmail: "Work email address *", institutionName: "Institution name *", institutionType: "Institution type *", institutionOther: "Please specify institution type *", contactRole: "Your role *", studentCount: "Approximate number of students", studentAgeRange: "Age range of students *", timeline: "Proposed timeline", collaborationTypes: "Preferred collaboration type(s) *", deliveryLanguages: "Preferred language(s) of delivery", collaborationGoals: "What would you like students to gain from this collaboration?",
       },
       placeholders: {
         programme: "Select a programme", select: "Select an option", parentName: "Your full name", email: "you@email.com", phone: "Phone number", childName: "Child name", childAge: "e.g. 9", studentName: "Student full name", notes: "Anything the educator should know", researchNotes: "Include questions, relevant student context, or anything else we should know.", collaborationNotes: "Include practical requirements, timetable limits, or useful background information.", learningSituation: "For example: school challenges, current support, upcoming exams, or anything helpful for the first conversation.", researchDescription: "Include the topic, school project, science fair, poster, or publication if relevant.", researchInterests: "For example: biology, psychology, environmental science, chemistry, physics, engineering, or space science.", contactName: "Your full name", workEmail: "you@school.edu", institutionName: "Name of school, college, or university", institutionOther: "Describe the institution type", studentCount: "For example, 18 students", studentAgeRange: "For example, 10–12 or 13–16", timeline: "For example, October–December 2026", collaborationGoals: "Describe the learning goals, intended outcomes, or wider school aims.",

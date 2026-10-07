@@ -49,7 +49,7 @@ class EnquiryCreate(BaseModel):
     email: EmailStr
     phone: Optional[str] = ""
     child_name: str
-    child_age: int = Field(ge=6, le=13)
+    child_age: int = Field(ge=3, le=14)
     preferred_week: str
     programme_interest: str
     message: Optional[str] = ""

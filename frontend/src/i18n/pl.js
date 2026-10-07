@@ -21,14 +21,14 @@ export const pl = {
   },
 
   hero: {
-    badge: "Wiek 6–14 lat • Kraków, Polska",
+    badge: "Wiek   lat • Kraków, Polska",
     headline: "Prawdziwa nauka dla młodych umysłów",
-    sub: "Wierzymy, że każde dziecko jest z natury naukowcem. Dajemy dzieciom w wieku 6–14 lat narzędzia, metodę i ciekawość potrzebne do odkrywania otaczającego je świata — poprzez praktyczną edukację STEAM.",
+    sub: "Wierzymy, że każde dziecko jest z natury naukowcem. Dajemy dzieciom w wieku 3–14 lat narzędzia, metodę i ciekawość potrzebne do odkrywania otaczającego je świata — poprzez praktyczną edukację STEAM.",
     english:
       "W La Neuron każde zajęcia prowadzone są w całości po angielsku, z minimalnym wsparciem w języku polskim tam, gdzie jest to konieczne. Dzięki praktycznym doświadczeniom STEAM dzieci w naturalny sposób rozwijają umiejętność myślenia, zadawania pytań, tworzenia i komunikowania się po angielsku — budując pewność siebie i pozostając w pełni zanurzonym w anglojęzycznym środowisku.",
     key: "To nie jest po prostu zabawa z materiałami naukowymi. Każde zajęcia opierają się na prawdziwym badaniu naukowym — hipoteza, eksperyment, obserwacja, wyniki i wnioski.",
     stats: [
-      { value: "6–14", label: "Przedział wiekowy" },
+      { value: "3–14", label: "Przedział wiekowy" },
       { value: "Maks. 10", label: "Osób w grupie" },
       { value: "5", label: "Dyscyplin STEAM" },
     ],
@@ -169,26 +169,37 @@ export const pl = {
   ],
 
   ageGroups: {
+    "Little Discoverers": {
+      title: "Ciekawskie Maluchy",
+      ageRange: "Wiek 3–5 lat",
+      activities: [
+        "Eksperymenty w praktyce: tonie czy pływa, magnesy i mieszanie kolorów",
+        "Pierwsze narzędzia badacza: lupy, pipety i lejki",
+        "Budowanie wież, mostów i torów do toczenia",
+        "Pierwsza matematyka: sortowanie, liczenie, układanie rytmów i kształty",
+        "Sztuka z przyrody: odbitki liści, faktury oraz zabawy światłem i cieniem",
+      ],
+    },
     "Young Explorers": {
       title: "Mali odkrywcy",
-      ageRange: "Wiek 6–9 lat",
+      ageRange: "Wiek 6–10 lat",
       activities: [
-        "Proste eksperymenty angażujące zmysły",
-        "Prowadzone arkusze pracy z obrazkami i podpowiedziami",
-        "Nacisk na obserwację i zadawanie pytań",
-        "Spacery przyrodnicze i zajęcia kolekcjonerskie na świeżym powietrzu",
-        "Rysowanie naukowe i prowadzenie dzienniczka badacza",
+        "Prowadzone eksperymenty odpowiadające na pytanie „Co się stanie, jeśli…?”",
+        "Prawdziwe narzędzia — linijki, stopery, termometry — do mierzenia i zapisywania wyników",
+        "Wyzwania konstrukcyjne: samochody napędzane balonem, katapulty i proste maszyny",
+        "Nauka w terenie: rośliny, owady, gleba i pogoda",
+        "Dzienniczek naukowy z rysunkami, podpisami i schematami",
       ],
     },
     "Junior Scientists": {
       title: "Młodzi naukowcy",
-      ageRange: "Wiek 10–14 lat",
+      ageRange: "Wiek 11–14 lat",
       activities: [
-        "Pełne badania z zastosowaniem metody naukowej",
-        "Ustrukturyzowane hipotezy, zmienne i rejestrowanie danych",
-        "Ilościowe wyniki i pisemne wnioski",
-        "Interdyscyplinarne projekty STEAM",
-        "Prezentacja wyników przed grupą",
+        "Pełne badania: hipoteza, zmienne, rzetelny test i wnioski",
+        "Zbieranie i analiza danych: tabele, wykresy i średnie",
+        "Proces projektowania inżynierskiego: planowanie, prototyp, testy i ulepszanie",
+        "Projekty z programowania i elektroniki łączące naukę z technologią",
+        "Prezentowanie wyników za pomocą plakatów, modeli i krótkich wystąpień",
       ],
     },
   },
@@ -198,7 +209,7 @@ export const pl = {
       title: "Cykliczne warsztaty STEAM",
       type: "Regularne",
       description:
-        "Cotygodniowe zajęcia popołudniowe dla dzieci w wieku 6–14 lat. Każde spotkanie łączy kilka dziedzin STEAM naraz — dzieci przewidują, budują, testują i samodzielnie dochodzą do rozwiązań, zamiast wykonywać gotowe instrukcje.",
+        "Cotygodniowe zajęcia popołudniowe dla dzieci w wieku 3–14 lat. Każde spotkanie łączy kilka dziedzin STEAM naraz — dzieci przewidują, budują, testują i samodzielnie dochodzą do rozwiązań, zamiast wykonywać gotowe instrukcje.",
     },
     "STEAM Thematic Workshop 2026": {
       title: "Tematyczne warsztaty STEAM 2026",
@@ -290,7 +301,7 @@ export const pl = {
     {
       question: "Dla jakich dzieci są te zajęcia?",
       answer:
-        "Zapraszamy dzieci w wieku 6–14 lat. Zajęcia są zróżnicowane — młodsze dzieci (6–9 lat) pracują metodą sensoryczną z prowadzonymi ćwiczeniami, natomiast starsze (10–14 lat) przeprowadzają pełne badania naukowe.",
+        "Zapraszamy dzieci w wieku 3–14 lat. Zajęcia są dopasowane do wieku — najmłodsi (3–5 lat) uczą się przez zabawę, opowieści i zmysły, młodsze dzieci (6–10 lat) wykonują praktyczne ćwiczenia pod okiem prowadzącego, a starsze (11–14 lat) przeprowadzają pełne badania naukowe.",
     },
     {
       question: "W jakim języku prowadzone są zajęcia?",
@@ -315,7 +326,7 @@ export const pl = {
     {
       question: "Czy rodzeństwo może uczęszczać razem?",
       answer:
-        "Tak. Rodzeństwo w przedziale wiekowym 6–14 lat jest mile widziane w tym samym tygodniu. Dostępna jest zniżka dla rodzeństwa — wspomnij o tym przy rejestracji.",
+        "Tak. Rodzeństwo w przedziale wiekowym 3–14 lat jest mile widziane w tym samym tygodniu. Dostępna jest zniżka dla rodzeństwa — wspomnij o tym przy rejestracji.",
     },
     {
       question: "Co dziecko zabierze do domu?",
@@ -331,7 +342,7 @@ export const pl = {
 
   footer: {
     description:
-      "Praktyczna edukacja STEAM dla dzieci w wieku 6–14 lat. Prowadzona przez doktora nauk kognitywnych i certyfikowanego coacha neurobiologicznego. Każde dziecko zasługuje na to, by doświadczyć radości odkrywania.",
+      "Praktyczna edukacja STEAM dla dzieci w wieku 3–14 lat. Prowadzona przez doktora nauk kognitywnych i certyfikowanego coacha neurobiologicznego. Każde dziecko zasługuje na to, by doświadczyć radości odkrywania.",
     exploreTitle: "Odkrywaj",
     contactTitle: "Kontakt",
     enquireBtn: "Zapytaj teraz",
@@ -353,13 +364,13 @@ export const pl = {
     heading: "Tematyczne warsztaty STEAM 2026",
     tag: "Rejestracja otwarta • ograniczona liczba miejsc",
     intro:
-      "Intensywne tematyczne warsztaty STEAM dla dzieci w wieku 6–14 lat. Każdy dzień to inne tematyczne laboratorium. Dzieci spędzają 3 godziny dziennie na prowadzonych badaniach naukowych — zarówno wewnątrz, jak i na zewnątrz.",
+      "Intensywne tematyczne warsztaty STEAM dla dzieci w wieku 3–14 lat. Każdy dzień to inne tematyczne laboratorium. Dzieci spędzają 3 godziny dziennie na prowadzonych badaniach naukowych — zarówno wewnątrz, jak i na zewnątrz.",
     weekHeading: "Tydzień zajęć",
     weekSub: "(kliknij dzień, aby odkryć szczegóły)",
     tapExplore: "Kliknij, aby odkryć",
     workshopDetailsHeading: "Szczegóły programu",
     statEducator: "Kognitywista i trener neuronauki",
-    statAgeGroup: "6–14 lat",
+    statAgeGroup: "3–14 lat",
     statDiscount: "Obniżone stawki",
     suitableNote:
       "Zajęcia dostosowane dla dzieci z trudnościami w uczeniu się. Nauczycielka jest certyfikowanym coachem neurobiologicznym z doświadczeniem w pracy z dziećmi z ADHD, dysleksją, trudnościami z pamięcią i specjalnymi potrzebami edukacyjnymi. Dzieci zabierają do domu efekty projektu naukowego, odznaki umiejętności i certyfikat ukończenia.",
@@ -502,7 +513,7 @@ export const pl = {
       {
         myth: "„STEAM jest tylko dla starszych dzieci.”",
         truth:
-          "Dzieci w wieku 6–9 lat czerpią największe korzyści z wczesnego kontaktu z STEAM. Zajęcia dla Małych Odkrywców są sensoryczne i wizualne, zaprojektowane dokładnie pod kątem tego, jak młode mózgi tworzą podstawowe pojęcia.",
+          "Dzieci w wieku 3–10 lat czerpią największe korzyści z wczesnego kontaktu ze STEAM. Zajęcia dla Ciekawskich Maluchów i Małych Odkrywców opierają się na zabawie, zmysłach i obrazie — są zaprojektowane dokładnie pod kątem tego, jak młode mózgi tworzą podstawowe pojęcia.",
       },
     ],
   },
@@ -571,7 +582,7 @@ export const pl = {
         {
           title: "Cykliczne warsztaty STEAM",
           status: "Aktywne grupy",
-          desc: "Cotygodniowe zajęcia STEAM dla dzieci 6–14 lat, w grupach do dziesięciu osób. Dzieci badają, budują i samodzielnie dochodzą do rozwiązań.",
+          desc: "Cotygodniowe zajęcia STEAM dla dzieci 3–14 lat, w grupach do dziesięciu osób. Dzieci badają, budują i samodzielnie dochodzą do rozwiązań.",
           href: "/cyclic-steam-workshops",
           external: false,
           cta: "Zobacz szczegóły",
@@ -707,7 +718,7 @@ export const pl = {
       email: "Adres e‑mail *",
       phone: "Telefon / WhatsApp (opcjonalnie)",
       childName: "Imię dziecka *",
-      childAge: "Wiek dziecka (6–14 lat) *",
+      childAge: "Wiek dziecka (3–14 lat) *",
       startDate: "Od dnia *",
       endDate: "Do dnia *",
       programmeInterest: "Rodzaj zajęć *",
@@ -758,7 +769,7 @@ export const pl = {
       collaborationTypes: ["Pozalekcyjne koło STEAM", "Jednorazowe warsztaty lub wydarzenie", "Program STEAM oparty na projektach", "Mentoring badawczy lub wsparcie w konkursach"],
       deliveryLanguages: ["Angielski", "Polski", "Dwujęzycznie"],
       labels: {
-        programmeInterest: "Jakim programem są Państwo zainteresowani? *", parentName: "Imię i nazwisko rodzica / opiekuna *", email: "Adres e-mail *", phone: "Telefon / WhatsApp", childName: "Imię dziecka *", childAge: "Wiek dziecka (6–14 lat) *", studentName: "Imię i nazwisko uczestnika *", studentAge: "Wiek uczestnika (13–18 lat) *", startDate: "Preferowana data rozpoczęcia *", endDate: "Preferowana data zakończenia *", preferredContact: "Jak możemy się z Państwem skontaktować? (wybierz co najmniej jedną opcję) *", notes: "Pytania, alergie lub ważne informacje o dziecku", researchNotes: "Dodatkowe informacje lub pytania", collaborationNotes: "Dodatkowe informacje, dostępne terminy lub ograniczenia", supportAreas: "W jakich obszarach dziecko potrzebuje wsparcia? *", sessionPattern: "Jaka forma spotkań będzie najlepsza? *", learningSituation: "Czy jest coś ważnego, co warto wiedzieć o obecnej sytuacji dziecka w nauce?", researchExperience: "Czy dziecko realizowało wcześniej projekt badawczy, brało udział w konkursie lub przygotowało pracę naukową?", englishComfort: "Czy dziecko swobodnie czyta materiały naukowe po angielsku?", researchDescription: "Prosimy krótko opisać wcześniejszy projekt lub doświadczenie", weeklyTime: "Ile czasu tygodniowo dziecko może poświęcić na samodzielną pracę nad projektem? *", projectStyle: "Jaka forma pracy będzie najlepsza?", researchInterests: "Jakie tematy naukowe interesują dziecko?", contactName: "Imię i nazwisko osoby do kontaktu *", workEmail: "Służbowy adres e-mail *", institutionName: "Nazwa placówki *", institutionType: "Rodzaj placówki *", institutionOther: "Prosimy podać rodzaj placówki *", contactRole: "Pełniona funkcja *", studentCount: "Przybliżona liczba uczniów", studentAgeRange: "Wiek uczniów *", timeline: "Proponowany termin", collaborationTypes: "Jaka forma współpracy Państwa interesuje? *", deliveryLanguages: "W jakim języku mają odbywać się zajęcia?", collaborationGoals: "Jakie umiejętności lub efekty chcieliby Państwo rozwinąć u uczniów?",
+        programmeInterest: "Jakim programem są Państwo zainteresowani? *", parentName: "Imię i nazwisko rodzica / opiekuna *", email: "Adres e-mail *", phone: "Telefon / WhatsApp", childName: "Imię dziecka *", childAge: "Wiek dziecka (3–14 lat) *", studentName: "Imię i nazwisko uczestnika *", studentAge: "Wiek uczestnika (13–18 lat) *", startDate: "Preferowana data rozpoczęcia *", endDate: "Preferowana data zakończenia *", preferredContact: "Jak możemy się z Państwem skontaktować? (wybierz co najmniej jedną opcję) *", notes: "Pytania, alergie lub ważne informacje o dziecku", researchNotes: "Dodatkowe informacje lub pytania", collaborationNotes: "Dodatkowe informacje, dostępne terminy lub ograniczenia", supportAreas: "W jakich obszarach dziecko potrzebuje wsparcia? *", sessionPattern: "Jaka forma spotkań będzie najlepsza? *", learningSituation: "Czy jest coś ważnego, co warto wiedzieć o obecnej sytuacji dziecka w nauce?", researchExperience: "Czy dziecko realizowało wcześniej projekt badawczy, brało udział w konkursie lub przygotowało pracę naukową?", englishComfort: "Czy dziecko swobodnie czyta materiały naukowe po angielsku?", researchDescription: "Prosimy krótko opisać wcześniejszy projekt lub doświadczenie", weeklyTime: "Ile czasu tygodniowo dziecko może poświęcić na samodzielną pracę nad projektem? *", projectStyle: "Jaka forma pracy będzie najlepsza?", researchInterests: "Jakie tematy naukowe interesują dziecko?", contactName: "Imię i nazwisko osoby do kontaktu *", workEmail: "Służbowy adres e-mail *", institutionName: "Nazwa placówki *", institutionType: "Rodzaj placówki *", institutionOther: "Prosimy podać rodzaj placówki *", contactRole: "Pełniona funkcja *", studentCount: "Przybliżona liczba uczniów", studentAgeRange: "Wiek uczniów *", timeline: "Proponowany termin", collaborationTypes: "Jaka forma współpracy Państwa interesuje? *", deliveryLanguages: "W jakim języku mają odbywać się zajęcia?", collaborationGoals: "Jakie umiejętności lub efekty chcieliby Państwo rozwinąć u uczniów?",
       },
       placeholders: {
         programme: "Wybierz program", select: "Wybierz opcję", parentName: "Imię i nazwisko", email: "twoj@email.pl", phone: "Numer telefonu", childName: "Imię dziecka", childAge: "np. 9", studentName: "Imię i nazwisko uczestnika", notes: "Napisz, jeśli jest coś ważnego, o czym powinniśmy wiedzieć.", researchNotes: "Można wpisać pytania, dodatkowe informacje o uczestniku lub inne ważne uwagi.", collaborationNotes: "Można wpisać informacje o organizacji zajęć, ograniczeniach czasowych lub potrzebach placówki.", learningSituation: "Np. trudności w szkole, obecne formy wsparcia, zbliżające się egzaminy lub inne informacje pomocne przed pierwszą rozmową.", researchDescription: "Np. temat projektu, konkurs, projekt szkolny, plakat naukowy lub publikacja.", researchInterests: "Np. biologia, psychologia, ekologia, chemia, fizyka, inżynieria lub kosmos.", contactName: "Imię i nazwisko", workEmail: "kontakt@szkola.pl", institutionName: "Nazwa szkoły, uczelni lub innej placówki", institutionOther: "Opisz rodzaj placówki", studentCount: "Np. 18 uczniów", studentAgeRange: "Np. 10–12 lat lub 13–16 lat", timeline: "Np. październik–grudzień 2026, raz w tygodniu", collaborationGoals: "Opisz najważniejsze cele, oczekiwane efekty lub potrzeby uczniów i placówki.",

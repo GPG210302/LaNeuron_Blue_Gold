@@ -30,15 +30,15 @@ export const NAV = [
 ];
 
 export const HERO = {
-  badge: "Ages 6–13 • Kraków, Poland",
+  badge: "Ages 3–14 • Kraków, Poland",
   headline: "Real-World Science for Young Minds",
-  sub: "We believe every child is a natural scientist. We give children aged 6–13 the tools, the method, and the wonder to investigate the world around them through hands-on STEAM education.",
+  sub: "We believe every child is a natural scientist. We give children aged 3–14 the tools, the method, and the wonder to investigate the world around them through hands-on STEAM education.",
   english: "At La Neuron, every session is conducted entirely in English, with minimal Polish support available where necessary. Through hands-on STEAM experiences, children naturally develop the ability to think, question, create, and communicate in English building confidence while staying fully immersed in an English speaking environment.",
   key: "This is not just fun with science materials. Every session follows a proper scientific investigation — hypothesis, experiment, observation, results, and conclusion.",
   image:
     "https://images.pexels.com/photos/8471975/pexels-photo-8471975.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   stats: [
-    { value: "6–13", label: "Age range" },
+    { value: "3–14", label: "Age range" },
     { value: "Max 10", label: "Per group" },
     { value: "5", label: "STEAM disciplines" },
   ],
@@ -121,12 +121,16 @@ export const RECEIVE = [
 
 export const AGE_GROUPS = [
   {
-    title: "Young Explorers", ages: "Ages 6–9", color: "#10B981",
-    points: ["Simple, sensory-led experiments", "Guided worksheets with pictures and prompts", "Focus on observation and questioning", "Outdoor nature walks and collection activities", "Science drawing and journalling"],
+    title: "Little Discoverers", ages: "Ages 3–5", color: "#F59E0B",
+    points: ["Hands-on experiments: sink or float, magnets and colour mixing", "First scientist tools: magnifying glasses, pipettes and funnels", "Building towers, bridges and rolling tracks", "Early maths through sorting, counting, patterns and shapes", "Nature art: leaf prints, textures and light-and-shadow play"],
   },
   {
-    title: "Junior Scientists", ages: "Ages 10–13", color: "#3B82F6",
-    points: ["Full scientific method investigations", "Structured hypothesis, variables, and data recording", "Quantitative results and written conclusions", "Cross-disciplinary STEAM projects", "Presentation of findings to the group"],
+    title: "Young Explorers", ages: "Ages 6–10", color: "#10B981",
+    points: ["Guided experiments that answer “What happens if…?” questions", "Real tools — rulers, timers, thermometers — to measure and record results", "Design-and-build challenges: balloon cars, catapults and simple machines", "Outdoor field science: plants, insects, soil and weather", "Science journals with drawings, labels and diagrams"],
+  },
+  {
+    title: "Junior Scientists", ages: "Ages 11–14", color: "#3B82F6",
+    points: ["Full investigations: hypothesis, variables, fair testing and conclusions", "Collecting and analysing data with tables, graphs and averages", "Engineering design cycle: plan, prototype, test and improve", "Coding and electronics projects linking science to real technology", "Presenting findings through posters, models and short talks"],
   },
 ];
 
@@ -138,7 +142,7 @@ export const PROGRAMMES = [
     color: "#0F8A78", tint: "#E7FAF6",
     link: "cyclic-steam-workshops",
     text:
-      "A weekly after-school workshop for children aged 6–14. Each session combines several STEAM fields at once — children predict, build, test and work things out for themselves, rather than following a set of ready-made steps.",
+      "A weekly after-school workshop for children aged 3–14. Each session combines several STEAM fields at once — children predict, build, test and work things out for themselves, rather than following a set of ready-made steps.",
     image:
       "https://images.pexels.com/photos/7869034/pexels-photo-7869034.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   },
@@ -229,12 +233,12 @@ export const PROGRAMME_OPTIONS = [
 ];
 
 export const FAQ = [
-  { q: "What ages can attend?", a: "Children aged 6 to 13 are welcome. Sessions are differentiated — younger children (6–9) follow a guided, sensory-led approach while older children (10–13) complete full scientific investigations." },
+  { q: "What ages can attend?", a: "Children aged 3 to 14 are welcome. Sessions are differentiated by age — the youngest (3–5) learn through play, stories and the senses; younger children (6–10) follow a guided, hands-on approach; and older children (11–14) complete full scientific investigations." },
   { q: "What language are sessions delivered in?", a: "Sessions are in English, making this ideal for children at international schools or bilingual families in Kraków." },
   { q: "What should my child bring?", a: "All science materials, worksheets, and equipment are provided. Children should bring comfortable clothes for outdoor activities, a water bottle, and a packed snack. An apron is provided for experiments." },
   { q: "What does an outdoor session involve?", a: "On nature days and some other days, children go outside to the area near the venue to collect natural samples — leaves, soil, rocks, insects — which become the subjects of their investigation. All outdoor time is fully supervised." },
   { q: "Is this suitable for children with learning differences?", a: "Yes. The educator holds a Neuroscience Coaching Certificate and has extensive experience supporting children with ADHD, dyslexia, SEN, memory challenges, and other cognitive differences. Please mention any requirements at registration." },
-  { q: "Can siblings attend together?", a: "Yes. Siblings within the 6–13 age range are welcome in the same week. A sibling discount is available — mention this when registering." },
+  { q: "Can siblings attend together?", a: "Yes. Siblings within the 3–14 age range are welcome in the same week. A sibling discount is available — mention this when registering." },
   { q: "What will my child bring home?", a: "Every child takes home a personalised science investigation notebook containing all their worksheets, hypotheses, results, and conclusions. Full-week participants also receive a completion certificate." },
   { q: "What is the cancellation policy?", a: "Full refund with more than 7 days' notice before the workshop week. Cancellations within 7 days can be transferred to another available week. Contact us directly for urgent situations." },
 ];
