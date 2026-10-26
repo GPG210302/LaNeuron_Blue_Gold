@@ -1,0 +1,3 @@
+# Suggestions for the "School or organisation" box on the feedback form.
+# One name per line. People can still type any other name.
+FabLab Małopolska

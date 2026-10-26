@@ -9,6 +9,7 @@ import WhySteamPage from "@/pages/WhySteamPage";
 import Gallery from "@/pages/Gallery";
 import Documents from "@/pages/Documents";
 import Connect from "@/pages/Connect";
+import Feedback from "@/pages/Feedback";
 
 import { About } from "@/components/sections/About";
 import { WhatIsSteam } from "@/components/sections/WhatIsSteam";
@@ -39,6 +40,7 @@ function App() {
             <Route path="gallery" element={<Gallery />} />
             <Route path="documents" element={<Documents />} />
             <Route path="connect" element={<Connect />} />
+            <Route path="feedback" element={<Feedback />} />
             <Route path="c" element={<Connect />} />
             <Route path="register" element={<Register />} />
             <Route path="faq" element={<Faq />} />

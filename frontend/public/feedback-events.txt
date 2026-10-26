@@ -1,0 +1,11 @@
+# Choices for "Your feedback is about" on laneuron.org/feedback
+#
+# One per line:   English name | Polish name | show until (optional)
+# - The FIRST line below is pre-selected.
+# - A date (YYYY-MM-DD) hides that line automatically after that day.
+# - To add a future event, add a new line (put it first to pre-select it).
+#
+FabLab Challenge 2026 | FabLab Challenge 2026 | 2026-11-30
+School collaboration | Współpraca ze szkołą
+Parents | Rodzice
+General | Ogólna opinia
